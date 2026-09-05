@@ -28,6 +28,7 @@
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 
 body {
   margin: 0;
@@ -342,8 +343,8 @@ button { font-family: inherit; }
   display: flex;
   flex-direction: column;
   gap: 4px;
-  min-width: 148px;
-  padding: 12px 14px 14px;
+  min-width: 120px;
+  padding: 11px 13px 13px;
   background: var(--panel);
   border: 0;
   border-top: 3px solid transparent;
@@ -553,7 +554,7 @@ button { font-family: inherit; }
   display: flex;
   gap: 2px;
   background: var(--stage);
-  overflow-x: auto;
+  overflow: hidden;
 }
 .guide-prog {
   display: flex;
@@ -562,7 +563,8 @@ button { font-family: inherit; }
   gap: 3px;
   padding: 8px 12px;
   background: var(--panel);
-  flex: none;
+  flex: 1 1 0;
+  min-width: 0;
   overflow: hidden;
 }
 .guide-prog.is-on { background: var(--panel-2); box-shadow: inset 3px 0 0 var(--ch); }

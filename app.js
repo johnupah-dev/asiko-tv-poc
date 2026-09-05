@@ -47,40 +47,55 @@
     lsSet(K + 'fill', store.fill.toFixed(4));
   }
 
-  /* ---------- linear playout ---------- */
-  function nowSec() { return Math.floor(Date.now() / 1000); }
+  /* ---------- linear playout ----------
+     Each channel is a looping VOD. We start it at now % loopLength so every
+     viewer is at the same point ("live"). hls.js gets the offset via
+     startPosition (seeking after load races the initial buffer and can stall);
+     native HLS seeks on loadedmetadata. */
+  const NATIVE_HLS = !(window.Hls && window.Hls.isSupported());
+  let durHint = 0;
 
+  function nowSec() { return Math.floor(Date.now() / 1000); }
+  function loopLen() {
+    return (dur && isFinite(dur) && dur > 5) ? dur : durHint;
+  }
   function syncLive() {
-    if (!dur || !isFinite(dur) || dur < 5) return;
-    try { video.currentTime = nowSec() % Math.floor(dur); } catch (e) {}
+    const base = loopLen();
+    if (!base) return;
+    try { video.currentTime = nowSec() % Math.floor(base); } catch (e) {}
   }
 
-  function loadSource(src) {
+  function loadSource(ch) {
+    durHint = ch.durationSec || 0;
     dur = 0;
     if (hls) { hls.destroy(); hls = null; }
-    if (window.Hls && window.Hls.isSupported()) {
-      hls = new window.Hls({ enableWorker: true, lowLatencyMode: false });
-      hls.loadSource(src);
+    if (!NATIVE_HLS) {
+      const cfg = { enableWorker: true, lowLatencyMode: false };
+      if (durHint) cfg.startPosition = nowSec() % durHint;
+      hls = new window.Hls(cfg);
+      hls.loadSource(ch.src);
       hls.attachMedia(video);
-      hls.on(window.Hls.Events.MANIFEST_PARSED, () => video.play().catch(() => {}));
+      hls.on(window.Hls.Events.MANIFEST_PARSED, () => {
+        dur = video.duration || durHint;
+        if (!inAd) video.play().catch(() => {});
+      });
       hls.on(window.Hls.Events.ERROR, (evt, data) => {
         if (!data || !data.fatal) return;
         if (data.type === window.Hls.ErrorTypes.NETWORK_ERROR) hls.startLoad();
         else if (data.type === window.Hls.ErrorTypes.MEDIA_ERROR) hls.recoverMediaError();
       });
     } else {
-      video.src = src;
-      video.play().catch(() => {});
+      video.src = ch.src;
+      if (!inAd) video.play().catch(() => {});
     }
   }
 
   video.loop = true;
-  video.addEventListener('loadedmetadata', () => { dur = video.duration; syncLive(); });
-  video.addEventListener('canplay', () => {
-    if (!dur) dur = video.duration;
-    syncLive();
-    if (!inAd) video.play().catch(() => {});
+  video.addEventListener('loadedmetadata', () => {
+    dur = video.duration || durHint;
+    if (NATIVE_HLS) syncLive();
   });
+  video.addEventListener('canplay', () => { if (!inAd) video.play().catch(() => {}); });
   video.addEventListener('playing', () => { if (!inAd) loadingEl.classList.add('is-hidden'); });
 
   /* ---------- schedule / EPG ---------- */
@@ -137,14 +152,14 @@
     const ch = CH[current];
     lsSet(K + 'ch', current);
     document.documentElement.style.setProperty('--ch', ch.accent);
-    $('.bug-num').textContent = ch.num;
+    $('.bug-num').textContent = fmt2(ch.num);
     $('.bug-name').textContent = ch.name;
     loadingEl.classList.remove('is-hidden');
     watchAccum = 0;
     inAd = false;
     adEl.hidden = true;
     [...railEl.children].forEach((el, idx) => el.classList.toggle('is-active', idx === current));
-    loadSource(ch.src);
+    loadSource(ch);
     updateLowerThird();
   }
 
@@ -264,7 +279,6 @@
     const nowMin = now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
     const winStart = Math.floor((now.getHours() * 60 + now.getMinutes()) / 30) * 30;
     const WIN = 180;
-    const PXPM = 4;
     $('#guideWindow').textContent =
       `${minToClock(winStart)} – ${minToClock(winStart + WIN)}  ·  network time`;
     const grid = $('#guideGrid');
@@ -288,7 +302,7 @@
         const on = cursor <= nowMin && s.endMin > nowMin;
         const cell = document.createElement('div');
         cell.className = 'guide-prog' + (on ? ' is-on' : '');
-        cell.style.width = Math.max(30, (segEnd - cursor) * PXPM) + 'px';
+        cell.style.flexGrow = String(Math.max(1, segEnd - cursor));
         cell.style.setProperty('--ch', ch.accent);
         cell.innerHTML = `<b>${s.title}</b><span>${minToClock(s.startMin)}</span>`;
         track.appendChild(cell);
@@ -296,7 +310,7 @@
       }
       const nl = document.createElement('div');
       nl.className = 'guide-now';
-      nl.style.left = ((nowMin - winStart) * PXPM) + 'px';
+      nl.style.left = (((nowMin - winStart) / WIN) * 100) + '%';
       track.appendChild(nl);
 
       row.appendChild(label);
@@ -322,10 +336,10 @@
       watchAccum += dt;
       if (watchAccum >= MON.breakIntervalSec) { watchAccum = 0; startAdBreak(); }
     }
-    if (!inAd && dur && !video.seeking && t - lastResync > 25000) {
+    if (!inAd && !video.seeking && video.readyState >= 3 && t - lastResync > 30000) {
       lastResync = t;
-      const target = nowSec() % Math.floor(dur);
-      if (Math.abs(video.currentTime - target) > 10) syncLive();
+      const base = loopLen();
+      if (base && Math.abs(video.currentTime - (nowSec() % Math.floor(base))) > 15) syncLive();
     }
     requestAnimationFrame(frame);
   }

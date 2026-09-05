@@ -25,7 +25,7 @@
   "channels": [
     {
       "num": 1, "id": "prime", "name": "PRIME REEL", "genre": "Cinema", "accent": "#F2B441",
-      "src": "https://bitmovin-a.akamaihd.net/content/sintel/hls/playlist.m3u8",
+      "src": "https://test-streams.mux.dev/tos_ismc/main.m3u8", "durationSec": 734,
       "programs": [
         { "title": "Sunrise Matinee: The Cutting Edge", "duration": 130 },
         { "title": "Backlot Stories", "duration": 30 },
@@ -43,13 +43,13 @@
     },
     {
       "num": 2, "id": "toon", "name": "TOONWAVE", "genre": "Animation", "accent": "#FF5C8A",
-      "src": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+      "src": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", "durationSec": 596,
       "programs": [
         { "title": "Cereal Bowl Cartoons", "duration": 120 },
         { "title": "Pixel & Sprocket", "duration": 30 },
         { "title": "The Bouncing Hour", "duration": 60 },
         { "title": "Hand-Drawn Heroes", "duration": 90 },
-        { "title": "Studio Ghibli-Style Shorts", "duration": 75 },
+        { "title": "Ghibli-Style Shorts", "duration": 75 },
         { "title": "Afternoon Animation Movie", "duration": 100 },
         { "title": "Stop-Motion Workshop", "duration": 45 },
         { "title": "Anime Block: Neon District", "duration": 120 },
@@ -61,7 +61,7 @@
     },
     {
       "num": 3, "id": "terra", "name": "TERRA LIVE", "genre": "Nature", "accent": "#2FBEA6",
-      "src": "https://test-streams.mux.dev/tos_ismc/main.m3u8",
+      "src": "https://test-streams.mux.dev/tos_ismc/main.m3u8", "durationSec": 734,
       "programs": [
         { "title": "Dawn Chorus: Live Cams", "duration": 150 },
         { "title": "Tidepools in Real Time", "duration": 90 },
@@ -78,7 +78,7 @@
     },
     {
       "num": 4, "id": "nightfall", "name": "NIGHTFALL", "genre": "Sci-Fi", "accent": "#6E7CFF",
-      "src": "https://test-streams.mux.dev/tos_ismc/main.m3u8",
+      "src": "https://test-streams.mux.dev/tos_ismc/main.m3u8", "durationSec": 734,
       "programs": [
         { "title": "Retro Futures: Serial Reruns", "duration": 120 },
         { "title": "Transmission Received", "duration": 30 },
@@ -112,7 +112,7 @@
     },
     {
       "num": 6, "id": "field", "name": "FIELD NOTES", "genre": "Documentary", "accent": "#56C08A",
-      "src": "https://bitmovin-a.akamaihd.net/content/sintel/hls/playlist.m3u8",
+      "src": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", "durationSec": 596,
       "programs": [
         { "title": "How It's Actually Made", "duration": 120 },
         { "title": "Short Doc: The Last Ferry", "duration": 40 },
@@ -129,7 +129,7 @@
     },
     {
       "num": 7, "id": "pulse", "name": "PULSE", "genre": "Music", "accent": "#B36BFF",
-      "src": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+      "src": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", "durationSec": 596,
       "programs": [
         { "title": "Wake-Up Playlist", "duration": 120 },
         { "title": "New Music Now", "duration": 60 },

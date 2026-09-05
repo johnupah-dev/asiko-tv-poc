@@ -45,16 +45,22 @@ Open it and you get:
 
 ## Run it
 
-You need [Node.js](https://nodejs.org) installed (LTS is fine). Then, in this folder:
+**Windows, nothing installed** — in this folder:
+
+```bash
+powershell -ExecutionPolicy Bypass -File serve.ps1
+```
+
+**If you have Node.js** (any dev will):
 
 ```bash
 node server.js
 ```
 
-Open **http://localhost:4173**. That's it — no build step, no dependencies.
+Either way, open **http://localhost:4173**. No build step, no dependencies.
 
 > In the Claude Code desktop app you can also just hit **Run / Preview** — it's wired
-> up via `.claude/launch.json`.
+> up via `.claude/launch.json` (uses the PowerShell server).
 
 The video player library (`hls.js`) loads from a public CDN, so the first load needs
 internet. Everything else is local files.
@@ -81,7 +87,8 @@ loop7/
 ├── styles.css           # "broadcast control room" dark theme, all tokens up top
 ├── app.js               # player, linear-sync, EPG, ad-break engine, revenue model
 ├── data/channels.json   # 7 channels + schedules + monetisation config  <-- edit me
-├── server.js            # zero-dependency static server
+├── serve.ps1            # zero-install dev server (Windows PowerShell)
+├── server.js            # same thing for Node.js
 └── .claude/launch.json  # "Run" button config for the desktop app
 ```
 
