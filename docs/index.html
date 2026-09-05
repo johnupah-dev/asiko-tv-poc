@@ -938,6 +938,7 @@ button { font-family: inherit; }
   let hls = null;
   let dur = 0;                 // playback loop length (seconds)
   let inAd = false;
+  let adEnteredAt = 0;
   let watchAccum = 0;
   let lastTick = performance.now();
   let lastResync = 0;
@@ -996,6 +997,7 @@ button { font-family: inherit; }
         if (!data || !data.fatal) return;
         if (data.type === window.Hls.ErrorTypes.NETWORK_ERROR) hls.startLoad();
         else if (data.type === window.Hls.ErrorTypes.MEDIA_ERROR) hls.recoverMediaError();
+        else { try { hls.destroy(); } catch (e) {} hls = null; setTimeout(() => { if (!hls) loadSource(CH[current]); }, 1500); }
       });
     } else {
       video.src = ch.src;
@@ -1143,46 +1145,64 @@ button { font-family: inherit; }
 
   /* ---------- ad break ---------- */
   function countdown(sec) {
+    // Wall-clock driven so a backgrounded tab (where rAF/interval throttle or
+    // halt) can never leave the break hanging. rAF just smooths the ring.
     return new Promise((resolve) => {
       const ring = $('#adRingFill');
       const countEl = $('#adCount');
       const C = 2 * Math.PI * 52;
-      const start = performance.now();
-      function step(t) {
-        const left = Math.max(0, sec - (t - start) / 1000);
+      const start = Date.now();
+      let done = false;
+      const finish = () => { if (done) return; done = true; clearInterval(iv); clearTimeout(safety); resolve(); };
+      const render = () => {
+        const left = Math.max(0, sec - (Date.now() - start) / 1000);
         countEl.textContent = Math.ceil(left);
         ring.style.strokeDashoffset = String(C * (1 - left / sec));
-        if (left <= 0) { resolve(); return; }
-        requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
+        if (left <= 0) finish();
+        else if (!done) requestAnimationFrame(render);
+      };
+      const iv = setInterval(render, 250);
+      const safety = setTimeout(finish, sec * 1000 + 500);
+      requestAnimationFrame(render);
     });
   }
 
+  function endAdBreak() {
+    if (!inAd) return;
+    inAd = false;
+    adEnteredAt = 0;
+    adEl.hidden = true;
+    lastTick = performance.now();
+    watchAccum = 0;
+    syncLive();
+    video.play().catch(() => {});
+  }
+
   async function startAdBreak() {
+    if (inAd) return;
     inAd = true;
+    adEnteredAt = Date.now();
     video.pause();
     loadingEl.classList.add('is-hidden');
     adEl.hidden = false;
-    const slots = 2;
-    for (let n = 1; n <= slots; n++) {
-      const cr = MON.creatives[Math.floor(Math.random() * MON.creatives.length)];
-      const ssp = weightedSSP();
-      adEl.style.setProperty('--ad-bg', cr.bg);
-      adEl.style.setProperty('--ad-fg', cr.fg);
-      $('#adBrand').textContent = cr.brand;
-      $('#adLine').textContent = cr.line;
-      $('#adSub').textContent = cr.sub;
-      $('#adSeq').textContent = `${n} of ${slots}`;
-      $('#adRoute').textContent = 'via ' + ROUTE[ssp.type];
-      logImpression(ssp);
-      await countdown(MON.adSlotSec);
+    try {
+      const slots = 2;
+      for (let n = 1; n <= slots; n++) {
+        const cr = MON.creatives[Math.floor(Math.random() * MON.creatives.length)];
+        const ssp = weightedSSP();
+        adEl.style.setProperty('--ad-bg', cr.bg);
+        adEl.style.setProperty('--ad-fg', cr.fg);
+        $('#adBrand').textContent = cr.brand;
+        $('#adLine').textContent = cr.line;
+        $('#adSub').textContent = cr.sub;
+        $('#adSeq').textContent = `${n} of ${slots}`;
+        $('#adRoute').textContent = 'via ' + ROUTE[ssp.type];
+        logImpression(ssp);
+        await countdown(MON.adSlotSec);
+      }
+    } finally {
+      endAdBreak();
     }
-    adEl.hidden = true;
-    inAd = false;
-    lastTick = performance.now();
-    syncLive();
-    video.play().catch(() => {});
   }
 
   /* ---------- program guide ---------- */
@@ -1249,6 +1269,15 @@ button { font-family: inherit; }
       watchAccum += dt;
       if (watchAccum >= MON.breakIntervalSec) { watchAccum = 0; startAdBreak(); }
     }
+    // watchdog: an ad break that has overrun its wall-clock budget (tab was
+    // hidden during the countdown) — force back to the channel
+    if (inAd && adEnteredAt && Date.now() - adEnteredAt > (MON.breakDurationSec + 12) * 1000) {
+      endAdBreak();
+    }
+    // watchdog: player unexpectedly paused while visible and playable — nudge it
+    if (!inAd && !document.hidden && video.paused && video.readyState >= 2 && !video.seeking) {
+      video.play().catch(() => {});
+    }
     if (!inAd && !video.seeking && video.readyState >= 3 && t - lastResync > 30000) {
       lastResync = t;
       const base = loopLen();
@@ -1274,7 +1303,12 @@ button { font-family: inherit; }
     else if (e.key.toLowerCase() === 'm') $('#soundBtn').click();
     else if (e.key.toLowerCase() === 'g') (guideEl.hidden ? openGuide() : closeGuide());
   });
-  document.addEventListener('visibilitychange', () => { if (!document.hidden && !inAd) syncLive(); });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) return;
+    // rescue a break that overran while the tab was hidden
+    if (inAd && adEnteredAt && Date.now() - adEnteredAt > (MON.breakDurationSec + 6) * 1000) endAdBreak();
+    if (!inAd) { syncLive(); if (video.paused) video.play().catch(() => {}); }
+  });
 
   function boot() {
     CFG = window.__ASIKO_CFG__;
