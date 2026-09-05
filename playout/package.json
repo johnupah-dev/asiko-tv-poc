@@ -1,0 +1,17 @@
+{
+  "name": "asiko-tv-playout",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Provision the 7 POC channels as real Eyevinn Channel Engine (VOD2Live) linear channels",
+  "scripts": {
+    "token": "node provision.mjs token",
+    "provision": "node provision.mjs provision",
+    "status": "node provision.mjs status",
+    "teardown": "node provision.mjs teardown"
+  },
+  "dependencies": {
+    "@osaas/client-core": "^0.26.0",
+    "@osaas/client-services": "^0.17.3"
+  }
+}
