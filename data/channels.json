@@ -1,0 +1,148 @@
+{
+  "network": "LOOP7",
+  "monetization": {
+    "breakIntervalSec": 150,
+    "breakDurationSec": 30,
+    "adSlotSec": 15,
+    "ssps": [
+      { "name": "Direct · Sponsor of the Hour", "cpm": 26.0, "type": "direct", "weight": 2 },
+      { "name": "Programmatic · Private Marketplace (PMP)", "cpm": 19.5, "type": "prog", "weight": 3 },
+      { "name": "Programmatic · Open Exchange (OpenRTB)", "cpm": 14.25, "type": "prog", "weight": 6 },
+      { "name": "House Promo · cross-channel", "cpm": 0.0, "type": "house", "weight": 2 }
+    ],
+    "creatives": [
+      { "brand": "AXIS ATHLETIC", "line": "Move like it's already tomorrow.", "sub": "Presenting sponsor — LOOP7 Prime", "bg": "#0E2038", "fg": "#7FD0FF" },
+      { "brand": "MERIDIAN COLD BREW", "line": "Slow-steeped. Wide awake.", "sub": "Programmatic · PMP deal ID 4471", "bg": "#241203", "fg": "#F6B461" },
+      { "brand": "HARBOR & PINE", "line": "Furniture that outlives the trend cycle.", "sub": "Open Exchange · OpenRTB win", "bg": "#12241C", "fg": "#79E0B4" },
+      { "brand": "NOVA MOBILITY", "line": "The commute, reconsidered.", "sub": "Direct sold · :15 spot", "bg": "#1B1130", "fg": "#C39BFF" }
+    ],
+    "companion": [
+      { "brand": "AXIS ATHLETIC", "text": "New season drop — shop the film", "type": "direct" },
+      { "brand": "MERIDIAN COLD BREW", "text": "First case ships free", "type": "prog" },
+      { "brand": "LOOP7", "text": "Download the app · 7 channels, always on", "type": "house" }
+    ]
+  },
+  "channels": [
+    {
+      "num": 1, "id": "prime", "name": "PRIME REEL", "genre": "Cinema", "accent": "#F2B441",
+      "src": "https://bitmovin-a.akamaihd.net/content/sintel/hls/playlist.m3u8",
+      "programs": [
+        { "title": "Sunrise Matinee: The Cutting Edge", "duration": 130 },
+        { "title": "Backlot Stories", "duration": 30 },
+        { "title": "Feature: Steel Horizon", "duration": 120 },
+        { "title": "Shorts Block", "duration": 40 },
+        { "title": "Feature: The Long Afternoon", "duration": 115 },
+        { "title": "Director's Cut Q&A", "duration": 45 },
+        { "title": "Feature: Paper Moonlight", "duration": 125 },
+        { "title": "Golden Hour Classics", "duration": 90 },
+        { "title": "Feature: Northern Reel", "duration": 130 },
+        { "title": "Late Show: Midnight Frames", "duration": 115 },
+        { "title": "Graveyard Cinema", "duration": 200 },
+        { "title": "Feature: Dawn Patrol", "duration": 160 }
+      ]
+    },
+    {
+      "num": 2, "id": "toon", "name": "TOONWAVE", "genre": "Animation", "accent": "#FF5C8A",
+      "src": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+      "programs": [
+        { "title": "Cereal Bowl Cartoons", "duration": 120 },
+        { "title": "Pixel & Sprocket", "duration": 30 },
+        { "title": "The Bouncing Hour", "duration": 60 },
+        { "title": "Hand-Drawn Heroes", "duration": 90 },
+        { "title": "Studio Ghibli-Style Shorts", "duration": 75 },
+        { "title": "Afternoon Animation Movie", "duration": 100 },
+        { "title": "Stop-Motion Workshop", "duration": 45 },
+        { "title": "Anime Block: Neon District", "duration": 120 },
+        { "title": "Cult Classics Cartoons", "duration": 90 },
+        { "title": "Late Night Loops", "duration": 150 },
+        { "title": "Overnight Animation Marathon", "duration": 240 },
+        { "title": "Dawn Doodles", "duration": 120 }
+      ]
+    },
+    {
+      "num": 3, "id": "terra", "name": "TERRA LIVE", "genre": "Nature", "accent": "#2FBEA6",
+      "src": "https://test-streams.mux.dev/tos_ismc/main.m3u8",
+      "programs": [
+        { "title": "Dawn Chorus: Live Cams", "duration": 150 },
+        { "title": "Tidepools in Real Time", "duration": 90 },
+        { "title": "The Slow Forest", "duration": 120 },
+        { "title": "Mountain Weather Desk", "duration": 60 },
+        { "title": "Reef Watch", "duration": 120 },
+        { "title": "Golden Hour on the Plains", "duration": 90 },
+        { "title": "Rivers, Uncut", "duration": 110 },
+        { "title": "Night Vision: Nocturnal", "duration": 130 },
+        { "title": "Aurora Feed", "duration": 160 },
+        { "title": "Deep Ocean Ambient", "duration": 200 },
+        { "title": "Campfire Loop", "duration": 140 }
+      ]
+    },
+    {
+      "num": 4, "id": "nightfall", "name": "NIGHTFALL", "genre": "Sci-Fi", "accent": "#6E7CFF",
+      "src": "https://test-streams.mux.dev/tos_ismc/main.m3u8",
+      "programs": [
+        { "title": "Retro Futures: Serial Reruns", "duration": 120 },
+        { "title": "Transmission Received", "duration": 30 },
+        { "title": "Feature: Orbital Decay", "duration": 125 },
+        { "title": "Practical Effects Deep Dive", "duration": 45 },
+        { "title": "Feature: The Ganymede Job", "duration": 130 },
+        { "title": "Anthology: Signal Lost", "duration": 90 },
+        { "title": "Feature: Cold Equations", "duration": 120 },
+        { "title": "Cyberpunk Block", "duration": 150 },
+        { "title": "Feature: Last Light on Kepler", "duration": 135 },
+        { "title": "3AM Dystopias", "duration": 180 },
+        { "title": "Feature: Return Vector", "duration": 145 }
+      ]
+    },
+    {
+      "num": 5, "id": "rewind", "name": "REWIND 88", "genre": "Retro TV", "accent": "#FF8A3D",
+      "src": "https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_ts/master.m3u8",
+      "programs": [
+        { "title": "Test Pattern & Sign-On", "duration": 20 },
+        { "title": "Morning Variety Hour", "duration": 90 },
+        { "title": "Game Show Block", "duration": 60 },
+        { "title": "The Noon Report (Archive)", "duration": 30 },
+        { "title": "Afternoon Sitcom Run", "duration": 120 },
+        { "title": "Soap Opera Digest", "duration": 90 },
+        { "title": "Prime Time Drama (1988)", "duration": 120 },
+        { "title": "Stand-Up Showcase", "duration": 60 },
+        { "title": "Late Movie: VHS Transfer", "duration": 130 },
+        { "title": "Infomercial Graveyard", "duration": 180 },
+        { "title": "Color Bars til Dawn", "duration": 160 }
+      ]
+    },
+    {
+      "num": 6, "id": "field", "name": "FIELD NOTES", "genre": "Documentary", "accent": "#56C08A",
+      "src": "https://bitmovin-a.akamaihd.net/content/sintel/hls/playlist.m3u8",
+      "programs": [
+        { "title": "How It's Actually Made", "duration": 120 },
+        { "title": "Short Doc: The Last Ferry", "duration": 40 },
+        { "title": "Feature Doc: Concrete & Salt", "duration": 115 },
+        { "title": "Archive Reel", "duration": 35 },
+        { "title": "Feature Doc: The Seed Vault", "duration": 120 },
+        { "title": "Interview: On the Record", "duration": 50 },
+        { "title": "Feature Doc: Grid Down", "duration": 110 },
+        { "title": "Nature of Work", "duration": 90 },
+        { "title": "Feature Doc: Cartographers", "duration": 125 },
+        { "title": "Midnight Investigations", "duration": 170 },
+        { "title": "Feature Doc: Deep Time", "duration": 150 }
+      ]
+    },
+    {
+      "num": 7, "id": "pulse", "name": "PULSE", "genre": "Music", "accent": "#B36BFF",
+      "src": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+      "programs": [
+        { "title": "Wake-Up Playlist", "duration": 120 },
+        { "title": "New Music Now", "duration": 60 },
+        { "title": "The Deep Cuts Hour", "duration": 60 },
+        { "title": "Live Session Replays", "duration": 90 },
+        { "title": "Afternoon Drive Mix", "duration": 120 },
+        { "title": "Genre Spotlight: Synthwave", "duration": 90 },
+        { "title": "Golden Era Videos", "duration": 100 },
+        { "title": "Club Rotation", "duration": 150 },
+        { "title": "Slow Jams After Hours", "duration": 130 },
+        { "title": "Ambient Overnight", "duration": 220 },
+        { "title": "Sunrise Set", "duration": 120 }
+      ]
+    }
+  ]
+}

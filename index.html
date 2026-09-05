@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LOOP7 — FAST Network POC</title>
+  <meta name="description" content="A 7-channel free ad-supported streaming (FAST) network — proof of concept." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230A0D12'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='16' font-weight='700' fill='%2337D497' text-anchor='middle'%3E7%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="masthead">
+      <div class="brand">LOOP<span>7</span></div>
+      <div class="masthead-mid">
+        <span class="on-air"><span class="rec"></span>ON AIR</span>
+        <time id="clock" class="clock">00:00:00</time>
+        <span class="tz">network feed</span>
+      </div>
+      <div class="masthead-actions">
+        <button id="guideBtn" class="btn" type="button" aria-expanded="false">Guide</button>
+        <button id="soundBtn" class="btn btn-accent" type="button">Unmute</button>
+      </div>
+    </header>
+
+    <main class="stage">
+      <video id="video" playsinline muted></video>
+      <div class="scrim" aria-hidden="true"></div>
+
+      <div id="bug" class="bug"><span class="bug-num">1</span><span class="bug-name">PRIME REEL</span></div>
+
+      <div class="lower-third" id="lowerThird">
+        <div class="lt-row lt-now">
+          <span class="lt-tag">NOW</span>
+          <span id="nowTitle" class="lt-title">—</span>
+          <span id="nowProgress" class="lt-prog"></span>
+        </div>
+        <div class="lt-row lt-next">
+          <span class="lt-tag lt-tag-ghost">NEXT</span>
+          <span id="nextTitle" class="lt-title-next">—</span>
+          <span id="nextTime" class="lt-time"></span>
+        </div>
+      </div>
+
+      <div id="loading" class="loading">Tuning<span class="dots">…</span></div>
+
+      <div id="adbreak" class="adbreak" hidden>
+        <div class="ad-frame">
+          <div class="ad-meta">
+            <span class="ad-flag">AD</span>
+            <span id="adSeq" class="ad-seq">1 of 2</span>
+            <span id="adRoute" class="ad-route">via Open Exchange</span>
+          </div>
+          <div id="adBrand" class="ad-brand">BRAND</div>
+          <div id="adLine" class="ad-line">Tagline goes here.</div>
+          <div id="adSub" class="ad-sub">deal id</div>
+          <svg class="ad-ring" viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="ad-ring-track" cx="60" cy="60" r="52" />
+            <circle id="adRingFill" class="ad-ring-fill" cx="60" cy="60" r="52" />
+          </svg>
+          <div id="adCount" class="ad-count">15</div>
+        </div>
+      </div>
+    </main>
+
+    <nav id="rail" class="rail" aria-label="Channels"></nav>
+
+    <section class="revbar" aria-label="Monetization">
+      <div class="rev-stat">
+        <span class="rev-k">Ad impressions</span>
+        <span id="mImps" class="rev-v">0</span>
+        <span class="rev-sub">this device · all sessions</span>
+      </div>
+      <div class="rev-stat">
+        <span class="rev-k">Fill rate</span>
+        <span id="mFill" class="rev-v">—</span>
+        <span class="rev-sub">avails sold / avails</span>
+      </div>
+      <div class="rev-stat">
+        <span class="rev-k">Blended eCPM</span>
+        <span id="mCpm" class="rev-v">$0.00</span>
+        <span class="rev-sub">direct + programmatic</span>
+      </div>
+      <div class="rev-stat">
+        <span class="rev-k">Est. revenue</span>
+        <span id="mRev" class="rev-v rev-v-money">$0.0000</span>
+        <span class="rev-sub">gross · pre rev-share</span>
+      </div>
+      <div class="rev-split">
+        <div class="rev-split-bar" id="mSplitBar">
+          <span class="seg seg-direct" style="width:0%"></span>
+          <span class="seg seg-prog" style="width:0%"></span>
+          <span class="seg seg-house" style="width:0%"></span>
+        </div>
+        <div class="rev-legend">
+          <span><i class="k k-direct"></i>Direct</span>
+          <span><i class="k k-prog"></i>Programmatic</span>
+          <span><i class="k k-house"></i>House</span>
+        </div>
+      </div>
+      <div class="companion" id="companion">
+        <span class="companion-tag">DISPLAY 320×100</span>
+        <span class="companion-brand" id="cBrand">LOOP7</span>
+        <span class="companion-text" id="cText">Seven channels, always on.</span>
+      </div>
+    </section>
+  </div>
+
+  <div id="guide" class="guide" hidden>
+    <div class="guide-head">
+      <div class="guide-title">Program Guide</div>
+      <div id="guideWindow" class="guide-window">—</div>
+      <button id="guideClose" class="btn" type="button">Close</button>
+    </div>
+    <div id="guideGrid" class="guide-grid"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.13/hls.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
