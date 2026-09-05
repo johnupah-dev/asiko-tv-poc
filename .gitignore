@@ -9,3 +9,7 @@ dist/
 playout/playout.json
 !.env.example
 !playout/.env.example
+
+# bunny credentials - never commit
+bunny.env
+bunny.env.*
