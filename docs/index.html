@@ -5,34 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Asiko TV — FAST Channels (POC)</title>
   <meta name="description" content="Asiko TV — a 7-channel free ad-supported streaming (FAST) network, proof of concept." />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230A0D12'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='15' font-weight='700' fill='%2337D497' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0a0c'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='15' font-weight='700' fill='%23d8a94b' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
   <style>
-/* Asiko TV — committed dark "broadcast control room" palette.
-   Single visual world by design: every colour is painted from a token,
-   nothing is left to the host ground. */
+/* Asiko TV — brand palette, lifted verbatim from asiko.live.
+   Committed dark world: every colour is painted from a token. */
 :root {
-  --ink:        #0A0D12;
-  --stage:      #04060A;
-  --panel:      #10151F;
-  --panel-2:    #161D2B;
-  --line:       #232C3D;
-  --line-soft:  #1A2130;
-  --text:       #EAEEF5;
-  --muted:      #8B95A9;
-  --faint:      #5C6579;
-  --live:       #FF4436;
-  --money:      #37D497;
-  --direct:     #F2B441;
-  --prog:       #5B8BFF;
-  --house:      #5C6579;
-  --focus:      #8AB4FF;
-  --ch:         #37D497; /* overridden per active channel */
+  --ink:        #0a0a0c;
+  --stage:      #000;
+  --panel:      #17171b;
+  --panel-2:    #1e1e23;
+  --line:       rgba(216, 169, 75, 0.16);
+  --line-soft:  rgba(216, 169, 75, 0.09);
+  --text:       #f7f5f0;
+  --muted:      #a7a4ac;
+  --faint:      #716f78;
+  --live:       #df3b34;
+  --money:      #d8a94b; /* Asiko gold — primary accent */
+  --direct:     #f3cd7e;
+  --prog:       #5b8bff;
+  --house:      #716f78;
+  --focus:      #d8a94b;
+  --ch:         #d8a94b; /* overridden per active channel */
 
-  --font-display: "Barlow Semi Condensed", "Arial Narrow", Arial, sans-serif;
-  --font-body:    "IBM Plex Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-display: "Poppins", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-body:    "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   --font-mono:    "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --r: 4px;
@@ -596,6 +595,15 @@ button { font-family: inherit; }
   background: var(--live);
   z-index: 2;
 }
+
+/* ---------- Asiko brand fit (Poppins is wider than the old condensed face) ---------- */
+.brand { letter-spacing: 0.08em; }
+.brand span { font-weight: 800; }
+.btn { border-radius: 999px; }
+.btn-accent, .btn.is-live, .lt-tag { color: #0a0a0c; }
+.ch { min-width: 138px; }
+.ch-name { font-size: 13px; letter-spacing: 0.03em; }
+.on-air { letter-spacing: 0.14em; }
 
 /* ---------- responsive ---------- */
 @media (max-width: 720px) {
