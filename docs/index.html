@@ -597,8 +597,22 @@ button { font-family: inherit; }
 }
 
 /* ---------- Asiko brand fit (Poppins is wider than the old condensed face) ---------- */
-.brand { letter-spacing: 0.08em; }
-.brand span { font-weight: 800; }
+.brand {
+  display: inline-flex; align-items: center; gap: 9px; text-decoration: none;
+  border: 1px solid var(--line); border-radius: 9px; padding: 5px 11px 5px 8px;
+  letter-spacing: normal;
+}
+.brand-mark { width: 24px; height: 24px; flex: none; display: block; }
+.brand-text { display: flex; flex-direction: column; line-height: 1; }
+.brand .brand-word {
+  font-family: var(--font-display); font-weight: 700; font-size: 17px;
+  letter-spacing: 0.1em; color: var(--text);
+}
+.brand .brand-word b { font-weight: 800; color: var(--money); }
+.brand-tag {
+  font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.24em;
+  text-transform: uppercase; color: var(--money); margin-top: 3px;
+}
 .btn { border-radius: 999px; }
 .btn-accent, .btn.is-live, .lt-tag { color: #0a0a0c; }
 .ch { min-width: 138px; }
@@ -607,6 +621,8 @@ button { font-family: inherit; }
 
 /* ---------- responsive ---------- */
 @media (max-width: 720px) {
+  .brand-tag { display: none; }
+  .brand { padding: 5px 9px; }
   .masthead { flex-wrap: wrap; gap: 8px 12px; }
   .masthead-mid { order: 3; width: 100%; }
   .lt-title { font-size: 18px; }
@@ -625,7 +641,17 @@ button { font-family: inherit; }
 <body>
   <div class="app">
     <header class="masthead">
-      <div class="brand">ASIKO<span>&nbsp;TV</span></div>
+      <a class="brand" href="./" aria-label="Asiko TV — home">
+        <svg class="brand-mark" viewBox="0 0 32 32" role="img" aria-hidden="true">
+          <path d="M16 3 L29 29 L3 29 Z" fill="#d8a94b" />
+          <path d="M16 13 L23.5 27 L8.5 27 Z" fill="#0a0a0c" />
+          <rect x="10" y="20.5" width="12" height="3.2" fill="#0a0a0c" />
+        </svg>
+        <span class="brand-text">
+          <span class="brand-word">ASIKO<b>&nbsp;TV</b></span>
+          <span class="brand-tag">The Soul of Africa</span>
+        </span>
+      </a>
       <div class="masthead-mid">
         <span class="on-air"><span class="rec"></span>ON AIR</span>
         <time id="clock" class="clock">00:00:00</time>
