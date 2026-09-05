@@ -4,3 +4,8 @@ node_modules/
 .env
 .env.*
 dist/
+
+# playout/ (Eyevinn provisioning)
+playout/playout.json
+!.env.example
+!playout/.env.example
