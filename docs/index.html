@@ -1,0 +1,1268 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Asiko TV — FAST Channels (POC)</title>
+  <meta name="description" content="Asiko TV — a 7-channel free ad-supported streaming (FAST) network, proof of concept." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230A0D12'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='15' font-weight='700' fill='%2337D497' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" />
+  <style>
+/* Asiko TV — committed dark "broadcast control room" palette.
+   Single visual world by design: every colour is painted from a token,
+   nothing is left to the host ground. */
+:root {
+  --ink:        #0A0D12;
+  --stage:      #04060A;
+  --panel:      #10151F;
+  --panel-2:    #161D2B;
+  --line:       #232C3D;
+  --line-soft:  #1A2130;
+  --text:       #EAEEF5;
+  --muted:      #8B95A9;
+  --faint:      #5C6579;
+  --live:       #FF4436;
+  --money:      #37D497;
+  --direct:     #F2B441;
+  --prog:       #5B8BFF;
+  --house:      #5C6579;
+  --focus:      #8AB4FF;
+  --ch:         #37D497; /* overridden per active channel */
+
+  --font-display: "Barlow Semi Condensed", "Arial Narrow", Arial, sans-serif;
+  --font-body:    "IBM Plex Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-mono:    "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --r: 4px;
+  --gap: 10px;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+button { font-family: inherit; }
+
+.app {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  height: 100vh;
+  height: 100dvh;
+  max-width: 1600px;
+  margin: 0 auto;
+  background: var(--stage);
+}
+
+/* ---------- masthead ---------- */
+.masthead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 16px;
+  background: var(--ink);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 0.14em;
+  color: var(--text);
+}
+.brand span { color: var(--money); }
+
+.masthead-mid {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  color: var(--muted);
+}
+.on-air {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: var(--text);
+}
+.rec {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--live);
+  box-shadow: 0 0 0 0 rgba(255, 68, 54, 0.55);
+  animation: rec 2s ease-out infinite;
+}
+@keyframes rec {
+  0%   { box-shadow: 0 0 0 0 rgba(255, 68, 54, 0.55); }
+  70%  { box-shadow: 0 0 0 9px rgba(255, 68, 54, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 68, 54, 0); }
+}
+.clock {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+.tz { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+.masthead-actions { display: flex; gap: 8px; }
+
+.btn {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--text);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border-radius: var(--r);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.btn:hover { border-color: var(--muted); }
+.btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.btn-accent {
+  border-color: transparent;
+  background: var(--money);
+  color: #04120C;
+}
+.btn-accent:hover { filter: brightness(1.08); border-color: transparent; }
+.btn.is-live { background: var(--money); color: #04120C; border-color: transparent; }
+
+/* ---------- stage ---------- */
+.stage {
+  position: relative;
+  background: #000;
+  overflow: hidden;
+}
+#video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
+}
+.scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to top, rgba(4,6,10,0.85) 0%, rgba(4,6,10,0) 26%),
+    linear-gradient(to bottom, rgba(4,6,10,0.5) 0%, rgba(4,6,10,0) 18%);
+}
+
+.bug {
+  position: absolute;
+  top: 14px; right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px 6px 6px;
+  background: rgba(10, 13, 18, 0.62);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-left: 3px solid var(--ch);
+  border-radius: var(--r);
+  backdrop-filter: blur(3px);
+}
+.bug-num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--ch);
+  min-width: 16px;
+  text-align: center;
+}
+.bug-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  color: var(--text);
+}
+
+.lower-third {
+  position: absolute;
+  left: 20px;
+  bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: min(70ch, 78%);
+}
+.lt-row { display: flex; align-items: baseline; gap: 10px; }
+.lt-tag {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: #04120C;
+  background: var(--ch);
+  padding: 3px 7px;
+  border-radius: 2px;
+  flex: none;
+}
+.lt-tag-ghost {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--line);
+}
+.lt-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: 0.01em;
+  color: var(--text);
+  text-wrap: balance;
+}
+.lt-prog {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+.lt-title-next { font-size: 13px; color: var(--muted); }
+.lt-time { font-family: var(--font-mono); font-size: 11px; color: var(--faint); }
+
+.loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  font-size: 13px;
+  color: var(--muted);
+  background: #000;
+  transition: opacity 0.35s ease;
+}
+.loading.is-hidden { opacity: 0; pointer-events: none; }
+
+/* ---------- ad break ---------- */
+.adbreak {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  background: var(--ad-bg, #0E2038);
+  z-index: 4;
+}
+.ad-frame {
+  position: relative;
+  width: min(560px, 82vw);
+  padding: 40px 40px 44px;
+  text-align: left;
+}
+.ad-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+.ad-flag {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  color: #04060A;
+  background: var(--ad-fg, #7FD0FF);
+  padding: 3px 7px;
+}
+.ad-seq, .ad-route {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: rgba(255,255,255,0.7);
+}
+.ad-brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(34px, 6vw, 52px);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--ad-fg, #7FD0FF);
+}
+.ad-line {
+  margin-top: 14px;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 20px;
+  color: #fff;
+}
+.ad-sub {
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: rgba(255,255,255,0.55);
+}
+.ad-ring {
+  position: absolute;
+  top: 34px; right: 30px;
+  width: 58px; height: 58px;
+  transform: rotate(-90deg);
+}
+.ad-ring-track { fill: none; stroke: rgba(255,255,255,0.16); stroke-width: 8; }
+.ad-ring-fill {
+  fill: none;
+  stroke: var(--ad-fg, #7FD0FF);
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-dasharray: 327;
+  stroke-dashoffset: 0;
+}
+.ad-count {
+  position: absolute;
+  top: 34px; right: 30px;
+  width: 58px; height: 58px;
+  display: grid;
+  place-content: center;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  color: #fff;
+}
+
+/* ---------- channel rail ---------- */
+.rail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 2px;
+  background: var(--line-soft);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  overflow-x: auto;
+}
+.ch {
+  --ch: var(--money);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 120px;
+  padding: 11px 13px 13px;
+  background: var(--panel);
+  border: 0;
+  border-top: 3px solid transparent;
+  text-align: left;
+  cursor: pointer;
+  color: var(--muted);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.ch:hover { background: var(--panel-2); color: var(--text); }
+.ch:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+.ch.is-active {
+  background: var(--panel-2);
+  color: var(--text);
+  border-top-color: var(--ch);
+}
+.ch-top {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.ch-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--faint);
+}
+.ch.is-active .ch-num { color: var(--ch); }
+.ch-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+}
+.ch-now {
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ch-genre {
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+/* ---------- revenue bar ---------- */
+.revbar {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  background: var(--ink);
+  border-top: 1px solid var(--line);
+  padding: 0;
+  min-height: 76px;
+  overflow-x: auto;
+}
+.rev-stat {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  padding: 12px 18px;
+  border-right: 1px solid var(--line-soft);
+  min-width: 150px;
+  flex: none;
+}
+.rev-k {
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.rev-v {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+.rev-v-money { color: var(--money); }
+.rev-sub { font-size: 10px; color: var(--faint); letter-spacing: 0.04em; }
+
+.rev-split {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border-right: 1px solid var(--line-soft);
+  min-width: 220px;
+  flex: 1;
+}
+.rev-split-bar {
+  display: flex;
+  height: 10px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--panel-2);
+}
+.seg { display: block; height: 100%; transition: width 0.5s ease; }
+.seg-direct { background: var(--direct); }
+.seg-prog   { background: var(--prog); }
+.seg-house  { background: var(--house); }
+.rev-legend {
+  display: flex;
+  gap: 14px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.rev-legend span { display: inline-flex; align-items: center; gap: 5px; }
+.k { width: 9px; height: 9px; border-radius: 2px; display: inline-block; }
+.k-direct { background: var(--direct); }
+.k-prog   { background: var(--prog); }
+.k-house  { background: var(--house); }
+
+.companion {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  padding: 12px 18px;
+  min-width: 240px;
+  flex: none;
+  background: repeating-linear-gradient(45deg, var(--panel) 0 10px, var(--panel-2) 10px 20px);
+  border-left: 1px solid var(--line);
+}
+.companion-tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--faint);
+}
+.companion-brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  color: var(--text);
+}
+.companion-text { font-size: 11px; color: var(--muted); }
+
+/* ---------- program guide ---------- */
+.guide {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background: rgba(4, 6, 10, 0.94);
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+  backdrop-filter: blur(2px);
+}
+.guide-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+.guide-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.guide-window {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+  margin-right: auto;
+}
+.guide-grid {
+  margin-top: 14px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.guide-row {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 2px;
+  min-height: 58px;
+}
+.guide-label {
+  --ch: var(--money);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  padding: 8px 12px;
+  background: var(--panel);
+  border-left: 3px solid var(--ch);
+}
+.guide-label b {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
+.guide-label span { font-family: var(--font-mono); font-size: 10px; color: var(--faint); }
+.guide-track {
+  position: relative;
+  display: flex;
+  gap: 2px;
+  background: var(--stage);
+  overflow: hidden;
+}
+.guide-prog {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  padding: 8px 12px;
+  background: var(--panel);
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+}
+.guide-prog.is-on { background: var(--panel-2); box-shadow: inset 3px 0 0 var(--ch); }
+.guide-prog b {
+  font-weight: 500;
+  font-size: 12px;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.guide-prog span { font-family: var(--font-mono); font-size: 10px; color: var(--faint); }
+.guide-now {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: var(--live);
+  z-index: 2;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 720px) {
+  .masthead { flex-wrap: wrap; gap: 8px 12px; }
+  .masthead-mid { order: 3; width: 100%; }
+  .lt-title { font-size: 18px; }
+  .bug { top: 10px; right: 10px; }
+  .rail { grid-auto-flow: column; }
+  .ch { min-width: 132px; }
+  .rev-split { min-width: 200px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rec { animation: none; }
+  .seg, .loading, .btn { transition: none; }
+}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="masthead">
+      <div class="brand">ASIKO<span>&nbsp;TV</span></div>
+      <div class="masthead-mid">
+        <span class="on-air"><span class="rec"></span>ON AIR</span>
+        <time id="clock" class="clock">00:00:00</time>
+        <span class="tz">network feed · POC</span>
+      </div>
+      <div class="masthead-actions">
+        <button id="guideBtn" class="btn" type="button" aria-expanded="false">Guide</button>
+        <button id="soundBtn" class="btn btn-accent" type="button">Unmute</button>
+      </div>
+    </header>
+
+    <main class="stage">
+      <video id="video" playsinline muted></video>
+      <div class="scrim" aria-hidden="true"></div>
+
+      <div id="bug" class="bug"><span class="bug-num">1</span><span class="bug-name">PRIME REEL</span></div>
+
+      <div class="lower-third" id="lowerThird">
+        <div class="lt-row lt-now">
+          <span class="lt-tag">NOW</span>
+          <span id="nowTitle" class="lt-title">—</span>
+          <span id="nowProgress" class="lt-prog"></span>
+        </div>
+        <div class="lt-row lt-next">
+          <span class="lt-tag lt-tag-ghost">NEXT</span>
+          <span id="nextTitle" class="lt-title-next">—</span>
+          <span id="nextTime" class="lt-time"></span>
+        </div>
+      </div>
+
+      <div id="loading" class="loading">Tuning<span class="dots">…</span></div>
+
+      <div id="adbreak" class="adbreak" hidden>
+        <div class="ad-frame">
+          <div class="ad-meta">
+            <span class="ad-flag">AD</span>
+            <span id="adSeq" class="ad-seq">1 of 2</span>
+            <span id="adRoute" class="ad-route">via Open Exchange</span>
+          </div>
+          <div id="adBrand" class="ad-brand">BRAND</div>
+          <div id="adLine" class="ad-line">Tagline goes here.</div>
+          <div id="adSub" class="ad-sub">deal id</div>
+          <svg class="ad-ring" viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="ad-ring-track" cx="60" cy="60" r="52" />
+            <circle id="adRingFill" class="ad-ring-fill" cx="60" cy="60" r="52" />
+          </svg>
+          <div id="adCount" class="ad-count">15</div>
+        </div>
+      </div>
+    </main>
+
+    <nav id="rail" class="rail" aria-label="Channels"></nav>
+
+    <section class="revbar" aria-label="Monetization">
+      <div class="rev-stat">
+        <span class="rev-k">Ad impressions</span>
+        <span id="mImps" class="rev-v">0</span>
+        <span class="rev-sub">this device · all sessions</span>
+      </div>
+      <div class="rev-stat">
+        <span class="rev-k">Fill rate</span>
+        <span id="mFill" class="rev-v">—</span>
+        <span class="rev-sub">avails sold / avails</span>
+      </div>
+      <div class="rev-stat">
+        <span class="rev-k">Blended eCPM</span>
+        <span id="mCpm" class="rev-v">$0.00</span>
+        <span class="rev-sub">direct + programmatic</span>
+      </div>
+      <div class="rev-stat">
+        <span class="rev-k">Est. revenue</span>
+        <span id="mRev" class="rev-v rev-v-money">$0.0000</span>
+        <span class="rev-sub">gross · pre rev-share</span>
+      </div>
+      <div class="rev-split">
+        <div class="rev-split-bar" id="mSplitBar">
+          <span class="seg seg-direct" style="width:0%"></span>
+          <span class="seg seg-prog" style="width:0%"></span>
+          <span class="seg seg-house" style="width:0%"></span>
+        </div>
+        <div class="rev-legend">
+          <span><i class="k k-direct"></i>Direct</span>
+          <span><i class="k k-prog"></i>Programmatic</span>
+          <span><i class="k k-house"></i>House</span>
+        </div>
+      </div>
+      <div class="companion" id="companion">
+        <span class="companion-tag">DISPLAY 320×100</span>
+        <span class="companion-brand" id="cBrand">ASIKO TV</span>
+        <span class="companion-text" id="cText">Seven channels, always on.</span>
+      </div>
+    </section>
+  </div>
+
+  <div id="guide" class="guide" hidden>
+    <div class="guide-head">
+      <div class="guide-title">Program Guide</div>
+      <div id="guideWindow" class="guide-window">—</div>
+      <button id="guideClose" class="btn" type="button">Close</button>
+    </div>
+    <div id="guideGrid" class="guide-grid"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.13/hls.min.js"></script>
+  <script>
+  /* Asiko TV — FAST network POC (single-file build for hosting)
+     Channel + monetisation config is inlined below; the runtime is unchanged
+     from the repo's app.js except that it reads window.__ASIKO_CFG__ instead
+     of fetching data/channels.json. */
+  window.__ASIKO_CFG__ = {
+    "network": "ASIKO TV",
+    "monetization": {
+      "breakIntervalSec": 150,
+      "breakDurationSec": 30,
+      "adSlotSec": 15,
+      "ssps": [
+        { "name": "Direct · Sponsor of the Hour", "cpm": 26.0, "type": "direct", "weight": 2 },
+        { "name": "Programmatic · Private Marketplace (PMP)", "cpm": 19.5, "type": "prog", "weight": 3 },
+        { "name": "Programmatic · Open Exchange (OpenRTB)", "cpm": 14.25, "type": "prog", "weight": 6 },
+        { "name": "House Promo · cross-channel", "cpm": 0.0, "type": "house", "weight": 2 }
+      ],
+      "creatives": [
+        { "brand": "AXIS ATHLETIC", "line": "Move like it's already tomorrow.", "sub": "Presenting sponsor — Asiko Prime", "bg": "#0E2038", "fg": "#7FD0FF" },
+        { "brand": "MERIDIAN COLD BREW", "line": "Slow-steeped. Wide awake.", "sub": "Programmatic · PMP deal ID 4471", "bg": "#241203", "fg": "#F6B461" },
+        { "brand": "HARBOR & PINE", "line": "Furniture that outlives the trend cycle.", "sub": "Open Exchange · OpenRTB win", "bg": "#12241C", "fg": "#79E0B4" },
+        { "brand": "NOVA MOBILITY", "line": "The commute, reconsidered.", "sub": "Direct sold · :15 spot", "bg": "#1B1130", "fg": "#C39BFF" }
+      ],
+      "companion": [
+        { "brand": "AXIS ATHLETIC", "text": "New season drop — shop the film", "type": "direct" },
+        { "brand": "MERIDIAN COLD BREW", "text": "First case ships free", "type": "prog" },
+        { "brand": "ASIKO TV", "text": "7 channels, always on", "type": "house" }
+      ]
+    },
+    "channels": [
+      {
+        "num": 1, "id": "prime", "name": "PRIME REEL", "genre": "Cinema", "accent": "#F2B441",
+        "src": "https://test-streams.mux.dev/tos_ismc/main.m3u8", "durationSec": 734,
+        "programs": [
+          { "title": "Sunrise Matinee: The Cutting Edge", "duration": 130 },
+          { "title": "Backlot Stories", "duration": 30 },
+          { "title": "Feature: Steel Horizon", "duration": 120 },
+          { "title": "Shorts Block", "duration": 40 },
+          { "title": "Feature: The Long Afternoon", "duration": 115 },
+          { "title": "Director's Cut Q&A", "duration": 45 },
+          { "title": "Feature: Paper Moonlight", "duration": 125 },
+          { "title": "Golden Hour Classics", "duration": 90 },
+          { "title": "Feature: Northern Reel", "duration": 130 },
+          { "title": "Late Show: Midnight Frames", "duration": 115 },
+          { "title": "Graveyard Cinema", "duration": 200 },
+          { "title": "Feature: Dawn Patrol", "duration": 160 }
+        ]
+      },
+      {
+        "num": 2, "id": "toon", "name": "TOONWAVE", "genre": "Animation", "accent": "#FF5C8A",
+        "src": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", "durationSec": 596,
+        "programs": [
+          { "title": "Cereal Bowl Cartoons", "duration": 120 },
+          { "title": "Pixel & Sprocket", "duration": 30 },
+          { "title": "The Bouncing Hour", "duration": 60 },
+          { "title": "Hand-Drawn Heroes", "duration": 90 },
+          { "title": "Ghibli-Style Shorts", "duration": 75 },
+          { "title": "Afternoon Animation Movie", "duration": 100 },
+          { "title": "Stop-Motion Workshop", "duration": 45 },
+          { "title": "Anime Block: Neon District", "duration": 120 },
+          { "title": "Cult Classics Cartoons", "duration": 90 },
+          { "title": "Late Night Loops", "duration": 150 },
+          { "title": "Overnight Animation Marathon", "duration": 240 },
+          { "title": "Dawn Doodles", "duration": 120 }
+        ]
+      },
+      {
+        "num": 3, "id": "terra", "name": "TERRA LIVE", "genre": "Nature", "accent": "#2FBEA6",
+        "src": "https://test-streams.mux.dev/tos_ismc/main.m3u8", "durationSec": 734,
+        "programs": [
+          { "title": "Dawn Chorus: Live Cams", "duration": 150 },
+          { "title": "Tidepools in Real Time", "duration": 90 },
+          { "title": "The Slow Forest", "duration": 120 },
+          { "title": "Mountain Weather Desk", "duration": 60 },
+          { "title": "Reef Watch", "duration": 120 },
+          { "title": "Golden Hour on the Plains", "duration": 90 },
+          { "title": "Rivers, Uncut", "duration": 110 },
+          { "title": "Night Vision: Nocturnal", "duration": 130 },
+          { "title": "Aurora Feed", "duration": 160 },
+          { "title": "Deep Ocean Ambient", "duration": 200 },
+          { "title": "Campfire Loop", "duration": 140 }
+        ]
+      },
+      {
+        "num": 4, "id": "nightfall", "name": "NIGHTFALL", "genre": "Sci-Fi", "accent": "#6E7CFF",
+        "src": "https://test-streams.mux.dev/tos_ismc/main.m3u8", "durationSec": 734,
+        "programs": [
+          { "title": "Retro Futures: Serial Reruns", "duration": 120 },
+          { "title": "Transmission Received", "duration": 30 },
+          { "title": "Feature: Orbital Decay", "duration": 125 },
+          { "title": "Practical Effects Deep Dive", "duration": 45 },
+          { "title": "Feature: The Ganymede Job", "duration": 130 },
+          { "title": "Anthology: Signal Lost", "duration": 90 },
+          { "title": "Feature: Cold Equations", "duration": 120 },
+          { "title": "Cyberpunk Block", "duration": 150 },
+          { "title": "Feature: Last Light on Kepler", "duration": 135 },
+          { "title": "3AM Dystopias", "duration": 180 },
+          { "title": "Feature: Return Vector", "duration": 145 }
+        ]
+      },
+      {
+        "num": 5, "id": "rewind", "name": "REWIND 88", "genre": "Retro TV", "accent": "#FF8A3D",
+        "src": "https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_ts/master.m3u8", "durationSec": 1800,
+        "programs": [
+          { "title": "Test Pattern & Sign-On", "duration": 20 },
+          { "title": "Morning Variety Hour", "duration": 90 },
+          { "title": "Game Show Block", "duration": 60 },
+          { "title": "The Noon Report (Archive)", "duration": 30 },
+          { "title": "Afternoon Sitcom Run", "duration": 120 },
+          { "title": "Soap Opera Digest", "duration": 90 },
+          { "title": "Prime Time Drama (1988)", "duration": 120 },
+          { "title": "Stand-Up Showcase", "duration": 60 },
+          { "title": "Late Movie: VHS Transfer", "duration": 130 },
+          { "title": "Infomercial Graveyard", "duration": 180 },
+          { "title": "Color Bars til Dawn", "duration": 160 }
+        ]
+      },
+      {
+        "num": 6, "id": "field", "name": "FIELD NOTES", "genre": "Documentary", "accent": "#56C08A",
+        "src": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", "durationSec": 596,
+        "programs": [
+          { "title": "How It's Actually Made", "duration": 120 },
+          { "title": "Short Doc: The Last Ferry", "duration": 40 },
+          { "title": "Feature Doc: Concrete & Salt", "duration": 115 },
+          { "title": "Archive Reel", "duration": 35 },
+          { "title": "Feature Doc: The Seed Vault", "duration": 120 },
+          { "title": "Interview: On the Record", "duration": 50 },
+          { "title": "Feature Doc: Grid Down", "duration": 110 },
+          { "title": "Nature of Work", "duration": 90 },
+          { "title": "Feature Doc: Cartographers", "duration": 125 },
+          { "title": "Midnight Investigations", "duration": 170 },
+          { "title": "Feature Doc: Deep Time", "duration": 150 }
+        ]
+      },
+      {
+        "num": 7, "id": "pulse", "name": "PULSE", "genre": "Music", "accent": "#B36BFF",
+        "src": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", "durationSec": 596,
+        "programs": [
+          { "title": "Wake-Up Playlist", "duration": 120 },
+          { "title": "New Music Now", "duration": 60 },
+          { "title": "The Deep Cuts Hour", "duration": 60 },
+          { "title": "Live Session Replays", "duration": 90 },
+          { "title": "Afternoon Drive Mix", "duration": 120 },
+          { "title": "Genre Spotlight: Synthwave", "duration": 90 },
+          { "title": "Golden Era Videos", "duration": 100 },
+          { "title": "Club Rotation", "duration": 150 },
+          { "title": "Slow Jams After Hours", "duration": 130 },
+          { "title": "Ambient Overnight", "duration": 220 },
+          { "title": "Sunrise Set", "duration": 120 }
+        ]
+      }
+    ]
+  };
+  </script>
+  <script>
+/* Asiko TV — FAST network POC
+   - 7 linear channels, each a looping VOD source seeked to wall-clock ("live" feel)
+   - EPG schedule is a metadata layer, decoupled from the underlying playout
+   - Client-side ad-break simulation: avails -> creative -> impression -> revenue
+   This is a front-end prototype. Production playout/SSAI/ad-decisioning is
+   described in README.md (Eyevinn OSC pipeline). */
+(() => {
+  'use strict';
+
+  const $ = (s, r = document) => r.querySelector(s);
+  const fmt2 = (n) => String(n).padStart(2, '0');
+  const K = 'asiko.';
+  const lsGet = (k, d) => { try { const v = localStorage.getItem(k); return v == null ? d : v; } catch (e) { return d; } };
+  const lsSet = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
+
+  const video = $('#video');
+  const railEl = $('#rail');
+  const loadingEl = $('#loading');
+  const clockEl = $('#clock');
+  const adEl = $('#adbreak');
+  const guideEl = $('#guide');
+
+  let CFG = null, MON = null, CH = [];
+  let current = 0;
+  let hls = null;
+  let dur = 0;                 // playback loop length (seconds)
+  let inAd = false;
+  let watchAccum = 0;
+  let lastTick = performance.now();
+  let lastResync = 0;
+  let compIdx = 0;
+
+  const store = {
+    imps:    +lsGet(K + 'imps', 0),
+    rev:     +lsGet(K + 'rev', 0),
+    cDirect: +lsGet(K + 'cDirect', 0),
+    cProg:   +lsGet(K + 'cProg', 0),
+    cHouse:  +lsGet(K + 'cHouse', 0),
+    fill:    +lsGet(K + 'fill', 0.88) || 0.88,
+  };
+  function persist() {
+    lsSet(K + 'imps', store.imps);
+    lsSet(K + 'rev', store.rev);
+    lsSet(K + 'cDirect', store.cDirect);
+    lsSet(K + 'cProg', store.cProg);
+    lsSet(K + 'cHouse', store.cHouse);
+    lsSet(K + 'fill', store.fill.toFixed(4));
+  }
+
+  /* ---------- linear playout ----------
+     Each channel is a looping VOD. We start it at now % loopLength so every
+     viewer is at the same point ("live"). hls.js gets the offset via
+     startPosition (seeking after load races the initial buffer and can stall);
+     native HLS seeks on loadedmetadata. */
+  const NATIVE_HLS = !(window.Hls && window.Hls.isSupported());
+  let durHint = 0;
+
+  function nowSec() { return Math.floor(Date.now() / 1000); }
+  function loopLen() {
+    return (dur && isFinite(dur) && dur > 5) ? dur : durHint;
+  }
+  function syncLive() {
+    const base = loopLen();
+    if (!base) return;
+    try { video.currentTime = nowSec() % Math.floor(base); } catch (e) {}
+  }
+
+  function loadSource(ch) {
+    durHint = ch.durationSec || 0;
+    dur = 0;
+    if (hls) { hls.destroy(); hls = null; }
+    if (!NATIVE_HLS) {
+      const cfg = { enableWorker: true, lowLatencyMode: false };
+      if (durHint) cfg.startPosition = nowSec() % durHint;
+      hls = new window.Hls(cfg);
+      hls.loadSource(ch.src);
+      hls.attachMedia(video);
+      hls.on(window.Hls.Events.MANIFEST_PARSED, () => {
+        dur = video.duration || durHint;
+        if (!inAd) video.play().catch(() => {});
+      });
+      hls.on(window.Hls.Events.ERROR, (evt, data) => {
+        if (!data || !data.fatal) return;
+        if (data.type === window.Hls.ErrorTypes.NETWORK_ERROR) hls.startLoad();
+        else if (data.type === window.Hls.ErrorTypes.MEDIA_ERROR) hls.recoverMediaError();
+      });
+    } else {
+      video.src = ch.src;
+      if (!inAd) video.play().catch(() => {});
+    }
+  }
+
+  video.loop = true;
+  video.addEventListener('loadedmetadata', () => {
+    dur = video.duration || durHint;
+    if (NATIVE_HLS) syncLive();
+  });
+  video.addEventListener('canplay', () => { if (!inAd) video.play().catch(() => {}); });
+  video.addEventListener('playing', () => { if (!inAd) loadingEl.classList.add('is-hidden'); });
+
+  /* ---------- schedule / EPG ---------- */
+  function scheduleAt(ch, date) {
+    const mins = date.getHours() * 60 + date.getMinutes() + date.getSeconds() / 60;
+    const progs = ch.programs;
+    const total = progs.reduce((a, p) => a + p.duration, 0);
+    let t = ((mins % total) + total) % total;
+    let i = 0;
+    while (t >= progs[i].duration) { t -= progs[i].duration; i++; }
+    const startMin = mins - t;
+    const next = progs[(i + 1) % progs.length];
+    return {
+      title: progs[i].title,
+      startMin,
+      endMin: startMin + progs[i].duration,
+      elapsed: t,
+      duration: progs[i].duration,
+      nextTitle: next.title,
+      nextAtMin: startMin + progs[i].duration,
+    };
+  }
+  function minToClock(m) {
+    m = ((Math.floor(m) % 1440) + 1440) % 1440;
+    return `${fmt2(Math.floor(m / 60))}:${fmt2(m % 60)}`;
+  }
+  function minToDate(base, mins) {
+    const d = new Date(base);
+    d.setHours(0, 0, 0, 0);
+    d.setMinutes(mins);
+    return d;
+  }
+
+  /* ---------- channel rail ---------- */
+  function buildRail() {
+    railEl.innerHTML = '';
+    CH.forEach((ch, idx) => {
+      const b = document.createElement('button');
+      b.className = 'ch';
+      b.type = 'button';
+      b.style.setProperty('--ch', ch.accent);
+      b.innerHTML =
+        `<span class="ch-top"><span class="ch-num">${fmt2(ch.num)}</span>` +
+        `<span class="ch-name">${ch.name}</span></span>` +
+        `<span class="ch-now" data-now>—</span>` +
+        `<span class="ch-genre">${ch.genre}</span>`;
+      b.addEventListener('click', () => tune(idx));
+      railEl.appendChild(b);
+    });
+  }
+
+  function tune(i) {
+    current = ((i % CH.length) + CH.length) % CH.length;
+    const ch = CH[current];
+    lsSet(K + 'ch', current);
+    document.documentElement.style.setProperty('--ch', ch.accent);
+    $('.bug-num').textContent = fmt2(ch.num);
+    $('.bug-name').textContent = ch.name;
+    loadingEl.classList.remove('is-hidden');
+    watchAccum = 0;
+    inAd = false;
+    adEl.hidden = true;
+    [...railEl.children].forEach((el, idx) => el.classList.toggle('is-active', idx === current));
+    loadSource(ch);
+    updateLowerThird();
+  }
+
+  /* ---------- lower third ---------- */
+  function updateLowerThird() {
+    if (!CH.length) return;
+    const now = new Date();
+    const s = scheduleAt(CH[current], now);
+    $('#nowTitle').textContent = s.title;
+    $('#nextTitle').textContent = s.nextTitle;
+    $('#nextTime').textContent = 'at ' + minToClock(s.nextAtMin);
+    const pct = Math.round((s.elapsed / s.duration) * 100);
+    $('#nowProgress').textContent = `${minToClock(s.startMin)}–${minToClock(s.endMin)} · ${pct}%`;
+    [...railEl.children].forEach((el, idx) => {
+      el.querySelector('[data-now]').textContent = scheduleAt(CH[idx], now).title;
+    });
+  }
+
+  /* ---------- monetization ---------- */
+  function weightedSSP() {
+    const pool = MON.ssps;
+    const total = pool.reduce((a, s) => a + s.weight, 0);
+    let r = Math.random() * total;
+    for (const s of pool) { if ((r -= s.weight) <= 0) return s; }
+    return pool[pool.length - 1];
+  }
+  const ROUTE = { direct: 'Direct sold', prog: 'Programmatic auction', house: 'House promo' };
+
+  function logImpression(ssp) {
+    store.imps++;
+    store.rev += ssp.cpm / 1000;
+    if (ssp.type === 'direct') store.cDirect++;
+    else if (ssp.type === 'prog') store.cProg++;
+    else store.cHouse++;
+    store.fill = Math.min(0.97, Math.max(0.72, store.fill + (Math.random() - 0.42) * 0.05));
+    persist();
+    renderRev();
+  }
+
+  function renderRev() {
+    $('#mImps').textContent = store.imps.toLocaleString();
+    $('#mFill').textContent = Math.round(store.fill * 100) + '%';
+    const ecpm = store.imps ? (store.rev / store.imps) * 1000 : 0;
+    $('#mCpm').textContent = '$' + ecpm.toFixed(2);
+    $('#mRev').textContent = '$' + store.rev.toFixed(4);
+    const tot = store.cDirect + store.cProg + store.cHouse || 1;
+    const segs = $('#mSplitBar').children;
+    segs[0].style.width = (store.cDirect / tot * 100) + '%';
+    segs[1].style.width = (store.cProg / tot * 100) + '%';
+    segs[2].style.width = (store.cHouse / tot * 100) + '%';
+  }
+
+  function rotateCompanion(silent) {
+    const c = MON.companion[compIdx % MON.companion.length];
+    compIdx++;
+    $('#cBrand').textContent = c.brand;
+    $('#cText').textContent = c.text;
+    if (silent) return;
+    store.imps++;
+    const cpm = c.type === 'direct' ? 8 : c.type === 'prog' ? 4.5 : 0;
+    store.rev += cpm / 1000;
+    if (c.type === 'direct') store.cDirect++;
+    else if (c.type === 'prog') store.cProg++;
+    else store.cHouse++;
+    persist();
+    renderRev();
+  }
+
+  /* ---------- ad break ---------- */
+  function countdown(sec) {
+    return new Promise((resolve) => {
+      const ring = $('#adRingFill');
+      const countEl = $('#adCount');
+      const C = 2 * Math.PI * 52;
+      const start = performance.now();
+      function step(t) {
+        const left = Math.max(0, sec - (t - start) / 1000);
+        countEl.textContent = Math.ceil(left);
+        ring.style.strokeDashoffset = String(C * (1 - left / sec));
+        if (left <= 0) { resolve(); return; }
+        requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }
+
+  async function startAdBreak() {
+    inAd = true;
+    video.pause();
+    loadingEl.classList.add('is-hidden');
+    adEl.hidden = false;
+    const slots = 2;
+    for (let n = 1; n <= slots; n++) {
+      const cr = MON.creatives[Math.floor(Math.random() * MON.creatives.length)];
+      const ssp = weightedSSP();
+      adEl.style.setProperty('--ad-bg', cr.bg);
+      adEl.style.setProperty('--ad-fg', cr.fg);
+      $('#adBrand').textContent = cr.brand;
+      $('#adLine').textContent = cr.line;
+      $('#adSub').textContent = cr.sub;
+      $('#adSeq').textContent = `${n} of ${slots}`;
+      $('#adRoute').textContent = 'via ' + ROUTE[ssp.type];
+      logImpression(ssp);
+      await countdown(MON.adSlotSec);
+    }
+    adEl.hidden = true;
+    inAd = false;
+    lastTick = performance.now();
+    syncLive();
+    video.play().catch(() => {});
+  }
+
+  /* ---------- program guide ---------- */
+  function renderGuide() {
+    if (guideEl.hidden || !CH.length) return;
+    const now = new Date();
+    const nowMin = now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
+    const winStart = Math.floor((now.getHours() * 60 + now.getMinutes()) / 30) * 30;
+    const WIN = 180;
+    $('#guideWindow').textContent =
+      `${minToClock(winStart)} – ${minToClock(winStart + WIN)}  ·  network time`;
+    const grid = $('#guideGrid');
+    grid.innerHTML = '';
+    CH.forEach((ch) => {
+      const row = document.createElement('div');
+      row.className = 'guide-row';
+
+      const label = document.createElement('div');
+      label.className = 'guide-label';
+      label.style.setProperty('--ch', ch.accent);
+      label.innerHTML = `<b>${ch.name}</b><span>${fmt2(ch.num)} · ${ch.genre}</span>`;
+
+      const track = document.createElement('div');
+      track.className = 'guide-track';
+      let cursor = winStart;
+      let guard = 0;
+      while (cursor < winStart + WIN && guard++ < 48) {
+        const s = scheduleAt(ch, minToDate(now, cursor));
+        const segEnd = Math.min(winStart + WIN, s.endMin);
+        const on = cursor <= nowMin && s.endMin > nowMin;
+        const cell = document.createElement('div');
+        cell.className = 'guide-prog' + (on ? ' is-on' : '');
+        cell.style.flexGrow = String(Math.max(1, segEnd - cursor));
+        cell.style.setProperty('--ch', ch.accent);
+        cell.innerHTML = `<b>${s.title}</b><span>${minToClock(s.startMin)}</span>`;
+        track.appendChild(cell);
+        cursor = s.endMin;
+      }
+      const nl = document.createElement('div');
+      nl.className = 'guide-now';
+      nl.style.left = (((nowMin - winStart) / WIN) * 100) + '%';
+      track.appendChild(nl);
+
+      row.appendChild(label);
+      row.appendChild(track);
+      grid.appendChild(row);
+    });
+  }
+  function openGuide() {
+    guideEl.hidden = false;
+    $('#guideBtn').setAttribute('aria-expanded', 'true');
+    renderGuide();
+  }
+  function closeGuide() {
+    guideEl.hidden = true;
+    $('#guideBtn').setAttribute('aria-expanded', 'false');
+  }
+
+  /* ---------- main loop ---------- */
+  function frame(t) {
+    const dt = Math.min(0.1, (t - lastTick) / 1000);
+    lastTick = t;
+    if (!inAd && !video.paused && !document.hidden) {
+      watchAccum += dt;
+      if (watchAccum >= MON.breakIntervalSec) { watchAccum = 0; startAdBreak(); }
+    }
+    if (!inAd && !video.seeking && video.readyState >= 3 && t - lastResync > 30000) {
+      lastResync = t;
+      const base = loopLen();
+      if (base && Math.abs(video.currentTime - (nowSec() % Math.floor(base))) > 15) syncLive();
+    }
+    requestAnimationFrame(frame);
+  }
+
+  /* ---------- wire up ---------- */
+  $('#soundBtn').addEventListener('click', () => {
+    video.muted = !video.muted;
+    if (!video.muted && video.volume === 0) video.volume = 1;
+    const b = $('#soundBtn');
+    b.textContent = video.muted ? 'Unmute' : 'Mute';
+    b.classList.toggle('is-live', !video.muted);
+    video.play().catch(() => {});
+  });
+  $('#guideBtn').addEventListener('click', () => (guideEl.hidden ? openGuide() : closeGuide()));
+  $('#guideClose').addEventListener('click', closeGuide);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeGuide();
+    else if (e.key >= '1' && e.key <= '7') tune(Number(e.key) - 1);
+    else if (e.key.toLowerCase() === 'm') $('#soundBtn').click();
+    else if (e.key.toLowerCase() === 'g') (guideEl.hidden ? openGuide() : closeGuide());
+  });
+  document.addEventListener('visibilitychange', () => { if (!document.hidden && !inAd) syncLive(); });
+
+  function boot() {
+    CFG = window.__ASIKO_CFG__;
+    if (!CFG) { loadingEl.textContent = 'Could not load channel config'; return; }
+    MON = CFG.monetization;
+    CH = CFG.channels;
+    buildRail();
+    renderRev();
+    rotateCompanion(true);
+    tune(Number(lsGet(K + 'ch', 0)) || 0);
+    setInterval(() => {
+      const d = new Date();
+      clockEl.textContent = `${fmt2(d.getHours())}:${fmt2(d.getMinutes())}:${fmt2(d.getSeconds())}`;
+    }, 250);
+    setInterval(updateLowerThird, 1000);
+    setInterval(() => rotateCompanion(false), 30000);
+    setInterval(renderGuide, 15000);
+    requestAnimationFrame(frame);
+  }
+
+  boot();
+})();
+  </script>
+</body>
+</html>
