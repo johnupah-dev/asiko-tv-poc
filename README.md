@@ -73,7 +73,7 @@ internet. Everything else is local files.
 | --- | --- | --- |
 | App type | Single-page static site (HTML/CSS/JS, no framework) | A POC should be trivial to run, read and hand to any developer. No build tooling to rot. |
 | Video format | **HLS** (`.m3u8`) via `hls.js` | The universal streaming format; every FAST platform and every CDN speaks it. |
-| "Live" trick | Seek a looping VOD to `now % duration` | Fakes linear playout with zero server. Production swaps this for a real playout server (below) without the UI changing. |
+| "Live" trick | Seek a looping video file to `now % duration` | This is a **linear / FAST** product, not on-demand: everyone sees the same frame, no pause/scrub/rewind, no library. The POC fakes the linear feed with zero server; production replaces it with a real continuous playout stream (Channel Engine + SCTE‑35 ad markers) — the viewer UI does not change. |
 | Schedule (EPG) | Static JSON, computed against the clock | Mirrors how real playout separates the *stream* from the *schedule metadata*. |
 | Ad model | Client-side break scheduler + weighted "SSP" picker | Demonstrates avail → creative → impression → revenue. This is the seam where SpringServe / an SSP connects. |
 | State | `localStorage` | No accounts, no backend. Fine for a POC dashboard. |
