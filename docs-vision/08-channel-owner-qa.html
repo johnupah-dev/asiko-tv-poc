@@ -1,0 +1,279 @@
+<title>Asiko TV Channel Owner Q&A</title>
+<meta name="description" content="Every question a prospective Asiko TV channel owner asks — commercials, onboarding, feed failover, embedding on your own site, reach, ads, reporting, rights and control — answered." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+
+<style>
+  :root {
+    --bg:#0a0a0c; --bg-soft:#0f0f12; --panel:#17171b; --panel-2:#1e1e23;
+    --line:rgba(216,169,75,0.16); --line-strong:rgba(216,169,75,0.34);
+    --gold:#d8a94b; --gold-bright:#f3cd7e; --gold-deep:#a8792c; --gold-wash:rgba(216,169,75,0.10);
+    --white:#f7f5f0; --muted:#a7a4ac; --muted-2:#716f78; --red:#df3b34; --green:#6fbf97;
+    --r-sm:6px; --r-md:10px; --pill:999px;
+    --display:"Poppins","Segoe UI",system-ui,sans-serif;
+    --body:"Inter","Segoe UI",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+    --measure:70ch;
+    --s-1:clamp(.8rem,.78rem + .1vw,.86rem);
+    --s0:clamp(.95rem,.92rem + .15vw,1.02rem);
+    --s1:clamp(1.1rem,1.02rem + .4vw,1.28rem);
+    --s2:clamp(1.3rem,1.12rem + .7vw,1.7rem);
+    --s4:clamp(2.1rem,1.6rem + 2.6vw,3.4rem);
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--white); font-family:var(--body); font-size:var(--s0); line-height:1.62; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:62rem; margin:0 auto; padding:clamp(1.4rem,1rem + 3vw,4rem) clamp(1.1rem,.6rem + 3vw,3.4rem) 6rem; }
+
+  .lockup { display:inline-flex; align-items:center; gap:10px; border:1px solid var(--line); border-radius:9px; padding:6px 13px 6px 9px; margin-bottom:1.5rem; }
+  .lockup svg { width:24px; height:24px; display:block; }
+  .lockup .w { font-family:var(--display); font-weight:700; font-size:16px; letter-spacing:.1em; }
+  .lockup .w b { font-weight:800; color:var(--gold); }
+  .lockup .t { display:block; font-family:var(--mono); font-size:8px; letter-spacing:.24em; text-transform:uppercase; color:var(--gold); margin-top:3px; }
+
+  .eyebrow { display:inline-flex; align-items:center; gap:.6rem; font-family:var(--mono); font-size:var(--s-1); letter-spacing:.18em; text-transform:uppercase; color:var(--gold); margin:0 0 1rem; }
+  .eyebrow::before { content:""; width:1.6rem; height:1px; background:var(--gold); }
+  h1 { font-family:var(--display); font-weight:800; font-size:var(--s4); line-height:1.04; letter-spacing:-.02em; text-wrap:balance; margin:0 0 .7rem; }
+  h1 .accent { color:var(--gold); }
+  .standfirst { font-size:var(--s1); color:var(--muted); max-width:54ch; margin:0 0 1.4rem; }
+  .masthead { border-bottom:1px solid var(--line-strong); padding-bottom:1.6rem; }
+  .toc { display:flex; flex-wrap:wrap; gap:8px; margin-top:1.2rem; }
+  .toc a { font-family:var(--mono); font-size:.72rem; letter-spacing:.04em; color:var(--gold-bright); border:1px solid var(--line-strong); border-radius:999px; padding:3px 10px; text-decoration:none; }
+  .toc a:hover { background:var(--gold-wash); }
+
+  main { margin-top:2.6rem; display:flex; flex-direction:column; gap:2.6rem; }
+  section h2 { font-family:var(--display); font-weight:700; font-size:var(--s2); line-height:1.14; letter-spacing:-.01em; margin:0 0 1rem; padding-bottom:.6rem; border-bottom:1px solid var(--line); scroll-margin-top:1rem; }
+  .qa { display:flex; flex-direction:column; gap:1.3rem; }
+  .q { font-family:var(--display); font-weight:600; font-size:var(--s0); color:var(--gold-bright); margin:0 0 .35rem; }
+  .a { margin:0; color:var(--white); max-width:var(--measure); }
+  .a + .a { margin-top:.5rem; }
+  .a .muted { color:var(--muted); }
+  strong { font-weight:600; color:var(--white); }
+  code { font-family:var(--mono); font-size:.82em; background:var(--panel-2); border:1px solid var(--line); border-radius:4px; padding:.06rem .35rem; color:var(--gold-bright); }
+  .tag { font-family:var(--mono); font-size:.62rem; letter-spacing:.1em; text-transform:uppercase; border:1px solid var(--line-strong); border-radius:999px; padding:1px 7px; margin-left:.5rem; vertical-align:.12em; }
+  .tag.now { color:var(--green); } .tag.soon { color:var(--gold); }
+
+  ul { margin:.5rem 0 0; padding:0; list-style:none; max-width:var(--measure); display:flex; flex-direction:column; gap:.4rem; }
+  ul li { padding-left:1.2rem; position:relative; }
+  ul li::before { content:""; position:absolute; left:.1rem; top:.62em; width:.38rem; height:.38rem; background:var(--gold); transform:rotate(45deg); }
+
+  .callout { background:var(--gold-wash); border:1px solid var(--line-strong); border-left:3px solid var(--gold); border-radius:0 var(--r-sm) var(--r-sm) 0; padding:1rem 1.15rem; max-width:var(--measure); }
+  .callout p { margin:0; }
+
+  .table-wrap { overflow-x:auto; border:1px solid var(--line); border-radius:var(--r-md); background:var(--bg-soft); margin-top:.6rem; }
+  table { border-collapse:collapse; width:100%; font-size:var(--s-1); min-width:34rem; }
+  th,td { text-align:left; padding:.65rem .85rem; vertical-align:top; border-bottom:1px solid var(--line); }
+  thead th { font-family:var(--mono); font-weight:500; font-size:.66rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); background:var(--panel); }
+  tbody tr:last-child td { border-bottom:0; }
+  td.k { color:var(--gold-bright); font-weight:500; white-space:nowrap; }
+
+  footer { margin-top:3.6rem; padding-top:1.3rem; border-top:1px solid var(--line-strong); font-size:var(--s-1); color:var(--muted); display:flex; flex-direction:column; gap:.3rem; }
+  footer b { color:var(--gold-bright); font-family:var(--display); font-weight:600; }
+  :focus-visible { outline:2px solid var(--gold); outline-offset:2px; }
+  a { color:var(--gold); }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <span class="lockup">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 L29 29 L3 29 Z" fill="#d8a94b"/><path d="M16 13 L23.5 27 L8.5 27 Z" fill="#0a0a0c"/><rect x="10" y="20.5" width="12" height="3.2" fill="#0a0a0c"/></svg>
+      <span><span class="w">ASIKO<b>&nbsp;TV</b></span><span class="t">The Soul of Africa</span></span>
+    </span>
+    <p class="eyebrow">Channel Owner Q&amp;A</p>
+    <h1>Every question a channel owner <span class="accent">asks</span></h1>
+    <p class="standfirst">Commercials, onboarding, feed failover, embedding on your own site, reach, ads, reporting, rights and control — answered plainly. <span class="tag now">now</span> = true today. <span class="tag soon">roadmap</span> = built during MVP.</p>
+    <nav class="toc">
+      <a href="#commercial">1 · Commercials</a>
+      <a href="#onboard">2 · Getting on</a>
+      <a href="#failover">3 · Feed &amp; failover</a>
+      <a href="#build">4 · Re-stream vs FAST build</a>
+      <a href="#reach">5 · Reach &amp; your own site</a>
+      <a href="#ads">6 · Ads &amp; brand safety</a>
+      <a href="#reporting">7 · Reporting &amp; payment</a>
+      <a href="#rights">8 · Rights &amp; legal</a>
+      <a href="#control">9 · Control &amp; your IP</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <section id="commercial">
+      <h2>1 · Commercials</h2>
+      <div class="qa">
+        <div><p class="q">What does it cost me to list a channel?</p>
+          <p class="a">Nothing to list. Asiko carries the CDN delivery cost. You supply the content and the feed; we integrate, distribute and monetise it.</p></div>
+        <div><p class="q">How do I get paid?</p>
+          <p class="a">A share of the ad revenue your channel generates. Which model applies depends on how your feed arrives:</p>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Your feed</th><th>Who sells the ads</th><th>Your revenue</th></tr></thead>
+            <tbody>
+              <tr><td class="k">Clean feed + SCTE-35, or files + schedule</td><td>Asiko fills every break</td><td>Revenue share of the net — typically <strong>content owner 50–70% / Asiko 30–50%</strong>, set by how much the channel drives viewing and by exclusivity</td></tr>
+              <tr><td class="k">Reserved pods</td><td>You fill some slots, Asiko fills the slots you mark for us</td><td>You keep <strong>100% of your own pods</strong>; Asiko keeps its reserved pods; an override may apply</td></tr>
+              <tr><td class="k">Ads already baked in</td><td>You</td><td>An <strong>audited revenue share</strong> on your reported impressions, or a <strong>flat carriage fee</strong></td></tr>
+            </tbody>
+          </table></div></div>
+        <div><p class="q">When and how am I paid?</p>
+          <p class="a">Monthly, by bank transfer, against the ad-server report, with a statement showing impressions, fill, eCPM and your share by channel. Currency and net terms are set in the listing agreement.</p></div>
+        <div><p class="q">What CPMs and fill rate can I expect?</p>
+          <p class="a">Honestly: a new channel does not fill 100% straight away. Early fill is often <strong>40–60%</strong>, climbing as demand and audience build. Diaspora connected-TV CPMs are typically in the <strong>$8–18</strong> range, higher for direct-sold sponsorship, lower for open-exchange backfill. House promos and Asiko direct sales backfill unsold slots.</p></div>
+        <div><p class="q">Is there a minimum guarantee?</p>
+          <p class="a">Negotiable. For channels that drive strong tune-in we can discuss a floor; for long-tail channels a <strong>flat carriage fee</strong> (either direction) is usually the cleaner deal.</p></div>
+        <div><p class="q">What is the term and is it exclusive?</p>
+          <p class="a"><strong>Non-exclusive by default</strong> — you can run the same channel on other platforms. Standard term with a notice period to exit. You keep your feed and your content if you leave.</p></div>
+        <div><p class="q">Do I need a registered company?</p>
+          <p class="a">Yes — for the contract and for payouts. A registered entity and a bank account in a payable currency.</p></div>
+      </div>
+    </section>
+
+    <section id="onboard">
+      <h2>2 · Getting on</h2>
+      <div class="qa">
+        <div><p class="q">What do you need from me to launch?</p>
+          <ul>
+            <li><strong>A live feed</strong> — HLS (TS or CMAF) URL of your 24/7 channel, with the encoding profile stated (resolutions, codec, keyframe cadence, audio).</li>
+            <li><strong>Ad-break signalling</strong> — SCTE-35 markers in the manifest, or an EPG precise enough to derive cue points, plus your typical break structure.</li>
+            <li><strong>An EPG</strong> — XMLTV or MRSS, now / next / at least 24–72h forward.</li>
+            <li><strong>Rights</strong> — cleared territories, music-clearance status, anything to be blacked out regionally.</li>
+            <li><strong>Brand assets</strong> — channel logo (SVG + PNG on transparent), a still off-air slate.</li>
+            <li><strong>Contacts</strong> — a commercial contact and a technical contact.</li>
+          </ul></div>
+        <div><p class="q">I don't have a live feed yet — only files. Can I still have a channel?</p>
+          <p class="a"><strong>Yes.</strong> Send a library of transcoded VOD files plus a schedule and Asiko builds the linear channel for you — a purpose-built FAST channel — and inserts the ad markers. See §4 for why this is often the better route anyway.</p></div>
+        <div><p class="q">What format must my stream be?</p>
+          <p class="a">HLS, one consistent encoding profile across the whole channel (mismatched renditions break playback at ad splice points). Stereo audio, and a described-audio track where you carry one. If your profile is inconsistent, Asiko re-encodes it once during onboarding.</p></div>
+        <div><p class="q">Do I have to provide SCTE-35?</p>
+          <p class="a">It's strongly preferred — it's how ad breaks are placed. If you can't emit SCTE-35, a precise EPG lets Asiko derive the cue points during re-origination.</p></div>
+        <div><p class="q">How long does onboarding take?</p>
+          <p class="a"><strong>Days</strong> for a clean feed with quick paperwork: review &amp; agreement → normalise your feed → run it on a test environment with a test ad break → your sign-off → go live with a channel number and guide slot. Longer if content, rights or the encoding profile need work.</p></div>
+        <div><p class="q">Can I change my schedule or rebrand later?</p>
+          <p class="a">Yes — schedule changes flow through your EPG feed; branding updates are a support request. A self-service CMS is on the roadmap. <span class="tag soon">roadmap</span></p></div>
+      </div>
+    </section>
+
+    <section id="failover">
+      <h2>3 · Feed &amp; failover</h2>
+      <div class="qa">
+        <div><p class="q">My channel comes off a satellite feed. What happens if the satellite feed fails?</p>
+          <p class="a">Asiko re-originates your feed rather than passing it straight through, so we sit between your source and the viewer and can react when it drops:</p>
+          <ul>
+            <li><strong>Dead-source detection</strong> — if your HLS input stalls, Asiko cuts to a <strong>fallback slate</strong> (your off-air card, or a "back shortly" holding frame) instead of showing viewers a black screen or an error.</li>
+            <li><strong>Automatic failover</strong> — if you give us a <strong>backup source</strong> (a second ingest, or a VOD loop of evergreen content), Asiko switches to it automatically and switches back when your primary recovers.</li>
+            <li><strong>Ads keep serving</strong> on the slate or loop if configured, so a short outage isn't a total revenue loss.</li>
+          </ul>
+          <p class="a"><span class="muted">A satellite feed with no backup and no slate is the fragile case — the single point of failure is at your end, before Asiko sees it. The fixes above reduce the blast radius; they don't remove the dependency on your uplink.</span></p></div>
+        <div><p class="q">Can I supply a primary and a backup feed?</p>
+          <p class="a">Yes, and we recommend it for any channel that matters. Primary + backup ingest, plus a slate, is the standard resilient setup.</p></div>
+        <div><p class="q">What if my whole playout goes down for hours?</p>
+          <p class="a">With a VOD backup loop configured, your channel keeps running evergreen content and ads until you're back. Without one, viewers see the slate. Either way the channel doesn't disappear from the guide.</p></div>
+      </div>
+    </section>
+
+    <section id="build">
+      <h2>4 · Re-streaming satellite vs a purpose-built FAST channel</h2>
+      <div class="qa">
+        <div><p class="q">Is it better to re-stream my existing satellite/linear channel, or build a fresh FAST channel?</p>
+          <p class="a">For most owners, <strong>a purpose-built FAST channel is the better choice.</strong> Here's the honest comparison:</p>
+          <div class="table-wrap"><table>
+            <thead><tr><th></th><th>Re-stream your satellite feed</th><th>Purpose-built FAST channel (Asiko builds from your library + schedule)</th></tr></thead>
+            <tbody>
+              <tr><td class="k">Reliability</td><td>Inherits every weakness of your uplink — satellite dropouts, encoder failures at your end</td><td><strong>Very high</strong> — file-based (VOD2Live), no live single point of failure</td></tr>
+              <tr><td class="k">Ad monetisation</td><td>Depends on whether your breaks are cleanly SCTE-35-marked; existing ads may not be cleared for streaming</td><td><strong>Clean SCTE-35 breaks</strong> designed for FAST — best fill and CPM</td></tr>
+              <tr><td class="k">Rights</td><td>Your satellite feed may carry content or ads not cleared for streaming or for the diaspora</td><td>You control exactly what goes in — rights-clean by construction</td></tr>
+              <tr><td class="k">Cost to run</td><td>Higher — a live re-origination path per channel</td><td>Lower — VOD2Live is a fraction of live compute</td></tr>
+              <tr><td class="k">What you provide</td><td>A stable live HLS feed + backup</td><td>A content library + a schedule</td></tr>
+              <tr><td class="k">Best for</td><td>Genuine live — sport, news, events — where there is no file alternative</td><td>Everything else, and it can still <strong>mirror</strong> your linear schedule</td></tr>
+            </tbody>
+          </table></div>
+          <p class="a"><strong>The hybrid</strong> is often the answer: a purpose-built FAST channel as the reliable base, with <strong>live windows spliced in</strong> for events. Your FAST channel and your satellite channel can look identical to a viewer while being far more robust underneath.</p></div>
+        <div><p class="q">Does a FAST build mean redoing my whole channel?</p>
+          <p class="a">No. If your content is already transcoded and packaged consistently, Asiko schedules it into a linear channel — no re-encoding. If it's a mixed-format archive, there's a one-off normalisation pass.</p></div>
+      </div>
+    </section>
+
+    <section id="reach">
+      <h2>5 · Reach &amp; putting your channel on your own platforms</h2>
+      <div class="qa">
+        <div><p class="q">Where will my channel be seen?</p>
+          <p class="a"><strong>asiko.africa</strong> on the web now; <strong>connected-TV apps</strong> — Roku, Fire TV, Samsung, LG — as they roll out <span class="tag soon">roadmap</span>; and anywhere it's embedded (below).</p></div>
+        <div><p class="q">Can I stream my channel on my own website and embed it there?</p>
+          <p class="a"><strong>Yes.</strong> You get one line of HTML — an <code>&lt;iframe&gt;</code> pointing at a page <strong>Asiko hosts</strong> (e.g. <code>embed.asiko.africa/c/your-channel</code>). Paste it on any page you own.</p>
+          <p class="a">Inside that frame it stays an Asiko stream: <strong>our player, our ad insertion, our analytics, your channel branding</strong>. You get zero URLs to repackage, and — deliberately — no access to any Asiko system or code. It behaves exactly like embedding a YouTube video.</p></div>
+        <div><p class="q">Can I put it in my own mobile app?</p>
+          <p class="a">Yes, via the same Asiko-provided embed or a token-authenticated playback URL. Same controls apply.</p></div>
+        <div><p class="q">What stops someone copying my embed and using it elsewhere?</p>
+          <p class="a">The embed is locked with <strong>domain allow-listing</strong> (plays only on domains Asiko approves), <strong>token-authenticated, expiring URLs</strong> (per partner), and referrer checks. Hand the iframe to a third party and it won't play.</p></div>
+        <div><p class="q">If viewers watch on my site, whose audience is it?</p>
+          <p class="a">Every view anywhere is an <strong>Asiko impression</strong> — monetised and counted by Asiko, then revenue-shared to you. Your site becomes additional reach for the channel, which is good for both of us: more surfaces = more viewer-hours = more ad revenue = a bigger share for you.</p></div>
+        <div><p class="q">Will Asiko promote my channel?</p>
+          <p class="a">Guide placement, home-row features and cross-channel promos, yes. Wider marketing is a shared effort — the more you drive to your channel, the more Asiko can justify featuring it.</p></div>
+        <div><p class="q">Can I run my channel on Asiko and other FAST platforms at the same time?</p>
+          <p class="a">Yes. Listing is non-exclusive unless you choose otherwise for a better rate.</p></div>
+      </div>
+    </section>
+
+    <section id="ads">
+      <h2>6 · Ads &amp; brand safety</h2>
+      <div class="qa">
+        <div><p class="q">What ads will run on my channel?</p>
+          <p class="a">A mix of Asiko direct-sold sponsorship and programmatic demand (private marketplace and open exchange), inserted server-side into your ad breaks. You can request <strong>category and competitor block-lists</strong>.</p></div>
+        <div><p class="q">Can I block certain advertisers or categories?</p>
+          <p class="a">Yes — block-lists are honoured at the ad-server level (e.g. gambling, alcohol, a named competitor).</p></div>
+        <div><p class="q">How many ad minutes, and who decides where breaks fall?</p>
+          <p class="a">You do — Asiko inserts against the break structure in your SCTE-35 or EPG. Typical FAST ad load is <strong>8–14 minutes per hour</strong>; you set yours.</p></div>
+        <div><p class="q">My content already has sponsors and product placement. Is that a problem?</p>
+          <p class="a">No. That's part of your content and stays untouched. Asiko's ad breaks are separate slots between and within programmes.</p></div>
+        <div><p class="q">Do I control the ad-break bumpers and slate?</p>
+          <p class="a">Asiko standard bumpers by default; custom "we'll be right back" cards using your branding are available.</p></div>
+      </div>
+    </section>
+
+    <section id="reporting">
+      <h2>7 · Reporting &amp; payment</h2>
+      <div class="qa">
+        <div><p class="q">What reporting do I get?</p>
+          <p class="a">A monthly statement per channel: impressions served, completion rate, fill rate, blended eCPM, gross and your net share. A self-service dashboard with near-real-time numbers is on the roadmap. <span class="tag soon">roadmap</span></p></div>
+        <div><p class="q">How is my revenue calculated?</p>
+          <p class="a">Gross ad revenue on your channel, minus the SSP / ad-server take (a few percent of media spend), gives net. Your contractual share is applied to that net. <strong>CDN delivery is carried by Asiko</strong> and already reflected in the split.</p></div>
+        <div><p class="q">Can I verify the numbers?</p>
+          <p class="a">The statement reconciles to the ad-server report. For audited-rev-share deals (baked-in ads), the agreement includes an audit right.</p></div>
+      </div>
+    </section>
+
+    <section id="rights">
+      <h2>8 · Rights &amp; legal</h2>
+      <div class="qa">
+        <div><p class="q">What rights do I need to have?</p>
+          <p class="a">Distribution rights for the territories you want the channel available in, music clearance for your content, and disclosure of anything that must be blacked out in specific regions. You warrant these in the listing agreement.</p></div>
+        <div><p class="q">Who is liable if my content infringes someone's rights?</p>
+          <p class="a">You warrant that you hold the rights, and indemnify Asiko against claims arising from your content. Asiko is responsible for the platform, not for what's in your channel.</p></div>
+        <div><p class="q">What about music licensing (PRS / PPL and equivalents)?</p>
+          <p class="a">Licensing for the music in your content is your responsibility. Asiko handles platform-level obligations where they apply.</p></div>
+        <div><p class="q">Who is responsible for viewer data protection?</p>
+          <p class="a">Asiko is the platform data controller for viewer data (it runs the app, the consent layer and the ad targeting). You remain responsible for your content and any data you collect directly.</p></div>
+        <div><p class="q">Can Asiko remove my channel?</p>
+          <p class="a">Yes — for a rights problem, a brand-safety issue, a breach of the agreement, or sustained non-performance. With notice wherever possible.</p></div>
+      </div>
+    </section>
+
+    <section id="control">
+      <h2>9 · Control &amp; your IP</h2>
+      <div class="qa">
+        <div><p class="q">Do I get access to Asiko's systems or source code?</p>
+          <p class="a"><strong>No — and you don't need it.</strong> You get a stream and an embed. The Asiko codebase, CMS, ad server, playout and data are on the other side of a wall that a video URL cannot cross.</p></div>
+        <div><p class="q">Can Asiko take my content and run it without me?</p>
+          <p class="a">No. You license carriage, not ownership. Asiko has no claim on your library, your brand, your schedules or your data, and you can revoke the carriage on notice.</p></div>
+        <div><p class="q">What happens to my channel if Asiko is acquired or shuts down?</p>
+          <p class="a">Your feed and content are yours throughout. The agreement covers wind-down and hand-back — you leave with exactly what you brought.</p></div>
+        <div><p class="q">Can I take my channel elsewhere later?</p>
+          <p class="a">Yes. Non-exclusive listing, a defined notice period, and no lock-in on your source feed or content.</p></div>
+      </div>
+      <div class="callout"><p><strong>The relationship in one line:</strong> Asiko is the origin, the player, the ad engine and the system of record. You are the content owner and a distribution partner. Every view, everywhere, is an Asiko impression — monetised by Asiko, shared with you.</p></div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p><b>Asiko TV</b> — Channel Owner Q&amp;A</p>
+    <p>Media Icons Africa · v1, 6 September 2026 · pairs with the "List Your Channel" pack · roadmap items are built during the MVP phase</p>
+  </footer>
+</div>
