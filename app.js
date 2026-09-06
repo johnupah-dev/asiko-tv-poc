@@ -166,17 +166,29 @@
   }
 
   /* ---------- lower third ---------- */
+  function nowLabel(ch, date) {
+    return ch.live ? (ch.liveTitle || 'LIVE NOW') : scheduleAt(ch, date).title;
+  }
+
   function updateLowerThird() {
     if (!CH.length) return;
     const now = new Date();
-    const s = scheduleAt(CH[current], now);
-    $('#nowTitle').textContent = s.title;
-    $('#nextTitle').textContent = s.nextTitle;
-    $('#nextTime').textContent = 'at ' + minToClock(s.nextAtMin);
-    const pct = Math.round((s.elapsed / s.duration) * 100);
-    $('#nowProgress').textContent = `${minToClock(s.startMin)}–${minToClock(s.endMin)} · ${pct}%`;
+    const cur = CH[current];
+    if (cur.live) {
+      $('#nowTitle').textContent = cur.liveTitle || 'LIVE NOW';
+      $('#nextTitle').textContent = '—';
+      $('#nextTime').textContent = '';
+      $('#nowProgress').textContent = '● LIVE';
+    } else {
+      const s = scheduleAt(cur, now);
+      $('#nowTitle').textContent = s.title;
+      $('#nextTitle').textContent = s.nextTitle;
+      $('#nextTime').textContent = 'at ' + minToClock(s.nextAtMin);
+      const pct = Math.round((s.elapsed / s.duration) * 100);
+      $('#nowProgress').textContent = `${minToClock(s.startMin)}–${minToClock(s.endMin)} · ${pct}%`;
+    }
     [...railEl.children].forEach((el, idx) => {
-      el.querySelector('[data-now]').textContent = scheduleAt(CH[idx], now).title;
+      el.querySelector('[data-now]').textContent = nowLabel(CH[idx], now);
     });
   }
 
@@ -352,7 +364,7 @@
   function frame(t) {
     const dt = Math.min(0.1, (t - lastTick) / 1000);
     lastTick = t;
-    if (!inAd && !video.paused && !document.hidden) {
+    if (!inAd && !video.paused && !document.hidden && !(CH[current] && CH[current].live)) {
       watchAccum += dt;
       if (watchAccum >= MON.breakIntervalSec) { watchAccum = 0; startAdBreak(); }
     }
