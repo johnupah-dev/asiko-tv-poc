@@ -89,7 +89,7 @@
       <a href="#build">4 · Re-stream vs FAST build</a>
       <a href="#reach">5 · Reach &amp; your own site</a>
       <a href="#ads">6 · Ads &amp; brand safety</a>
-      <a href="#reporting">7 · Reporting &amp; payment</a>
+      <a href="#reporting">7 · Reporting &amp; measurement</a>
       <a href="#rights">8 · Rights &amp; legal</a>
       <a href="#control">9 · Control &amp; your IP</a>
     </nav>
@@ -228,10 +228,40 @@
     </section>
 
     <section id="reporting">
-      <h2>7 · Reporting &amp; payment</h2>
+      <h2>7 · Reporting &amp; measurement</h2>
       <div class="qa">
-        <div><p class="q">What reporting do I get?</p>
-          <p class="a">A monthly statement per channel: impressions served, completion rate, fill rate, blended eCPM, gross and your net share. A self-service dashboard with near-real-time numbers is on the roadmap. <span class="tag soon">roadmap</span></p></div>
+        <div><p class="q">Asiko is free to watch with no sign-up. So how do you know how many people watched my channel?</p>
+          <p class="a">Viewership on a FAST service is measured <strong>server-side and by anonymous player telemetry — it never needs a viewer login</strong>. This is how Pluto, Tubi, Samsung TV+ and The Roku Channel all do it. Three sources combine:</p>
+          <ul>
+            <li><strong>Player beacons</strong> — every session sends anonymous events: play start, a heartbeat every few seconds, pause, channel change, ad start/complete, error. No personal data — a session ID, not a person. This gives concurrent viewers, viewer-hours, average watch time, completion rate and channel-switch behaviour, <strong>per channel, per hour, per market</strong>.</li>
+            <li><strong>Ad-server logs</strong> — every ad slot filled is a logged impression tagged with channel, time, market and device type. This is the revenue-grade number and it is inherently per-channel — it is what your statement reconciles to.</li>
+            <li><strong>CDN logs</strong> — Bunny records every manifest and segment request per channel: a cross-check on viewer-hours and the bandwidth view.</li>
+          </ul>
+          <p class="a">On connected TV the device supplies a resettable <strong>advertising ID</strong> (not a login) which lets us count unique devices and cap ad frequency. On web, a first-party anonymous ID does the same, subject to consent.</p></div>
+        <div><p class="q">What channel metrics will I actually see?</p>
+          <p class="a">All of these are measurable without any registration:</p>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Audience</th><th>Engagement</th><th>Money</th></tr></thead>
+            <tbody>
+              <tr><td>Viewer-hours (headline)</td><td>Average watch time / session</td><td>Ad impressions served</td></tr>
+              <tr><td>Average &amp; peak concurrent viewers</td><td>Completion rate</td><td>Fill rate</td></tr>
+              <tr><td>Unique devices / viewers</td><td>Tune-in by hour and day</td><td>Blended eCPM</td></tr>
+              <tr><td>Market / geo split</td><td>Where viewers arrive from and leave to</td><td>Gross and your net share</td></tr>
+              <tr><td>Device split (web / Roku / Fire TV …)</td><td></td><td></td></tr>
+            </tbody>
+          </table></div></div>
+        <div><p class="q">What's the plan for me to see my numbers, and when?</p>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Stage</th><th>What you get</th></tr></thead>
+            <tbody>
+              <tr><td class="k">POC (now)</td><td>A <strong>preview analytics view</strong> in the demo — a sample per-channel dashboard showing exactly the metrics above, so you can see the reporting you'll receive. <span class="tag now">now</span></td></tr>
+              <tr><td class="k">MVP</td><td>Real beacons + ad-server logs → a <strong>monthly statement per channel</strong> (PDF), reconciled to the ad server.</td></tr>
+              <tr><td class="k">Commercial pilot</td><td>A <strong>partner portal</strong> — you log in (partners get accounts; viewers don't) and see near-real-time charts for your channels. <span class="tag soon">roadmap</span></td></tr>
+              <tr><td class="k">Scale</td><td>Third-party measurement validation (Comscore / Nielsen / a standard analytics vendor) so advertisers and partners trust the numbers.</td></tr>
+            </tbody>
+          </table></div></div>
+        <div><p class="q">What reporting do I get on day one?</p>
+          <p class="a">A monthly statement per channel: viewer-hours, unique devices, completion rate, impressions served, fill rate, blended eCPM, gross and your net share. The self-service portal follows in the pilot phase. <span class="tag soon">roadmap</span></p></div>
         <div><p class="q">How is my revenue calculated?</p>
           <p class="a">Gross ad revenue on your channel, minus the SSP / ad-server take (a few percent of media spend), gives net. Your contractual share is applied to that net. <strong>CDN delivery is carried by Asiko</strong> and already reflected in the split.</p></div>
         <div><p class="q">Can I verify the numbers?</p>
