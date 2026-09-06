@@ -19,7 +19,7 @@
     "companion": [
       { "brand": "AXIS ATHLETIC", "text": "New season drop — shop the film", "type": "direct" },
       { "brand": "MERIDIAN COLD BREW", "text": "First case ships free", "type": "prog" },
-      { "brand": "ASIKO TV", "text": "20 channels, always on", "type": "house" }
+      { "brand": "ASIKO TV", "text": "22 channels · 2 live now", "type": "house" }
     ]
   },
   "channels": [
@@ -62,6 +62,12 @@
     { "num": 19, "id": "streetfc", "name": "STREET FC", "genre": "Football", "accent": "#d8a94b", "src": "https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_fmp4/master.m3u8", "durationSec": 1800,
       "programs": [ { "title": "Grassroots Gameday", "duration": 120 }, { "title": "Legends of the League", "duration": 90 }, { "title": "Tactics Board", "duration": 45 }, { "title": "Classic African Cup", "duration": 120 }, { "title": "Academy Watch", "duration": 60 }, { "title": "Prime Replay", "duration": 130 }, { "title": "Overnight Football", "duration": 220 } ] },
     { "num": 20, "id": "tiwakids", "name": "TIWA KIDS", "genre": "Kids", "accent": "#d8a94b", "src": "https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8", "durationSec": 1800,
-      "programs": [ { "title": "Good Morning Friends", "duration": 90 }, { "title": "Folktales", "duration": 45 }, { "title": "Number Island", "duration": 60 }, { "title": "Cartoon Block", "duration": 120 }, { "title": "Dance & Move", "duration": 45 }, { "title": "Afternoon Movie", "duration": 100 }, { "title": "Bedtime Stories", "duration": 240 } ] }
+      "programs": [ { "title": "Good Morning Friends", "duration": 90 }, { "title": "Folktales", "duration": 45 }, { "title": "Number Island", "duration": 60 }, { "title": "Cartoon Block", "duration": 120 }, { "title": "Dance & Move", "duration": 45 }, { "title": "Afternoon Movie", "duration": 100 }, { "title": "Bedtime Stories", "duration": 240 } ] },
+    { "num": 21, "id": "asikolive", "name": "ASIKO LIVE", "genre": "Live Event", "accent": "#df3b34", "live": true, "liveTitle": "LIVE NOW — Asiko Live Event",
+      "src": "https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8",
+      "programs": [ { "title": "Live Event", "duration": 240 } ] },
+    { "num": 22, "id": "asikolivecue", "name": "ASIKO LIVE · CUES", "genre": "Live Event", "accent": "#df3b34", "live": true, "liveTitle": "LIVE — carries SCTE-35 ad-break markers",
+      "src": "https://demo.unified-streaming.com/k8s/live/stable/scte35.isml/.m3u8",
+      "programs": [ { "title": "Live Event", "duration": 240 } ] }
   ]
 }
