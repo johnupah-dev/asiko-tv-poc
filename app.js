@@ -386,7 +386,8 @@
   $('#guideClose').addEventListener('click', closeGuide);
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeGuide();
-    else if (e.key >= '1' && e.key <= '7') tune(Number(e.key) - 1);
+    else if (e.key >= '1' && e.key <= '9') tune(Number(e.key) - 1);
+    else if (e.key === '0') tune(9);
     else if (e.key.toLowerCase() === 'm') $('#soundBtn').click();
     else if (e.key.toLowerCase() === 'g') (guideEl.hidden ? openGuide() : closeGuide());
   });

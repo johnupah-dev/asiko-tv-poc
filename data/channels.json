@@ -1,5 +1,5 @@
 {
-  "network": "LOOP7",
+  "network": "ASIKO TV",
   "monetization": {
     "breakIntervalSec": 150,
     "breakDurationSec": 30,
@@ -11,7 +11,7 @@
       { "name": "House Promo · cross-channel", "cpm": 0.0, "type": "house", "weight": 2 }
     ],
     "creatives": [
-      { "brand": "AXIS ATHLETIC", "line": "Move like it's already tomorrow.", "sub": "Presenting sponsor — LOOP7 Prime", "bg": "#0E2038", "fg": "#7FD0FF" },
+      { "brand": "AXIS ATHLETIC", "line": "Move like it's already tomorrow.", "sub": "Presenting sponsor — Asiko Prime", "bg": "#0E2038", "fg": "#7FD0FF" },
       { "brand": "MERIDIAN COLD BREW", "line": "Slow-steeped. Wide awake.", "sub": "Programmatic · PMP deal ID 4471", "bg": "#241203", "fg": "#F6B461" },
       { "brand": "HARBOR & PINE", "line": "Furniture that outlives the trend cycle.", "sub": "Open Exchange · OpenRTB win", "bg": "#12241C", "fg": "#79E0B4" },
       { "brand": "NOVA MOBILITY", "line": "The commute, reconsidered.", "sub": "Direct sold · :15 spot", "bg": "#1B1130", "fg": "#C39BFF" }
@@ -19,12 +19,12 @@
     "companion": [
       { "brand": "AXIS ATHLETIC", "text": "New season drop — shop the film", "type": "direct" },
       { "brand": "MERIDIAN COLD BREW", "text": "First case ships free", "type": "prog" },
-      { "brand": "LOOP7", "text": "Download the app · 7 channels, always on", "type": "house" }
+      { "brand": "ASIKO TV", "text": "10 channels, always on", "type": "house" }
     ]
   },
   "channels": [
     {
-      "num": 1, "id": "prime", "name": "PRIME REEL", "genre": "Cinema", "accent": "#F2B441",
+      "num": 1, "id": "prime", "name": "PRIME REEL", "genre": "Cinema", "accent": "#d8a94b",
       "src": "https://test-streams.mux.dev/tos_ismc/main.m3u8", "durationSec": 734,
       "programs": [
         { "title": "Sunrise Matinee: The Cutting Edge", "duration": 130 },
@@ -42,7 +42,7 @@
       ]
     },
     {
-      "num": 2, "id": "toon", "name": "TOONWAVE", "genre": "Animation", "accent": "#FF5C8A",
+      "num": 2, "id": "toon", "name": "TOONWAVE", "genre": "Animation", "accent": "#d8a94b",
       "src": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", "durationSec": 596,
       "programs": [
         { "title": "Cereal Bowl Cartoons", "duration": 120 },
@@ -60,8 +60,8 @@
       ]
     },
     {
-      "num": 3, "id": "terra", "name": "TERRA LIVE", "genre": "Nature", "accent": "#2FBEA6",
-      "src": "https://test-streams.mux.dev/tos_ismc/main.m3u8", "durationSec": 734,
+      "num": 3, "id": "terra", "name": "TERRA LIVE", "genre": "Nature", "accent": "#d8a94b",
+      "src": "https://maitv-vod.lab.eyevinn.technology/tearsofsteel_4k.mov/master.m3u8", "durationSec": 734,
       "programs": [
         { "title": "Dawn Chorus: Live Cams", "duration": 150 },
         { "title": "Tidepools in Real Time", "duration": 90 },
@@ -77,7 +77,7 @@
       ]
     },
     {
-      "num": 4, "id": "nightfall", "name": "NIGHTFALL", "genre": "Sci-Fi", "accent": "#6E7CFF",
+      "num": 4, "id": "nightfall", "name": "NIGHTFALL", "genre": "Sci-Fi", "accent": "#d8a94b",
       "src": "https://test-streams.mux.dev/tos_ismc/main.m3u8", "durationSec": 734,
       "programs": [
         { "title": "Retro Futures: Serial Reruns", "duration": 120 },
@@ -94,8 +94,8 @@
       ]
     },
     {
-      "num": 5, "id": "rewind", "name": "REWIND 88", "genre": "Retro TV", "accent": "#FF8A3D",
-      "src": "https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_ts/master.m3u8",
+      "num": 5, "id": "rewind", "name": "REWIND 88", "genre": "Retro TV", "accent": "#d8a94b",
+      "src": "https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_ts/master.m3u8", "durationSec": 1800,
       "programs": [
         { "title": "Test Pattern & Sign-On", "duration": 20 },
         { "title": "Morning Variety Hour", "duration": 90 },
@@ -111,7 +111,7 @@
       ]
     },
     {
-      "num": 6, "id": "field", "name": "FIELD NOTES", "genre": "Documentary", "accent": "#56C08A",
+      "num": 6, "id": "field", "name": "FIELD NOTES", "genre": "Documentary", "accent": "#d8a94b",
       "src": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", "durationSec": 596,
       "programs": [
         { "title": "How It's Actually Made", "duration": 120 },
@@ -128,8 +128,8 @@
       ]
     },
     {
-      "num": 7, "id": "pulse", "name": "PULSE", "genre": "Music", "accent": "#B36BFF",
-      "src": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", "durationSec": 596,
+      "num": 7, "id": "pulse", "name": "PULSE", "genre": "Music", "accent": "#d8a94b",
+      "src": "https://maitv-vod.lab.eyevinn.technology/VINN.mp4/master.m3u8", "durationSec": 370,
       "programs": [
         { "title": "Wake-Up Playlist", "duration": 120 },
         { "title": "New Music Now", "duration": 60 },
@@ -142,6 +142,57 @@
         { "title": "Slow Jams After Hours", "duration": 130 },
         { "title": "Ambient Overnight", "duration": 220 },
         { "title": "Sunrise Set", "duration": 120 }
+      ]
+    },
+    {
+      "num": 8, "id": "newsline", "name": "NEWSLINE 24", "genre": "News", "accent": "#d8a94b",
+      "src": "https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.ism/.m3u8", "durationSec": 692,
+      "programs": [
+        { "title": "Africa This Morning", "duration": 120 },
+        { "title": "Market Open", "duration": 30 },
+        { "title": "The Newsroom", "duration": 60 },
+        { "title": "Continental Report", "duration": 60 },
+        { "title": "Midday Bulletin", "duration": 30 },
+        { "title": "In Depth: The Long Read", "duration": 60 },
+        { "title": "Business Daily", "duration": 45 },
+        { "title": "Evening Edition", "duration": 90 },
+        { "title": "Night Desk", "duration": 120 },
+        { "title": "Headlines on the Hour", "duration": 180 },
+        { "title": "Dawn Wire", "duration": 105 }
+      ]
+    },
+    {
+      "num": 9, "id": "pitchside", "name": "PITCHSIDE", "genre": "Sport", "accent": "#d8a94b",
+      "src": "https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_fmp4/master.m3u8", "durationSec": 1800,
+      "programs": [
+        { "title": "Match Rewind: Derby Day", "duration": 120 },
+        { "title": "The Warm-Up", "duration": 30 },
+        { "title": "Classic Fixtures", "duration": 120 },
+        { "title": "Transfer Talk", "duration": 45 },
+        { "title": "Track & Field Hour", "duration": 60 },
+        { "title": "Boxing Archive", "duration": 90 },
+        { "title": "Full Time Analysis", "duration": 60 },
+        { "title": "Prime Match: Champions Night", "duration": 130 },
+        { "title": "Highlights Reel", "duration": 45 },
+        { "title": "Overnight Sports Loop", "duration": 200 },
+        { "title": "Sunrise Sports Desk", "duration": 100 }
+      ]
+    },
+    {
+      "num": 10, "id": "spark", "name": "SPARK KIDS", "genre": "Kids", "accent": "#d8a94b",
+      "src": "https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8", "durationSec": 1800,
+      "programs": [
+        { "title": "Sunrise Sing-Along", "duration": 90 },
+        { "title": "Little Explorers", "duration": 30 },
+        { "title": "Story Corner", "duration": 45 },
+        { "title": "Cartoon Carousel", "duration": 120 },
+        { "title": "Learn & Play", "duration": 60 },
+        { "title": "Afternoon Movie: Friends Forever", "duration": 100 },
+        { "title": "Craft Club", "duration": 45 },
+        { "title": "Music Box", "duration": 60 },
+        { "title": "Wind-Down Tales", "duration": 60 },
+        { "title": "Goodnight Loop", "duration": 240 },
+        { "title": "Early Birds", "duration": 90 }
       ]
     }
   ]
