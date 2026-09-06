@@ -12,6 +12,7 @@ claude.ai; the PDFs and Word files are the same content for sending by email.
 | 04 | **List Your Channel pack** — what a partner sends, revenue share, what happens after they submit | `04-list-your-channel-pack.html` | Prospective channel owners |
 | 05 | **Week 1 plan** — the 7-day plan to get asiko.africa live and the real pipeline started | `05-week-1-plan.html` | Internal |
 | 06 | **Trail to launch** — POC → MVP → commercial pilot → full launch, with running financials and the monetisation growth path (FAST → AVOD → TVOD/Cinemas → SVOD) | `06-trail-to-launch.html` | Investors, board |
+| 07 | **Investor & partner readiness** -- what is done, what to fix before meetings, what only you decide | `07-investor-and-partner-readiness.html` | You, before booking meetings |
 
 ## Notes
 

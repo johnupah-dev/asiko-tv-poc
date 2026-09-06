@@ -1,0 +1,179 @@
+<title>Asiko Investor & Partner Readiness</title>
+<meta name="description" content="What is done, what to fix before meetings, and what only you can decide — for sitting with investors and prospective channel owners." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+
+<style>
+  :root {
+    --bg:#0a0a0c; --bg-soft:#0f0f12; --panel:#17171b; --panel-2:#1e1e23;
+    --line:rgba(216,169,75,0.16); --line-strong:rgba(216,169,75,0.34);
+    --gold:#d8a94b; --gold-bright:#f3cd7e; --gold-deep:#a8792c; --gold-wash:rgba(216,169,75,0.10);
+    --white:#f7f5f0; --muted:#a7a4ac; --muted-2:#716f78; --red:#df3b34; --green:#6fbf97; --amber:#e0b45e;
+    --r-sm:6px; --r-md:10px; --pill:999px;
+    --display:"Poppins","Segoe UI",system-ui,sans-serif;
+    --body:"Inter","Segoe UI",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+    --measure:66ch;
+    --s-1:clamp(.8rem,.78rem + .1vw,.86rem);
+    --s0:clamp(.95rem,.92rem + .15vw,1.02rem);
+    --s1:clamp(1.1rem,1.02rem + .4vw,1.3rem);
+    --s2:clamp(1.35rem,1.15rem + .8vw,1.8rem);
+    --s4:clamp(2.1rem,1.6rem + 2.6vw,3.4rem);
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--white); font-family:var(--body); font-size:var(--s0); line-height:1.55; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:60rem; margin:0 auto; padding:clamp(1.4rem,1rem + 3vw,4rem) clamp(1.1rem,.6rem + 3vw,3.4rem) 6rem; }
+
+  .lockup { display:inline-flex; align-items:center; gap:10px; border:1px solid var(--line); border-radius:9px; padding:6px 13px 6px 9px; margin-bottom:1.5rem; }
+  .lockup svg { width:24px; height:24px; display:block; }
+  .lockup .w { font-family:var(--display); font-weight:700; font-size:16px; letter-spacing:.1em; }
+  .lockup .w b { font-weight:800; color:var(--gold); }
+  .lockup .t { display:block; font-family:var(--mono); font-size:8px; letter-spacing:.24em; text-transform:uppercase; color:var(--gold); margin-top:3px; }
+
+  .eyebrow { display:inline-flex; align-items:center; gap:.6rem; font-family:var(--mono); font-size:var(--s-1); letter-spacing:.18em; text-transform:uppercase; color:var(--gold); margin:0 0 1rem; }
+  .eyebrow::before { content:""; width:1.6rem; height:1px; background:var(--gold); }
+  h1 { font-family:var(--display); font-weight:800; font-size:var(--s4); line-height:1.04; letter-spacing:-.02em; text-wrap:balance; margin:0 0 .7rem; }
+  h1 .accent { color:var(--gold); }
+  .standfirst { font-size:var(--s1); color:var(--muted); max-width:52ch; margin:0 0 1.4rem; }
+  .masthead { border-bottom:1px solid var(--line-strong); padding-bottom:1.6rem; }
+
+  .legend { display:flex; flex-wrap:wrap; gap:14px; margin:1.2rem 0 0; font-family:var(--mono); font-size:.72rem; color:var(--muted); }
+  .legend span { display:inline-flex; align-items:center; gap:6px; }
+  .dot { width:.8rem; height:.8rem; border-radius:50%; display:inline-block; flex:none; }
+  .dot.done { background:var(--green); } .dot.wip { background:var(--amber); } .dot.no { background:var(--muted-2); }
+
+  main { margin-top:2.6rem; display:flex; flex-direction:column; gap:2.4rem; }
+  h2 { font-family:var(--display); font-weight:700; font-size:var(--s2); line-height:1.14; letter-spacing:-.01em; margin:0 0 .3rem; }
+  .grouptag { font-family:var(--mono); font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; color:var(--gold-deep); margin:1.1rem 0 .5rem; }
+
+  ul.check { margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:.1rem; }
+  ul.check li { display:grid; grid-template-columns:1.4rem 1fr; gap:.7rem; align-items:start; padding:.55rem .2rem; border-bottom:1px solid var(--line); }
+  ul.check li:last-child { border-bottom:0; }
+  ul.check .dot { margin-top:.28em; }
+  .item b { font-family:var(--display); font-weight:600; color:var(--white); }
+  .item span { color:var(--muted); }
+  .who { font-family:var(--mono); font-size:.64rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gold); border:1px solid var(--line-strong); border-radius:999px; padding:1px 7px; margin-left:.5rem; white-space:nowrap; }
+
+  .callout { background:var(--gold-wash); border:1px solid var(--line-strong); border-left:3px solid var(--gold); border-radius:0 var(--r-sm) var(--r-sm) 0; padding:1rem 1.15rem; max-width:var(--measure); }
+  .callout.warn { border-left-color:var(--red); background:rgba(223,59,52,0.07); }
+  .callout p { margin:0; }
+  .callout strong { color:var(--white); }
+
+  footer { margin-top:3.4rem; padding-top:1.3rem; border-top:1px solid var(--line-strong); font-size:var(--s-1); color:var(--muted); display:flex; flex-direction:column; gap:.3rem; }
+  footer b { color:var(--gold-bright); font-family:var(--display); font-weight:600; }
+  :focus-visible { outline:2px solid var(--gold); outline-offset:2px; }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <span class="lockup">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 L29 29 L3 29 Z" fill="#d8a94b"/><path d="M16 13 L23.5 27 L8.5 27 Z" fill="#0a0a0c"/><rect x="10" y="20.5" width="12" height="3.2" fill="#0a0a0c"/></svg>
+      <span><span class="w">ASIKO<b>&nbsp;TV</b></span><span class="t">The Soul of Africa</span></span>
+    </span>
+    <p class="eyebrow">Readiness Checklist</p>
+    <h1>Ready to sit with <span class="accent">investors</span> &amp; channel owners</h1>
+    <p class="standfirst">What's done, what to fix before a meeting, and what only you can decide.</p>
+    <div class="legend">
+      <span><i class="dot done"></i> done</span>
+      <span><i class="dot wip"></i> in progress / partial</span>
+      <span><i class="dot no"></i> not started</span>
+      <span style="color:var(--muted-2)">tag = whose job</span>
+    </div>
+  </header>
+
+  <main>
+
+    <section>
+      <h2>Do these first — blockers for any meeting</h2>
+      <ul class="check">
+        <li><i class="dot wip"></i><div class="item"><b>asiko.africa live</b> <span class="who">You</span><br><span>Add the four apex A records in Namecheap. Demoing on a github.io URL undercuts the pitch. ~5 min my side once DNS resolves.</span></div></li>
+        <li><i class="dot no"></i><div class="item"><b>Playout access</b> <span class="who">You</span><br><span>Eyevinn billing cleared, or SSH to the KVM8. Without it, "is any of this real?" has no good answer beyond the trail doc.</span></div></li>
+        <li><i class="dot no"></i><div class="item"><b>"Terms · Privacy" footer link in the app</b> <span class="who">Me</span><br><span>Placeholder links are enough for the demo; shows it's considered. Real drafting is a lawyer task before Phase 1 ads.</span></div></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>For investors</h2>
+
+      <p class="grouptag">Have / ready</p>
+      <ul class="check">
+        <li><i class="dot done"></i><div class="item"><b>Working branded demo</b> <span>— 22 channels + 2 live, Asiko-skinned, organised Browse view with genre rows, competitions and voting.</span></div></li>
+        <li><i class="dot done"></i><div class="item"><b>Monetisation model, visualised</b> <span>— live revenue panel: fill, eCPM, gross, Direct / Programmatic / House split.</span></div></li>
+        <li><i class="dot done"></i><div class="item"><b>The document set</b> <span>— revised architecture, trail-to-launch with financials, onboarding &amp; ad-revenue, design spec, week-1 plan. All in the repo and as shareable pages.</span></div></li>
+        <li><i class="dot done"></i><div class="item"><b>Phased plan with numbers</b> <span>— POC → MVP → pilot → launch, cost ladder, break-even in viewer-hours, monetisation growth path.</span></div></li>
+      </ul>
+
+      <p class="grouptag">Must fix before the meeting</p>
+      <ul class="check">
+        <li><i class="dot wip"></i><div class="item"><b>The demo on the brand domain</b> <span>— see blockers above.</span></div></li>
+        <li><i class="dot no"></i><div class="item"><b>The ask</b> <span class="who">You</span><span> — how much you're raising, use of funds, valuation. I can structure it once you set the numbers.</span></div></li>
+        <li><i class="dot no"></i><div class="item"><b>Team slide</b> <span class="who">You</span><span> — who builds and operates this. "Founder + AI assistant" invites the question; have the hiring / Enveu answer ready.</span></div></li>
+        <li><i class="dot no"></i><div class="item"><b>Content strategy, one page</b> <span class="who">You</span><span> — the biggest risk. Credible mix: partner feeds + a licensed diaspora library + owned production.</span></div></li>
+        <li><i class="dot no"></i><div class="item"><b>"Why Asiko wins"</b> <span class="who">You</span><span> — one slide vs GenXT, Kulture Streams, Edo Kulture Streams and the global FAST players. Diaspora focus, the culture, first-mover in the niche.</span></div></li>
+        <li><i class="dot no"></i><div class="item"><b>Traction proof, however small</b> <span>— one real channel running, or letters of intent from the 10 companies. Turns a pitch into evidence.</span></div></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>For prospective channel owners</h2>
+
+      <p class="grouptag">Have / ready</p>
+      <ul class="check">
+        <li><i class="dot done"></i><div class="item"><b>"List Your Channel" pack</b> <span>— feed spec, SCTE-35, ad policy, EPG, rights, brand assets, the 5-step onboarding flow.</span></div></li>
+        <li><i class="dot done"></i><div class="item"><b>Their slot, visible</b> <span>— the Browse view shows genre rows with "List your channel" tiles; competitions have a dedicated row.</span></div></li>
+        <li><i class="dot done"></i><div class="item"><b>Revenue-share model explained</b> <span>— clean feed / reserved pods / baked-in, with typical splits.</span></div></li>
+      </ul>
+
+      <p class="grouptag">Must fix before signing anyone</p>
+      <ul class="check">
+        <li><i class="dot no"></i><div class="item"><b>A listing-agreement template</b> <span class="who">You + lawyer</span><span> — a contract, not just the pack.</span></div></li>
+        <li><i class="dot no"></i><div class="item"><b>A real test-channel environment</b> <span class="who">Me</span><span> — take their HLS feed and show it running end to end. Needs playout access (blockers above).</span></div></li>
+        <li><i class="dot no"></i><div class="item"><b>Rate card &amp; rev-share terms in writing</b> <span class="who">You</span><span> — specifics, not ranges.</span></div></li>
+        <li><i class="dot no"></i><div class="item"><b>A monthly-statement mock</b> <span class="who">Me</span><span> — what reporting they receive.</span></div></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Legal &amp; ops — before real ads run</h2>
+      <ul class="check">
+        <li><i class="dot no"></i><div class="item"><b>Privacy Policy</b> <span class="who">Lawyer</span><span> — mandatory. Ad targeting = personal data under UK/EU GDPR from day one.</span></div></li>
+        <li><i class="dot no"></i><div class="item"><b>Cookie / consent banner (CMP)</b> <span class="who">Me + policy</span><span> — mandatory in UK/EU before programmatic ads. The POC has none.</span></div></li>
+        <li><i class="dot no"></i><div class="item"><b>Terms of Use</b> <span class="who">Lawyer</span><span> — liability, acceptable use, content disclaimers.</span></div></li>
+        <li><i class="dot no"></i><div class="item"><b>Company entity + bank + billing</b> <span class="who">You</span><span> — needed to contract with an SSP / ad server.</span></div></li>
+        <li><i class="dot no"></i><div class="item"><b>B2B pipeline tracker (light CRM)</b> <span class="who">You</span><span> — for the 10 companies, advertisers, competition entrants. A shared sheet is enough to start.</span></div></li>
+      </ul>
+      <div class="callout"><p>Legal pages live canonically on <strong>asiko.live</strong> but must be <strong>linked from inside the app</strong> — that's where data is collected. Ad rate cards and business terms stay as sales collateral, not consumer legal.</p></div>
+    </section>
+
+    <section>
+      <h2>Roadmap — acknowledge, don't hide</h2>
+      <p style="color:var(--muted); max-width:var(--measure)">These are expected gaps at POC stage. The trail-to-launch doc frames them as deliberate phases — say so in the room rather than gloss over them.</p>
+      <ul class="check">
+        <li><i class="dot no"></i><div class="item"><b>CTV apps</b> <span>— Roku, Fire TV, Samsung, LG. Where FAST money is. Phase 2.</span></div></li>
+        <li><i class="dot no"></i><div class="item"><b>Real server-side ad insertion (SSAI)</b> <span>— Eyevinn SGAI + an ad decision server. Phase 1–2.</span></div></li>
+        <li><i class="dot no"></i><div class="item"><b>CMS for scheduling &amp; channel ops</b> <span>— Enveu scope, or built. Phase 2.</span></div></li>
+        <li><i class="dot no"></i><div class="item"><b>Live: DVR / catch-up / SCTE-35 ad breaks</b> <span>— not off-the-shelf; needs building. Phase 2–3.</span></div></li>
+        <li><i class="dot no"></i><div class="item"><b>Real voting backend</b> <span>— the competition rows are a mock today; a real service drops into that seam. MVP+.</span></div></li>
+        <li><i class="dot no"></i><div class="item"><b>AVOD on-demand → TVOD "Asiko Cinemas" → SVOD tier</b> <span>— the monetisation growth path. Upside, not the plan.</span></div></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>What only you can decide</h2>
+      <ul class="check">
+        <li><i class="dot no"></i><div class="item"><b>The raise</b> <span>— amount, valuation, use of funds.</span></div></li>
+        <li><i class="dot no"></i><div class="item"><b>Enveu — yes or no</b> <span>— the $13k build partner, committed against Phase-2 data.</span></div></li>
+        <li><i class="dot no"></i><div class="item"><b>Content</b> <span>— what actually plays: deals, licences, owned production.</span></div></li>
+        <li><i class="dot no"></i><div class="item"><b>Team</b> <span>— hires, or lean on a build partner + managed ops.</span></div></li>
+        <li><i class="dot no"></i><div class="item"><b>Territory &amp; entity</b> <span>— where Asiko is registered; which markets first.</span></div></li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer>
+    <p><b>Asiko TV</b> — investor &amp; partner readiness checklist</p>
+    <p>Media Icons Africa · 6 September 2026 · work down the "must fix" items before booking meetings</p>
+  </footer>
+</div>
