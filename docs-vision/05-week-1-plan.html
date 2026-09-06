@@ -1,0 +1,190 @@
+<title>Asiko Week 1 Plan</title>
+<meta name="description" content="The 7-day plan to get asiko.africa live with a 10-channel POC and the real Eyevinn pipeline started — 6 to 12 September 2026." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+
+<style>
+  :root {
+    --bg:#0a0a0c; --bg-soft:#0f0f12; --panel:#17171b; --panel-2:#1e1e23;
+    --line:rgba(216,169,75,0.16); --line-strong:rgba(216,169,75,0.34);
+    --gold:#d8a94b; --gold-bright:#f3cd7e; --gold-deep:#a8792c; --gold-wash:rgba(216,169,75,0.10);
+    --white:#f7f5f0; --muted:#a7a4ac; --muted-2:#716f78; --red:#df3b34; --green:#6fbf97;
+    --r-sm:6px; --r-md:10px; --pill:999px;
+    --display:"Poppins","Segoe UI",system-ui,sans-serif;
+    --body:"Inter","Segoe UI",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+    --measure:66ch;
+    --s-1:clamp(.8rem,.78rem + .1vw,.86rem);
+    --s0:clamp(.95rem,.92rem + .15vw,1.02rem);
+    --s1:clamp(1.1rem,1.02rem + .4vw,1.3rem);
+    --s2:clamp(1.4rem,1.2rem + .8vw,1.9rem);
+    --s4:clamp(2.2rem,1.7rem + 2.6vw,3.6rem);
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--white); font-family:var(--body); font-size:var(--s0); line-height:1.6; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:72rem; margin:0 auto; padding:clamp(1.4rem,1rem + 3vw,4rem) clamp(1.1rem,.6rem + 3vw,3.4rem) 6rem; }
+
+  .lockup { display:inline-flex; align-items:center; gap:10px; border:1px solid var(--line); border-radius:9px; padding:6px 13px 6px 9px; margin-bottom:1.6rem; }
+  .lockup svg { width:24px; height:24px; display:block; }
+  .lockup .w { font-family:var(--display); font-weight:700; font-size:16px; letter-spacing:.1em; }
+  .lockup .w b { font-weight:800; color:var(--gold); }
+  .lockup .t { display:block; font-family:var(--mono); font-size:8px; letter-spacing:.24em; text-transform:uppercase; color:var(--gold); margin-top:3px; }
+
+  .eyebrow { display:inline-flex; align-items:center; gap:.6rem; font-family:var(--mono); font-size:var(--s-1); letter-spacing:.18em; text-transform:uppercase; color:var(--gold); margin:0 0 1rem; }
+  .eyebrow::before { content:""; width:1.6rem; height:1px; background:var(--gold); }
+  h1 { font-family:var(--display); font-weight:800; font-size:var(--s4); line-height:1.03; letter-spacing:-.02em; text-wrap:balance; margin:0 0 .7rem; }
+  h1 .accent { color:var(--gold); }
+  .standfirst { font-size:var(--s1); color:var(--muted); max-width:56ch; margin:0 0 1.6rem; }
+  .masthead { border-bottom:1px solid var(--line-strong); padding-bottom:1.8rem; }
+  .range { font-family:var(--mono); font-size:var(--s-1); color:var(--gold-bright); letter-spacing:.04em; }
+
+  main { margin-top:2.6rem; display:flex; flex-direction:column; gap:2.6rem; }
+  h2 { font-family:var(--display); font-weight:700; font-size:var(--s2); line-height:1.12; letter-spacing:-.01em; margin:0 0 1rem; padding-bottom:.6rem; border-bottom:1px solid var(--line); }
+  p { margin:0 0 .8rem; max-width:var(--measure); }
+  strong { font-weight:600; color:var(--white); }
+  code { font-family:var(--mono); font-size:.82em; background:var(--panel-2); border:1px solid var(--line); border-radius:4px; padding:.06rem .35rem; color:var(--gold-bright); }
+
+  .goal { background:var(--gold-wash); border:1px solid var(--line-strong); border-left:3px solid var(--gold); border-radius:0 var(--r-sm) var(--r-sm) 0; padding:1.1rem 1.2rem; }
+  .goal strong { color:var(--gold-bright); }
+
+  .blockers { display:grid; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr)); gap:.9rem; }
+  .blk { border:1px solid var(--line); border-radius:var(--r-md); background:var(--bg-soft); padding:1rem 1.1rem; }
+  .blk .n { font-family:var(--mono); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--red); }
+  .blk h3 { font-family:var(--display); font-weight:600; font-size:var(--s0); margin:.35rem 0 .3rem; }
+  .blk p { font-size:var(--s-1); color:var(--muted); margin:0; max-width:none; }
+  .blk .who { display:inline-block; margin-top:.5rem; font-family:var(--mono); font-size:.66rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gold); border:1px solid var(--line-strong); border-radius:var(--pill); padding:.12rem .55rem; }
+
+  .table-wrap { overflow-x:auto; border:1px solid var(--line); border-radius:var(--r-md); background:var(--bg-soft); }
+  table { border-collapse:collapse; width:100%; font-size:var(--s-1); min-width:42rem; }
+  th,td { text-align:left; padding:.72rem .9rem; vertical-align:top; border-bottom:1px solid var(--line); }
+  thead th { font-family:var(--mono); font-weight:500; font-size:.68rem; letter-spacing:.07em; text-transform:uppercase; color:var(--muted); background:var(--panel); }
+  tbody tr:last-child td { border-bottom:0; }
+  td.day { white-space:nowrap; font-family:var(--display); font-weight:700; color:var(--gold-bright); }
+  td.day span { display:block; font-family:var(--mono); font-weight:400; font-size:.7rem; color:var(--muted-2); }
+  .done { color:var(--green); }
+  .col-me, .col-you { width:42%; }
+  ul { margin:.3rem 0 0; padding-left:1.1rem; }
+  li { margin:.2rem 0; }
+  li::marker { color:var(--gold); }
+
+  footer { margin-top:3.4rem; padding-top:1.3rem; border-top:1px solid var(--line-strong); font-size:var(--s-1); color:var(--muted); display:flex; flex-direction:column; gap:.3rem; }
+  footer b { color:var(--gold-bright); font-family:var(--display); font-weight:600; }
+  :focus-visible { outline:2px solid var(--gold); outline-offset:2px; }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <span class="lockup">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 L29 29 L3 29 Z" fill="#d8a94b"/><path d="M16 13 L23.5 27 L8.5 27 Z" fill="#0a0a0c"/><rect x="10" y="20.5" width="12" height="3.2" fill="#0a0a0c"/></svg>
+      <span><span class="w">ASIKO<b>&nbsp;TV</b></span><span class="t">The Soul of Africa</span></span>
+    </span>
+    <p class="eyebrow">Build Plan · Week 1</p>
+    <h1>Get <span class="accent">asiko.africa</span> live, and start the real pipeline</h1>
+    <p class="standfirst">Seven days. A 10-channel POC on the brand domain, the real Eyevinn pipeline started, and the intake process open for the first ten channel partners.</p>
+    <p class="range">Sat 6 Sep &rarr; Fri 12 Sep 2026</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>End-of-week goal</h2>
+      <div class="goal">
+        <p><strong>Realistic target for Friday:</strong> <code>asiko.africa</code> live with the 10-slot POC on the Asiko brand · <strong>1–3 real Channel Engine channels</strong> running (hosted on Eyevinn or self-hosted on the KVM8) · <strong>server-side ad insertion proven</strong> on one real channel with a test tag · the <strong>“List Your Channel” intake open</strong> and sent to all ten companies.</p>
+        <p style="margin:.7rem 0 0; color:var(--muted); font-size:var(--s-1)">Not a target for week 1: ten real partner channels fully onboarded. Partner feeds, contracts and ad policies run on their own clock.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Three blockers — all need you</h2>
+      <div class="blockers">
+        <div class="blk">
+          <span class="n">Blocker 1</span>
+          <h3>asiko.africa DNS</h3>
+          <p>Namecheap &rarr; <code>asiko.africa</code> &rarr; Advanced DNS: four <code>A</code> records on host <code>@</code> pointing to <code>185.199.108–111.153</code>, domain on Namecheap BasicDNS (not parking).</p>
+          <span class="who">You · ~10 min</span>
+        </div>
+        <div class="blk">
+          <span class="n">Blocker 2</span>
+          <h3>Playout engine access</h3>
+          <p>Either the Eyevinn billing clears, <em>or</em> you send SSH access to the Hostinger KVM8 so the Channel Engine can be self-hosted. One of the two.</p>
+          <span class="who">You</span>
+        </div>
+        <div class="blk">
+          <span class="n">Blocker 3</span>
+          <h3>Bunny content origin</h3>
+          <p>Send the Storage Zone <strong>name</strong> and <strong>region</strong> (or the Account API key), and confirm there is content in it — or a Pull Zone to serve it.</p>
+          <span class="who">You</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Day by day</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Day</th><th class="col-me">Me</th><th class="col-you">You</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="day">Sat<span>6 Sep</span></td>
+              <td>
+                <ul>
+                  <li class="done">✓ 10-channel POC built &amp; pushed</li>
+                  <li class="done">✓ “List Your Channel” pack drafted</li>
+                  <li class="done">✓ This plan</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>Finish Namecheap A records</li>
+                  <li>Send Bunny zone name + region</li>
+                  <li>Check Eyevinn billing — if stuck, send KVM8 SSH</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td class="day">Sun<span>7 Sep</span></td>
+              <td><ul><li>DNS resolves &rarr; wire <code>asiko.africa</code> + HTTPS</li><li>Verify 10-slot POC on the brand domain</li></ul></td>
+              <td><ul><li>Send the pack to all 10 companies</li><li>Chase feed details / technical contacts</li></ul></td>
+            </tr>
+            <tr>
+              <td class="day">Mon<span>8 Sep</span></td>
+              <td><ul><li>Stand up <strong>1 real Channel Engine channel</strong> end to end (Eyevinn or KVM8), fed from Bunny</li></ul></td>
+              <td><ul><li>Get 2–3 partner HLS URLs in hand</li><li>Confirm content is on Bunny + Pull Zone connected</li></ul></td>
+            </tr>
+            <tr>
+              <td class="day">Tue<span>9 Sep</span></td>
+              <td><ul><li>Clone that channel to <strong>all 10 slots</strong></li><li>Repoint the POC at real playback URLs for any partner feeds received</li></ul></td>
+              <td><ul><li>Send Enveu the revised-architecture doc; ask for a revised quote</li></ul></td>
+            </tr>
+            <tr>
+              <td class="day">Wed<span>10 Sep</span></td>
+              <td><ul><li>Add <strong>Eyevinn SGAI (SSAI)</strong> in front + a test ad tag</li><li>Prove an ad break renders on a real channel</li></ul></td>
+              <td><ul><li>Line up partner feeds #4–6</li></ul></td>
+            </tr>
+            <tr>
+              <td class="day">Thu<span>11 Sep</span></td>
+              <td><ul><li>Onboard the <strong>first real partner feed</strong> through normalise &rarr; SSAI, with reserved ad pods</li></ul></td>
+              <td><ul><li>Confirm ad-policy terms with the first 2–3 partners</li></ul></td>
+            </tr>
+            <tr>
+              <td class="day">Fri<span>12 Sep</span></td>
+              <td><ul><li>Package a <strong>demo build + status sheet</strong> — where each of the 10 slots stands</li><li>Week-2 punch list</li></ul></td>
+              <td><ul><li>Review · decide Enveu yes / no</li></ul></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>What could still gate everything</h2>
+      <p><strong>The schedule assumes DNS lands and one of {Eyevinn billing / KVM8 SSH} arrives by Sun–Mon.</strong> Every day those slip, the rest of the week slips with them.</p>
+      <p><strong>Content rights</strong> and the <strong>Enveu decision</strong> are the two things that can gate everything past week 1 — neither is a coding problem, and both are yours to move.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p><b>Asiko TV</b> — Week 1 build plan</p>
+    <p>Media Icons Africa · 6 September 2026 · companion to the revised architecture, design spec and onboarding pack</p>
+  </footer>
+</div>

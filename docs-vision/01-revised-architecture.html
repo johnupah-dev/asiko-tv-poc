@@ -1,0 +1,601 @@
+<title>Asiko TV Architecture</title>
+<meta name="description" content="Revised FAST platform stack — Eyevinn-native, no AWS — and Media Icons' formal response to Enveu proposal v3." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Spectral:ital,wght@0,500;0,600;1,500&display=swap" />
+
+<style>
+  :root {
+    --ground: #FBFAF7;
+    --surface: #FFFFFF;
+    --panel: #F3F0E9;
+    --ink: #1B1E24;
+    --ink-soft: #595E68;
+    --ink-faint: #8A8F99;
+    --accent: #A9720F;
+    --accent-soft: #F0E4CF;
+    --line: #E3DFD4;
+    --line-strong: #CFC9BA;
+    --keep: #2F6B4F;
+    --keep-bg: #E4EFE7;
+    --drop: #9E3B28;
+    --drop-bg: #F1E1DC;
+    --change: #8A6410;
+    --change-bg: #F1E7D0;
+    --shadow: 0 1px 2px rgba(27, 30, 36, .05), 0 8px 24px -12px rgba(27, 30, 36, .12);
+
+    --measure: 68ch;
+    --step--1: clamp(.82rem, .8rem + .1vw, .88rem);
+    --step-0: clamp(.98rem, .95rem + .15vw, 1.05rem);
+    --step-1: clamp(1.16rem, 1.08rem + .4vw, 1.35rem);
+    --step-2: clamp(1.42rem, 1.28rem + .7vw, 1.8rem);
+    --step-3: clamp(1.9rem, 1.6rem + 1.5vw, 2.9rem);
+
+    --sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --serif: "Spectral", ui-serif, Georgia, "Times New Roman", serif;
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #14161B;
+      --surface: #1C1F26;
+      --panel: #21252E;
+      --ink: #ECE9E2;
+      --ink-soft: #A0A6AF;
+      --ink-faint: #767C86;
+      --accent: #E0A54A;
+      --accent-soft: #372B18;
+      --line: #2B303A;
+      --line-strong: #3A404B;
+      --keep: #6FBF97;
+      --keep-bg: #1B2C24;
+      --drop: #E0876F;
+      --drop-bg: #2E2019;
+      --change: #E4B45E;
+      --change-bg: #2E2712;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 12px 32px -14px rgba(0, 0, 0, .6);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground: #14161B;
+    --surface: #1C1F26;
+    --panel: #21252E;
+    --ink: #ECE9E2;
+    --ink-soft: #A0A6AF;
+    --ink-faint: #767C86;
+    --accent: #E0A54A;
+    --accent-soft: #372B18;
+    --line: #2B303A;
+    --line-strong: #3A404B;
+    --keep: #6FBF97;
+    --keep-bg: #1B2C24;
+    --drop: #E0876F;
+    --drop-bg: #2E2019;
+    --change: #E4B45E;
+    --change-bg: #2E2712;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 12px 32px -14px rgba(0, 0, 0, .6);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: var(--step-0);
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 78rem;
+    margin: 0 auto;
+    padding: clamp(1.5rem, 1rem + 3vw, 4.5rem) clamp(1.15rem, .6rem + 3vw, 3.5rem) 6rem;
+  }
+
+  /* ---- masthead ---- */
+  .masthead { border-bottom: 2px solid var(--ink); padding-bottom: 1.6rem; }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: var(--step--1);
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 1.1rem;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: var(--step-3);
+    line-height: 1.06;
+    letter-spacing: -.012em;
+    text-wrap: balance;
+    margin: 0 0 .6rem;
+  }
+  .standfirst {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: var(--step-1);
+    color: var(--ink-soft);
+    max-width: 46ch;
+    margin: 0 0 1.9rem;
+  }
+  .docmeta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: .9rem 2.2rem;
+    font-size: var(--step--1);
+  }
+  .docmeta div { display: flex; flex-direction: column; gap: .15rem; }
+  .docmeta dt {
+    font-family: var(--mono);
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--ink-faint);
+    font-size: .72rem;
+  }
+  .docmeta dd { margin: 0; color: var(--ink); }
+  .confidential {
+    margin-top: 1.5rem;
+    font-family: var(--mono);
+    font-size: .72rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  /* ---- section rhythm ---- */
+  main { margin-top: 3.2rem; display: flex; flex-direction: column; gap: 3.4rem; }
+  section { display: grid; grid-template-columns: 4.5rem minmax(0, 1fr); gap: 0 1.6rem; }
+  @media (max-width: 46rem) { section { grid-template-columns: 1fr; gap: .4rem; } }
+
+  .secnum {
+    font-family: var(--mono);
+    font-size: var(--step--1);
+    color: var(--accent);
+    padding-top: .55rem;
+    letter-spacing: .04em;
+  }
+  .secbody { min-width: 0; }
+  .secbody > * + * { margin-top: 1.05rem; }
+  .secbody > h2 + * { margin-top: 1.2rem; }
+
+  h2 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: var(--step-2);
+    line-height: 1.14;
+    letter-spacing: -.01em;
+    text-wrap: balance;
+    margin: 0;
+    padding-bottom: .7rem;
+    border-bottom: 1px solid var(--line-strong);
+  }
+  h3 {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: var(--step-0);
+    letter-spacing: .01em;
+    margin: 0;
+  }
+  p { margin: 0; max-width: var(--measure); }
+  .lede { font-size: var(--step-1); line-height: 1.5; color: var(--ink); max-width: 60ch; }
+  strong { font-weight: 600; }
+  em { font-style: italic; }
+  a { color: var(--accent); text-underline-offset: 2px; }
+
+  ul { margin: 0; padding: 0; list-style: none; max-width: var(--measure); display: flex; flex-direction: column; gap: .6rem; }
+  ul.body-list li { padding-left: 1.3rem; position: relative; }
+  ul.body-list li::before {
+    content: "";
+    position: absolute; left: .15rem; top: .72em;
+    width: .42rem; height: .42rem;
+    background: var(--accent);
+    transform: rotate(45deg);
+  }
+
+  .callout {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    padding: 1rem 1.15rem;
+    font-size: var(--step-0);
+    max-width: var(--measure);
+  }
+  .callout p + p { margin-top: .6rem; }
+
+  /* ---- status tags ---- */
+  .tag {
+    font-family: var(--mono);
+    font-size: .68rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: .16rem .5rem;
+    border: 1px solid;
+    white-space: nowrap;
+    display: inline-block;
+  }
+  .tag.keep { color: var(--keep); background: var(--keep-bg); border-color: color-mix(in srgb, var(--keep) 35%, transparent); }
+  .tag.drop { color: var(--drop); background: var(--drop-bg); border-color: color-mix(in srgb, var(--drop) 35%, transparent); }
+  .tag.change { color: var(--change); background: var(--change-bg); border-color: color-mix(in srgb, var(--change) 35%, transparent); }
+
+  /* ---- architecture diagram ---- */
+  .stack {
+    border: 1px solid var(--line-strong);
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .stack-row {
+    display: grid;
+    grid-template-columns: 8.5rem minmax(0, 1fr) 9.5rem;
+    align-items: stretch;
+    border-bottom: 1px solid var(--line);
+  }
+  .stack-row:last-child { border-bottom: 0; }
+  .stack-layer {
+    font-family: var(--mono);
+    font-size: .68rem;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding: .95rem .9rem;
+    background: var(--panel);
+    border-right: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+  }
+  .stack-cell { padding: .85rem .9rem; display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; }
+  .chip {
+    font-family: var(--mono);
+    font-size: .78rem;
+    padding: .3rem .55rem;
+    background: var(--ground);
+    border: 1px solid var(--line-strong);
+    color: var(--ink);
+  }
+  .chip.core { border-color: var(--accent); background: var(--accent-soft); color: var(--ink); font-weight: 500; }
+  .stack-note {
+    font-size: .72rem;
+    line-height: 1.35;
+    color: var(--ink-soft);
+    padding: .85rem .9rem;
+    border-left: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    background: color-mix(in srgb, var(--panel) 45%, transparent);
+  }
+  @media (max-width: 46rem) {
+    .stack-row { grid-template-columns: 1fr; }
+    .stack-layer { border-right: 0; border-bottom: 1px solid var(--line); }
+    .stack-note { border-left: 0; border-top: 1px dashed var(--line); }
+  }
+
+  .flow {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem .1rem;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: .74rem;
+    color: var(--ink-soft);
+  }
+  .flow b { color: var(--ink); font-weight: 500; }
+  .flow .arr { color: var(--accent); padding: 0 .35rem; }
+
+  .removed {
+    margin-top: 1rem;
+    display: flex; flex-wrap: wrap; gap: .5rem;
+    align-items: baseline;
+  }
+  .removed .lbl {
+    font-family: var(--mono); font-size: .7rem; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--drop);
+  }
+  .removed s { text-decoration-color: var(--drop); color: var(--ink-faint); font-family: var(--mono); font-size: .78rem; }
+
+  /* ---- tables ---- */
+  .table-wrap { overflow-x: auto; border: 1px solid var(--line-strong); background: var(--surface); box-shadow: var(--shadow); }
+  table { border-collapse: collapse; width: 100%; font-size: var(--step--1); min-width: 34rem; }
+  caption {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: .72rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding: .8rem .9rem;
+    border-bottom: 1px solid var(--line);
+  }
+  th, td { text-align: left; padding: .7rem .9rem; vertical-align: top; border-bottom: 1px solid var(--line); }
+  thead th {
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: .7rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    background: var(--panel);
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  td.c1 { font-weight: 500; white-space: nowrap; }
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* ---- ask list ---- */
+  ol.asks { margin: 0; padding: 0; list-style: none; counter-reset: ask; display: flex; flex-direction: column; gap: .8rem; max-width: var(--measure); }
+  ol.asks li { counter-increment: ask; display: grid; grid-template-columns: 1.9rem 1fr; gap: .8rem; }
+  ol.asks li::before {
+    content: counter(ask);
+    font-family: var(--mono);
+    font-size: .9rem;
+    color: var(--accent);
+    border: 1px solid var(--line-strong);
+    width: 1.9rem; height: 1.9rem;
+    display: grid; place-items: center;
+  }
+
+  footer {
+    margin-top: 4rem;
+    padding-top: 1.4rem;
+    border-top: 2px solid var(--ink);
+    font-size: var(--step--1);
+    color: var(--ink-soft);
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+  }
+  footer .sign { font-family: var(--serif); font-style: italic; font-size: var(--step-0); color: var(--ink); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    a { transition: color .15s ease; }
+  }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+
+<div class="page">
+  <header class="masthead">
+    <p class="eyebrow">Media Icons Africa · Technical Note</p>
+    <h1>Asiko TV — Revised Platform Architecture</h1>
+    <p class="standfirst">A FAST stack built on one platform, and how our proof of concept feeds your build.</p>
+    <dl class="docmeta">
+      <div><dt>In response to</dt><dd>Enveu Proposal v3 — ENV/ASIKO/2026-09/03</dd></div>
+      <div><dt>Prepared for</dt><dd>Chandan Luthra, Head of Professional Services, Enveu</dd></div>
+      <div><dt>Prepared by</dt><dd>John Upah, Managing Director, Media Icons Africa</dd></div>
+      <div><dt>Date</dt><dd>5 September 2026</dd></div>
+      <div><dt>Service</dt><dd>Asiko TV — free ad-supported linear, African diaspora (UK / US / CA / EU)</dd></div>
+      <div><dt>Launch scope</dt><dd>7 channels (POC) → 100+ channels (target)</dd></div>
+    </dl>
+    <p class="confidential">Commercial in confidence — prepared for Enveu, not for onward distribution</p>
+  </header>
+
+  <main>
+    <section>
+      <div class="secnum">01</div>
+      <div class="secbody">
+        <h2>The change, in one paragraph</h2>
+        <p class="lede">We are removing AWS Elemental and AWS Elemental MediaTailor from the Asiko TV stack entirely. Server-side ad insertion moves to the Eyevinn platform, alongside the Channel Engine origin that Proposal v3 already assumes. Nothing else in your engagement changes in intent — scheduling, playout orchestration, EPG, SCTE-35 break signalling and the CMS are still the layer we need Enveu to build.</p>
+        <ul class="body-list">
+          <li><strong>Why:</strong> one platform instead of two, no AWS account or egress to manage, and every dollar not spent on infrastructure goes to content licensing — the real constraint on launch.</li>
+          <li><strong>What is unaffected:</strong> the ad <em>decision</em> server (Google Ad Manager, SpringServe or Publica) stays with Media Icons and is still integrated by Enveu. Direct sponsorship is still sold by us.</li>
+          <li><strong>In parallel:</strong> Media Icons is building a working proof of concept now, on Eyevinn Open Source Cloud, at near-zero cost. It is described in §4 and is offered to Enveu as the starting point for the front end and EPG rather than a greenfield build.</li>
+          <li><strong>Scale is unchanged:</strong> we accept that operating 100+ channels needs Enveu. The POC proves feasibility and de-risks the origin; it does not replace the production platform.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="secnum">02</div>
+      <div class="secbody">
+        <h2>The revised stack</h2>
+        <p>Seven layers, one platform doing the playout and ad insertion. Read top-down as the viewer experiences it; the data flows bottom-up from the library to the screen.</p>
+
+        <div class="stack" role="img" aria-label="Asiko TV revised architecture, seven layers from content to viewer experience">
+          <div class="stack-row">
+            <div class="stack-layer">Experience</div>
+            <div class="stack-cell">
+              <span class="chip">PWA player</span><span class="chip">channel surf</span><span class="chip">EPG / now &amp; next</span><span class="chip">ad-break UX</span>
+            </div>
+            <div class="stack-note">POC delivers a working reference · Enveu hardens &amp; extends</div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-layer">Scheduling &amp; CMS</div>
+            <div class="stack-cell">
+              <span class="chip">schedule builder</span><span class="chip">break-structure config</span><span class="chip">content metadata</span>
+            </div>
+            <div class="stack-note">Enveu builds · non-engineers operate it</div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-layer">Ad decision</div>
+            <div class="stack-cell">
+              <span class="chip">Google Ad Manager / SpringServe / Publica</span><span class="chip">direct sponsorship</span>
+            </div>
+            <div class="stack-note">Media Icons — contract &amp; billing · Enveu integrates</div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-layer">Ad insertion</div>
+            <div class="stack-cell">
+              <span class="chip core">Eyevinn SGAI Pipeline</span><span class="chip core">Ad Normalizer — VAST / VMAP</span>
+            </div>
+            <div class="stack-note">Replaces AWS MediaTailor · same SCTE-35-driven SSAI job</div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-layer">Playout origin</div>
+            <div class="stack-cell">
+              <span class="chip core">Eyevinn Channel Engine ×7</span><span class="chip">VOD2Live</span><span class="chip">SCTE-35 markers out</span>
+            </div>
+            <div class="stack-note">POC proves it end to end · Enveu drives it from the schedule</div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-layer">Delivery</div>
+            <div class="stack-cell">
+              <span class="chip">Bunny CDN — edge cache &amp; egress</span>
+            </div>
+            <div class="stack-note">Media Icons — the right place to spend as audience grows</div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-layer">Content</div>
+            <div class="stack-cell">
+              <span class="chip">transcoded HLS library</span><span class="chip">Bunny storage</span><span class="chip">Eyevinn VOD Pipeline — batch transcode</span>
+            </div>
+            <div class="stack-note">Media Icons · one consistent encoding profile across the library</div>
+          </div>
+        </div>
+
+        <div class="flow" aria-label="Data flow">
+          <b>Library (Bunny)</b><span class="arr">→</span>
+          <b>Channel Engine</b> playout + SCTE-35<span class="arr">→</span>
+          <b>Eyevinn SGAI</b> stitch per viewer<span class="arr">⇄</span>
+          <b>Ad decision server</b> VAST<span class="arr">→</span>
+          <b>Bunny CDN</b><span class="arr">→</span>
+          <b>PWA player</b>
+        </div>
+
+        <div class="removed">
+          <span class="lbl">Removed from the stack</span>
+          <s>AWS Elemental MediaLive</s>
+          <s>AWS Elemental MediaPackage</s>
+          <s>AWS Elemental MediaTailor</s>
+          <s>Hostinger KVM8 (VPS)</s>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <caption>Component register</caption>
+            <thead>
+              <tr><th>Component</th><th>Role</th><th>Owner</th><th>Status vs v3</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="c1">Eyevinn Channel Engine</td><td>Linear playout origin, one instance per channel (VOD2Live), emits HLS + SCTE-35</td><td>Media Icons</td><td><span class="tag keep">Unchanged</span></td></tr>
+              <tr><td class="c1">Eyevinn SGAI Pipeline</td><td>Server-side ad insertion — stitches ads against SCTE-35 markers</td><td>Media Icons</td><td><span class="tag change">Replaces MediaTailor</span></td></tr>
+              <tr><td class="c1">Eyevinn Ad Normalizer</td><td>VAST / VMAP handling between SGAI and the ad decision server</td><td>Media Icons</td><td><span class="tag change">New — was MediaTailor internal</span></td></tr>
+              <tr><td class="c1">Ad decision server</td><td>Which ad plays — GAM / SpringServe / Publica</td><td>Media Icons</td><td><span class="tag keep">Unchanged</span></td></tr>
+              <tr><td class="c1">Bunny CDN</td><td>Edge cache and delivery to viewers</td><td>Media Icons</td><td><span class="tag keep">Unchanged</span></td></tr>
+              <tr><td class="c1">Bunny storage</td><td>Origin store for the transcoded HLS library</td><td>Media Icons</td><td><span class="tag keep">Unchanged</span></td></tr>
+              <tr><td class="c1">Eyevinn VOD Pipeline</td><td>Batch transcode / package to a consistent profile — run, then stop</td><td>Media Icons</td><td><span class="tag change">Optional — or existing Bunny transcode</span></td></tr>
+              <tr><td class="c1">Scheduling &amp; CMS</td><td>Schedule building, break-structure config, content metadata for non-engineers</td><td>Enveu build</td><td><span class="tag keep">Unchanged scope</span></td></tr>
+              <tr><td class="c1">PWA front end + EPG</td><td>Channel selection, live playback, programme guide, ad-break UX</td><td>Enveu build</td><td><span class="tag change">Re-based on POC — extend, not build</span></td></tr>
+              <tr><td class="c1">AWS Elemental MediaTailor</td><td>Server-side ad insertion</td><td>—</td><td><span class="tag drop">Removed</span></td></tr>
+              <tr><td class="c1">AWS Elemental MediaLive / MediaPackage</td><td>Live encode / package origin</td><td>—</td><td><span class="tag drop">Removed — not required by v3 either</span></td></tr>
+              <tr><td class="c1">Hostinger KVM8</td><td>Self-managed VPS</td><td>—</td><td><span class="tag drop">Removed — Eyevinn runs the compute</span></td></tr>
+              <tr><td class="c1">Hostinger CloudStartup</td><td>Marketing / corporate site</td><td>Media Icons</td><td><span class="tag keep">Unchanged</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="secnum">03</div>
+      <div class="secbody">
+        <h2>What this changes against Proposal v3</h2>
+        <p>Your scope in §2 holds almost line for line. The one substantive edit is the ad-insertion target; two front-end items re-base onto the POC.</p>
+        <div class="table-wrap">
+          <table>
+            <caption>Proposal v3 §2 scope — revised</caption>
+            <thead>
+              <tr><th>Enveu scope item</th><th>Revised position</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="c1">Channel scheduling &amp; playout orchestration</td><td>Unchanged. Eyevinn Channel Engine remains the origin; your orchestration drives it from the schedule with SCTE-35 markers in place. The POC proves the origin works for 7 channels before you build on it.</td></tr>
+              <tr><td class="c1">SCTE-35 / break structure feeding the engine</td><td>Unchanged in effort. The markers are now consumed by <strong>Eyevinn SGAI</strong> instead of MediaTailor. The schedule → break-structure → marker work is identical.</td></tr>
+              <tr><td class="c1">Electronic Programme Guide</td><td>Re-based. The POC already generates a working EPG (now / next / forward) from schedule JSON. Enveu formalises generation and delivery from a proven reference rather than from zero.</td></tr>
+              <tr><td class="c1">Ad server integration</td><td>Changed target. "Integrate with AWS MediaTailor" becomes "integrate Eyevinn SGAI Pipeline + Ad Normalizer with the chosen ad decision server." Both are SCTE-35-driven SSAI calling a VAST endpoint — like-for-like.</td></tr>
+              <tr><td class="c1">Viewer front end (PWA)</td><td>Re-based. The POC is a working PWA — channel surfing, HLS playback, guide, ad-break UX. Enveu hardens it to production (state backend, analytics, QA) and extends it, rather than greenfield.</td></tr>
+              <tr><td class="c1">Content management (CMS)</td><td>Unchanged. Not covered by the POC. Still Enveu's to build.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout">
+          <p><strong>On the §5 assumptions.</strong> Your assumptions still hold with one clarification: the shared origin both Channel Engine and the ad-insertion layer read from is <strong>Bunny storage or object storage behind Bunny CDN — no AWS dependency</strong>. Content is pre-transcoded HLS on one consistent profile, as you require. Media Icons runs and hosts the Channel Engine instance.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="secnum">04</div>
+      <div class="secbody">
+        <h2>Where the POC fits your build</h2>
+        <p>The proof of concept is a Git repository — <span class="chip" style="font-size:.72rem">github.com/johnupah-dev/asiko-tv-poc</span> — that Media Icons is building now and will give Enveu read access to on day one.</p>
+
+        <h3>What it delivers today</h3>
+        <ul class="body-list">
+          <li>A working <strong>viewer PWA</strong>: 7 branded channels, live HLS playback, channel surfing, a programme guide, an ad-break sequence with countdown and rejoin, and a monetisation dashboard modelling Direct / PMP / Open Exchange / House demand.</li>
+          <li><strong>One config file</strong> (<span class="chip" style="font-size:.72rem">data/channels.json</span>) holding all 7 channels, their schedules, break structure and demand weights — no code changes to re-programme.</li>
+          <li><strong>Playout provisioning scripts</strong> (<span class="chip" style="font-size:.72rem">playout/</span>) that stand up real Eyevinn Channel Engine channels from that same config via the Open Source Cloud API, and return the live HLS playback URLs.</li>
+        </ul>
+
+        <h3>What it proves — so you don't have to</h3>
+        <ul class="body-list">
+          <li>Eyevinn Channel Engine works as the origin for a 7-channel line-up, end to end, on real infrastructure.</li>
+          <li>An EPG can be generated from a schedule document and rendered in the player.</li>
+          <li>The ad-break placement and viewer experience are validated in a real player before any ad server is wired in.</li>
+          <li>The monetisation model — avail → creative → impression → revenue, split by demand type — is expressed and can be reconciled later against the real ad server.</li>
+        </ul>
+
+        <h3>What stays firmly Enveu's</h3>
+        <ul class="body-list">
+          <li>Production <strong>scheduling and playout orchestration</strong> — the POC loops assets; it does not run a real schedule-driven linear feed with SCTE-35 emission.</li>
+          <li><strong>SCTE-35 signalling</strong> into the manifest, and the break-structure adapter feeding the engine.</li>
+          <li><strong>Server-side ad insertion</strong> wiring — Eyevinn SGAI configured per channel and connected to the ad decision server.</li>
+          <li>A multi-user <strong>CMS</strong> for non-engineers; production hardening of the PWA; an analytics backend.</li>
+          <li>Everything that makes <strong>100+ channels</strong> operable rather than 7.</li>
+        </ul>
+
+        <div class="callout">
+          <p>Net effect: Enveu begins from a proven origin, a live reference front end and a working EPG, integrating <strong>one platform</strong> rather than an AWS toolchain. Two of the five §2 scope items shift from "build" to "extend."</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="secnum">05</div>
+      <div class="secbody">
+        <h2>What we are asking Enveu to confirm</h2>
+        <ol class="asks">
+          <li>A revised scope, timeline and price reflecting: MediaTailor integration removed; Eyevinn SGAI + Ad Normalizer integration added; PWA front end and EPG re-based as "extend the delivered POC," not build from zero.</li>
+          <li>That Eyevinn SGAI integration is a like-for-like substitution for MediaTailor integration — both SCTE-35-driven SSAI against a VAST endpoint — with no net increase to the one-time fee.</li>
+          <li>Day-one read access to the POC repository as the reference architecture and the starting point for the front end and EPG.</li>
+          <li>That the §5 assumptions hold with Bunny storage / object storage behind Bunny CDN as the shared origin, and no AWS component anywhere in the delivered platform.</li>
+          <li>The managed-operations line still stands as optional and separately quoted, not a condition of IP transfer — unchanged from v3.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section>
+      <div class="secnum">06</div>
+      <div class="secbody">
+        <h2>Commercial posture</h2>
+        <div class="table-wrap">
+          <table>
+            <caption>Running cost — revised stack</caption>
+            <thead>
+              <tr><th>Line</th><th>Basis</th><th class="num">Indicative</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="c1">Eyevinn — 7 channels</td><td>10 tokens / channel / day</td><td class="num">70 / day</td></tr>
+              <tr><td class="c1">Eyevinn — storage, ad insertion, scheduler</td><td>platform overhead</td><td class="num">~30 / day</td></tr>
+              <tr><td class="c1">Eyevinn — POC total</td><td>fits Professional plan, €69/mo, 300 tokens/day, 14-day trial</td><td class="num">~100 / day</td></tr>
+              <tr><td class="c1">Eyevinn — batch transcode</td><td>250 tokens/day while running — run, then stop</td><td class="num">one-off</td></tr>
+              <tr><td class="c1">Bunny CDN</td><td>usage — egress scales with audience, not channel count</td><td class="num">variable</td></tr>
+              <tr><td class="c1">AWS</td><td>removed</td><td class="num">0</td></tr>
+              <tr><td class="c1">Enveu — recurring</td><td>none after handover; managed ops optional</td><td class="num">0</td></tr>
+              <tr><td class="c1">Enveu — build</td><td>one-time, per revised scope (v3 baseline USD 13,000)</td><td class="num">one-time</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Media Icons is a sales house, not a technology house. Capital is being held for content licensing, which is the binding constraint on launch. The revised stack exists to protect that: no AWS spend, no recurring platform fee, and a proof of concept that costs the price of a trial to stand up.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p class="sign">John Upah</p>
+    <p>Managing Director, Media Icons Africa</p>
+    <p>Reference: response to ENV/ASIKO/2026-09/03 (v3) · 5 September 2026 · Commercial in confidence</p>
+  </footer>
+</div>

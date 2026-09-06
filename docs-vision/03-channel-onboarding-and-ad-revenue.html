@@ -1,0 +1,328 @@
+<title>Channel Onboarding & Ad Revenue</title>
+<meta name="description" content="How third-party channels arrive at Asiko as HLS, where the feed plugs in, and how ad revenue is split — with a schematic of the pipeline." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+
+<style>
+  :root {
+    --bg: #0a0a0c; --bg-soft: #0f0f12; --panel: #17171b; --panel-2: #1e1e23;
+    --line: rgba(216,169,75,0.16); --line-strong: rgba(216,169,75,0.34);
+    --gold: #d8a94b; --gold-bright: #f3cd7e; --gold-deep: #a8792c; --gold-wash: rgba(216,169,75,0.10);
+    --white: #f7f5f0; --muted: #a7a4ac; --muted-2: #716f78; --red: #df3b34; --blue: #6f9be8;
+    --r-sm: 6px; --r-md: 10px; --pill: 999px;
+    --display: "Poppins", "Segoe UI", system-ui, sans-serif;
+    --body: "Inter", "Segoe UI", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+    --measure: 66ch;
+    --s-1: clamp(.8rem,.78rem + .1vw,.86rem);
+    --s0: clamp(.95rem,.92rem + .15vw,1.02rem);
+    --s1: clamp(1.1rem,1.02rem + .4vw,1.3rem);
+    --s2: clamp(1.4rem,1.2rem + .8vw,1.9rem);
+    --s3: clamp(1.9rem,1.5rem + 1.8vw,3rem);
+    --s4: clamp(2.4rem,1.8rem + 3vw,4rem);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--white);
+    font-family: var(--body); font-size: var(--s0); line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 72rem; margin: 0 auto; padding: clamp(1.4rem,1rem + 3vw,4rem) clamp(1.1rem,.6rem + 3vw,3.4rem) 6rem; }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: .6rem;
+    font-family: var(--mono); font-size: var(--s-1); letter-spacing: .18em;
+    text-transform: uppercase; color: var(--gold); margin: 0 0 1.1rem;
+  }
+  .eyebrow::before { content: ""; width: 1.6rem; height: 1px; background: var(--gold); }
+  h1 {
+    font-family: var(--display); font-weight: 800; font-size: var(--s4);
+    line-height: 1.02; letter-spacing: -.02em; text-wrap: balance; margin: 0 0 .7rem;
+  }
+  .standfirst { font-size: var(--s1); color: var(--muted); max-width: 54ch; margin: 0 0 2rem; }
+  .masthead { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.8rem; }
+
+  main { margin-top: 3rem; display: flex; flex-direction: column; gap: 3.2rem; }
+  section { display: grid; grid-template-columns: 3rem minmax(0,1fr); gap: 0 1.5rem; }
+  @media (max-width: 48rem) { section { grid-template-columns: 1fr; gap: .5rem; } }
+  .secnum { font-family: var(--mono); font-size: var(--s-1); color: var(--gold-deep); padding-top: .5rem; }
+  .secbody { min-width: 0; }
+  .secbody > * + * { margin-top: 1.05rem; }
+  .secbody > h2 + * { margin-top: 1.25rem; }
+
+  h2 {
+    font-family: var(--display); font-weight: 700; font-size: var(--s2); line-height: 1.12;
+    letter-spacing: -.01em; text-wrap: balance; margin: 0; padding-bottom: .7rem;
+    border-bottom: 1px solid var(--line);
+  }
+  h3 { font-family: var(--display); font-weight: 600; font-size: var(--s0); margin: 1.5rem 0 0; color: var(--gold-bright); }
+  p { margin: 0; max-width: var(--measure); }
+  .lede { font-size: var(--s1); color: var(--white); max-width: 58ch; }
+  strong { font-weight: 600; color: var(--white); }
+  a { color: var(--gold); }
+  code { font-family: var(--mono); font-size: .82em; background: var(--panel-2); border: 1px solid var(--line); border-radius: 4px; padding: .06rem .35rem; color: var(--gold-bright); }
+
+  ul { margin: 0; padding: 0; list-style: none; max-width: var(--measure); display: flex; flex-direction: column; gap: .55rem; }
+  ul li { padding-left: 1.3rem; position: relative; }
+  ul li::before { content: ""; position: absolute; left: .1rem; top: .68em; width: .4rem; height: .4rem; background: var(--gold); transform: rotate(45deg); }
+
+  .callout { background: var(--gold-wash); border: 1px solid var(--line-strong); border-left: 3px solid var(--gold); border-radius: 0 var(--r-sm) var(--r-sm) 0; padding: 1rem 1.15rem; max-width: var(--measure); }
+
+  .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--bg-soft); }
+  table { border-collapse: collapse; width: 100%; font-size: var(--s-1); min-width: 40rem; }
+  th, td { text-align: left; padding: .7rem .9rem; vertical-align: top; border-bottom: 1px solid var(--line); }
+  thead th { font-family: var(--mono); font-weight: 500; font-size: .68rem; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); background: var(--panel); }
+  tbody tr:last-child td { border-bottom: 0; }
+  td.k { color: var(--gold-bright); font-weight: 500; white-space: nowrap; }
+  .yes { color: var(--gold-bright); } .no { color: var(--muted-2); }
+
+  figure { margin: 1.4rem 0 0; }
+  .fig-frame { border: 1px solid var(--line-strong); border-radius: var(--r-md); background: #060608; padding: 1.1rem 1rem .4rem; overflow-x: auto; }
+  figure svg { display: block; width: 100%; min-width: 40rem; height: auto; color: var(--white); }
+  figcaption { font-size: var(--s-1); color: var(--muted); margin-top: .8rem; max-width: var(--measure); }
+
+  footer { margin-top: 4rem; padding-top: 1.3rem; border-top: 1px solid var(--line-strong); font-size: var(--s-1); color: var(--muted); display: flex; flex-direction: column; gap: .3rem; }
+  footer b { color: var(--gold-bright); font-family: var(--display); font-weight: 600; }
+  :focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <p class="eyebrow">Asiko TV · Distribution &amp; Monetisation</p>
+    <h1>Onboarding a channel, and getting paid for its ads</h1>
+    <p class="standfirst">What happens when a partner hands Asiko an HLS feed — where it plugs in, and how the ad revenue is split.</p>
+  </header>
+
+  <main>
+    <section>
+      <div class="secnum">01</div>
+      <div class="secbody">
+        <h2>A channel arrives in one of three shapes</h2>
+        <p class="lede">The shape it arrives in decides how Asiko earns from it. This is the single most important thing to nail in the "List Your Channel" agreement.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Intake</th><th>What the partner sends</th><th>Who inserts the ads</th><th>How Asiko earns</th><th>Asiko's position</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="k">A · Clean feed</td>
+                <td>Live HLS of the programme only + <code>SCTE-35</code> ad-break markers + EPG (XMLTV / MRSS)</td>
+                <td><strong>Asiko</strong> — our SSAI fills every break</td>
+                <td>We sell / auction all inventory, then rev-share back to the partner</td>
+                <td class="yes">Strongest — full control &amp; measurement</td>
+              </tr>
+              <tr>
+                <td class="k">B · Files + schedule</td>
+                <td>Transcoded VOD assets (or a growing library) + a playlist / schedule feed</td>
+                <td><strong>Asiko</strong> — we build the linear channel (Channel Engine), insert our own SCTE-35, run SSAI</td>
+                <td>Same as A — we own monetisation end to end</td>
+                <td class="yes">Strongest — we also own playout</td>
+              </tr>
+              <tr>
+                <td class="k">C · Ads baked in</td>
+                <td>Live HLS with the partner's ads <em>already stitched</em> — one finished channel</td>
+                <td><strong>Partner</strong> (or their aggregator) — we can't address their pods</td>
+                <td>Contract only: reserved pods, audited rev-share, or a flat carriage fee</td>
+                <td class="no">Weakest — no measurement hook</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout">
+          <p><strong>Push every partner to A or B.</strong> Accept C only for a channel you really want, and only with one of the three contractual mechanisms in §4 — never on a handshake "we'll share what we make".</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="secnum">02</div>
+      <div class="secbody">
+        <h2>The pipeline</h2>
+
+        <figure>
+          <div class="fig-frame">
+            <svg viewBox="0 0 1060 400" role="img" aria-label="Channel onboarding and ad-insertion pipeline. A partner HLS feed and EPG are submitted through the ingest portal and enter at Normalise / re-origin — the plug-in point — which conditions the stream and its SCTE-35 markers. Asiko SSAI then fills each ad break by calling the ad decision server, which takes programmatic demand and also logs impressions to Measurement and the revenue-share engine, which pays the partner monthly. A feed that already has ads baked in skips Normalise and SSAI, goes straight to the CDN, and earns by contract only.">
+              <defs>
+                <marker id="ah" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/>
+                </marker>
+                <marker id="ahg" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0 0 L10 5 L0 10 z" fill="#d8a94b"/>
+                </marker>
+                <marker id="ahr" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0 0 L10 5 L0 10 z" fill="#df3b34"/>
+                </marker>
+              </defs>
+
+              <g font-family="Inter, system-ui, sans-serif" font-size="12.5" fill="#f7f5f0">
+                <!-- Row 1 : the delivery line -->
+                <rect x="24" y="40" width="150" height="58" rx="6" fill="#17171b" stroke="#3a3a42"/>
+                <text x="99" y="64" text-anchor="middle" font-weight="600">Partner channel</text>
+                <text x="99" y="82" text-anchor="middle" font-size="10.5" fill="#a7a4ac">content owner</text>
+
+                <rect x="214" y="40" width="150" height="58" rx="6" fill="#17171b" stroke="#3a3a42"/>
+                <text x="289" y="64" text-anchor="middle" font-weight="600">Ingest portal</text>
+                <text x="289" y="82" text-anchor="middle" font-size="10.5" fill="#a7a4ac">“List Your Channel”</text>
+
+                <rect x="404" y="34" width="164" height="70" rx="6" fill="rgba(216,169,75,0.10)" stroke="#d8a94b" stroke-width="1.5"/>
+                <text x="486" y="56" text-anchor="middle" font-weight="700" fill="#f3cd7e">Normalise / re-origin</text>
+                <text x="486" y="73" text-anchor="middle" font-size="10" fill="#d8a94b">one encoding profile</text>
+                <text x="486" y="88" text-anchor="middle" font-size="10" fill="#d8a94b">validate / insert SCTE-35</text>
+
+                <rect x="608" y="40" width="150" height="58" rx="6" fill="#17171b" stroke="#3a3a42"/>
+                <text x="683" y="60" text-anchor="middle" font-weight="700">Asiko SSAI</text>
+                <text x="683" y="77" text-anchor="middle" font-size="10" fill="#a7a4ac">SGAI · per-viewer stitch</text>
+
+                <rect x="798" y="40" width="140" height="58" rx="6" fill="#17171b" stroke="#3a3a42"/>
+                <text x="868" y="60" text-anchor="middle" font-weight="700">CDN — Bunny</text>
+                <text x="868" y="77" text-anchor="middle" font-size="10" fill="#a7a4ac">per-session manifest</text>
+
+                <rect x="798" y="150" width="140" height="62" rx="6" fill="#17171b" stroke="#3a3a42"/>
+                <text x="868" y="170" text-anchor="middle" font-weight="700">Apps</text>
+                <text x="868" y="186" text-anchor="middle" font-size="10" fill="#a7a4ac">asiko.africa web</text>
+                <text x="868" y="200" text-anchor="middle" font-size="10" fill="#a7a4ac">CTV: Roku · Fire · Samsung · LG</text>
+
+                <!-- Row 2 : the money loop -->
+                <rect x="576" y="164" width="182" height="66" rx="6" fill="#17171b" stroke="#3a3a42"/>
+                <text x="667" y="186" text-anchor="middle" font-weight="700">Ad decision server</text>
+                <text x="667" y="202" text-anchor="middle" font-size="10" fill="#a7a4ac">GAM / SpringServe / Publica</text>
+                <text x="667" y="216" text-anchor="middle" font-size="10" fill="#a7a4ac">direct · PMP · open exchange</text>
+
+                <rect x="576" y="270" width="182" height="30" rx="6" fill="#0f0f12" stroke="#2a2a30"/>
+                <text x="667" y="289" text-anchor="middle" font-size="11" fill="#a7a4ac">Demand — DSPs · Asiko direct</text>
+
+                <!-- Row 3 : settlement -->
+                <rect x="330" y="270" width="150" height="58" rx="6" fill="#17171b" stroke="#3a3a42"/>
+                <text x="405" y="292" text-anchor="middle" font-weight="700">Measurement</text>
+                <text x="405" y="309" text-anchor="middle" font-size="10" fill="#a7a4ac">impressions / channel</text>
+
+                <rect x="120" y="264" width="164" height="70" rx="6" fill="rgba(216,169,75,0.10)" stroke="#d8a94b" stroke-width="1.5"/>
+                <text x="202" y="286" text-anchor="middle" font-weight="700" fill="#f3cd7e">Rev-share engine</text>
+                <text x="202" y="303" text-anchor="middle" font-size="10" fill="#d8a94b">net → split → statement</text>
+                <text x="202" y="318" text-anchor="middle" font-size="10" fill="#d8a94b">monthly partner payout</text>
+              </g>
+
+              <g font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#a7a4ac">
+                <!-- row 1 flow -->
+                <line x1="174" y1="69" x2="210" y2="69" stroke="currentColor" marker-end="url(#ah)"/>
+                <text x="192" y="62" text-anchor="middle">submit</text>
+                <line x1="364" y1="69" x2="400" y2="69" stroke="#d8a94b" marker-end="url(#ahg)"/>
+                <text x="382" y="62" text-anchor="middle" fill="#d8a94b">HLS + EPG</text>
+                <line x1="568" y1="69" x2="604" y2="69" stroke="#d8a94b" marker-end="url(#ahg)"/>
+                <text x="586" y="62" text-anchor="middle" fill="#d8a94b">clean + cues</text>
+                <line x1="758" y1="69" x2="794" y2="69" stroke="currentColor" marker-end="url(#ah)"/>
+                <text x="776" y="62" text-anchor="middle">stitched</text>
+                <line x1="868" y1="98" x2="868" y2="148" stroke="currentColor" marker-end="url(#ah)"/>
+                <text x="878" y="126" text-anchor="start">stream</text>
+
+                <!-- SSAI <-> ad server -->
+                <line x1="676" y1="98" x2="672" y2="162" stroke="currentColor" marker-end="url(#ah)"/>
+                <line x1="662" y1="162" x2="666" y2="100" stroke="currentColor" marker-end="url(#ah)"/>
+                <text x="690" y="132" text-anchor="start">VAST /</text>
+                <text x="690" y="144" text-anchor="start">OpenRTB</text>
+                <!-- demand up into ad server -->
+                <line x1="667" y1="270" x2="667" y2="232" stroke="currentColor" marker-end="url(#ah)"/>
+                <text x="677" y="254" text-anchor="start">bids</text>
+                <!-- apps signal back to ad server -->
+                <line x1="800" y1="176" x2="760" y2="192" stroke="#2a2a30" stroke-dasharray="4 4" marker-end="url(#ah)"/>
+                <text x="792" y="163" text-anchor="end" fill="#716f78">IFA · app · geo</text>
+
+                <!-- settlement -->
+                <line x1="620" y1="230" x2="470" y2="276" stroke="#2a2a30" stroke-dasharray="4 4" marker-end="url(#ah)"/>
+                <text x="548" y="244" text-anchor="middle" fill="#716f78">ad-server logs</text>
+                <line x1="330" y1="299" x2="286" y2="299" stroke="currentColor" marker-end="url(#ah)"/>
+                <line x1="202" y1="264" x2="202" y2="102" stroke="#d8a94b" stroke-dasharray="3 5" marker-end="url(#ahg)"/>
+                <text x="150" y="200" text-anchor="start" fill="#d8a94b">monthly payout</text>
+
+                <!-- baked-in bypass: ingest -> CDN, routed above the delivery line -->
+                <path d="M289 40 L289 20 L868 20 L868 38" fill="none" stroke="#df3b34" stroke-dasharray="5 4" marker-end="url(#ahr)"/>
+                <text x="578" y="14" text-anchor="middle" fill="#df3b34">C · ads baked in — skips Normalise + SSAI, monetised by contract only</text>
+              </g>
+            </svg>
+          </div>
+          <figcaption><strong>Clean feed (intake A / B, gold path):</strong> the partner HLS + EPG enter at <em>Normalise / re-origin</em> — that is where you plug it in — it is conditioned to one profile with valid SCTE-35, then Asiko SSAI fills each break by calling the ad decision server per viewer. The ad server takes programmatic demand and logs every impression to Measurement, which drives the rev-share engine and the monthly partner payout. <strong>Baked-in feed (intake C, red path):</strong> there is nothing to insert into — it skips Normalise and SSAI, goes straight to the CDN, and is paid by contract, not by measured impressions.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section>
+      <div class="secnum">03</div>
+      <div class="secbody">
+        <h2>Where the HLS plugs in</h2>
+        <p>The connection point is the <strong>Normalise / re-origin</strong> stage — not the player, not the CDN. The partner gives you a pull URL (their HLS manifest) and an EPG feed; you pull from it and re-originate a clean stream your SSAI can trust.</p>
+        <h3>Why it can't go straight to SSAI or the player</h3>
+        <ul>
+          <li><strong>Rendition consistency.</strong> Manifest-based ad stitching splices ad segments into the content stream. If the partner's video ladder (resolutions, codecs, keyframe cadence, audio) doesn't match your ad renditions, playback breaks at every splice. Normalisation forces one profile across content and ads.</li>
+          <li><strong>SCTE-35 conditioning.</strong> Ad breaks must be signalled in the manifest as <code>#EXT-X-CUE-OUT/IN</code> or <code>EXT-X-DATERANGE</code>. If the partner sends clean markers, you validate them; if they can't, you insert cue points from their EPG / a schedule adapter.</li>
+          <li><strong>A stable origin.</strong> Their URL might move, throttle, or geo-block. Re-origination gives you one predictable origin behind Bunny, and one place to enforce failover to a slate.</li>
+        </ul>
+        <p>On the platform we're using, this stage is <strong>Eyevinn Channel Engine</strong> — file/schedule mode for intake B, or a pass-through / re-origination role for intake A — with the <strong>SGAI Pipeline</strong> as the SSAI layer immediately after.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="secnum">04</div>
+      <div class="secbody">
+        <h2>Getting a share of the revenue</h2>
+
+        <h3>A / B — clean feed or files: Asiko monetises, then shares back</h3>
+        <ul>
+          <li>Your ad server reports <strong>net ad revenue per channel</strong> (gross minus the SSP / ad-server take, usually a few percent of media spend).</li>
+          <li>Contractual split on that net — FAST norm is <strong>content owner 50–70% / platform 30–50%</strong>, tuned by how much the channel drives tune-in and by exclusivity.</li>
+          <li>Asiko also carries the <strong>CDN egress</strong> cost (Bunny) — factor it into the split or bill it separately.</li>
+          <li>Paid monthly against the ad-server report; the partner gets a statement showing impressions, fill, eCPM and their share by channel.</li>
+        </ul>
+
+        <h3>C — ads baked in: four ways to still earn</h3>
+        <ul>
+          <li><strong>Reserved pods (best).</strong> Contract requires the partner to leave a set share of ad minutes — e.g. every 3rd slot, or 30–50% of pod time — as <em>addressable avails marked with SCTE-35</em>. You DAI your own ads into only those slots. The break becomes <code>[partner ad · ASIKO ad · partner ad]</code>. You measure and keep 100% of your pods; the partner may still pay an override.</li>
+          <li><strong>Audited rev-share.</strong> Partner sells everything, sends you a reconciled impressions/revenue report from <em>their</em> ad server, pays you an agreed % (often 10–30%). Needs an audit clause and, ideally, read access to their ad-server reporting.</li>
+          <li><strong>Flat carriage.</strong> A fixed monthly fee per channel (either direction), no revenue link. Simplest, lowest ceiling — use it for long-tail channels.</li>
+          <li><strong>Sponsorship around the content.</strong> You sell what their pods don't touch — channel presenting-sponsor, EPG placement, home-row promotion, lower-thirds / L-bar on your app. Pure Asiko revenue, no split.</li>
+        </ul>
+
+        <div class="callout">
+          <p>Reserved pods are the only C-model option that gives you real, measured, programmatic upside. If a partner won't mark avails for you, treat them as flat-carriage and price accordingly.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="secnum">05</div>
+      <div class="secbody">
+        <h2>CTV, AVOD &amp; programmatic notes</h2>
+        <ul>
+          <li><strong>SSAI, not client-side.</strong> On CTV there is no ad blocker to defeat, but there's also no reliable client ad SDK across Roku / Tizen / webOS / Fire TV. Server-side stitching is the only thing that renders an ad frame-accurately on every device and survives the 10-foot app.</li>
+          <li><strong>What the ad request carries.</strong> Per break, SSAI sends the ad server: device ad id (IFA / RIDA / LGUDID), app bundle + name, content genre / rating / channel, coarse geo, IP, and pod structure (slots × duration). That's what makes the impression addressable and worth a CTV CPM.</li>
+          <li><strong>AVOD (on-demand).</strong> Same SSAI, different trigger — pre-roll + mid-roll cue points on the asset instead of a live SCTE-35 stream. One ad stack serves both linear and on-demand.</li>
+          <li><strong>Ad server choice.</strong> <code>SpringServe</code> is the FAST-native default (built for CTV pods, good SSAI integrations). <code>Publica</code> (by IAS) is the unified-auction SSP many FAST platforms sit on. <code>Google Ad Manager</code> if you already live in Google's stack. Asiko picks one; Enveu (or we) integrate it behind the SSAI.</li>
+          <li><strong>Fill.</strong> New FAST channels rarely fill 100% programmatically. House promos and direct-sold sponsorship backfill unsold avails — which is exactly what the POC's revenue panel models.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="secnum">06</div>
+      <div class="secbody">
+        <h2>What the “List Your Channel” spec must require</h2>
+        <ul>
+          <li><strong>Feed:</strong> HLS (TS or CMAF), a named encoding profile, keyframe cadence stated, stereo + described-audio where available.</li>
+          <li><strong>Ad signalling:</strong> SCTE-35 in-manifest on every break, or an EPG precise enough to derive cue points; declared pod structure.</li>
+          <li><strong>Ad policy:</strong> clean / reserved-pods / baked-in — stated up front, with the reserved-pod share if C.</li>
+          <li><strong>EPG:</strong> XMLTV or MRSS, now + next + at least 24–72h forward, updated on change.</li>
+          <li><strong>Rights:</strong> territories, music clearance, any content that must be blacked out.</li>
+          <li><strong>Brand assets:</strong> channel logo (SVG + PNG on transparent), a fallback slate.</li>
+          <li><strong>Reporting access:</strong> for C-audited deals, read access to their ad-server reporting or a signed monthly reconciliation.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><b>Asiko TV</b> — channel onboarding &amp; ad revenue</p>
+    <p>Companion to the revised architecture (Eyevinn-native SSAI) and the asiko.africa design spec</p>
+    <p>Prepared for Media Icons Africa · 5 September 2026</p>
+  </footer>
+</div>

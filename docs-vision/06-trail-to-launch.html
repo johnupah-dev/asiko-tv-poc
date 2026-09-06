@@ -1,0 +1,398 @@
+<title>Asiko Trail to Launch</title>
+<meta name="description" content="The path from a 7-to-20-channel POC through MVP and a commercial pilot to full launch — with running financials and how the monetisation model grows from FAST into hybrid." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+
+<style>
+  :root {
+    --bg:#0a0a0c; --bg-soft:#0f0f12; --panel:#17171b; --panel-2:#1e1e23;
+    --line:rgba(216,169,75,0.16); --line-strong:rgba(216,169,75,0.34);
+    --gold:#d8a94b; --gold-bright:#f3cd7e; --gold-deep:#a8792c; --gold-wash:rgba(216,169,75,0.10);
+    --white:#f7f5f0; --muted:#a7a4ac; --muted-2:#716f78; --red:#df3b34; --green:#6fbf97; --blue:#6f9be8;
+    --r-sm:6px; --r-md:10px; --pill:999px;
+    --display:"Poppins","Segoe UI",system-ui,sans-serif;
+    --body:"Inter","Segoe UI",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+    --measure:66ch;
+    --s-1:clamp(.8rem,.78rem + .1vw,.86rem);
+    --s0:clamp(.95rem,.92rem + .15vw,1.02rem);
+    --s1:clamp(1.1rem,1.02rem + .4vw,1.3rem);
+    --s2:clamp(1.4rem,1.2rem + .8vw,1.9rem);
+    --s4:clamp(2.2rem,1.7rem + 2.6vw,3.6rem);
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--white); font-family:var(--body); font-size:var(--s0); line-height:1.6; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:74rem; margin:0 auto; padding:clamp(1.4rem,1rem + 3vw,4rem) clamp(1.1rem,.6rem + 3vw,3.4rem) 6rem; }
+
+  .lockup { display:inline-flex; align-items:center; gap:10px; border:1px solid var(--line); border-radius:9px; padding:6px 13px 6px 9px; margin-bottom:1.6rem; }
+  .lockup svg { width:24px; height:24px; display:block; }
+  .lockup .w { font-family:var(--display); font-weight:700; font-size:16px; letter-spacing:.1em; }
+  .lockup .w b { font-weight:800; color:var(--gold); }
+  .lockup .t { display:block; font-family:var(--mono); font-size:8px; letter-spacing:.24em; text-transform:uppercase; color:var(--gold); margin-top:3px; }
+
+  .eyebrow { display:inline-flex; align-items:center; gap:.6rem; font-family:var(--mono); font-size:var(--s-1); letter-spacing:.18em; text-transform:uppercase; color:var(--gold); margin:0 0 1rem; }
+  .eyebrow::before { content:""; width:1.6rem; height:1px; background:var(--gold); }
+  h1 { font-family:var(--display); font-weight:800; font-size:var(--s4); line-height:1.03; letter-spacing:-.02em; text-wrap:balance; margin:0 0 .7rem; }
+  h1 .accent { color:var(--gold); }
+  .standfirst { font-size:var(--s1); color:var(--muted); max-width:58ch; margin:0 0 1.4rem; }
+  .masthead { border-bottom:1px solid var(--line-strong); padding-bottom:1.8rem; }
+
+  main { margin-top:2.8rem; display:flex; flex-direction:column; gap:3rem; }
+  section { display:grid; grid-template-columns:3rem minmax(0,1fr); gap:0 1.5rem; }
+  @media (max-width:48rem) { section { grid-template-columns:1fr; gap:.5rem; } }
+  .secnum { font-family:var(--mono); font-size:var(--s-1); color:var(--gold-deep); padding-top:.5rem; }
+  .secbody { min-width:0; }
+  .secbody > * + * { margin-top:1.05rem; }
+  .secbody > h2 + * { margin-top:1.25rem; }
+
+  h2 { font-family:var(--display); font-weight:700; font-size:var(--s2); line-height:1.12; letter-spacing:-.01em; text-wrap:balance; margin:0; padding-bottom:.7rem; border-bottom:1px solid var(--line); }
+  h3 { font-family:var(--display); font-weight:600; font-size:var(--s0); margin:1.5rem 0 0; color:var(--gold-bright); }
+  p { margin:0; max-width:var(--measure); }
+  .lede { font-size:var(--s1); color:var(--white); max-width:58ch; }
+  strong { font-weight:600; color:var(--white); }
+  a { color:var(--gold); }
+  code { font-family:var(--mono); font-size:.82em; background:var(--panel-2); border:1px solid var(--line); border-radius:4px; padding:.06rem .35rem; color:var(--gold-bright); }
+
+  ul { margin:0; padding:0; list-style:none; max-width:var(--measure); display:flex; flex-direction:column; gap:.5rem; }
+  ul li { padding-left:1.3rem; position:relative; }
+  ul li::before { content:""; position:absolute; left:.1rem; top:.68em; width:.4rem; height:.4rem; background:var(--gold); transform:rotate(45deg); }
+
+  .callout { background:var(--gold-wash); border:1px solid var(--line-strong); border-left:3px solid var(--gold); border-radius:0 var(--r-sm) var(--r-sm) 0; padding:1rem 1.15rem; max-width:var(--measure); }
+  .callout.warn { border-left-color:var(--red); background:rgba(223,59,52,0.07); }
+
+  .table-wrap { overflow-x:auto; border:1px solid var(--line); border-radius:var(--r-md); background:var(--bg-soft); }
+  table { border-collapse:collapse; width:100%; font-size:var(--s-1); min-width:44rem; }
+  th,td { text-align:left; padding:.7rem .9rem; vertical-align:top; border-bottom:1px solid var(--line); }
+  thead th { font-family:var(--mono); font-weight:500; font-size:.66rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); background:var(--panel); }
+  tbody tr:last-child td { border-bottom:0; }
+  td.k { color:var(--gold-bright); font-weight:500; white-space:nowrap; }
+  .num { font-variant-numeric:tabular-nums; white-space:nowrap; }
+  tfoot td { font-weight:600; color:var(--white); border-top:1px solid var(--line-strong); background:var(--panel); }
+
+  .phasecards { display:grid; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr)); gap:1rem; }
+  .pc { border:1px solid var(--line); border-radius:var(--r-md); background:var(--bg-soft); padding:1.1rem 1.15rem; display:flex; flex-direction:column; gap:.5rem; }
+  .pc .tag { font-family:var(--mono); font-size:.66rem; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); }
+  .pc h3 { margin:0; color:var(--white); font-size:var(--s1); }
+  .pc .when { font-family:var(--mono); font-size:.72rem; color:var(--muted-2); }
+  .pc p { font-size:var(--s-1); color:var(--muted); max-width:none; }
+  .pc .cost { margin-top:auto; font-family:var(--mono); font-size:.74rem; color:var(--gold-bright); border-top:1px dashed var(--line); padding-top:.55rem; }
+
+  figure { margin:1.4rem 0 0; }
+  .fig-frame { border:1px solid var(--line-strong); border-radius:var(--r-md); background:#060608; padding:1.1rem 1rem .5rem; overflow-x:auto; }
+  figure svg { display:block; width:100%; min-width:44rem; height:auto; color:var(--white); }
+  figcaption { font-size:var(--s-1); color:var(--muted); margin-top:.8rem; max-width:var(--measure); }
+
+  footer { margin-top:3.6rem; padding-top:1.3rem; border-top:1px solid var(--line-strong); font-size:var(--s-1); color:var(--muted); display:flex; flex-direction:column; gap:.3rem; }
+  footer b { color:var(--gold-bright); font-family:var(--display); font-weight:600; }
+  :focus-visible { outline:2px solid var(--gold); outline-offset:2px; }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <span class="lockup">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 L29 29 L3 29 Z" fill="#d8a94b"/><path d="M16 13 L23.5 27 L8.5 27 Z" fill="#0a0a0c"/><rect x="10" y="20.5" width="12" height="3.2" fill="#0a0a0c"/></svg>
+      <span><span class="w">ASIKO<b>&nbsp;TV</b></span><span class="t">The Soul of Africa</span></span>
+    </span>
+    <p class="eyebrow">Roadmap · Financials · Growth</p>
+    <h1>The trail from POC to <span class="accent">launch</span></h1>
+    <p class="standfirst">7 &rarr; 10 &rarr; 20 channels as a proof of concept, into an MVP the sales houses can plug into, a commercial pilot that proves the economics, and a full launch on a production build — with the money mapped at every step, and a plan for growing past FAST.</p>
+  </header>
+
+  <main>
+
+    <section>
+      <div class="secnum">01</div>
+      <div class="secbody">
+        <h2>Where we are</h2>
+        <p class="lede">The POC scales channels for free. Going from 7 to 10 to 20 is a config change, not a build — it's already done.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Build</th><th>What it is</th><th>Effort</th><th>What it proves</th></tr></thead>
+            <tbody>
+              <tr><td class="k">7 channels</td><td>First POC — branded player, EPG, ad-break engine, revenue model</td><td>done</td><td>The product idea and the money model</td></tr>
+              <tr><td class="k">10 channels</td><td>Same, +3 slots (News, Sport, Kids)</td><td>done</td><td>Room for the first ten partner companies</td></tr>
+              <tr><td class="k">20 channels</td><td>Same, +10 genre slots (Nollywood, Afrobeats, Faith, Comedy, Mzansi, History…)</td><td>done</td><td>A full-looking bouquet for advertiser &amp; sales-house meetings</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout warn">
+          <p><strong>What the POC is not:</strong> there is no real playout, no ad server, no revenue. Channels are HLS URLs played in a browser; the ad breaks and the earnings panel are a model. It is a <em>demo</em> — the right tool for meetings, not a platform.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="secnum">02</div>
+      <div class="secbody">
+        <h2>The trail — four phases</h2>
+
+        <figure>
+          <div class="fig-frame">
+            <svg viewBox="0 0 1000 300" role="img" aria-label="Four phases from POC to full launch. Phase 0 POC: 7 to 20 channels, client-side demo, near zero cost, for meetings. Phase 1 MVP: 5 to 10 real linear channels with real ad insertion, hundreds of dollars a month, first revenue. Phase 2 Commercial pilot: 20 to 40 channels, real ad demand, CTV apps, thousands a month, proves unit economics, and the Enveu build decision is taken here. Phase 3 Full launch: 50 to 100+ channels on a production build, multi-CTV, scaling with viewer-hours, and the monetisation model begins to grow past FAST.">
+              <defs>
+                <marker id="tr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#d8a94b"/></marker>
+              </defs>
+              <line x1="40" y1="150" x2="960" y2="150" stroke="#2a2a30"/>
+              <line x1="40" y1="150" x2="952" y2="150" stroke="#d8a94b" stroke-dasharray="2 6" marker-end="url(#tr)"/>
+              <g font-family="Inter, sans-serif">
+                <g>
+                  <rect x="44" y="78" width="210" height="128" rx="8" fill="#17171b" stroke="#d8a94b" stroke-width="1.5"/>
+                  <text x="60" y="100" font-family="IBM Plex Mono, monospace" font-size="10" fill="#d8a94b" letter-spacing="1">PHASE 0 · NOW</text>
+                  <text x="60" y="121" font-size="14" font-weight="700" fill="#f7f5f0">POC</text>
+                  <text x="60" y="141" font-size="11" fill="#a7a4ac">7 &rarr; 20 channels · demo</text>
+                  <text x="60" y="157" font-size="11" fill="#a7a4ac">client-side, no playout</text>
+                  <text x="60" y="180" font-size="11" fill="#f3cd7e">~$0–50 / mo</text>
+                  <text x="60" y="196" font-size="10" fill="#716f78">for meetings</text>
+                </g>
+                <g>
+                  <rect x="286" y="78" width="210" height="128" rx="8" fill="#17171b" stroke="#3a3a42"/>
+                  <text x="302" y="100" font-family="IBM Plex Mono, monospace" font-size="10" fill="#a7a4ac" letter-spacing="1">PHASE 1 · wk 2–8</text>
+                  <text x="302" y="121" font-size="14" font-weight="700" fill="#f7f5f0">MVP</text>
+                  <text x="302" y="141" font-size="11" fill="#a7a4ac">5 &rarr; 10 real linear ch.</text>
+                  <text x="302" y="157" font-size="11" fill="#a7a4ac">real SSAI + reporting</text>
+                  <text x="302" y="180" font-size="11" fill="#f3cd7e">~$0.3k–1.5k / mo</text>
+                  <text x="302" y="196" font-size="10" fill="#716f78">first revenue</text>
+                </g>
+                <g>
+                  <rect x="528" y="78" width="210" height="128" rx="8" fill="#17171b" stroke="#3a3a42"/>
+                  <text x="544" y="100" font-family="IBM Plex Mono, monospace" font-size="10" fill="#a7a4ac" letter-spacing="1">PHASE 2 · mo 2–6</text>
+                  <text x="544" y="121" font-size="14" font-weight="700" fill="#f7f5f0">Commercial pilot</text>
+                  <text x="544" y="141" font-size="11" fill="#a7a4ac">20 &rarr; 40 ch · CTV apps</text>
+                  <text x="544" y="157" font-size="11" fill="#a7a4ac">real ad demand</text>
+                  <text x="544" y="180" font-size="11" fill="#f3cd7e">~$2k–8k / mo + $13k</text>
+                  <text x="544" y="196" font-size="10" fill="#716f78">Enveu decision here</text>
+                </g>
+                <g>
+                  <rect x="770" y="78" width="210" height="128" rx="8" fill="#17171b" stroke="#3a3a42"/>
+                  <text x="786" y="100" font-family="IBM Plex Mono, monospace" font-size="10" fill="#a7a4ac" letter-spacing="1">PHASE 3 · mo 6–12+</text>
+                  <text x="786" y="121" font-size="14" font-weight="700" fill="#f7f5f0">Full launch</text>
+                  <text x="786" y="141" font-size="11" fill="#a7a4ac">50 &rarr; 100+ ch · multi-CTV</text>
+                  <text x="786" y="157" font-size="11" fill="#a7a4ac">production build</text>
+                  <text x="786" y="180" font-size="11" fill="#f3cd7e">scales w/ viewer-hours</text>
+                  <text x="786" y="196" font-size="10" fill="#716f78">monetisation grows</text>
+                </g>
+              </g>
+              <g font-family="IBM Plex Mono, monospace" font-size="9" fill="#716f78">
+                <text x="150" y="238" text-anchor="middle">show it works</text>
+                <text x="391" y="238" text-anchor="middle">make it real &amp; small</text>
+                <text x="633" y="238" text-anchor="middle">prove the economics</text>
+                <text x="875" y="238" text-anchor="middle">scale &amp; diversify</text>
+              </g>
+            </svg>
+          </div>
+          <figcaption>Each phase has a job. You do not build Phase 3 until Phase 2 has shown the numbers work — that is also where the Enveu build (or an in-house team) gets committed, with real data in hand instead of a guess.</figcaption>
+        </figure>
+
+        <div class="phasecards">
+          <div class="pc">
+            <span class="tag">Phase 0 · now</span>
+            <h3>POC</h3>
+            <span class="when">now &rarr; ~2 weeks</span>
+            <p>Client-side demo, 7&ndash;20 channels, on <code>asiko.africa</code>, Asiko-branded. For advertiser, sales-house, partner and investor meetings.</p>
+            <p><strong>Exit:</strong> asiko.africa live · 10+ partners engaged · a demo you can walk into any room with.</p>
+            <span class="cost">GitHub Pages (free) · domain · Eyevinn trial &nbsp;→&nbsp; ~$0–50/mo</span>
+          </div>
+          <div class="pc">
+            <span class="tag">Phase 1 · wk 2–8</span>
+            <h3>MVP</h3>
+            <span class="when">~6 weeks</span>
+            <p>Real 24/7 linear playout for 5&ndash;10 channels (Eyevinn Channel Engine or self-hosted on the KVM8). Real content — yours + first partner feeds. Eyevinn SGAI ad insertion with a real tag. EPG from a real schedule. Web app hardened, basic analytics, first CTV surface (web-based Roku or PWA).</p>
+            <p><strong>Exit:</strong> 5–10 real channels live · SSAI working with real demand · first invoices out · reporting a sales house trusts.</p>
+            <span class="cost">playout €69–199 · CDN $50–300 · storage/transcode &nbsp;→&nbsp; ~$300–1,500/mo + one-off content/transcode</span>
+          </div>
+          <div class="pc">
+            <span class="tag">Phase 2 · mo 2–6</span>
+            <h3>Commercial pilot</h3>
+            <span class="when">~4 months</span>
+            <p>20&ndash;40+ channels, all first partners onboarded. Real ad demand live (SpringServe / Publica + direct sold). CTV apps on 1&ndash;3 platforms. Ad-ops function. Content pipeline running. <strong>Decide Enveu here.</strong></p>
+            <p><strong>Exit:</strong> positive contribution per viewer-hour · repeatable partner onboarding · 100k+ monthly viewer-hours · an ad-sales pipeline.</p>
+            <span class="cost">run-rate ~$2k–8k/mo (CDN dominates) + CTV apps $0–40k + Enveu build $13k one-off + people</span>
+          </div>
+          <div class="pc">
+            <span class="tag">Phase 3 · mo 6–12+</span>
+            <h3>Full launch</h3>
+            <span class="when">ongoing</span>
+            <p>Enveu-built production platform (or in-house team). 50&ndash;100+ channels, multi-CTV, full ad stack + a direct sales house, marketing push. The monetisation model starts to grow past FAST (§5).</p>
+            <p><strong>Exit:</strong> break-even trajectory · diversified revenue · brand in market.</p>
+            <span class="cost">scales with channels &amp; viewer-hours · CDN is the big line · content spend + team grow</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="secnum">03</div>
+      <div class="secbody">
+        <h2>Milestones that matter to you</h2>
+        <p>The gates — pass each before spending on the next.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>#</th><th>Milestone</th><th>Phase</th><th>Why it's a gate</th></tr></thead>
+            <tbody>
+              <tr><td class="num">M1</td><td><strong>asiko.africa live</strong> with the 20-channel POC on brand</td><td>0</td><td>You can now sell the vision in a meeting, not a slide</td></tr>
+              <tr><td class="num">M2</td><td><strong>First real linear channel</strong> running end to end (playout + SGAI + a real ad tag)</td><td>1</td><td>Proves the whole pipeline works on real infrastructure — de-risks everything after</td></tr>
+              <tr><td class="num">M3</td><td><strong>First partner channel onboarded</strong> from their HLS feed, with reserved ad pods</td><td>1</td><td>The "List Your Channel" process is real; you can scale partner intake</td></tr>
+              <tr><td class="num">M4</td><td><strong>First revenue</strong> — a real invoice, however small</td><td>1</td><td>Turns a pitch into a P&amp;L line; unlocks investor and sales-house conversations</td></tr>
+              <tr><td class="num">M5</td><td><strong>A sales house or SSP signs on</strong> and demand flows to the channels</td><td>2</td><td>You're no longer selling ads one at a time; fill rate and CPM become the levers</td></tr>
+              <tr><td class="num">M6</td><td><strong>Positive contribution per viewer-hour</strong> (revenue after CDN &amp; splits &gt; 0)</td><td>2</td><td>The unit economics work — now growth is worth funding</td></tr>
+              <tr><td class="num">M7</td><td><strong>CTV apps live</strong> on Roku / Fire TV (where the FAST money is)</td><td>2</td><td>CTV CPMs are 2–4&times; web; this is where the business becomes real</td></tr>
+              <tr><td class="num">M8</td><td><strong>Enveu build committed</strong> (or in-house team hired) with real pilot data</td><td>2 &rarr; 3</td><td>You commit the $13k + ops spend against proven numbers, not a forecast</td></tr>
+              <tr><td class="num">M9</td><td><strong>Break-even trajectory</strong> at a known viewer-hours target</td><td>3</td><td>The platform funds itself; monetisation growth (§5) becomes upside, not survival</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="secnum">04</div>
+      <div class="secbody">
+        <h2>The financials — so nothing surprises you</h2>
+        <p class="lede">FAST infrastructure is cheap. The business is won on <strong>viewer-hours</strong> and <strong>content</strong>, not servers. These figures are illustrative ranges with the assumptions shown — treat them as shape, not forecast.</p>
+
+        <h3>Running cost by phase</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Monthly line</th><th class="num">Phase 0<br>POC</th><th class="num">Phase 1<br>MVP</th><th class="num">Phase 2<br>Pilot</th><th class="num">Phase 3<br>Launch</th></tr></thead>
+            <tbody>
+              <tr><td class="k">Playout (Eyevinn or KVM8)</td><td class="num">$0 trial</td><td class="num">$75–220</td><td class="num">$220–600</td><td class="num">$600–3k+</td></tr>
+              <tr><td class="k">Storage</td><td class="num">–</td><td class="num">$5–25</td><td class="num">$25–120</td><td class="num">$120–500</td></tr>
+              <tr><td class="k">Transcode (batch)</td><td class="num">–</td><td class="num">one-off</td><td class="num">$50–300</td><td class="num">$300–1k</td></tr>
+              <tr><td class="k">CDN egress (Bunny)</td><td class="num">~$0</td><td class="num">$50–300</td><td class="num">$300–2k</td><td class="num">$2k–15k+</td></tr>
+              <tr><td class="k">Ad server / SSP</td><td class="num">–</td><td class="num">rev-share ~10%</td><td class="num">rev-share ~10%</td><td class="num">rev-share ~10%</td></tr>
+              <tr><td class="k">Web hosting + domain</td><td class="num">$10</td><td class="num">$12</td><td class="num">$12</td><td class="num">$12</td></tr>
+              <tr><td class="k">People / ad ops</td><td class="num">you</td><td class="num">you</td><td class="num">1 contractor</td><td class="num">ad ops + eng, or Enveu managed ops</td></tr>
+            </tbody>
+            <tfoot>
+              <tr><td>Indicative monthly run-rate</td><td class="num">~$0–50</td><td class="num">~$0.3k–1.5k</td><td class="num">~$2k–8k</td><td class="num">$8k–40k+ (∝ viewers)</td></tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <h3>One-time / capital</h3>
+        <ul>
+          <li><strong>Content</strong> — licensing or production. The largest and most variable number, entirely your call. Public-domain + partner feeds keep it near zero to start; a real diaspora catalogue is five to six figures.</li>
+          <li><strong>Enveu production build</strong> — <strong>$13,000</strong> one-time (revised scope, Eyevinn-native, no AWS), committed at M8.</li>
+          <li><strong>CTV apps</strong> — a web-based Roku channel can be ~$0–5k; native apps across Roku / Fire TV / Samsung / LG are $30k–120k if outsourced, or folded into the Enveu build.</li>
+          <li><strong>Company, legal, ad-tech contracts</strong> — entity, privacy/consent, listing agreements, SSP onboarding. Low four figures.</li>
+        </ul>
+
+        <h3>The FAST revenue formula</h3>
+        <div class="callout">
+          <p><strong>Gross ad revenue ≈ viewer-hours &times; ad impressions per hour &times; (CPM &divide; 1000) &times; fill rate</strong></p>
+          <p style="margin-top:.6rem">Worked example (year-1, diaspora CTV assumptions): 24 impressions/viewer-hour &times; $10 CPM &times; 50% fill = <strong>$0.12 gross per viewer-hour</strong>.<br>
+          Less SSP ~10% and a blended content-owner split (0% on owned channels, ~50% on partner channels) ≈ <strong>$0.06–0.08 net to Asiko per viewer-hour</strong>.<br>
+          Less CDN at ~1.3 GB/viewer-hour &times; ~$0.01/GB ≈ <strong>$0.013</strong> &rarr; <strong>contribution ≈ $0.05–0.07 per viewer-hour</strong> before fixed costs.</p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Monthly viewer-hours</th><th class="num">Gross ad rev</th><th class="num">Contribution (after CDN &amp; splits)</th><th class="num">vs. fixed costs</th></tr></thead>
+            <tbody>
+              <tr><td class="k">50,000</td><td class="num">~$6,000</td><td class="num">~$3,000</td><td class="num">below Phase-2 fixed — investment mode</td></tr>
+              <tr><td class="k">150,000</td><td class="num">~$18,000</td><td class="num">~$9,000</td><td class="num">≈ covers Phase-2 fixed</td></tr>
+              <tr><td class="k">500,000</td><td class="num">~$60,000</td><td class="num">~$30,000</td><td class="num">clearly positive — fundable growth</td></tr>
+              <tr><td class="k">2,000,000</td><td class="num">~$240,000</td><td class="num">~$120,000</td><td class="num">a real business</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout warn">
+          <p><strong>Break-even is a viewer-hours number, not a channel-count number.</strong> Roughly <strong>60k–150k viewer-hours a month</strong> covers Phase-2 fixed costs — about 3,000–10,000 regular viewers. CPM, fill and watch-time each swing the result &plusmn;50%. Adding channels raises the ceiling; it does not move break-even. <strong>Audience acquisition and content are the real spend</strong> — plan for marketing, not just infrastructure.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="secnum">05</div>
+      <div class="secbody">
+        <h2>Growing past FAST — hybrid monetisation</h2>
+        <p class="lede">FAST stays the base and the funnel. Each new model is a layer on top — most reuse the same video and ad plumbing; the harder ones add payments, accounts and DRM.</p>
+
+        <figure>
+          <div class="fig-frame">
+            <svg viewBox="0 0 1000 340" role="img" aria-label="Monetisation layers accreting over time. At launch: FAST linear AVOD only. Plus about six months: add AVOD on-demand, a VOD catalogue on the same ad stack, a low lift. Plus about twelve months: add TVOD and EST, rent or buy premium titles as Asiko Cinemas, a medium-to-high lift needing payments, a storefront and studio-grade DRM. Plus eighteen to twenty-four months: add an SVOD tier, ad-free or premium bundle, a high lift needing subscription billing, accounts and churn operations, and more premium content spend. The end state is hybrid: FAST funnels free viewers, TVOD and SVOD convert the most engaged.">
+              <defs>
+                <marker id="ev" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#716f78"/></marker>
+              </defs>
+              <line x1="40" y1="286" x2="968" y2="286" stroke="#2a2a30" marker-end="url(#ev)"/>
+              <g font-family="IBM Plex Mono, monospace" font-size="9" fill="#716f78">
+                <text x="130" y="304">launch</text>
+                <text x="370" y="304">+ ~6 months</text>
+                <text x="610" y="304">+ ~12 months</text>
+                <text x="850" y="304">+ ~18–24 months</text>
+              </g>
+              <g font-family="Inter, sans-serif" font-size="11">
+                <!-- col 1 -->
+                <rect x="60" y="210" width="180" height="52" rx="5" fill="rgba(216,169,75,0.16)" stroke="#d8a94b"/>
+                <text x="150" y="232" text-anchor="middle" font-weight="700" fill="#f3cd7e">FAST — linear AVOD</text>
+                <text x="150" y="249" text-anchor="middle" font-size="10" fill="#d8a94b">the base &amp; the funnel</text>
+                <!-- col 2 -->
+                <rect x="300" y="210" width="180" height="52" rx="5" fill="rgba(216,169,75,0.16)" stroke="#d8a94b"/>
+                <text x="390" y="240" text-anchor="middle" font-weight="700" fill="#f3cd7e">FAST</text>
+                <rect x="300" y="150" width="180" height="52" rx="5" fill="#17171b" stroke="#6fbf97"/>
+                <text x="390" y="171" text-anchor="middle" font-weight="700" fill="#6fbf97">AVOD on-demand</text>
+                <text x="390" y="188" text-anchor="middle" font-size="10" fill="#a7a4ac">catalogue, same ad stack</text>
+                <!-- col 3 -->
+                <rect x="540" y="210" width="180" height="52" rx="5" fill="rgba(216,169,75,0.16)" stroke="#d8a94b"/>
+                <text x="630" y="240" text-anchor="middle" font-weight="700" fill="#f3cd7e">FAST</text>
+                <rect x="540" y="150" width="180" height="52" rx="5" fill="#17171b" stroke="#6fbf97"/>
+                <text x="630" y="180" text-anchor="middle" font-weight="700" fill="#6fbf97">AVOD on-demand</text>
+                <rect x="540" y="90" width="180" height="52" rx="5" fill="#17171b" stroke="#6f9be8"/>
+                <text x="630" y="111" text-anchor="middle" font-weight="700" fill="#6f9be8">TVOD / EST</text>
+                <text x="630" y="128" text-anchor="middle" font-size="10" fill="#a7a4ac">“Asiko Cinemas” — rent / buy</text>
+                <!-- col 4 -->
+                <rect x="780" y="210" width="180" height="52" rx="5" fill="rgba(216,169,75,0.16)" stroke="#d8a94b"/>
+                <text x="870" y="240" text-anchor="middle" font-weight="700" fill="#f3cd7e">FAST</text>
+                <rect x="780" y="150" width="180" height="52" rx="5" fill="#17171b" stroke="#6fbf97"/>
+                <text x="870" y="180" text-anchor="middle" font-weight="700" fill="#6fbf97">AVOD on-demand</text>
+                <rect x="780" y="90" width="180" height="52" rx="5" fill="#17171b" stroke="#6f9be8"/>
+                <text x="870" y="120" text-anchor="middle" font-weight="700" fill="#6f9be8">TVOD / EST</text>
+                <rect x="780" y="30" width="180" height="52" rx="5" fill="#17171b" stroke="#c39bff"/>
+                <text x="870" y="51" text-anchor="middle" font-weight="700" fill="#c39bff">SVOD tier</text>
+                <text x="870" y="68" text-anchor="middle" font-size="10" fill="#a7a4ac">ad-free / premium bundle</text>
+              </g>
+              <text x="870" y="20" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#716f78">end state: hybrid</text>
+            </svg>
+          </div>
+          <figcaption>FAST never goes away — it is the free tier that acquires the audience the paid tiers convert from. Add layers only when the one below is generating and the audience is asking for the next.</figcaption>
+        </figure>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Layer</th><th>Adds (revenue)</th><th>Needs (new tech)</th><th>Lift</th><th>Main risk</th></tr></thead>
+            <tbody>
+              <tr><td class="k">FAST linear</td><td>Ad revenue, rev-share with channel partners</td><td>— (this is the platform)</td><td>—</td><td>Fill rate &amp; CPM in a niche market</td></tr>
+              <tr><td class="k">AVOD on-demand</td><td>Higher CPMs (better targeting), more watch-time per user</td><td>VOD catalogue + CMS, mid-roll cue points on assets</td><td>Low — reuses the ad stack</td><td>Content rights for on-demand windows</td></tr>
+              <tr><td class="k">TVOD / EST<br><span style="color:var(--muted-2)">“Asiko Cinemas”</span></td><td>Transaction revenue per rental / purchase; premium-title deals</td><td>Payments, a storefront, entitlement service, <strong>studio-grade DRM</strong> (Widevine / FairPlay / PlayReady)</td><td>Medium–High</td><td>DRM &amp; studio terms; conversion from a free audience</td></tr>
+              <tr><td class="k">SVOD tier</td><td>Recurring subscription revenue; predictable ARPU</td><td>Subscription billing, accounts / auth, churn &amp; dunning ops, more premium content spend</td><td>High</td><td>Churn; needs enough exclusive content to be worth paying for</td></tr>
+              <tr><td class="k">Hybrid (all)</td><td>Diversified — ads + transactions + subscriptions</td><td>All the above, integrated behind one account &amp; one player</td><td>—</td><td>Operational complexity; each line needs its own discipline</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout">
+          <p>The build sequence is deliberate: <strong>AVOD on-demand</strong> is nearly free to add and lifts ad revenue, so it comes first. <strong>TVOD / Asiko Cinemas</strong> is the first real new capability (payments + DRM) and a natural premium play for African cinema. <strong>SVOD</strong> comes last — it is a different business discipline and only works once you have an audience and exclusive content worth a monthly fee.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="secnum">06</div>
+      <div class="secbody">
+        <h2>What this means for you now</h2>
+        <ul>
+          <li><strong>Phase 0 is basically done</strong> — finish <code>asiko.africa</code> (DNS) and you have your meeting demo, 20 channels, for near zero.</li>
+          <li><strong>Phase 1 needs two unlocks from you</strong> — playout access (Eyevinn billing or KVM8 SSH) and first content/partner feeds. Cost is hundreds a month, not thousands.</li>
+          <li><strong>The Enveu $13k and the CTV-app spend wait until Phase 2</strong> — committed against real pilot numbers, not a forecast.</li>
+          <li><strong>Budget for audience, not servers.</strong> Break-even is ~60k–150k viewer-hours/month; getting there is a marketing and content spend, and it is the real number to plan around.</li>
+          <li><strong>Monetisation growth is upside, not the plan.</strong> Get FAST working and funded first; add AVOD-on-demand, then Asiko Cinemas, then SVOD, each only when the layer below is earning.</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p><b>Asiko TV</b> — trail to launch, financials &amp; monetisation growth</p>
+    <p>Media Icons Africa · 6 September 2026 · figures are illustrative ranges, not a forecast · companion to the revised architecture, design spec, onboarding pack and Week-1 plan</p>
+  </footer>
+</div>

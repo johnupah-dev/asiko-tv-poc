@@ -1,0 +1,179 @@
+<title>List Your Channel on Asiko</title>
+<meta name="description" content="What a channel partner sends to launch on Asiko TV, how the ad revenue is shared, and what happens after you submit." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+
+<style>
+  :root {
+    --bg:#0a0a0c; --bg-soft:#0f0f12; --panel:#17171b; --panel-2:#1e1e23;
+    --line:rgba(216,169,75,0.16); --line-strong:rgba(216,169,75,0.34);
+    --gold:#d8a94b; --gold-bright:#f3cd7e; --gold-deep:#a8792c; --gold-wash:rgba(216,169,75,0.10);
+    --white:#f7f5f0; --muted:#a7a4ac; --muted-2:#716f78; --red:#df3b34;
+    --r-sm:6px; --r-md:10px; --pill:999px;
+    --display:"Poppins","Segoe UI",system-ui,sans-serif;
+    --body:"Inter","Segoe UI",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+    --measure:64ch;
+    --s-1:clamp(.8rem,.78rem + .1vw,.86rem);
+    --s0:clamp(.95rem,.92rem + .15vw,1.02rem);
+    --s1:clamp(1.1rem,1.02rem + .4vw,1.3rem);
+    --s2:clamp(1.4rem,1.2rem + .8vw,1.9rem);
+    --s4:clamp(2.4rem,1.8rem + 3vw,4rem);
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--white); font-family:var(--body); font-size:var(--s0); line-height:1.62; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:70rem; margin:0 auto; padding:clamp(1.4rem,1rem + 3vw,4rem) clamp(1.1rem,.6rem + 3vw,3.4rem) 6rem; }
+
+  .lockup { display:inline-flex; align-items:center; gap:10px; border:1px solid var(--line); border-radius:9px; padding:6px 13px 6px 9px; margin-bottom:1.6rem; }
+  .lockup svg { width:26px; height:26px; display:block; }
+  .lockup .w { font-family:var(--display); font-weight:700; font-size:17px; letter-spacing:.1em; }
+  .lockup .w b { font-weight:800; color:var(--gold); }
+  .lockup .t { display:block; font-family:var(--mono); font-size:8px; letter-spacing:.24em; text-transform:uppercase; color:var(--gold); margin-top:3px; }
+
+  .eyebrow { display:inline-flex; align-items:center; gap:.6rem; font-family:var(--mono); font-size:var(--s-1); letter-spacing:.18em; text-transform:uppercase; color:var(--gold); margin:0 0 1.1rem; }
+  .eyebrow::before { content:""; width:1.6rem; height:1px; background:var(--gold); }
+  h1 { font-family:var(--display); font-weight:800; font-size:var(--s4); line-height:1.02; letter-spacing:-.02em; text-wrap:balance; margin:0 0 .7rem; }
+  h1 .accent { color:var(--gold); }
+  .standfirst { font-size:var(--s1); color:var(--muted); max-width:52ch; margin:0 0 2rem; }
+  .masthead { border-bottom:1px solid var(--line-strong); padding-bottom:1.8rem; }
+
+  main { margin-top:3rem; display:flex; flex-direction:column; gap:3rem; }
+  section { display:grid; grid-template-columns:3rem minmax(0,1fr); gap:0 1.5rem; }
+  @media (max-width:48rem) { section { grid-template-columns:1fr; gap:.5rem; } }
+  .secnum { font-family:var(--mono); font-size:var(--s-1); color:var(--gold-deep); padding-top:.5rem; }
+  .secbody { min-width:0; }
+  .secbody > * + * { margin-top:1.05rem; }
+  .secbody > h2 + * { margin-top:1.25rem; }
+
+  h2 { font-family:var(--display); font-weight:700; font-size:var(--s2); line-height:1.12; letter-spacing:-.01em; text-wrap:balance; margin:0; padding-bottom:.7rem; border-bottom:1px solid var(--line); }
+  h3 { font-family:var(--display); font-weight:600; font-size:var(--s0); margin:1.4rem 0 0; color:var(--gold-bright); }
+  p { margin:0; max-width:var(--measure); }
+  .lede { font-size:var(--s1); color:var(--white); max-width:56ch; }
+  strong { font-weight:600; color:var(--white); }
+  a { color:var(--gold); }
+  code { font-family:var(--mono); font-size:.82em; background:var(--panel-2); border:1px solid var(--line); border-radius:4px; padding:.06rem .35rem; color:var(--gold-bright); }
+
+  ul { margin:0; padding:0; list-style:none; max-width:var(--measure); display:flex; flex-direction:column; gap:.55rem; }
+  ul li { padding-left:1.3rem; position:relative; }
+  ul li::before { content:""; position:absolute; left:.1rem; top:.68em; width:.4rem; height:.4rem; background:var(--gold); transform:rotate(45deg); }
+
+  .callout { background:var(--gold-wash); border:1px solid var(--line-strong); border-left:3px solid var(--gold); border-radius:0 var(--r-sm) var(--r-sm) 0; padding:1rem 1.15rem; max-width:var(--measure); }
+
+  .table-wrap { overflow-x:auto; border:1px solid var(--line); border-radius:var(--r-md); background:var(--bg-soft); }
+  table { border-collapse:collapse; width:100%; font-size:var(--s-1); min-width:36rem; }
+  th,td { text-align:left; padding:.72rem .9rem; vertical-align:top; border-bottom:1px solid var(--line); }
+  thead th { font-family:var(--mono); font-weight:500; font-size:.68rem; letter-spacing:.07em; text-transform:uppercase; color:var(--muted); background:var(--panel); }
+  tbody tr:last-child td { border-bottom:0; }
+  td.k { color:var(--gold-bright); font-weight:500; white-space:nowrap; }
+  .req { color:var(--gold); font-family:var(--mono); font-size:.7rem; }
+  .opt { color:var(--muted-2); font-family:var(--mono); font-size:.7rem; }
+
+  ol.steps { margin:0; padding:0; list-style:none; counter-reset:s; display:flex; flex-direction:column; gap:.8rem; max-width:var(--measure); }
+  ol.steps li { counter-increment:s; display:grid; grid-template-columns:2rem 1fr; gap:.9rem; align-items:start; }
+  ol.steps li::before { content:counter(s); font-family:var(--mono); font-size:.9rem; color:var(--gold); border:1px solid var(--line-strong); width:2rem; height:2rem; display:grid; place-items:center; border-radius:var(--r-sm); }
+  ol.steps b { color:var(--white); font-weight:600; font-family:var(--display); }
+
+  footer { margin-top:4rem; padding-top:1.3rem; border-top:1px solid var(--line-strong); font-size:var(--s-1); color:var(--muted); display:flex; flex-direction:column; gap:.3rem; }
+  footer b { color:var(--gold-bright); font-family:var(--display); font-weight:600; }
+  :focus-visible { outline:2px solid var(--gold); outline-offset:2px; }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <span class="lockup">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 L29 29 L3 29 Z" fill="#d8a94b"/><path d="M16 13 L23.5 27 L8.5 27 Z" fill="#0a0a0c"/><rect x="10" y="20.5" width="12" height="3.2" fill="#0a0a0c"/></svg>
+      <span><span class="w">ASIKO<b>&nbsp;TV</b></span><span class="t">The Soul of Africa</span></span>
+    </span>
+    <p class="eyebrow">Partner Onboarding</p>
+    <h1>List your channel on <span class="accent">Asiko</span></h1>
+    <p class="standfirst">Asiko TV is a free, ad-supported streaming home for African audiences across the UK, US, Canada and Europe. Here is exactly what we need from you to launch, and how the ad revenue is shared.</p>
+  </header>
+
+  <main>
+    <section>
+      <div class="secnum">01</div>
+      <div class="secbody">
+        <h2>What listing gets you</h2>
+        <ul>
+          <li><strong>Distribution to the whole Asiko audience</strong> — web now, connected-TV apps (Roku, Fire TV, Samsung, LG) as they roll out.</li>
+          <li><strong>A share of the advertising revenue your channel generates</strong> — see §3.</li>
+          <li><strong>No cost to list.</strong> You keep your content, your brand and your rights. Asiko integrates your feed; it does not take ownership of anything.</li>
+          <li><strong>A guide slot, channel number and on-screen branding</strong> in the Asiko app.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="secnum">02</div>
+      <div class="secbody">
+        <h2>What to send us</h2>
+        <p class="lede">One email with the items below gets your channel into the pipeline. Items marked <span class="req">required</span> are needed to go live; <span class="opt">optional</span> ones we can help with.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Item</th><th>Detail</th><th></th></tr></thead>
+            <tbody>
+              <tr><td class="k">Live feed</td><td><strong>HLS</strong> (TS or CMAF) URL of your 24/7 linear channel. Tell us the encoding profile — resolutions, video codec, keyframe/GOP cadence, audio (stereo, and described audio if you carry it).</td><td class="req">required</td></tr>
+              <tr><td class="k">Ad-break signalling</td><td><strong>SCTE-35</strong> markers in the manifest on every ad break (<code>#EXT-X-CUE-OUT/IN</code> or <code>EXT-X-DATERANGE</code>). If you can't emit SCTE-35, send an EPG precise enough for us to derive the cue points, and your typical break structure (breaks per hour, slots per break, slot length).</td><td class="req">required</td></tr>
+              <tr><td class="k">Ad policy</td><td>One of: <strong>Clean feed</strong> (no ads — Asiko sells all inventory) · <strong>Reserved pods</strong> (you sell some, and mark a share of each break for Asiko) · <strong>Baked-in</strong> (your ads already stitched). If reserved pods, state the share for Asiko (e.g. every 3rd slot, or 40% of break time).</td><td class="req">required</td></tr>
+              <tr><td class="k">EPG</td><td><strong>XMLTV</strong> or <strong>MRSS</strong> feed — now, next and at least 24–72 hours forward, refreshed when the schedule changes.</td><td class="req">required</td></tr>
+              <tr><td class="k">Rights</td><td>Territories you're cleared for, music clearance status, and anything that must be blacked out in specific regions.</td><td class="req">required</td></tr>
+              <tr><td class="k">Brand assets</td><td>Channel logo as <strong>SVG</strong> and <strong>PNG on transparent</strong> (readable on a dark background), plus a still "off-air" slate frame.</td><td class="req">required</td></tr>
+              <tr><td class="k">Contacts</td><td>A commercial contact and a <strong>technical contact</strong> who can act on feed issues.</td><td class="req">required</td></tr>
+              <tr><td class="k">No live feed yet?</td><td>Send a library of transcoded VOD files + a schedule. Asiko can build the linear channel for you (playout engine) and insert the ad markers.</td><td class="opt">optional</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout">
+          <p>The one thing that most affects your revenue: send a <strong>clean feed with SCTE-35</strong>, or <strong>reserved pods</strong>. A fully baked-in feed can't be measured or optimised on our side, so it earns the least (see §3).</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="secnum">03</div>
+      <div class="secbody">
+        <h2>How you get paid</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Your feed</th><th>Who sells the ads</th><th>Your revenue</th></tr></thead>
+            <tbody>
+              <tr><td class="k">Clean feed + SCTE-35<br><span class="opt">or files + schedule</span></td><td>Asiko — our ad server fills every break (direct, private marketplace and open-exchange demand)</td><td>A <strong>revenue share of the net</strong> your channel generates. Typical range is <strong>content owner 50–70% / Asiko 30–50%</strong>, set by how much the channel drives viewing and by exclusivity. Paid monthly with a statement: impressions, fill, eCPM and your share.</td></tr>
+              <tr><td class="k">Reserved pods</td><td>Both — you fill your slots, Asiko fills the slots you mark for us</td><td>You keep <strong>100% of your own pods</strong>. Asiko keeps its reserved pods; an override on your pods may apply. You also get a monthly statement for the Asiko-filled portion.</td></tr>
+              <tr><td class="k">Baked-in ads</td><td>You — Asiko can't address your ads</td><td>Either an <strong>audited revenue share</strong> on your reported impressions (with an audit clause), or a <strong>flat monthly carriage fee</strong>. No performance upside on the ad side.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><strong>CDN delivery cost</strong> (serving your channel to viewers) is carried by Asiko and factored into the split. Direct sponsorship that Asiko sells around your channel — a presenting sponsor, guide placement — is additional and not shared.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="secnum">04</div>
+      <div class="secbody">
+        <h2>What happens after you submit</h2>
+        <ol class="steps">
+          <li><b>Review &amp; agreement</b> — we confirm the feed spec, ad policy and rights, and sign a short listing agreement.</li>
+          <li><b>Normalise</b> — we pull your HLS, condition it to one profile, and validate or add the SCTE-35 markers. Your feed is not re-encoded end to end unless the profile is inconsistent.</li>
+          <li><b>Test channel</b> — your channel runs on an Asiko test environment, end to end, with a test ad break. You get a link to review it.</li>
+          <li><b>Your sign-off</b> — you confirm playback, branding, guide data and ad placement look right.</li>
+          <li><b>Go live</b> — the channel gets its number and guide slot on Asiko. Reporting starts from day one; first statement at the end of the month.</li>
+        </ol>
+        <p>Typical time from a complete submission to a live channel is <strong>days, not weeks</strong>, when the feed is clean and the paperwork is quick.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="secnum">05</div>
+      <div class="secbody">
+        <h2>Send it in</h2>
+        <p>Email the §2 items to your Asiko contact at <strong>Media Icons Africa</strong>. Not sure your feed is ready? Send what you have — the feed URL and EPG are enough for us to tell you what's missing.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><b>Asiko TV</b> — List Your Channel</p>
+    <p>Media Icons Africa · partner onboarding pack · v1, 6 September 2026</p>
+  </footer>
+</div>

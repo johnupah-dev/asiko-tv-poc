@@ -1,0 +1,518 @@
+<title>asiko.africa Design Spec</title>
+<meta name="description" content="How the Asiko TV streaming app should look and behave — identity, layout, components and device matrix, derived from asiko.live." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+
+<style>
+  /* Asiko TV — committed dark brand world, tokens lifted verbatim from asiko.live */
+  :root {
+    --bg:          #0a0a0c;
+    --bg-soft:     #0f0f12;
+    --panel:       #17171b;
+    --panel-2:     #1e1e23;
+    --line:        rgba(216, 169, 75, 0.16);
+    --line-strong: rgba(216, 169, 75, 0.34);
+    --gold:        #d8a94b;
+    --gold-bright: #f3cd7e;
+    --gold-deep:   #a8792c;
+    --gold-wash:   rgba(216, 169, 75, 0.10);
+    --white:       #f7f5f0;
+    --muted:       #a7a4ac;
+    --muted-2:     #716f78;
+    --red:         #df3b34;
+
+    --r-sm: 6px; --r-md: 10px; --r-lg: 18px; --pill: 999px;
+
+    --display: "Poppins", "Segoe UI", system-ui, sans-serif;
+    --body: "Inter", "Segoe UI", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+
+    --measure: 66ch;
+    --s-1: clamp(.8rem, .78rem + .1vw, .86rem);
+    --s0: clamp(.95rem, .92rem + .15vw, 1.02rem);
+    --s1: clamp(1.1rem, 1.02rem + .4vw, 1.3rem);
+    --s2: clamp(1.4rem, 1.2rem + .8vw, 1.9rem);
+    --s3: clamp(1.9rem, 1.5rem + 1.8vw, 3rem);
+    --s4: clamp(2.6rem, 1.9rem + 3.4vw, 4.6rem);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--white);
+    font-family: var(--body);
+    font-size: var(--s0);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 74rem;
+    margin: 0 auto;
+    padding: clamp(1.4rem, 1rem + 3vw, 4rem) clamp(1.1rem, .6rem + 3vw, 3.4rem) 6rem;
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead { border-bottom: 1px solid var(--line-strong); padding-bottom: 2rem; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: .6rem;
+    font-family: var(--mono);
+    font-size: var(--s-1);
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 1.2rem;
+  }
+  .eyebrow::before { content: ""; width: 1.6rem; height: 1px; background: var(--gold); }
+  h1 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: var(--s4);
+    line-height: 1.0;
+    letter-spacing: -.02em;
+    text-wrap: balance;
+    margin: 0 0 .7rem;
+  }
+  h1 .accent { color: var(--gold); }
+  .standfirst {
+    font-size: var(--s1);
+    color: var(--muted);
+    max-width: 52ch;
+    margin: 0 0 2rem;
+  }
+  .metagrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: 1rem 2rem;
+  }
+  .metagrid div { display: flex; flex-direction: column; gap: .2rem; }
+  .metagrid dt {
+    font-family: var(--mono); font-size: .68rem; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--muted-2);
+  }
+  .metagrid dd { margin: 0; color: var(--white); }
+
+  /* ---------- section rhythm ---------- */
+  main { margin-top: 3.4rem; display: flex; flex-direction: column; gap: 3.6rem; }
+  section { display: grid; grid-template-columns: 3.4rem minmax(0, 1fr); gap: 0 1.6rem; }
+  @media (max-width: 48rem) { section { grid-template-columns: 1fr; gap: .5rem; } }
+
+  .secnum {
+    font-family: var(--mono);
+    font-size: var(--s-1);
+    color: var(--gold-deep);
+    padding-top: .5rem;
+  }
+  .secbody { min-width: 0; }
+  .secbody > * + * { margin-top: 1.1rem; }
+  .secbody > h2 + * { margin-top: 1.3rem; }
+
+  h2 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: var(--s2);
+    line-height: 1.12;
+    letter-spacing: -.01em;
+    text-wrap: balance;
+    margin: 0;
+    padding-bottom: .7rem;
+    border-bottom: 1px solid var(--line);
+  }
+  h3 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: var(--s0);
+    letter-spacing: .005em;
+    margin: 1.6rem 0 0;
+    color: var(--gold-bright);
+  }
+  p { margin: 0; max-width: var(--measure); }
+  .lede { font-size: var(--s1); color: var(--white); max-width: 58ch; }
+  strong { font-weight: 600; color: var(--white); }
+  a { color: var(--gold); }
+
+  ul { margin: 0; padding: 0; list-style: none; max-width: var(--measure); display: flex; flex-direction: column; gap: .55rem; }
+  ul li { padding-left: 1.3rem; position: relative; }
+  ul li::before {
+    content: ""; position: absolute; left: .1rem; top: .7em;
+    width: .4rem; height: .4rem; background: var(--gold); transform: rotate(45deg);
+  }
+
+  .callout {
+    background: var(--gold-wash);
+    border: 1px solid var(--line-strong);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 var(--r-sm) var(--r-sm) 0;
+    padding: 1rem 1.15rem;
+    max-width: var(--measure);
+  }
+
+  /* ---------- tables ---------- */
+  .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--bg-soft); }
+  table { border-collapse: collapse; width: 100%; font-size: var(--s-1); min-width: 33rem; }
+  th, td { text-align: left; padding: .68rem .9rem; vertical-align: top; border-bottom: 1px solid var(--line); }
+  thead th {
+    font-family: var(--mono); font-weight: 500; font-size: .68rem;
+    letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
+    background: var(--panel);
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  td.k { color: var(--gold-bright); font-weight: 500; white-space: nowrap; }
+  .swatch { display: inline-block; width: .95rem; height: .95rem; border-radius: 3px; border: 1px solid var(--line-strong); vertical-align: -2px; margin-right: .45rem; }
+  code { font-family: var(--mono); font-size: .82em; background: var(--panel-2); border: 1px solid var(--line); border-radius: 4px; padding: .06rem .35rem; color: var(--gold-bright); }
+
+  /* ---------- screen sketches ---------- */
+  .sketches { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 1rem; margin-top: 1rem; }
+  .sk {
+    border: 1px solid var(--line-strong);
+    border-radius: var(--r-md);
+    overflow: hidden;
+    background: #000;
+    font-family: var(--display);
+  }
+  .sk-cap {
+    font-family: var(--mono); font-size: .66rem; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--muted); padding: .55rem .7rem; background: var(--panel); border-bottom: 1px solid var(--line);
+  }
+  .sk-stage { position: relative; aspect-ratio: 16/10; background: linear-gradient(140deg, #241a0c, #0a0a0c 70%); }
+  .sk-topbar { position: absolute; inset: 0 0 auto 0; display: flex; align-items: center; justify-content: space-between; padding: .5rem .7rem; font-size: .6rem; color: var(--white); }
+  .sk-logo { font-weight: 800; letter-spacing: .12em; }
+  .sk-logo b { color: var(--gold); }
+  .sk-live { color: var(--red); font-family: var(--mono); font-size: .58rem; letter-spacing: .06em; }
+  .sk-bug { position: absolute; top: 2.1rem; right: .7rem; display: flex; gap: .35rem; align-items: center; background: rgba(10,10,12,.6); border: 1px solid var(--line-strong); border-left: 2px solid var(--gold); border-radius: 4px; padding: .25rem .45rem; font-size: .58rem; }
+  .sk-bug b { color: var(--gold); }
+  .sk-lt { position: absolute; left: .8rem; bottom: 2.6rem; display: flex; flex-direction: column; gap: .25rem; }
+  .sk-tag { font-size: .5rem; letter-spacing: .12em; background: var(--gold); color: #0a0a0c; padding: .1rem .3rem; align-self: flex-start; border-radius: 2px; }
+  .sk-now { font-size: .78rem; font-weight: 600; }
+  .sk-next { font-size: .56rem; color: var(--muted); }
+  .sk-rail { position: absolute; inset: auto 0 0 0; display: flex; gap: 2px; background: var(--line); border-top: 1px solid var(--line-strong); }
+  .sk-ch { flex: 1; background: var(--panel); padding: .3rem .35rem; display: flex; flex-direction: column; gap: .1rem; }
+  .sk-ch.on { background: var(--panel-2); border-top: 2px solid var(--gold); }
+  .sk-ch span:first-child { font-size: .55rem; font-weight: 600; }
+  .sk-ch span:last-child { font-size: .48rem; color: var(--muted-2); font-family: var(--mono); letter-spacing: .05em; text-transform: uppercase; }
+
+  .sk-ad { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: .3rem; padding: 1rem; background: linear-gradient(150deg, #1a1204, #0a0a0c); }
+  .sk-ad .m { font-family: var(--mono); font-size: .55rem; color: var(--muted); letter-spacing: .08em; }
+  .sk-ad .brand { font-size: 1.4rem; font-weight: 800; color: var(--gold); line-height: 1; }
+  .sk-ad .line { font-size: .62rem; color: var(--white); }
+  .sk-ring { position: absolute; top: .9rem; right: .9rem; width: 1.6rem; height: 1.6rem; border-radius: 50%; border: 2px solid var(--line-strong); border-top-color: var(--gold); }
+
+  .sk-guide { position: absolute; inset: 0; display: flex; flex-direction: column; padding: .5rem; gap: 2px; background: rgba(4,4,6,.96); }
+  .sk-grow { display: grid; grid-template-columns: 3.2rem 1fr; gap: 2px; }
+  .sk-glabel { background: var(--panel); border-left: 2px solid var(--gold); padding: .25rem .3rem; font-size: .5rem; font-weight: 600; }
+  .sk-gtrack { position: relative; display: flex; gap: 2px; }
+  .sk-gcell { flex: 1; background: var(--panel); padding: .25rem .3rem; font-size: .48rem; color: var(--muted); }
+  .sk-gcell.on { background: var(--gold-wash); color: var(--white); box-shadow: inset 2px 0 0 var(--gold); }
+  .sk-gnow { position: absolute; top: 0; bottom: 0; left: 46%; width: 1px; background: var(--red); }
+
+  footer {
+    margin-top: 4.4rem; padding-top: 1.4rem;
+    border-top: 1px solid var(--line-strong);
+    font-size: var(--s-1); color: var(--muted);
+    display: flex; flex-direction: column; gap: .3rem;
+  }
+  footer b { color: var(--gold-bright); font-family: var(--display); font-weight: 600; }
+
+  :focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  @media (prefers-reduced-motion: no-preference) { a { transition: color .15s ease; } }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <p class="eyebrow">Asiko TV · Product Design Spec</p>
+    <h1>What <span class="accent">asiko.africa</span> should look like</h1>
+    <p class="standfirst">The streaming app — identity, layout, components and device behaviour — built on the identity already established at asiko.live.</p>
+    <dl class="metagrid">
+      <div><dt>Property</dt><dd>asiko.africa — the streaming product</dd></div>
+      <div><dt>Sibling</dt><dd>asiko.live — sales funnel (live)</dd></div>
+      <div><dt>Relationship</dt><dd>Same brand, different job</dd></div>
+      <div><dt>Source of truth</dt><dd>asiko.live stylesheet + brand</dd></div>
+      <div><dt>Tagline</dt><dd>The Soul of Africa</dd></div>
+      <div><dt>Positioning</dt><dd>One Africa. One Market. One Destination.</dd></div>
+    </dl>
+  </header>
+
+  <main>
+    <section>
+      <div class="secnum">01</div>
+      <div class="secbody">
+        <h2>Same brand, different job</h2>
+        <p class="lede">asiko.live sells. asiko.africa is watched. They must be unmistakably the same company and structurally nothing alike.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Carries across (identical)</th><th>Diverges (by design)</th></tr></thead>
+            <tbody>
+              <tr><td>Logo, wordmark, "The Soul of Africa" lockup</td><td>Layout — the app is chrome-light, the funnel is a scrolling marketing page</td></tr>
+              <tr><td>Palette — near-black ground, gold primary, warm white text</td><td>Density — the app is a 10-foot / lean-back surface, not a reading page</td></tr>
+              <tr><td>Type — Poppins display, Inter body</td><td>Interaction — channel surfing, a guide, an ad-break state; no CTAs to "sign up"</td></tr>
+              <tr><td>Voice — pan-African, warm, direct</td><td>Motion — minimal and functional, not promotional</td></tr>
+              <tr><td>Shape language — soft radii, pill buttons</td><td>No login, no marketing sections, no footer nav</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="secnum">02</div>
+      <div class="secbody">
+        <h2>Identity — locked to asiko.live</h2>
+
+        <h3>Colour</h3>
+        <p>Lifted verbatim from the asiko.live stylesheet. The app uses the same token names.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Token</th><th>Value</th><th>Role in the app</th></tr></thead>
+            <tbody>
+              <tr><td class="k">--bg</td><td><span class="swatch" style="background:#0a0a0c"></span><code>#0a0a0c</code></td><td>Player letterbox, base ground</td></tr>
+              <tr><td class="k">--bg-soft</td><td><span class="swatch" style="background:#0f0f12"></span><code>#0f0f12</code></td><td>Guide backdrop, sheets</td></tr>
+              <tr><td class="k">--panel</td><td><span class="swatch" style="background:#17171b"></span><code>#17171b</code></td><td>Channel rail cards, guide cells</td></tr>
+              <tr><td class="k">--panel-2</td><td><span class="swatch" style="background:#1e1e23"></span><code>#1e1e23</code></td><td>Active card, hover, pressed</td></tr>
+              <tr><td class="k">--gold</td><td><span class="swatch" style="background:#d8a94b"></span><code>#d8a94b</code></td><td>Primary accent — active channel, focus ring, key numbers, LIVE-adjacent marks</td></tr>
+              <tr><td class="k">--gold-bright</td><td><span class="swatch" style="background:#f3cd7e"></span><code>#f3cd7e</code></td><td>Hover state of gold, headings within body</td></tr>
+              <tr><td class="k">--gold-deep</td><td><span class="swatch" style="background:#a8792c"></span><code>#a8792c</code></td><td>Pressed gold, section numerals</td></tr>
+              <tr><td class="k">--white</td><td><span class="swatch" style="background:#f7f5f0"></span><code>#f7f5f0</code></td><td>All reading text and titles</td></tr>
+              <tr><td class="k">--muted</td><td><span class="swatch" style="background:#a7a4ac"></span><code>#a7a4ac</code></td><td>Secondary text — NEXT, timestamps, genres</td></tr>
+              <tr><td class="k">--muted-2</td><td><span class="swatch" style="background:#716f78"></span><code>#716f78</code></td><td>Tertiary — labels, disabled</td></tr>
+              <tr><td class="k">--red</td><td><span class="swatch" style="background:#df3b34"></span><code>#df3b34</code></td><td>Reserved: the LIVE dot and the guide "now" line only</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout">
+          <p>Gold is a UI and large-text colour, never body copy. Reading text is always <code>--white</code> on <code>--bg</code>. Red is reserved for "live now" signalling — nothing else.</p>
+        </div>
+
+        <h3>Typography</h3>
+        <ul>
+          <li><strong>Display — Poppins.</strong> Weights 800 for screen titles and sponsor names, 700 for section heads, 600 for channel names and buttons. Tight tracking (<code>-0.02em</code>) at large sizes, as on asiko.live.</li>
+          <li><strong>Body / UI — Inter.</strong> 400–600. Programme titles, guide text, metadata.</li>
+          <li><strong>Data — monospace.</strong> The on-screen clock, countdowns and timecodes use a tabular mono so digits don't jitter.</li>
+          <li>Both Poppins and Inter are open-licence (OFL) — no licensing cost, safe to embed in web and TV builds.</li>
+        </ul>
+
+        <h3>Logo &amp; shape</h3>
+        <ul>
+          <li>Full lockup — gold angular "A" mark + <strong>ASIKO</strong> wordmark + <strong>THE SOUL OF AFRICA</strong> under-line, on dark only.</li>
+          <li>The "A" mark alone is the app icon, the favicon, and the small-space / TV-tile mark.</li>
+          <li>Clear space around the lockup = the height of the "A". Minimum wordmark height 16px web, 28px TV.</li>
+          <li>Radii <code>6 / 10 / 18px</code>; buttons and badges are full pills (<code>999px</code>), matching asiko.live.</li>
+        </ul>
+
+        <h3>Voice</h3>
+        <p>Warm, pan-African, plain. "One Africa. One Market. One Destination." · "The Soul of Africa." · "Built for how Africa actually watches." On-screen text is short and declarative — channel names, programme titles, "UP NEXT", "AD BREAK", never marketing lines inside the player.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="secnum">03</div>
+      <div class="secbody">
+        <h2>The screens</h2>
+        <p>Four states. Everything else is a variation of these.</p>
+
+        <div class="sketches">
+          <div class="sk">
+            <div class="sk-cap">Watch — the default</div>
+            <div class="sk-stage">
+              <div class="sk-topbar"><span class="sk-logo">ASIKO<b>&nbsp;TV</b></span><span class="sk-live">● LIVE 19:04</span></div>
+              <div class="sk-bug"><b>03</b> TERRA LIVE</div>
+              <div class="sk-lt">
+                <span class="sk-tag">NOW</span>
+                <span class="sk-now">The Slow Forest</span>
+                <span class="sk-next">NEXT 20:00 · Reef Watch</span>
+              </div>
+              <div class="sk-rail">
+                <div class="sk-ch"><span>01 PRIME REEL</span><span>Cinema</span></div>
+                <div class="sk-ch"><span>02 TOONWAVE</span><span>Animation</span></div>
+                <div class="sk-ch on"><span>03 TERRA LIVE</span><span>Nature</span></div>
+                <div class="sk-ch"><span>04 NIGHTFALL</span><span>Sci-Fi</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sk">
+            <div class="sk-cap">Channel guide</div>
+            <div class="sk-stage">
+              <div class="sk-guide">
+                <div class="sk-grow"><div class="sk-glabel">01 PRIME</div><div class="sk-gtrack"><div class="sk-gcell">Backlot Stories</div><div class="sk-gcell on">Steel Horizon</div><div class="sk-gcell">Shorts Block</div><div class="sk-gnow"></div></div></div>
+                <div class="sk-grow"><div class="sk-glabel">02 TOON</div><div class="sk-gtrack"><div class="sk-gcell">Bouncing Hour</div><div class="sk-gcell on">Hand-Drawn Heroes</div><div class="sk-gcell">Anime Block</div><div class="sk-gnow"></div></div></div>
+                <div class="sk-grow"><div class="sk-glabel">03 TERRA</div><div class="sk-gtrack"><div class="sk-gcell">Tidepools</div><div class="sk-gcell on">The Slow Forest</div><div class="sk-gcell">Reef Watch</div><div class="sk-gnow"></div></div></div>
+                <div class="sk-grow"><div class="sk-glabel">04 NIGHT</div><div class="sk-gtrack"><div class="sk-gcell">Orbital Decay</div><div class="sk-gcell on">The Ganymede Job</div><div class="sk-gcell">Signal Lost</div><div class="sk-gnow"></div></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sk">
+            <div class="sk-cap">Ad break</div>
+            <div class="sk-stage">
+              <div class="sk-ad">
+                <div class="sk-ring"></div>
+                <span class="m">AD · 1 OF 2 · VIA DIRECT SOLD</span>
+                <span class="brand">AXIS ATHLETIC</span>
+                <span class="line">Move like it's already tomorrow.</span>
+                <span class="m" style="margin-top:.4rem">Presenting sponsor — Asiko Prime</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="sk">
+            <div class="sk-cap">Tuning — channel change</div>
+            <div class="sk-stage">
+              <div class="sk-ad" style="background:#0a0a0c;align-items:center;text-align:center">
+                <span class="sk-logo" style="font-size:.9rem">ASIKO<b>&nbsp;TV</b></span>
+                <span class="m" style="letter-spacing:.2em">TUNING · 04 NIGHTFALL</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3>Watch (default)</h3>
+        <ul>
+          <li><strong>Full-bleed player</strong> on <code>--bg</code>. No persistent controls — they fade in on interaction and auto-hide after 3s.</li>
+          <li><strong>Top bar:</strong> logo mark left · LIVE dot + network clock centre · Guide + audio toggle right.</li>
+          <li><strong>Channel bug</strong> top-right: channel number in gold, name in white, a 2px gold left rule. Persistent, low opacity.</li>
+          <li><strong>Lower-third:</strong> NOW tag (gold), programme title (Poppins 600), a thin progress line, then NEXT in muted with its start time.</li>
+          <li><strong>Channel rail</strong> along the bottom: one card per channel — number, name, genre, now-playing line. Active card lifts to <code>--panel-2</code> with a gold top border. Horizontal scroll / D-pad.</li>
+          <li>Optional <strong>sponsor strip</strong> (see §4) sits under the rail, not over the video.</li>
+        </ul>
+
+        <h3>Channel guide</h3>
+        <ul>
+          <li>Slides up over the player (player keeps running, ducked). <code>--bg-soft</code> at 96%.</li>
+          <li>Channels down the left (<code>--panel</code> label cells, gold left rule); programmes across in a time grid.</li>
+          <li>The live cell is <code>--gold-wash</code> with an inset gold rule. A single <code>--red</code> vertical "now" line crosses all rows.</li>
+          <li>Select a cell → tune to that channel and dismiss. Escape / Back closes.</li>
+        </ul>
+
+        <h3>Ad break</h3>
+        <ul>
+          <li>Full-screen branded slate — <strong>not</strong> a black gap. Gradient from <code>--gold-deep</code>-tinted black to <code>--bg</code>.</li>
+          <li>Top line (mono, muted): <code>AD · n OF N · VIA {DIRECT SOLD | PROGRAMMATIC | HOUSE}</code> — names the demand path, which is the monetisation story.</li>
+          <li>Sponsor name huge in gold (Poppins 800), one line of copy in white, a deal reference in muted.</li>
+          <li>Countdown ring top-right in gold. On completion, "Tuning" ident, then rejoin live.</li>
+          <li>This screen is the seam where real SSAI creative renders later — same layout, real ad.</li>
+        </ul>
+
+        <h3>Tuning &amp; edge states</h3>
+        <ul>
+          <li><strong>Channel change:</strong> ~600ms — black, logo mark, "TUNING · {NN NAME}".</li>
+          <li><strong>First load:</strong> logo mark centred, "Bringing Africa online…", then straight into the last-watched channel.</li>
+          <li><strong>Signal lost / offline:</strong> muted card, "Reconnecting…", auto-retry. Never a browser error.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="secnum">04</div>
+      <div class="secbody">
+        <h2>Components</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Component</th><th>Anatomy &amp; tokens</th><th>Behaviour</th></tr></thead>
+            <tbody>
+              <tr><td class="k">Top bar</td><td>Logo mark · centre clock (mono) · Guide + sound buttons (secondary pill, <code>--panel</code> / <code>--line</code>)</td><td>Auto-hide with controls; always reachable on Menu/Up</td></tr>
+              <tr><td class="k">Channel bug</td><td><code>--gold</code> number · <code>--white</code> name · 2px gold left rule · <code>rgba(bg,.6)</code> fill</td><td>Persistent; fades to 40% after 5s idle</td></tr>
+              <tr><td class="k">Lower-third</td><td>NOW pill (gold/ink) · title Poppins 600 · 2px progress track (gold fill) · NEXT muted</td><td>Updates on programme boundary; slides on channel change</td></tr>
+              <tr><td class="k">Rail card</td><td><code>--panel</code> → active <code>--panel-2</code> + 2px gold top border · number / name / genre / now-line</td><td>Focus = gold ring; click / OK tunes; horizontal scroll or D-pad</td></tr>
+              <tr><td class="k">Guide cell</td><td><code>--panel</code>; live = <code>--gold-wash</code> + inset gold rule; width ∝ duration</td><td>Focusable; OK tunes + closes guide</td></tr>
+              <tr><td class="k">Now-line</td><td>1px <code>--red</code>, full height of the grid</td><td>Advances in real time; the only red in the product</td></tr>
+              <tr><td class="k">Ad slate</td><td>Gradient ground · mono meta line · sponsor Poppins 800 gold · gold countdown ring</td><td>Locks input except audio; rejoins on complete</td></tr>
+              <tr><td class="k">Sponsor strip</td><td>Under the rail · "SPONSORED" mono label · brand + one line · house style when unsold</td><td>Rotates on a timer; never overlays video</td></tr>
+              <tr><td class="k">Buttons</td><td>Primary = gold pill, ink text (rare in-app). Secondary = <code>--panel</code> pill, <code>--white</code> text, <code>--line</code> border</td><td>Focus = gold ring, offset 2px</td></tr>
+              <tr><td class="k">Badges</td><td>LIVE = <code>--red</code> dot + label. Genre = mono, <code>--muted-2</code>, uppercase, letter-spaced</td><td>Static</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="secnum">05</div>
+      <div class="secbody">
+        <h2>Device matrix</h2>
+        <p>Asiko is "every screen." The layout re-flows; the identity does not.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Surface</th><th>Layout</th><th>Input &amp; notes</th></tr></thead>
+            <tbody>
+              <tr><td class="k">Desktop web</td><td>Player fills the viewport; rail along the bottom; guide slides up</td><td>Mouse + keys 1–9, G guide, M mute, ← → channel, F fullscreen. This is the POC today.</td></tr>
+              <tr><td class="k">Tablet</td><td>Same as desktop; rail becomes a 2-row scroll; guide is full-screen</td><td>Touch; tap video to reveal controls</td></tr>
+              <tr><td class="k">Mobile (portrait)</td><td>Player top (16:9), then NOW/NEXT, then a vertical channel list; guide is a full-screen sheet</td><td>Touch; swipe up = guide, swipe L/R on player = change channel</td></tr>
+              <tr><td class="k">TV / 10-foot</td><td>Player full-frame; rail overlays on Down; guide on Up/Menu. Type +2 steps up; 5% safe-area inset</td><td>D-pad only. <strong>Focus is always a visible gold ring or a gold-bordered card</strong> — never rely on colour-fill alone. Roku / Fire TV / Android TV.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="secnum">06</div>
+      <div class="secbody">
+        <h2>Motion &amp; accessibility</h2>
+        <h3>Motion — functional only</h3>
+        <ul>
+          <li>Controls / lower-third: 150ms fade + 4px rise.</li>
+          <li>Guide: 220ms slide-up.</li>
+          <li>Ad countdown ring: linear, real-time.</li>
+          <li>Now-line: continuous, no easing.</li>
+          <li>No decorative motion, no parallax, no auto-playing hero flourishes — that lives on asiko.live, not in the player. Honour <code>prefers-reduced-motion</code>: cut all of the above to instant.</li>
+        </ul>
+        <h3>Accessibility</h3>
+        <ul>
+          <li>Body text is <code>--white</code> on <code>--bg</code> — ~17:1, well past AA. Gold on black clears AA for large text and UI.</li>
+          <li>Every focusable element shows a <strong>2px gold ring, 2px offset</strong>. TV focus additionally moves a gold-bordered card — state is never colour-only.</li>
+          <li><strong>Captions / subtitles</strong> toggle in the player; honour the platform caption style on TV.</li>
+          <li>Support an <strong>audio-description</strong> track where the source carries one.</li>
+          <li>Full keyboard and D-pad parity; the guide is a proper focus trap while open.</li>
+          <li>Live region announces channel changes and "Ad break — 30 seconds".</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="secnum">07</div>
+      <div class="secbody">
+        <h2>From the POC to this</h2>
+        <p>The proof of concept (<code>github.com/johnupah-dev/asiko-tv-poc</code>) already has the structure. It needs a re-skin, not a rebuild.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>In the POC now</th><th>Change to hit this spec</th></tr></thead>
+            <tbody>
+              <tr><td>"Control-room" green accent <code>#37D497</code></td><td>Swap for <code>--gold #d8a94b</code> across bug, active card, focus, numbers</td></tr>
+              <tr><td>Barlow Semi Condensed + IBM Plex Sans</td><td>Poppins (display) + Inter (body); keep mono for the clock</td></tr>
+              <tr><td>"ASIKO TV" text wordmark</td><td>Real logo lockup (mark + wordmark + "The Soul of Africa")</td></tr>
+              <tr><td>Placeholder channel names (PRIME REEL…)</td><td>Real Asiko bouquet names + per-channel logos</td></tr>
+              <tr><td>Guide grid — functional</td><td>Restyle to spec (gold-wash live cell, red now-line, label rules)</td></tr>
+              <tr><td>Ad slate — generic dark</td><td>Gold-gradient slate + "VIA {demand path}" meta line</td></tr>
+              <tr><td>Desktop only</td><td>Add mobile-portrait and TV/10-foot layouts</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="secnum">08</div>
+      <div class="secbody">
+        <h2>Assets to supply</h2>
+        <ul>
+          <li><strong>Logo</strong> — SVG of the full lockup and the "A" mark alone, on transparent.</li>
+          <li><strong>App icon set</strong> — 1024px master of the "A" mark on <code>--bg</code>; web favicon; TV tile art (Roku/Fire/Android sizes).</li>
+          <li><strong>Channel logos</strong> — one per channel, SVG or PNG on transparent, safe on dark.</li>
+          <li><strong>Slate / ident</strong> — a still "Asiko TV" holding frame for signal loss and pre-roll.</li>
+          <li><strong>Sponsor placeholder</strong> — the house-promo creative shown when an avail is unsold.</li>
+          <li><strong>Fonts</strong> — none needed; Poppins + Inter are free (OFL), embedded from Google Fonts on web and bundled in TV builds.</li>
+          <li><strong>Colour</strong> — none needed; tokens above are final and match asiko.live.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><b>asiko.africa</b> — streaming app design spec</p>
+    <p>Identity sourced from asiko.live · POC reference: github.com/johnupah-dev/asiko-tv-poc</p>
+    <p>Prepared for Media Icons Africa · 5 September 2026</p>
+  </footer>
+</div>
