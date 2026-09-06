@@ -340,8 +340,7 @@ button { font-family: inherit; }
 /* ---------- channel rail ---------- */
 .rail {
   display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 1fr;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
   gap: 2px;
   background: var(--line-soft);
   border-top: 1px solid var(--line);
@@ -615,8 +614,8 @@ button { font-family: inherit; }
 }
 .btn { border-radius: 999px; }
 .btn-accent, .btn.is-live, .lt-tag { color: #0a0a0c; }
-.ch { min-width: 138px; }
-.ch-name { font-size: 13px; letter-spacing: 0.03em; }
+.ch { min-width: 0; padding: 10px 10px 12px; }
+.ch-name { font-size: 12px; letter-spacing: 0.02em; }
 .on-air { letter-spacing: 0.14em; }
 
 /* ---------- responsive ---------- */
@@ -627,8 +626,8 @@ button { font-family: inherit; }
   .masthead-mid { order: 3; width: 100%; }
   .lt-title { font-size: 18px; }
   .bug { top: 10px; right: 10px; }
-  .rail { grid-auto-flow: column; }
-  .ch { min-width: 132px; }
+  .rail { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 44%; }
+  .ch { min-width: 0; }
   .rev-split { min-width: 200px; }
 }
 
