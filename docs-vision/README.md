@@ -17,6 +17,7 @@ claude.ai; the PDFs and Word files are the same content for sending by email.
 | 09 | **FAST Channel Creation Checklist** -- the 11 steps to build a FAST channel + how Roku, Fire TV, Samsung, LG, Pluto, Tubi and the aggregators work | `09-fast-channel-creation-checklist.html` · `Asiko TV - FAST Channel Creation Checklist.pdf` | Prospective channel owners |
 | 10 | **POC to MVP Transition** -- workstreams, sequence, in/out of scope, exit criteria for making the POC real | `10-poc-to-mvp-transition.html` · `Asiko TV - POC to MVP Transition.pdf` | Internal, Enveu |
 | 11 | **Properties & Positioning** -- how FOA, asiko.africa and asiko.live fit together, and the positioning vs AVO TV | `11-properties-and-positioning.html` · `Asiko TV - Properties and Positioning.pdf` | Investors, partners |
+| 12 | **Strategic SWOT** -- strengths, weaknesses, opportunities, threats across competition, voting, fresh channels, FAST training, ad-server, data cost, why free, media-entrepreneurship impact | `12-strategic-swot.html` · `Asiko TV - Strategic SWOT.pdf` | Investors, board, strategy |
 
 ## Notes
 
