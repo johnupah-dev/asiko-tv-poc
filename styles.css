@@ -608,13 +608,26 @@ button { font-family: inherit; }
 
 /* ---------- responsive ---------- */
 @media (max-width: 720px) {
-  .masthead { flex-wrap: wrap; gap: 8px 12px; }
+  .brand-tag { display: none; }
+  .brand { padding: 5px 9px; }
+  .app { height: auto; min-height: 100svh; display: block; }
+  .masthead { flex-wrap: wrap; gap: 7px 8px; padding: 8px 12px; }
+  .masthead-actions { gap: 6px; flex-wrap: wrap; }
+  .masthead-actions .btn { padding: 6px 9px; font-size: 10px; letter-spacing: 0.06em; }
   .masthead-mid { order: 3; width: 100%; }
-  .lt-title { font-size: 18px; }
-  .bug { top: 10px; right: 10px; }
-  .rail { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 44%; }
-  .ch { min-width: 0; }
-  .rev-split { min-width: 200px; }
+  .clock { font-size: 12px; }
+  .stage { position: sticky; top: 0; z-index: 5; aspect-ratio: 16 / 9; }
+  #video { object-fit: cover; }
+  .bug { top: 8px; right: 8px; max-width: 62vw; }
+  .bug-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .lower-third { left: 10px; right: 10px; bottom: 10px; max-width: none; }
+  .lt-title { font-size: 16px; }
+  .rail { grid-template-columns: repeat(2, 1fr); grid-auto-flow: row; grid-auto-columns: auto; gap: 1px; overflow-x: hidden; }
+  .ch { min-width: 0; padding: 10px 12px 12px; }
+  .ch-name { font-size: 12.5px; }
+  .revbar { flex-wrap: wrap; min-height: 0; }
+  .rev-stat { flex: 1 1 45%; min-width: 0; }
+  .rev-split, .companion { flex-basis: 100%; min-width: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
