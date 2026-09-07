@@ -1,0 +1,244 @@
+<title>Asiko Properties & Positioning</title>
+<meta name="description" content="How FAST-On-Africa, asiko.africa and asiko.live fit together — each one's job, audience and revenue — and how the whole is positioned against AVO TV." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+
+<style>
+  :root {
+    --bg:#0a0a0c; --bg-soft:#0f0f12; --panel:#17171b; --panel-2:#1e1e23;
+    --line:rgba(216,169,75,0.16); --line-strong:rgba(216,169,75,0.34);
+    --gold:#d8a94b; --gold-bright:#f3cd7e; --gold-deep:#a8792c; --gold-wash:rgba(216,169,75,0.10);
+    --white:#f7f5f0; --muted:#a7a4ac; --muted-2:#716f78; --red:#df3b34; --green:#6fbf97; --blue:#6f9be8;
+    --r-sm:6px; --r-md:10px; --pill:999px;
+    --display:"Poppins","Segoe UI",system-ui,sans-serif;
+    --body:"Inter","Segoe UI",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+    --measure:68ch;
+    --s-1:clamp(.8rem,.78rem + .1vw,.86rem);
+    --s0:clamp(.95rem,.92rem + .15vw,1.02rem);
+    --s1:clamp(1.1rem,1.02rem + .4vw,1.28rem);
+    --s2:clamp(1.3rem,1.12rem + .7vw,1.7rem);
+    --s4:clamp(2.1rem,1.6rem + 2.6vw,3.4rem);
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--white); font-family:var(--body); font-size:var(--s0); line-height:1.6; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:66rem; margin:0 auto; padding:clamp(1.4rem,1rem + 3vw,4rem) clamp(1.1rem,.6rem + 3vw,3.4rem) 6rem; }
+  .lockup { display:inline-flex; align-items:center; gap:10px; border:1px solid var(--line); border-radius:9px; padding:6px 13px 6px 9px; margin-bottom:1.5rem; }
+  .lockup svg { width:24px; height:24px; display:block; }
+  .lockup .w { font-family:var(--display); font-weight:700; font-size:16px; letter-spacing:.1em; }
+  .lockup .w b { font-weight:800; color:var(--gold); }
+  .lockup .t { display:block; font-family:var(--mono); font-size:8px; letter-spacing:.24em; text-transform:uppercase; color:var(--gold); margin-top:3px; }
+  .eyebrow { display:inline-flex; align-items:center; gap:.6rem; font-family:var(--mono); font-size:var(--s-1); letter-spacing:.18em; text-transform:uppercase; color:var(--gold); margin:0 0 1rem; }
+  .eyebrow::before { content:""; width:1.6rem; height:1px; background:var(--gold); }
+  h1 { font-family:var(--display); font-weight:800; font-size:var(--s4); line-height:1.04; letter-spacing:-.02em; text-wrap:balance; margin:0 0 .7rem; }
+  h1 .accent { color:var(--gold); }
+  .standfirst { font-size:var(--s1); color:var(--muted); max-width:56ch; margin:0 0 1.4rem; }
+  .masthead { border-bottom:1px solid var(--line-strong); padding-bottom:1.6rem; }
+
+  main { margin-top:2.6rem; display:flex; flex-direction:column; gap:2.6rem; }
+  section h2 { font-family:var(--display); font-weight:700; font-size:var(--s2); line-height:1.14; letter-spacing:-.01em; margin:0 0 1rem; padding-bottom:.6rem; border-bottom:1px solid var(--line); }
+  h3 { font-family:var(--display); font-weight:600; font-size:var(--s0); margin:1.4rem 0 .4rem; color:var(--gold-bright); }
+  p { margin:0 0 .8rem; max-width:var(--measure); }
+  .lede { font-size:var(--s1); color:var(--white); max-width:58ch; }
+  strong { font-weight:600; color:var(--white); }
+  a { color:var(--gold); }
+  code { font-family:var(--mono); font-size:.82em; background:var(--panel-2); border:1px solid var(--line); border-radius:4px; padding:.06rem .35rem; color:var(--gold-bright); }
+
+  .props { display:grid; grid-template-columns:repeat(auto-fit,minmax(16rem,1fr)); gap:1rem; }
+  .prop { border:1px solid var(--line); background:var(--bg-soft); border-radius:var(--r-md); padding:1.1rem 1.2rem; display:flex; flex-direction:column; gap:.5rem; }
+  .prop.eng { border-color:var(--line-strong); background:var(--gold-wash); }
+  .prop .name { font-family:var(--display); font-weight:700; font-size:var(--s1); color:var(--white); }
+  .prop .name b { color:var(--gold); font-weight:800; }
+  .prop .handle { font-family:var(--mono); font-size:.7rem; color:var(--muted-2); }
+  .prop dl { margin:.4rem 0 0; display:flex; flex-direction:column; gap:.5rem; }
+  .prop dt { font-family:var(--mono); font-size:.62rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted-2); }
+  .prop dd { margin:.1rem 0 0; font-size:var(--s-1); color:var(--muted); }
+  .prop dd strong { color:var(--white); }
+
+  figure { margin:1.4rem 0 0; }
+  .fig-frame { border:1px solid var(--line-strong); border-radius:var(--r-md); background:#060608; padding:1.1rem 1rem .5rem; overflow-x:auto; }
+  figure svg { display:block; width:100%; min-width:42rem; height:auto; color:var(--white); }
+  figcaption { font-size:var(--s-1); color:var(--muted); margin-top:.8rem; max-width:var(--measure); }
+
+  .callout { background:var(--gold-wash); border:1px solid var(--line-strong); border-left:3px solid var(--gold); border-radius:0 var(--r-sm) var(--r-sm) 0; padding:1rem 1.15rem; max-width:var(--measure); }
+  .callout p { margin:0; }
+
+  .table-wrap { overflow-x:auto; border:1px solid var(--line); border-radius:var(--r-md); background:var(--bg-soft); margin-top:.6rem; }
+  table { border-collapse:collapse; width:100%; font-size:var(--s-1); min-width:40rem; }
+  th,td { text-align:left; padding:.66rem .85rem; vertical-align:top; border-bottom:1px solid var(--line); }
+  thead th { font-family:var(--mono); font-weight:500; font-size:.64rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); background:var(--panel); }
+  tbody tr:last-child td { border-bottom:0; }
+  td.k { color:var(--gold-bright); font-weight:500; white-space:nowrap; }
+  .win td:first-child { color:var(--green); }
+
+  ul { margin:.4rem 0 .8rem; padding:0; list-style:none; max-width:var(--measure); display:flex; flex-direction:column; gap:.5rem; }
+  ul li { padding-left:1.2rem; position:relative; }
+  ul li::before { content:""; position:absolute; left:.05rem; top:.62em; width:.34rem; height:.34rem; background:var(--gold); transform:rotate(45deg); }
+
+  .lines { display:flex; flex-direction:column; gap:.7rem; max-width:var(--measure); }
+  .oneliner { border-left:2px solid var(--gold); padding-left:.9rem; }
+  .oneliner .who { font-family:var(--mono); font-size:.64rem; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:.15rem; }
+  .oneliner p { margin:0; font-family:var(--display); font-weight:500; font-size:var(--s0); color:var(--white); }
+
+  footer { margin-top:3.6rem; padding-top:1.3rem; border-top:1px solid var(--line-strong); font-size:var(--s-1); color:var(--muted); display:flex; flex-direction:column; gap:.3rem; }
+  footer b { color:var(--gold-bright); font-family:var(--display); font-weight:600; }
+  :focus-visible { outline:2px solid var(--gold); outline-offset:2px; }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <span class="lockup">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 L29 29 L3 29 Z" fill="#d8a94b"/><path d="M16 13 L23.5 27 L8.5 27 Z" fill="#0a0a0c"/><rect x="10" y="20.5" width="12" height="3.2" fill="#0a0a0c"/></svg>
+      <span><span class="w">ASIKO<b>&nbsp;TV</b></span><span class="t">The Soul of Africa</span></span>
+    </span>
+    <p class="eyebrow">Properties &amp; Positioning</p>
+    <h1>One company, <span class="accent">three properties</span>, one story</h1>
+    <p class="standfirst">FAST-On-Africa is the engine. asiko.africa is the destination. asiko.live is the funnel. Together they are an African-owned platform for African stories — positioned against AVO TV.</p>
+  </header>
+
+  <main>
+
+    <section>
+      <h2>1 · The three properties</h2>
+      <div class="props">
+        <div class="prop eng">
+          <div class="name">FAST-<b>On</b>-Africa</div>
+          <div class="handle">FOA · @fastonafrica</div>
+          <dl>
+            <div><dt>What it is</dt><dd>The <strong>engine</strong>. Create your FAST channel with FOA and get a production-ready <strong>HLS you own</strong>. Flight it on asiko.africa, or take it and distribute anywhere. Non-exclusive.</dd></div>
+            <div><dt>Who for</dt><dd>Channel owners, broadcasters, creators — B2B</dd></div>
+            <div><dt>Revenue</dt><dd>Channel build / setup + playout-as-a-service (running the channel) + optional rev-share</dd></div>
+          </dl>
+        </div>
+        <div class="prop">
+          <div class="name">asiko.<b>africa</b></div>
+          <div class="handle">the product</div>
+          <dl>
+            <div><dt>What it is</dt><dd>Media Icons' <strong>owned destination</strong> — the consumer FAST app. Target line-up: <strong>110 channels</strong> — 2 per African country + a diaspora channel + the pan-African flagship.</dd></div>
+            <div><dt>Who for</dt><dd>Viewers — Africa and the diaspora (UK / US / CA / EU)</dd></div>
+            <div><dt>Revenue</dt><dd>The eyeballs — <strong>category-exclusive sponsorship</strong> (one advertiser per sector) + programmatic backfill</dd></div>
+          </dl>
+        </div>
+        <div class="prop">
+          <div class="name">asiko.<b>live</b></div>
+          <div class="handle">the funnel</div>
+          <dl>
+            <div><dt>What it is</dt><dd>Marketing site + canonical <strong>legal pages</strong> (privacy, terms). Where prospects land and are routed.</dd></div>
+            <div><dt>Who for</dt><dd>Everyone before they convert — viewers, channel owners, advertisers, investors</dd></div>
+            <div><dt>Revenue</dt><dd>None directly — it drives the other two</dd></div>
+          </dl>
+        </div>
+      </div>
+      <p style="margin-top:1rem;color:var(--muted);font-size:var(--s-1)">Parent: <strong>Media Icons Africa</strong> (Tattase TV), Lagos.</p>
+    </section>
+
+    <section>
+      <h2>2 · How they fit together</h2>
+      <figure>
+        <div class="fig-frame">
+          <svg viewBox="0 0 940 300" role="img" aria-label="A channel owner builds a channel with FAST-On-Africa and receives an HLS feed they own. From there they can flight it on asiko.africa, the owned consumer destination watched by Africa and the diaspora, or take the feed and distribute anywhere else. asiko.live is the funnel that routes viewers, channel owners, advertisers and investors into the other two. FOA earns build and playout fees; asiko.africa earns category-exclusive sponsorship and programmatic.">
+            <defs>
+              <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#d8a94b"/></marker>
+              <marker id="arm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#716f78"/></marker>
+            </defs>
+            <g font-family="Inter, system-ui, sans-serif" font-size="12" fill="#f7f5f0">
+              <rect x="20" y="96" width="120" height="52" rx="6" fill="#17171b" stroke="#3a3a42"/>
+              <text x="80" y="118" text-anchor="middle" font-weight="600">Channel owner</text>
+              <text x="80" y="134" text-anchor="middle" font-size="10" fill="#a7a4ac">creator / broadcaster</text>
+
+              <rect x="196" y="88" width="168" height="68" rx="6" fill="rgba(216,169,75,0.12)" stroke="#d8a94b" stroke-width="1.5"/>
+              <text x="280" y="110" text-anchor="middle" font-weight="800" fill="#f3cd7e">FAST-On-Africa</text>
+              <text x="280" y="127" text-anchor="middle" font-size="10" fill="#d8a94b">build the channel</text>
+              <text x="280" y="141" text-anchor="middle" font-size="10" fill="#d8a94b">you own the HLS</text>
+
+              <rect x="430" y="30" width="168" height="60" rx="6" fill="#17171b" stroke="#3a3a42"/>
+              <text x="514" y="52" text-anchor="middle" font-weight="700">asiko.africa</text>
+              <text x="514" y="68" text-anchor="middle" font-size="10" fill="#a7a4ac">flight here (optional)</text>
+              <text x="514" y="81" text-anchor="middle" font-size="10" fill="#a7a4ac">110-channel destination</text>
+
+              <rect x="430" y="150" width="168" height="46" rx="6" fill="#0f0f12" stroke="#2a2a30"/>
+              <text x="514" y="170" text-anchor="middle" fill="#a7a4ac" font-size="11">or distribute anywhere</text>
+              <text x="514" y="184" text-anchor="middle" font-size="9.5" fill="#716f78">Roku · aggregator · own site</text>
+
+              <rect x="668" y="30" width="150" height="60" rx="6" fill="#17171b" stroke="#3a3a42"/>
+              <text x="743" y="52" text-anchor="middle" font-weight="700">Viewers</text>
+              <text x="743" y="68" text-anchor="middle" font-size="10" fill="#a7a4ac">Africa + diaspora</text>
+              <text x="743" y="81" text-anchor="middle" font-size="10" fill="#a7a4ac">free · no sign-up</text>
+
+              <rect x="196" y="228" width="402" height="46" rx="6" fill="#17171b" stroke="#3a3a42"/>
+              <text x="397" y="248" text-anchor="middle" font-weight="700">asiko.live</text>
+              <text x="397" y="263" text-anchor="middle" font-size="10" fill="#a7a4ac">funnel · marketing · legal — routes everyone in</text>
+            </g>
+            <g font-family="IBM Plex Mono, monospace" font-size="9" fill="#a7a4ac">
+              <line x1="140" y1="122" x2="192" y2="122" stroke="#d8a94b" marker-end="url(#ar)"/>
+              <line x1="364" y1="112" x2="426" y2="66" stroke="#d8a94b" marker-end="url(#ar)"/>
+              <text x="392" y="82" text-anchor="middle" fill="#d8a94b">HLS</text>
+              <line x1="364" y1="134" x2="426" y2="170" stroke="#2a2a30" stroke-dasharray="4 4" marker-end="url(#arm)"/>
+              <line x1="598" y1="60" x2="664" y2="60" stroke="#d8a94b" marker-end="url(#ar)"/>
+              <line x1="397" y1="228" x2="397" y2="200" stroke="#716f78" marker-end="url(#arm)"/>
+              <path d="M598 251 C 700 251, 760 130, 743 92" fill="none" stroke="#716f78" stroke-dasharray="4 4" marker-end="url(#arm)"/>
+              <path d="M196 251 C 120 251, 80 170, 80 150" fill="none" stroke="#716f78" stroke-dasharray="4 4" marker-end="url(#arm)"/>
+              <text x="245" y="180" fill="#d8a94b">build + playout fees</text>
+              <text x="470" y="118" fill="#d8a94b">sponsorship + programmatic</text>
+            </g>
+          </svg>
+        </div>
+        <figcaption>The creator owns the output at FOA and chooses where it goes — that choice is the trust feature. <strong>FOA monetises the creation; asiko.africa monetises the audience.</strong> Two revenue lines, one shared infrastructure.</figcaption>
+      </figure>
+    </section>
+
+    <section>
+      <h2>3 · Why two-sided beats a walled garden</h2>
+      <div class="callout"><p>Your own Playbook names the problem: a decade of African platforms — bank-backed, telco-backed — broke revenue-share promises. Content owners start at <strong>negative trust</strong>. A creator handing everything to a single destination is the exact fear. FOA's answer — <strong>you own your HLS, you can leave</strong> — turns that fear into the pitch. A walled garden like AVO structurally cannot offer it.</p></div>
+      <ul>
+        <li><strong>Platform, not just an app.</strong> FOA is picks-and-shovels for the whole market; asiko.africa is one destination on top of it.</li>
+        <li><strong>Two revenue lines.</strong> Creation fees (FOA) are steady and low-risk; ad revenue (asiko.africa) scales with audience. One doesn't depend on the other.</li>
+        <li><strong>Non-exclusive by design.</strong> A channel can build with FOA and also run on AVO or Roku — you still earn on the build and your own destination.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>4 · Positioning against AVO TV</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th></th><th>AVO TV</th><th>Asiko / FOA</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Ownership</td><td><strong>UK company</strong> — AVO TV Ltd, Guildford</td><td><strong>African</strong> — Lagos-built, 30-year Nigerian broadcaster at the helm</td></tr>
+          <tr><td class="k">Model</td><td>Single destination (walled garden) + satellite</td><td>Two-sided — an engine (FOA) + a destination (asiko.africa)</td></tr>
+          <tr><td class="k">Content owner deal</td><td>Hand over content to the platform</td><td>Build your channel, <strong>own your HLS</strong>, flight with us or not</td></tr>
+          <tr><td class="k">Ads</td><td>Standard programmatic + DAA opt-outs — commodity inventory</td><td><strong>Category-exclusive sponsorship</strong> — one advertiser per sector, priced at a premium</td></tr>
+          <tr><td class="k">Audience focus</td><td>Mass-market pan-African, mostly on-continent via satellite</td><td><strong>Diaspora-first</strong> (UK/US/CA/EU), higher-CPM, then broaden</td></tr>
+          <tr><td class="k">Registration</td><td>Optional email — unlocks the VOD library</td><td>None for FAST; accounts only at the Asiko Cinemas (TVOD) stage</td></tr>
+          <tr><td class="k">Scale today</td><td>120+ channels, 20M+ viewers, apps everywhere</td><td>Pre-launch — the 110-channel plan, POC live</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Where Asiko wins — and where not to fight</h3>
+      <div class="table-wrap"><table>
+        <tbody class="win">
+          <tr><td class="k">Win</td><td><strong>African-owned, and it's literally true.</strong> The cap table is the differentiator. Lean on it with content owners, the diaspora, African brands, cultural bodies. AVO can't claim it.</td></tr>
+          <tr><td class="k">Win</td><td><strong>The content-owner relationship.</strong> "You keep control and can leave" is the most disarming offer to the Nollywood / creator community — and unavailable to a walled garden.</td></tr>
+          <tr><td class="k">Win</td><td><strong>Category-exclusive sponsorship.</strong> Sells differentiation to telecom, banks, fintech, remittance, travel — brands with no clean way to buy pan-African / diaspora reach today.</td></tr>
+          <tr><td class="k">Win</td><td><strong>Diaspora-first.</strong> Underserved, higher CPMs, advertisers who specifically want it. Own the lane before broadening.</td></tr>
+          <tr><td class="k">Win</td><td><strong>FOA powers everyone</strong> — including channels that also run on AVO. Non-exclusive. You're the infrastructure and a destination.</td></tr>
+          <tr><td style="color:var(--red)">Don't</td><td>Fight AVO on <strong>scale + free + satellite</strong>. Not winnable quickly, and the Playbook's "graveyard" warning is: don't compromise the model chasing someone else's scale.</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section>
+      <h2>5 · The one-liners</h2>
+      <div class="lines">
+        <div class="oneliner"><span class="who">To a channel owner</span><p>"Build your FAST channel with FAST-On-Africa. You own the feed. Flight it on asiko.africa for the diaspora audience — or take it anywhere. Your story, your control."</p></div>
+        <div class="oneliner"><span class="who">To an advertiser</span><p>"Be your sector's exclusive sponsor across asiko.africa — pan-African and diaspora reach, never beside a competitor. A media buy that doesn't exist anywhere else."</p></div>
+        <div class="oneliner"><span class="who">To a viewer</span><p>"Free African TV, no sign-up. 110 channels — every country, the diaspora, one destination. The Soul of Africa."</p></div>
+        <div class="oneliner"><span class="who">To an investor</span><p>"An African-owned, two-sided FAST platform: an engine that earns on every channel built, and a diaspora-first destination that earns on the audience. The African-owned answer to a foreign-owned incumbent."</p></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p><b>Asiko TV</b> — properties &amp; positioning</p>
+    <p>Media Icons Africa · 7 September 2026 · draws on <em>The African FAST Platform Playbook</em> and the 110-channel strategy</p>
+  </footer>
+</div>
