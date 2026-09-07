@@ -1,0 +1,168 @@
+<title>FAST Channel Creation Checklist</title>
+<meta name="description" content="Step-by-step to build a FAST channel, and how the distribution platforms work — Asiko, Roku, Fire TV, Samsung, LG, Pluto, Tubi and the aggregators." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+
+<style>
+  :root {
+    --bg:#0a0a0c; --bg-soft:#0f0f12; --panel:#17171b; --panel-2:#1e1e23;
+    --line:rgba(216,169,75,0.16); --line-strong:rgba(216,169,75,0.34);
+    --gold:#d8a94b; --gold-bright:#f3cd7e; --gold-deep:#a8792c; --gold-wash:rgba(216,169,75,0.10);
+    --white:#f7f5f0; --muted:#a7a4ac; --muted-2:#716f78; --red:#df3b34; --green:#6fbf97;
+    --r-sm:6px; --r-md:10px; --pill:999px;
+    --display:"Poppins","Segoe UI",system-ui,sans-serif;
+    --body:"Inter","Segoe UI",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+    --measure:70ch;
+    --s-1:clamp(.8rem,.78rem + .1vw,.86rem);
+    --s0:clamp(.95rem,.92rem + .15vw,1.02rem);
+    --s1:clamp(1.1rem,1.02rem + .4vw,1.28rem);
+    --s2:clamp(1.3rem,1.12rem + .7vw,1.7rem);
+    --s4:clamp(2.1rem,1.6rem + 2.6vw,3.4rem);
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--white); font-family:var(--body); font-size:var(--s0); line-height:1.6; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:64rem; margin:0 auto; padding:clamp(1.4rem,1rem + 3vw,4rem) clamp(1.1rem,.6rem + 3vw,3.4rem) 6rem; }
+
+  .lockup { display:inline-flex; align-items:center; gap:10px; border:1px solid var(--line); border-radius:9px; padding:6px 13px 6px 9px; margin-bottom:1.5rem; }
+  .lockup svg { width:24px; height:24px; display:block; }
+  .lockup .w { font-family:var(--display); font-weight:700; font-size:16px; letter-spacing:.1em; }
+  .lockup .w b { font-weight:800; color:var(--gold); }
+  .lockup .t { display:block; font-family:var(--mono); font-size:8px; letter-spacing:.24em; text-transform:uppercase; color:var(--gold); margin-top:3px; }
+
+  .eyebrow { display:inline-flex; align-items:center; gap:.6rem; font-family:var(--mono); font-size:var(--s-1); letter-spacing:.18em; text-transform:uppercase; color:var(--gold); margin:0 0 1rem; }
+  .eyebrow::before { content:""; width:1.6rem; height:1px; background:var(--gold); }
+  h1 { font-family:var(--display); font-weight:800; font-size:var(--s4); line-height:1.04; letter-spacing:-.02em; text-wrap:balance; margin:0 0 .7rem; }
+  h1 .accent { color:var(--gold); }
+  .standfirst { font-size:var(--s1); color:var(--muted); max-width:54ch; margin:0 0 1.4rem; }
+  .masthead { border-bottom:1px solid var(--line-strong); padding-bottom:1.6rem; }
+
+  main { margin-top:2.6rem; display:flex; flex-direction:column; gap:2.6rem; }
+  section h2 { font-family:var(--display); font-weight:700; font-size:var(--s2); line-height:1.14; letter-spacing:-.01em; margin:0 0 1rem; padding-bottom:.6rem; border-bottom:1px solid var(--line); }
+  h3 { font-family:var(--display); font-weight:600; font-size:var(--s0); margin:1.4rem 0 .4rem; color:var(--gold-bright); }
+  p { margin:0 0 .8rem; max-width:var(--measure); }
+  .lede { font-size:var(--s1); color:var(--white); max-width:56ch; }
+  strong { font-weight:600; color:var(--white); }
+  a { color:var(--gold); }
+  code { font-family:var(--mono); font-size:.82em; background:var(--panel-2); border:1px solid var(--line); border-radius:4px; padding:.06rem .35rem; color:var(--gold-bright); }
+
+  ol.steps { margin:0; padding:0; list-style:none; counter-reset:s; display:flex; flex-direction:column; gap:1rem; }
+  ol.steps > li { counter-increment:s; display:grid; grid-template-columns:2rem 1fr; gap:1rem; align-items:start; }
+  ol.steps > li::before { content:counter(s); font-family:var(--mono); font-size:.95rem; color:var(--gold); border:1px solid var(--line-strong); width:2rem; height:2rem; display:grid; place-items:center; border-radius:var(--r-sm); }
+  ol.steps b { font-family:var(--display); font-weight:600; color:var(--white); display:block; margin-bottom:.2rem; }
+  ol.steps .d { color:var(--muted); font-size:var(--s-1); }
+  ol.steps ul { margin:.4rem 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:.3rem; }
+  ol.steps ul li { padding-left:1rem; position:relative; font-size:var(--s-1); color:var(--muted); }
+  ol.steps ul li::before { content:""; position:absolute; left:.05rem; top:.6em; width:.32rem; height:.32rem; background:var(--gold); transform:rotate(45deg); }
+
+  .callout { background:var(--gold-wash); border:1px solid var(--line-strong); border-left:3px solid var(--gold); border-radius:0 var(--r-sm) var(--r-sm) 0; padding:1rem 1.15rem; max-width:var(--measure); }
+  .callout p { margin:0; }
+
+  .table-wrap { overflow-x:auto; border:1px solid var(--line); border-radius:var(--r-md); background:var(--bg-soft); margin-top:.6rem; }
+  table { border-collapse:collapse; width:100%; font-size:var(--s-1); min-width:44rem; }
+  th,td { text-align:left; padding:.65rem .85rem; vertical-align:top; border-bottom:1px solid var(--line); }
+  thead th { font-family:var(--mono); font-weight:500; font-size:.64rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); background:var(--panel); }
+  tbody tr:last-child td { border-bottom:0; }
+  td.k { color:var(--gold-bright); font-weight:500; white-space:nowrap; }
+
+  footer { margin-top:3.6rem; padding-top:1.3rem; border-top:1px solid var(--line-strong); font-size:var(--s-1); color:var(--muted); display:flex; flex-direction:column; gap:.3rem; }
+  footer b { color:var(--gold-bright); font-family:var(--display); font-weight:600; }
+  :focus-visible { outline:2px solid var(--gold); outline-offset:2px; }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <span class="lockup">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 L29 29 L3 29 Z" fill="#d8a94b"/><path d="M16 13 L23.5 27 L8.5 27 Z" fill="#0a0a0c"/><rect x="10" y="20.5" width="12" height="3.2" fill="#0a0a0c"/></svg>
+      <span><span class="w">ASIKO<b>&nbsp;TV</b></span><span class="t">The Soul of Africa</span></span>
+    </span>
+    <p class="eyebrow">Channel Owner Guide</p>
+    <h1>How to build a <span class="accent">FAST channel</span></h1>
+    <p class="standfirst">The eleven steps to stand up a free ad-supported linear channel — and how the distribution platforms actually work.</p>
+  </header>
+
+  <main>
+
+    <section>
+      <h2>Part 1 · The build checklist</h2>
+      <p class="lede">A FAST channel is a 24/7 linear HLS stream with ad-break markers, an EPG and a brand. Whether you build it yourself or hand it to Asiko, these are the pieces.</p>
+      <ol class="steps">
+        <li><div><b>Define the channel</b><span class="d">Name, genre, target audience, primary language, and the markets you want it available in. A tight editorial idea beats a broad one — "Nollywood classics," not "movies."</span></div></li>
+        <li><div><b>Secure content &amp; rights</b>
+          <ul>
+            <li>Streaming (not just broadcast) rights for your territories, for the window you want.</li>
+            <li>Music clearance for everything in the content.</li>
+            <li>Either a <strong>library</strong> — 20–40+ hours to start, ideally more so it doesn't feel repetitive — or a <strong>genuine live feed</strong> for sport / news / events.</li>
+          </ul></div></li>
+        <li><div><b>Encode &amp; package to HLS</b><span class="d">Transcode every asset to <strong>one consistent ladder</strong> — same resolutions, codec, keyframe/GOP cadence, audio. Mismatched profiles break playback at ad splice points. Output HLS (TS or CMAF). Tools: Eyevinn Encore, AWS MediaConvert, Cloudflare Stream, FFmpeg.</span></div></li>
+        <li><div><b>Store it behind a CDN</b><span class="d">Put the packaged files where a playout engine and a CDN can both read them over HTTP — object storage (Bunny, R2, S3) with a CDN in front. For Asiko: Bunny.</span></div></li>
+        <li><div><b>Build a schedule &amp; EPG</b><span class="d">Lay the library into a 24/7 schedule. Export it as <strong>XMLTV</strong> or <strong>MRSS</strong> — now, next, and at least 24–72 hours forward, refreshed on change. The EPG is separate from the video: it's metadata the guide reads.</span></div></li>
+        <li><div><b>Run the playout</b>
+          <ul>
+            <li><strong>VOD2Live</strong> — an engine loops/schedules your files into one continuous HLS stream. Cheap, no live encoder, very reliable. Eyevinn Channel Engine does this.</li>
+            <li><strong>Live encoder</strong> — only for genuine live. Needs an uplink and is fragile; always pair with a backup source and a fallback slate.</li>
+          </ul></div></li>
+        <li><div><b>Mark the ad breaks</b><span class="d">Insert <strong>SCTE-35</strong> markers in the manifest at each break (<code>#EXT-X-CUE-OUT/IN</code>), or provide an EPG precise enough to derive them. Decide your pod structure — breaks per hour, slots per break, slot length. Typical FAST load: 8–14 min/hour.</span></div></li>
+        <li><div><b>Prepare brand assets</b><span class="d">Channel logo (SVG + PNG on transparent, readable on dark), an on-screen bug, a still "off-air" slate, and optional break bumpers.</span></div></li>
+        <li><div><b>Choose distribution</b><span class="d">Direct to each platform, or — the practical route — one <strong>aggregator</strong> that fans your single feed out to many platforms. See Part 2.</span></div></li>
+        <li><div><b>Wire up monetisation</b><span class="d">Server-side ad insertion (SSAI) against your SCTE-35, calling an ad decision server (SpringServe, Publica, Google Ad Manager) — or let the distribution platform's ad stack handle it and take a rev-share. Add house promos to backfill unsold slots.</span></div></li>
+        <li><div><b>Monitor, log, reconcile</b><span class="d">24/7 monitoring with alerting, as-run logs, and a monthly reconciliation of ad-server revenue against buyer reports. This is ongoing operations, not a launch task.</span></div></li>
+      </ol>
+      <div class="callout"><p><strong>With Asiko you do steps 1, 2, 5, 8 and hand us a feed (or files + schedule).</strong> Asiko does 3–4 (normalisation), 6–7 (playout &amp; SCTE-35), 9–11 (distribution, monetisation, ops). See the <em>List Your Channel</em> pack and the <em>Channel Owner Q&amp;A</em>.</p></div>
+    </section>
+
+    <section>
+      <h2>Part 2 · The platforms, and how each works</h2>
+      <p>Every FAST platform ingests a linear feed, wraps it in their app and guide, sells or brokers the ads, and rev-shares with the channel owner. What differs is <strong>how you get on</strong> and <strong>who controls the ads</strong>.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Platform</th><th>What it is</th><th>How a channel gets on</th><th>Ads &amp; economics</th></tr></thead>
+          <tbody>
+            <tr><td class="k">Asiko TV</td><td>Diaspora / Africa FAST — web now, CTV apps rolling out</td><td>Send an HLS feed, or files + a schedule. Asiko normalises, runs playout, inserts ads, distributes.</td><td>Asiko sells; rev-share to you (typ. 50–70% owner). Reserved-pods option if you sell some yourself.</td></tr>
+            <tr><td class="k">Roku — The Roku Channel</td><td>The largest US FAST surface</td><td>A Roku Partner account; submit a linear feed + program metadata. Or a "Direct Publisher" / Independent channel you build.</td><td>Roku sells the ads and rev-shares (often ~60/40 to Roku, negotiable). Roku's scale, Roku's rules.</td></tr>
+            <tr><td class="k">Amazon Fire TV / Freevee</td><td>Amazon's linear + AVOD</td><td>Curation-heavy — usually an invite or a content/licensing deal, or via an aggregator. Feed-based.</td><td>Amazon sells; rev-share. Harder to get on directly.</td></tr>
+            <tr><td class="k">Samsung TV Plus</td><td>Built into every Samsung TV; very large</td><td>Almost always via an <strong>aggregator</strong> (Amagi, Wurl…). Samsung curates hard.</td><td>Samsung sells the ads; rev-share through the aggregator.</td></tr>
+            <tr><td class="k">LG Channels</td><td>Built into LG TVs; powered by Zeasn / XUMO</td><td>Via an aggregator or the tech partner. Curated.</td><td>Platform sells; rev-share.</td></tr>
+            <tr><td class="k">Xumo Play / Vizio WatchFree+</td><td>Xumo is Comcast + Charter; also powers Vizio</td><td>Direct deal or aggregator.</td><td>Platform sells; rev-share.</td></tr>
+            <tr><td class="k">Pluto TV</td><td>Paramount-owned, one of the originals</td><td>Curated and slow — usually a content deal or via an aggregator. Hard to get on directly.</td><td>Pluto sells everything; content-licensing or rev-share deals.</td></tr>
+            <tr><td class="k">Tubi</td><td>Fox-owned; mostly AVOD, growing FAST ("Tubi channels")</td><td>Content-licensing deals; feed for the linear channels.</td><td>Tubi sells; licensing fee or rev-share.</td></tr>
+            <tr><td class="k">Plex · Sling Freestream · Local Now · Rakuten TV</td><td>Smaller / regional FAST surfaces</td><td>Direct or aggregator; each has its own portal.</td><td>Platform or shared ad sales; rev-share.</td></tr>
+            <tr><td class="k">Free-to-air satellite<br><span style="color:var(--muted-2)">(e.g. how AVO reaches Africa on Intelsat 20)</span></td><td>Not streaming — a broadcast transponder</td><td>A transponder / uplink deal with a satellite operator. Capital-heavy, separate skill set.</td><td>Sold as a broadcast channel; not addressable ad tech.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Aggregators — the route most channel owners actually take</h3>
+      <p>Integrating each platform is months of work. An aggregator takes your <strong>one feed</strong> and does the rest: format each platform's spec, handle ad ops and SSAI, deliver EPG, consolidate reporting, and pay you a single rev-share.</p>
+      <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:.5rem;max-width:var(--measure)">
+        <li style="padding-left:1.2rem;position:relative"><span style="position:absolute;left:.1rem;top:.62em;width:.38rem;height:.38rem;background:var(--gold);transform:rotate(45deg);display:block"></span><strong>Amagi</strong> — the market leader; playout + SSAI + distribution + analytics, cloud-based.</li>
+        <li style="padding-left:1.2rem;position:relative"><span style="position:absolute;left:.1rem;top:.62em;width:.38rem;height:.38rem;background:var(--gold);transform:rotate(45deg);display:block"></span><strong>Wurl</strong> (Roku-owned) — distribution + ad monetisation across CTV.</li>
+        <li style="padding-left:1.2rem;position:relative"><span style="position:absolute;left:.1rem;top:.62em;width:.38rem;height:.38rem;background:var(--gold);transform:rotate(45deg);display:block"></span><strong>Frequency</strong>, <strong>Glewed TV</strong>, <strong>Zeasn/Whale</strong> — similar, various strengths.</li>
+      </ul>
+      <div class="callout"><p><strong>Where Asiko sits:</strong> for African and diaspora content, Asiko is the direct, fastest route with a rev-share that isn't diluted by a chain of intermediaries. Longer term Asiko can itself be your aggregator to the global platforms, or you run Asiko alongside an aggregator for the others — listing is non-exclusive.</p></div>
+    </section>
+
+    <section>
+      <h2>Part 3 · Quick decision guide</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Your situation</th><th>Best route</th></tr></thead>
+          <tbody>
+            <tr><td class="k">African/diaspora content, want to launch fast, small team</td><td>List with <strong>Asiko</strong> — feed or files, and you're on in days.</td></tr>
+            <tr><td class="k">You have a live feed + backup and want broad CTV reach now</td><td>Asiko + an <strong>aggregator</strong> (Amagi / Wurl) for the global platforms. Non-exclusive.</td></tr>
+            <tr><td class="k">Only a content library, no playout</td><td>Asiko builds the channel for you (VOD2Live) from your library + schedule.</td></tr>
+            <tr><td class="k">You want to keep selling your own ads</td><td><strong>Reserved-pods</strong> deal — you fill some slots, the platform fills the rest.</td></tr>
+            <tr><td class="k">Genuine 24/7 live (news/sport)</td><td>Live encoder + backup + slate → feed to Asiko / aggregator. Consider a VOD2Live "base" channel with live windows spliced in.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p><b>Asiko TV</b> — FAST channel creation checklist &amp; platform guide</p>
+    <p>Media Icons Africa · 7 September 2026 · pairs with the List Your Channel pack and the Channel Owner Q&amp;A</p>
+  </footer>
+</div>

@@ -14,6 +14,8 @@ claude.ai; the PDFs and Word files are the same content for sending by email.
 | 06 | **Trail to launch** — POC → MVP → commercial pilot → full launch, with running financials and the monetisation growth path (FAST → AVOD → TVOD/Cinemas → SVOD) | `06-trail-to-launch.html` | Investors, board |
 | 07 | **Investor & partner readiness** -- what is done, what to fix before meetings, what only you decide | `07-investor-and-partner-readiness.html` | You, before booking meetings |
 | 08 | **Channel Owner Q&A** -- every question a prospective channel owner asks, answered (commercials, failover, embedding, rights, control) | `08-channel-owner-qa.html` · `Asiko TV - Channel Owner Q and A.pdf` | Prospective channel owners |
+| 09 | **FAST Channel Creation Checklist** -- the 11 steps to build a FAST channel + how Roku, Fire TV, Samsung, LG, Pluto, Tubi and the aggregators work | `09-fast-channel-creation-checklist.html` · `Asiko TV - FAST Channel Creation Checklist.pdf` | Prospective channel owners |
+| 10 | **POC to MVP Transition** -- workstreams, sequence, in/out of scope, exit criteria for making the POC real | `10-poc-to-mvp-transition.html` · `Asiko TV - POC to MVP Transition.pdf` | Internal, Enveu |
 
 ## Notes
 
