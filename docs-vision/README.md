@@ -19,6 +19,7 @@ claude.ai; the PDFs and Word files are the same content for sending by email.
 | 11 | **Properties & Positioning** -- how FOA, asiko.africa and asiko.live fit together, and the positioning vs AVO TV | `11-properties-and-positioning.html` · `Asiko TV - Properties and Positioning.pdf` | Investors, partners |
 | 12 | **Strategic SWOT** -- strengths, weaknesses, opportunities, threats across competition, voting, fresh channels, FAST training, ad-server, data cost, why free, media-entrepreneurship impact | `12-strategic-swot.html` · `Asiko TV - Strategic SWOT.pdf` | Investors, board, strategy |
 | 13 | **Niche & Mitigations** -- the beachhead Asiko owns, a mitigation for every weakness, the voting/cash-prize effect on usage, and the DNS steps for asiko.africa | `13-niche-and-mitigations.html` · `Asiko TV - Niche and Mitigations.pdf` | Investors, strategy |
+| 14 | **Team** -- the Media Icons Africa team behind Asiko across commercial, technology, content and legal/finance; bios to be completed | `14-team.html` · `Asiko TV - Team.pdf` | Investors, partners |
 
 ## Notes
 
