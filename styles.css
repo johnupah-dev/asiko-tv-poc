@@ -162,8 +162,9 @@ button { font-family: inherit; }
   position: relative;
   background: #000;
   overflow: hidden;
-  aspect-ratio: 16 / 9;
+  height: 58vh;
   min-height: 360px;
+  max-height: 560px;
 }
 #video {
   position: absolute;
@@ -358,7 +359,7 @@ button { font-family: inherit; }
   background: var(--line-soft);
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  max-height: 240px;
+  max-height: 256px;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: thin;

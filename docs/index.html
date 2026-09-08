@@ -151,8 +151,12 @@ button { font-family: inherit; }
   position: relative;
   background: #000;
   overflow: hidden;
-  aspect-ratio: 16 / 9;
+  /* Fixed broadcast-style video window: big, but never taller than ~58%
+     of the screen, so the 10-per-row channel grid + revenue bar stay in
+     view. object-fit:contain letterboxes odd source ratios. */
+  height: 58vh;
   min-height: 360px;
+  max-height: 560px;
 }
 #video {
   position: absolute;
@@ -351,7 +355,7 @@ button { font-family: inherit; }
   background: var(--line-soft);
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  max-height: 240px;      /* ~3 rows; more channels scroll inside the rail */
+  max-height: 256px;      /* ~3 rows; more channels scroll inside the rail */
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: thin;
