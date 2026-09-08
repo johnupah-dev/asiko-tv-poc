@@ -55,9 +55,9 @@ button { font-family: inherit; }
 
 .app {
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto auto;
-  height: 100vh;
-  height: 100dvh;
+  grid-template-rows: auto auto auto auto;
+  min-height: 100vh;
+  min-height: 100dvh;
   max-width: 1600px;
   margin: 0 auto;
   background: var(--stage);
@@ -151,6 +151,7 @@ button { font-family: inherit; }
   position: relative;
   background: #000;
   overflow: hidden;
+  aspect-ratio: 16 / 9;
   min-height: 360px;
 }
 #video {
@@ -340,14 +341,19 @@ button { font-family: inherit; }
 
 /* ---------- channel rail ---------- */
 .rail {
-  display: flex;
-  flex-wrap: nowrap;
+  /* Desktop: LOCKED to 10 channels per row. Adding channels adds rows,
+     not columns. The rail caps at ~3 rows and scrolls internally beyond
+     that, so the video stage above is never squeezed. Do not change to
+     flex/auto-fit — that regresses the video-hero size. */
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
   gap: 2px;
   background: var(--line-soft);
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  overflow-x: auto;
-  overflow-y: hidden;
+  max-height: 240px;      /* ~3 rows; more channels scroll inside the rail */
+  overflow-y: auto;
+  overflow-x: hidden;
   scrollbar-width: thin;
 }
 .ch {
@@ -356,8 +362,7 @@ button { font-family: inherit; }
   display: flex;
   flex-direction: column;
   gap: 3px;
-  flex: 0 0 172px;
-  min-width: 172px;
+  min-width: 0;
   padding: 9px 13px 10px;
   background: var(--panel);
   border: 0;
@@ -408,6 +413,10 @@ button { font-family: inherit; }
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--faint);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 /* ---------- revenue bar ---------- */
@@ -707,7 +716,7 @@ button { font-family: inherit; }
   .masthead-mid { order: 3; width: 100%; gap: 8px; }
   .clock { font-size: 12px; }
 
-  .stage { position: sticky; top: 0; z-index: 5; aspect-ratio: 16 / 9; }
+  .stage { position: sticky; top: 0; z-index: 5; aspect-ratio: 16 / 9; min-height: 0; max-height: none; }
   #video { object-fit: cover; }
   .bug { top: 8px; right: 8px; gap: 5px; padding: 4px 7px 4px 5px; max-width: 62vw; }
   .bug-name { font-size: 10px; letter-spacing: 0.1em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -717,10 +726,11 @@ button { font-family: inherit; }
   .lt-prog, .lt-time, .lt-title-next { font-size: 10px; }
   .lt-prog { flex-basis: 100%; margin-top: 1px; }
 
-  /* channels in rows of two — no sideways scrolling */
-  .rail { display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-flow: row; grid-auto-columns: auto; gap: 1px; overflow-x: hidden; }
-  .ch { flex: initial; min-width: 0; padding: 10px 12px 12px; }
+  /* channels in rows of two — no sideways scrolling, whole page scrolls */
+  .rail { display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-flow: row; grid-auto-columns: auto; gap: 1px; max-height: none; overflow-x: hidden; overflow-y: visible; }
+  .ch { min-width: 0; padding: 10px 12px 12px; }
   .ch-name { font-size: 12.5px; white-space: normal; overflow: visible; text-overflow: clip; }
+  .ch-genre { white-space: normal; overflow: visible; text-overflow: clip; }
   .ch-now { font-size: 11px; }
 
   /* revenue strip wraps instead of scrolling */

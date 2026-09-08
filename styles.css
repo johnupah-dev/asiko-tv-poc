@@ -44,7 +44,7 @@
 }
 .btn { border-radius: 999px; }
 .btn-accent, .btn.is-live, .lt-tag { color: #0a0a0c; }
-.ch { flex: 0 0 172px; min-width: 172px; padding: 9px 13px 10px; }
+.ch { min-width: 0; padding: 9px 13px 10px; }
 .ch-name { font-size: 13px; letter-spacing: 0.06em; }
 .on-air { letter-spacing: 0.14em; }
 @media (max-width: 720px) { .brand-tag { display: none; } .brand { padding: 5px 9px; } }
@@ -66,9 +66,9 @@ button { font-family: inherit; }
 
 .app {
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto auto;
-  height: 100vh;
-  height: 100dvh;
+  grid-template-rows: auto auto auto auto;
+  min-height: 100vh;
+  min-height: 100dvh;
   max-width: 1600px;
   margin: 0 auto;
   background: var(--stage);
@@ -162,6 +162,7 @@ button { font-family: inherit; }
   position: relative;
   background: #000;
   overflow: hidden;
+  aspect-ratio: 16 / 9;
   min-height: 360px;
 }
 #video {
@@ -351,14 +352,15 @@ button { font-family: inherit; }
 
 /* ---------- channel rail ---------- */
 .rail {
-  display: flex;
-  flex-wrap: nowrap;
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
   gap: 2px;
   background: var(--line-soft);
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  overflow-x: auto;
-  overflow-y: hidden;
+  max-height: 240px;
+  overflow-y: auto;
+  overflow-x: hidden;
   scrollbar-width: thin;
 }
 .ch {
@@ -367,8 +369,7 @@ button { font-family: inherit; }
   display: flex;
   flex-direction: column;
   gap: 3px;
-  flex: 0 0 172px;
-  min-width: 172px;
+  min-width: 0;
   padding: 9px 13px 10px;
   background: var(--panel);
   border: 0;
@@ -419,6 +420,10 @@ button { font-family: inherit; }
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--faint);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 /* ---------- revenue bar ---------- */
@@ -624,7 +629,7 @@ button { font-family: inherit; }
   .masthead-actions .btn { padding: 6px 9px; font-size: 10px; letter-spacing: 0.06em; }
   .masthead-mid { order: 3; width: 100%; }
   .clock { font-size: 12px; }
-  .stage { position: sticky; top: 0; z-index: 5; aspect-ratio: 16 / 9; }
+  .stage { position: sticky; top: 0; z-index: 5; aspect-ratio: 16 / 9; min-height: 0; max-height: none; }
   #video { object-fit: cover; }
   .bug { top: 8px; right: 8px; max-width: 62vw; }
   .bug-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -632,9 +637,10 @@ button { font-family: inherit; }
   .lt-row { flex-wrap: wrap; }
   .lt-prog { flex-basis: 100%; margin-top: 1px; }
   .lt-title { font-size: 16px; }
-  .rail { display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-flow: row; grid-auto-columns: auto; gap: 1px; overflow-x: hidden; }
-  .ch { flex: initial; min-width: 0; padding: 10px 12px 12px; }
+  .rail { display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-flow: row; grid-auto-columns: auto; gap: 1px; max-height: none; overflow-x: hidden; overflow-y: visible; }
+  .ch { min-width: 0; padding: 10px 12px 12px; }
   .ch-name { font-size: 12.5px; white-space: normal; overflow: visible; text-overflow: clip; }
+  .ch-genre { white-space: normal; overflow: visible; text-overflow: clip; }
   .revbar { flex-wrap: wrap; min-height: 0; }
   .rev-stat { flex: 1 1 45%; min-width: 0; }
   .rev-split, .companion { flex-basis: 100%; min-width: 0; }
