@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leads — Asiko TV Admin (Demo)</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/img/logos/asiko-icon.png">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+  table{ width:100%; border-collapse:collapse; margin-top:20px; }
+  th,td{ text-align:left; padding:12px 14px; border-bottom:1px solid var(--line); font-size:0.85rem; }
+  th{ color:var(--gold); text-transform:uppercase; letter-spacing:0.06em; font-size:0.7rem; }
+  td{ color:var(--muted); }
+  td.strong{ color:var(--white); }
+</style>
+</head>
+<body class="grain-bg">
+
+<header class="site-header">
+  <div class="container nav-row">
+    <a href="index.html"><img class="brand-logo" src="assets/img/logos/asiko-logo-nav.png" alt="Asiko TV — The Soul of Africa"></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="channels.html">Channel Guide</a>
+      <a href="advertise.html">Advertise With Us</a>
+      <a href="join.html">List Your Channel</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero" style="padding-bottom:0">
+  <div class="container">
+    <span class="eyebrow">Internal</span>
+    <h1>Leads dashboard <span style="color:var(--muted-2); font-size:0.5em; font-weight:600;">(demo)</span></h1>
+    <p>This page shows submissions made <strong style="color:var(--white)">during this browser session only</strong> — it's a working demo of what a connected CRM view could look like, not a production database. See the note below on connecting a real backend.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="card" data-reveal>
+      <div id="gate">
+        <p class="small-caps" style="margin-bottom:10px;">This demo view is passcode-protected</p>
+        <div style="display:flex; gap:10px; max-width:360px;">
+          <input type="password" id="passInput" placeholder="Enter passcode" style="flex:1; background:var(--bg-soft); border:1px solid var(--line-strong); color:var(--white); padding:12px 16px; border-radius:var(--radius-sm);">
+          <button class="btn btn-gold btn-sm" id="unlockBtn">Unlock</button>
+        </div>
+        <p class="field-hint" style="margin-top:10px;">Demo passcode: <code>asiko2026</code> — change this before real use; this is a client-side demo lock only, not real security.</p>
+      </div>
+
+      <div id="dashboard" style="display:none;">
+        <p class="result-count" id="leadCount" style="margin-bottom:0;"></p>
+        <div style="overflow-x:auto;">
+          <table>
+            <thead>
+              <tr><th>Time</th><th>Form</th><th>Name / Company</th><th>Contact</th><th>Details</th></tr>
+            </thead>
+            <tbody id="leadsBody"></tbody>
+          </table>
+        </div>
+        <div class="empty-state" id="leadsEmpty" style="display:none;">
+          <p>No submissions yet this session. Fill out a form on <a href="advertise.html" style="color:var(--gold)">Advertise With Us</a> or <a href="join.html" style="color:var(--gold)">List Your Channel</a> to see it appear here.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:24px;" data-reveal>
+      <h3 style="font-size:1.05rem; margin-bottom:10px;">Connecting a real CRM</h3>
+      <p style="color:var(--muted); font-size:0.9rem; line-height:1.8;">
+        Right now every form on this site (Advertise, List Your Channel, Join As A Creator, Test Run, Contact) captures a lead and,
+        with no backend configured, opens a pre-filled email to <strong style="color:var(--white)">john.upah@mediaiconsltd.com</strong>
+        so nothing is lost. To make this dashboard persistent and multi-user — and to feed leads straight into marky.ai or another CRM —
+        open <code>assets/js/leads.js</code> and set <code>CRM_ENDPOINT</code> to your webhook or API URL. Every submission will then
+        POST as JSON automatically, with the email fallback kept as a safety net if that request ever fails.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom" style="margin-top:0; border-top:none; padding-top:0;">
+      <p>© <span data-year></span> Asiko TV, a Media Icons Africa property. All rights reserved.</p>
+      <p class="built-by">Built by <a href="about.html">Media Icons Africa</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script src="assets/js/leads.js"></script>
+<script>
+  var PASSCODE = "asiko2026";
+  document.getElementById('unlockBtn').addEventListener('click', function(){
+    if(document.getElementById('passInput').value === PASSCODE){
+      document.getElementById('gate').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      renderLeads();
+    } else {
+      asikoToast("Incorrect passcode.");
+    }
+  });
+
+  function renderLeads(){
+    var leads = window.__asikoSessionLeads || [];
+    var body = document.getElementById('leadsBody');
+    var count = document.getElementById('leadCount');
+    var empty = document.getElementById('leadsEmpty');
+    count.textContent = leads.length + (leads.length === 1 ? ' submission' : ' submissions') + ' this session';
+    empty.style.display = leads.length ? 'none' : 'block';
+    body.innerHTML = leads.slice().reverse().map(function(l){
+      var f = l.fields;
+      var nameOrCompany = f.name || f.channelName || f.company || '—';
+      var contact = [f.email, f.phone].filter(Boolean).join(' / ') || '—';
+      var details = f.category || f.sector || f.niche || f.interest || f.reason || '';
+      return '<tr>' +
+        '<td>' + new Date(l.submittedAt).toLocaleString() + '</td>' +
+        '<td class="strong">' + l.formType + '</td>' +
+        '<td class="strong">' + nameOrCompany + '</td>' +
+        '<td>' + contact + '</td>' +
+        '<td>' + details + '</td>' +
+      '</tr>';
+    }).join('');
+  }
+</script>
+</body>
+</html>
