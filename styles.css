@@ -630,7 +630,7 @@ button { font-family: inherit; }
   .masthead-actions .btn { padding: 6px 9px; font-size: 10px; letter-spacing: 0.06em; }
   .masthead-mid { order: 3; width: 100%; }
   .clock { font-size: 12px; }
-  .stage { position: sticky; top: 0; z-index: 5; aspect-ratio: 16 / 9; min-height: 0; max-height: none; }
+  .stage { position: sticky; top: 0; z-index: 5; height: auto; aspect-ratio: 16 / 9; min-height: 0; max-height: none; }
   #video { object-fit: cover; }
   .bug { top: 8px; right: 8px; max-width: 62vw; }
   .bug-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
