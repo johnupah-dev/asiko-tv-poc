@@ -5,108 +5,1260 @@
     "breakDurationSec": 30,
     "adSlotSec": 15,
     "ssps": [
-      { "name": "Direct · Sponsor of the Hour", "cpm": 26.0, "type": "direct", "weight": 2 },
-      { "name": "Programmatic · Private Marketplace (PMP)", "cpm": 19.5, "type": "prog", "weight": 3 },
-      { "name": "Programmatic · Open Exchange (OpenRTB)", "cpm": 14.25, "type": "prog", "weight": 6 },
-      { "name": "House Promo · cross-channel", "cpm": 0.0, "type": "house", "weight": 2 }
+      {
+        "name": "Direct · Sponsor of the Hour",
+        "cpm": 26.0,
+        "type": "direct",
+        "weight": 2
+      },
+      {
+        "name": "Programmatic · Private Marketplace (PMP)",
+        "cpm": 19.5,
+        "type": "prog",
+        "weight": 3
+      },
+      {
+        "name": "Programmatic · Open Exchange (OpenRTB)",
+        "cpm": 14.25,
+        "type": "prog",
+        "weight": 6
+      },
+      {
+        "name": "House Promo · cross-channel",
+        "cpm": 0.0,
+        "type": "house",
+        "weight": 2
+      }
     ],
     "creatives": [
-      { "brand": "AXIS ATHLETIC", "line": "Move like it's already tomorrow.", "sub": "Presenting sponsor — Asiko Prime", "bg": "#0E2038", "fg": "#7FD0FF" },
-      { "brand": "MERIDIAN COLD BREW", "line": "Slow-steeped. Wide awake.", "sub": "Programmatic · PMP deal ID 4471", "bg": "#241203", "fg": "#F6B461" },
-      { "brand": "HARBOR & PINE", "line": "Furniture that outlives the trend cycle.", "sub": "Open Exchange · OpenRTB win", "bg": "#12241C", "fg": "#79E0B4" },
-      { "brand": "NOVA MOBILITY", "line": "The commute, reconsidered.", "sub": "Direct sold · :15 spot", "bg": "#1B1130", "fg": "#C39BFF" }
+      {
+        "brand": "AXIS ATHLETIC",
+        "line": "Move like it's already tomorrow.",
+        "sub": "Presenting sponsor — Asiko Prime",
+        "bg": "#0E2038",
+        "fg": "#7FD0FF"
+      },
+      {
+        "brand": "MERIDIAN COLD BREW",
+        "line": "Slow-steeped. Wide awake.",
+        "sub": "Programmatic · PMP deal ID 4471",
+        "bg": "#241203",
+        "fg": "#F6B461"
+      },
+      {
+        "brand": "HARBOR & PINE",
+        "line": "Furniture that outlives the trend cycle.",
+        "sub": "Open Exchange · OpenRTB win",
+        "bg": "#12241C",
+        "fg": "#79E0B4"
+      },
+      {
+        "brand": "NOVA MOBILITY",
+        "line": "The commute, reconsidered.",
+        "sub": "Direct sold · :15 spot",
+        "bg": "#1B1130",
+        "fg": "#C39BFF"
+      }
     ],
     "companion": [
-      { "brand": "AXIS ATHLETIC", "text": "New season drop — shop the film", "type": "direct" },
-      { "brand": "MERIDIAN COLD BREW", "text": "First case ships free", "type": "prog" },
-      { "brand": "ASIKO TV", "text": "28 channels · 2 live now", "type": "house" }
+      {
+        "brand": "AXIS ATHLETIC",
+        "text": "New season drop — shop the film",
+        "type": "direct"
+      },
+      {
+        "brand": "MERIDIAN COLD BREW",
+        "text": "First case ships free",
+        "type": "prog"
+      },
+      {
+        "brand": "ASIKO TV",
+        "text": "28 channels · 2 live now",
+        "type": "house"
+      }
     ]
   },
   "browse": {
     "sections": [
-      { "id": "live", "label": "LIVE NOW", "kind": "live" },
-      { "id": "flagship", "label": "Asiko Flagship" },
-      { "id": "nollywood", "label": "Nollywood & Drama" },
-      { "id": "faith", "label": "Faith" },
-      { "id": "news", "label": "News & Current Affairs" },
-      { "id": "music", "label": "Music" },
-      { "id": "comedy", "label": "Comedy" },
-      { "id": "lifestyle", "label": "Lifestyle" },
-      { "id": "culture", "label": "Culture & Heritage" },
-      { "id": "kids", "label": "Kiddies & Teens" },
-      { "id": "fashion", "label": "Beauty & Fashion" },
-      { "id": "business", "label": "Business" },
-      { "id": "competitions", "label": "Competitions — vote now", "kind": "competition", "entries": [
-        { "id": "genxt", "name": "TV Entrepreneur GenXT", "tagline": "Africa's boldest founders pitch to win" },
-        { "id": "kulture", "name": "Kulture Streams", "tagline": "Nollywood in your tongue — pan-African showdown" },
-        { "id": "edo", "name": "Edo Kulture Streams (EKS TV)", "tagline": "Edo language & heritage, live on stage" }
-      ] },
-      { "id": "weddings", "label": "Weddings", "coming": true, "placeholders": ["Hooked", "GhanaWeds"] },
-      { "id": "sports", "label": "Sports", "coming": true, "placeholders": ["Sportsville TV", "Striker", "Spires TV", "Afrosports"] },
-      { "id": "shopping", "label": "Shopping & Marketplace", "coming": true, "placeholders": ["The Cowrie", "BUY TV", "1MATV — One Market Africa"] },
-      { "id": "travel", "label": "Travel & Tourism", "coming": true, "placeholders": ["Travel Nigeria", "ATQ TV"] },
-      { "id": "women", "label": "Women's Empowerment", "coming": true, "placeholders": ["TWC — The Woman Channel", "Women Connect TV"] },
-      { "id": "cinemas", "label": "Asiko Cinemas — On Demand", "coming": true, "kind": "vod", "placeholders": ["New Releases", "Nollywood Classics", "Yoruba Cinema", "Igbo Cinema", "Kannywood", "Documentaries", "Faith Movies", "Kids Movies"] }
+      {
+        "id": "live",
+        "label": "LIVE NOW",
+        "kind": "live"
+      },
+      {
+        "id": "flagship",
+        "label": "Asiko Flagship"
+      },
+      {
+        "id": "nollywood",
+        "label": "Nollywood & Drama"
+      },
+      {
+        "id": "faith",
+        "label": "Faith"
+      },
+      {
+        "id": "news",
+        "label": "News & Current Affairs"
+      },
+      {
+        "id": "music",
+        "label": "Music"
+      },
+      {
+        "id": "comedy",
+        "label": "Comedy"
+      },
+      {
+        "id": "lifestyle",
+        "label": "Lifestyle"
+      },
+      {
+        "id": "culture",
+        "label": "Culture & Heritage"
+      },
+      {
+        "id": "kids",
+        "label": "Kiddies & Teens"
+      },
+      {
+        "id": "fashion",
+        "label": "Beauty & Fashion"
+      },
+      {
+        "id": "business",
+        "label": "Business"
+      },
+      {
+        "id": "competitions",
+        "label": "Competitions — vote now",
+        "kind": "competition",
+        "entries": [
+          {
+            "id": "genxt",
+            "name": "TV Entrepreneur GenXT",
+            "tagline": "Africa's boldest founders pitch to win"
+          },
+          {
+            "id": "kulture",
+            "name": "Kulture Streams",
+            "tagline": "Nollywood in your tongue — pan-African showdown"
+          },
+          {
+            "id": "edo",
+            "name": "Edo Kulture Streams (EKS TV)",
+            "tagline": "Edo language & heritage, live on stage"
+          }
+        ]
+      },
+      {
+        "id": "weddings",
+        "label": "Weddings",
+        "coming": true,
+        "placeholders": [
+          "Hooked",
+          "GhanaWeds"
+        ]
+      },
+      {
+        "id": "sports",
+        "label": "Sports",
+        "coming": true,
+        "placeholders": [
+          "Sportsville TV",
+          "Striker",
+          "Spires TV",
+          "Afrosports"
+        ]
+      },
+      {
+        "id": "shopping",
+        "label": "Shopping & Marketplace",
+        "coming": true,
+        "placeholders": [
+          "The Cowrie",
+          "BUY TV",
+          "1MATV — One Market Africa"
+        ]
+      },
+      {
+        "id": "travel",
+        "label": "Travel & Tourism",
+        "coming": true,
+        "placeholders": [
+          "Travel Nigeria",
+          "ATQ TV"
+        ]
+      },
+      {
+        "id": "women",
+        "label": "Women's Empowerment",
+        "coming": true,
+        "placeholders": [
+          "TWC — The Woman Channel",
+          "Women Connect TV"
+        ]
+      },
+      {
+        "id": "cinemas",
+        "label": "Asiko Cinemas — On Demand",
+        "coming": true,
+        "kind": "vod",
+        "placeholders": [
+          "New Releases",
+          "Nollywood Classics",
+          "Yoruba Cinema",
+          "Igbo Cinema",
+          "Kannywood",
+          "Documentaries",
+          "Faith Movies",
+          "Kids Movies"
+        ]
+      }
     ]
   },
   "channels": [
-    { "num": 1, "id": "asikotv", "name": "ASIKO TV", "genre": "Flagship · Full Bouquet", "category": "flagship", "accent": "#d8a94b", "src": "https://test-streams.mux.dev/tos_ismc/main.m3u8", "durationSec": 734,
-      "programs": [ { "title": "Asiko Breakfast — Best of the Bouquet", "duration": 120 }, { "title": "Nollywood Now", "duration": 90 }, { "title": "The Africa Brief", "duration": 45 }, { "title": "Afternoon Movie Premiere", "duration": 120 }, { "title": "Music & Culture Mix", "duration": 60 }, { "title": "Prime Time: Channel of the Week", "duration": 120 }, { "title": "Faith & Reflection", "duration": 45 }, { "title": "Late Reel — Overnight Simulcast", "duration": 200 } ] },
-    { "num": 2, "id": "asikoplus", "name": "ASIKO+", "genre": "Flagship · Premium Layer", "category": "flagship", "accent": "#d8a94b", "src": "https://maitv-vod.lab.eyevinn.technology/tearsofsteel_4k.mov/master.m3u8", "durationSec": 734,
-      "programs": [ { "title": "Premiere Window — Exclusive First Runs", "duration": 130 }, { "title": "Binge Block: Box Set of the Day", "duration": 180 }, { "title": "Diaspora-First Special", "duration": 90 }, { "title": "Curated Cinema", "duration": 120 }, { "title": "Creator Spotlight", "duration": 60 }, { "title": "Ad-Light Prime Feature", "duration": 130 }, { "title": "After Hours Selects", "duration": 200 } ] },
-    { "num": 3, "id": "movieafrica", "name": "MOVIE AFRICA", "genre": "Nollywood & Beyond", "category": "nollywood", "accent": "#d8a94b", "src": "https://test-streams.mux.dev/tos_ismc/main.m3u8", "durationSec": 734,
-      "programs": [ { "title": "Morning Movie", "duration": 120 }, { "title": "Nollywood Classics", "duration": 120 }, { "title": "New Release Premiere", "duration": 120 }, { "title": "Behind the Scenes", "duration": 40 }, { "title": "Our Stories, Our Movies", "duration": 90 }, { "title": "Evening Feature", "duration": 130 }, { "title": "Late Night Thriller", "duration": 120 } ] },
-    { "num": 4, "id": "ma-yoruba", "name": "MOVIE AFRICA: YORUBA", "genre": "Nollywood · Yoruba", "category": "nollywood", "accent": "#d8a94b", "src": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", "durationSec": 596,
-      "programs": [ { "title": "Yoruba Epic Morning", "duration": 120 }, { "title": "Classic Epic & Apata", "duration": 120 }, { "title": "Contemporary Yoruba Drama", "duration": 110 }, { "title": "Stars of the Industry", "duration": 45 }, { "title": "Afternoon Feature (subtitled)", "duration": 120 }, { "title": "Prime Yoruba Movie", "duration": 130 }, { "title": "Late Screening", "duration": 180 } ] },
-    { "num": 5, "id": "ma-epic", "name": "MOVIE AFRICA: EPIC", "genre": "Nollywood · Epic & Historical", "category": "nollywood", "accent": "#d8a94b", "src": "https://maitv-vod.lab.eyevinn.technology/tearsofsteel_4k.mov/master.m3u8", "durationSec": 734,
-      "programs": [ { "title": "Kingdoms of Old", "duration": 120 }, { "title": "Warriors & Legends", "duration": 120 }, { "title": "Feature: The Throne", "duration": 130 }, { "title": "Folklore Retold", "duration": 60 }, { "title": "Epic Double Bill", "duration": 220 }, { "title": "Overnight Epics", "duration": 200 } ] },
-    { "num": 6, "id": "sinema-olopin", "name": "SINEMA OLOPIN", "genre": "Yoruba Movies & Culture", "category": "nollywood", "accent": "#d8a94b", "src": "https://test-streams.mux.dev/tos_ismc/main.m3u8", "durationSec": 734,
-      "programs": [ { "title": "Culture Laid Bare", "duration": 90 }, { "title": "Morning Yoruba Feature (English subs)", "duration": 120 }, { "title": "Talk & Talent", "duration": 60 }, { "title": "Heritage Reel", "duration": 45 }, { "title": "Afternoon Movie", "duration": 120 }, { "title": "Prime Feature", "duration": 130 }, { "title": "Late Show", "duration": 180 } ] },
-    { "num": 7, "id": "movieindia", "name": "MOVIE INDIA", "genre": "Bollywood", "category": "nollywood", "accent": "#d8a94b", "src": "https://maitv-vod.lab.eyevinn.technology/tearsofsteel_4k.mov/master.m3u8", "durationSec": 734,
-      "programs": [ { "title": "Bollywood Breakfast", "duration": 150 }, { "title": "Song & Dance Hour", "duration": 60 }, { "title": "Afternoon Blockbuster", "duration": 150 }, { "title": "Star Interviews", "duration": 45 }, { "title": "Prime Blockbuster", "duration": 160 }, { "title": "Late Movie", "duration": 180 } ] },
-    { "num": 8, "id": "ppg", "name": "PPG", "genre": "Praise · Power · Glory", "category": "faith", "accent": "#d8a94b", "src": "https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.ism/.m3u8", "durationSec": 692,
-      "programs": [ { "title": "Morning Praise", "duration": 90 }, { "title": "Nonstop Worship", "duration": 120 }, { "title": "The Word Today", "duration": 60 }, { "title": "Gospel Music Hour", "duration": 60 }, { "title": "Testimonies", "duration": 45 }, { "title": "Evening Praise & Worship", "duration": 90 }, { "title": "Overnight Worship", "duration": 240 } ] },
-    { "num": 9, "id": "amenmovies", "name": "AMEN MOVIES", "genre": "Christian Movies", "category": "faith", "accent": "#d8a94b", "src": "https://test-streams.mux.dev/tos_ismc/main.m3u8", "durationSec": 734,
-      "programs": [ { "title": "Faith Feature: Morning", "duration": 120 }, { "title": "Christian Drama Series", "duration": 90 }, { "title": "Afternoon Movie", "duration": 120 }, { "title": "Family & Faith", "duration": 60 }, { "title": "Prime Christian Movie", "duration": 120 }, { "title": "Late Feature", "duration": 180 } ] },
-    { "num": 10, "id": "mandatenews", "name": "MANDATE NEWS INTERNATIONAL", "genre": "News", "category": "news", "accent": "#d8a94b", "src": "https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.ism/.m3u8", "durationSec": 692,
-      "programs": [ { "title": "Africa This Morning", "duration": 120 }, { "title": "Market Open", "duration": 30 }, { "title": "The Newsroom", "duration": 60 }, { "title": "Continental Report", "duration": 60 }, { "title": "Midday Bulletin", "duration": 30 }, { "title": "In Depth: The Long Read", "duration": 60 }, { "title": "Evening Edition", "duration": 90 }, { "title": "Night Desk", "duration": 120 }, { "title": "Headlines on the Hour", "duration": 160 } ] },
-    { "num": 11, "id": "goldmyne", "name": "GOLDMYNE TV", "genre": "Entertainment News & Gist", "category": "news", "accent": "#d8a94b", "src": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", "durationSec": 596,
-      "programs": [ { "title": "Morning Gist", "duration": 90 }, { "title": "Red Carpet Rewind", "duration": 60 }, { "title": "Celebrity Interviews", "duration": 60 }, { "title": "Industry News", "duration": 45 }, { "title": "The Story Behind the Stars", "duration": 90 }, { "title": "Evening Buzz", "duration": 60 }, { "title": "After Dark Gist", "duration": 180 } ] },
-    { "num": 12, "id": "fad360", "name": "FAD360", "genre": "News", "category": "news", "accent": "#d8a94b", "src": "https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.ism/.m3u8", "durationSec": 692,
-      "programs": [ { "title": "360 Morning", "duration": 120 }, { "title": "Politics Desk", "duration": 60 }, { "title": "The Culture Desk", "duration": 60 }, { "title": "Continental Wrap", "duration": 45 }, { "title": "Evening 360", "duration": 90 }, { "title": "Overnight Wire", "duration": 200 } ] },
-    { "num": 13, "id": "play", "name": "PLAY", "genre": "African Music + Lifestyle", "category": "music", "accent": "#d8a94b", "src": "https://maitv-vod.lab.eyevinn.technology/VINN.mp4/master.m3u8", "durationSec": 370,
-      "programs": [ { "title": "Wake-Up Playlist", "duration": 120 }, { "title": "Fresh Naija", "duration": 60 }, { "title": "Afrobeats & Amapiano", "duration": 90 }, { "title": "Retro Rewind", "duration": 60 }, { "title": "Drive-Time Mix", "duration": 120 }, { "title": "Live Session Replays", "duration": 90 }, { "title": "After Dark Sessions", "duration": 200 } ] },
-    { "num": 14, "id": "platinumplay", "name": "PLATINUM PLAY", "genre": "Urban Music", "category": "music", "accent": "#d8a94b", "src": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", "durationSec": 596,
-      "programs": [ { "title": "Morning Rotation", "duration": 120 }, { "title": "Hip-Hop & Dancehall", "duration": 90 }, { "title": "The Platinum 20", "duration": 90 }, { "title": "New Video Premieres", "duration": 60 }, { "title": "Club Rotation", "duration": 120 }, { "title": "Overnight Loop", "duration": 220 } ] },
-    { "num": 15, "id": "laffotv", "name": "LAFFO TV", "genre": "Comedy", "category": "comedy", "accent": "#d8a94b", "src": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", "durationSec": 596,
-      "programs": [ { "title": "Skit Marathon", "duration": 90 }, { "title": "Stand-Up Hour", "duration": 60 }, { "title": "Kings of Comedy", "duration": 90 }, { "title": "Sitcom Block", "duration": 120 }, { "title": "Prime Comedy Special", "duration": 110 }, { "title": "Late Laughs", "duration": 180 } ] },
-    { "num": 16, "id": "nite1000", "name": "NITE OF A THOUSAND LAUGHS", "genre": "Comedy", "category": "comedy", "accent": "#d8a94b", "src": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", "durationSec": 596,
-      "programs": [ { "title": "Classic Nite Sets", "duration": 120 }, { "title": "The Franchise Archive", "duration": 90 }, { "title": "Headline Acts", "duration": 90 }, { "title": "Backstage", "duration": 45 }, { "title": "Prime Stand-Up Reel", "duration": 120 }, { "title": "Overnight Comedy", "duration": 200 } ] },
-    { "num": 17, "id": "tattase", "name": "TATTASE", "genre": "Food, Culture & Lifestyle", "category": "lifestyle", "accent": "#d8a94b", "src": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", "durationSec": 596,
-      "programs": [ { "title": "Market Run", "duration": 60 }, { "title": "Recipes of the Continent", "duration": 60 }, { "title": "Food Brands & Makers", "duration": 90 }, { "title": "Tourism Trail", "duration": 60 }, { "title": "Chef's Table", "duration": 90 }, { "title": "Weekend Feast", "duration": 120 }, { "title": "Late Bites", "duration": 180 } ] },
-    { "num": 18, "id": "naija", "name": "NAIJA", "genre": "Nigerian Lifestyle", "category": "lifestyle", "accent": "#d8a94b", "src": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", "durationSec": 596,
-      "programs": [ { "title": "The Lingo Show", "duration": 60 }, { "title": "Naija Kitchen", "duration": 60 }, { "title": "Street & Style", "duration": 90 }, { "title": "The Daily Challenge", "duration": 45 }, { "title": "Evening Lifestyle", "duration": 90 }, { "title": "Naija After Dark", "duration": 180 } ] },
-    { "num": 19, "id": "heritagetv", "name": "HERITAGE TV", "genre": "Culture & Heritage", "category": "culture", "accent": "#d8a94b", "src": "https://maitv-vod.lab.eyevinn.technology/tearsofsteel_4k.mov/master.m3u8", "durationSec": 734,
-      "programs": [ { "title": "Africa's History Hour", "duration": 120 }, { "title": "Traditions & Rites", "duration": 90 }, { "title": "Documentary: Cultural Memory", "duration": 120 }, { "title": "Oral Histories", "duration": 45 }, { "title": "Prime Documentary", "duration": 120 }, { "title": "Late Archive", "duration": 200 } ] },
-    { "num": 20, "id": "arewa24", "name": "AREWA24", "genre": "Hausa Entertainment", "category": "culture", "accent": "#d8a94b", "src": "https://test-streams.mux.dev/tos_ismc/main.m3u8", "durationSec": 734,
-      "programs": [ { "title": "Arewa Morning", "duration": 120 }, { "title": "Kannywood Drama", "duration": 120 }, { "title": "Hausa Music Hour", "duration": 60 }, { "title": "Lifestyle Arewa", "duration": 60 }, { "title": "Prime Drama", "duration": 120 }, { "title": "Overnight", "duration": 200 } ] },
-    { "num": 21, "id": "bounce", "name": "BOUNCE", "genre": "Kids", "category": "kids", "accent": "#d8a94b", "src": "https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8", "durationSec": 1800,
-      "programs": [ { "title": "Sunrise Sing-Along", "duration": 90 }, { "title": "Little Treasures", "duration": 45 }, { "title": "Cartoon Carousel", "duration": 120 }, { "title": "Learn & Play", "duration": 60 }, { "title": "Afternoon Movie", "duration": 100 }, { "title": "Craft Club", "duration": 45 }, { "title": "Wind-Down Tales", "duration": 60 }, { "title": "Goodnight Loop", "duration": 220 } ] },
-    { "num": 22, "id": "teenafrica", "name": "TEEN AFRICA", "genre": "Teen & Youth Lifestyle", "category": "kids", "accent": "#d8a94b", "src": "https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8", "durationSec": 1800,
-      "programs": [ { "title": "Homeroom", "duration": 60 }, { "title": "Trends & Music", "duration": 90 }, { "title": "Campus Life", "duration": 60 }, { "title": "Issues That Matter", "duration": 45 }, { "title": "Talent Showcase", "duration": 90 }, { "title": "Evening Hangout", "duration": 120 }, { "title": "Late Loop", "duration": 200 } ] },
-    { "num": 23, "id": "questv", "name": "QUESTV", "genre": "Fashion, Beauty & Style", "category": "fashion", "accent": "#d8a94b", "src": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", "durationSec": 596,
-      "programs": [ { "title": "Front Row", "duration": 60 }, { "title": "Designer Files", "duration": 60 }, { "title": "The Beauty Desk", "duration": 60 }, { "title": "Runway Africa", "duration": 90 }, { "title": "Style Icons", "duration": 60 }, { "title": "Evening Glamour", "duration": 90 }, { "title": "After Hours Style", "duration": 180 } ] },
-    { "num": 24, "id": "shakara", "name": "SHAKARA", "genre": "African Fashion", "category": "fashion", "accent": "#d8a94b", "src": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", "durationSec": 596,
-      "programs": [ { "title": "Afrocentric Runway", "duration": 90 }, { "title": "Made in Africa", "duration": 60 }, { "title": "Textiles & Craft", "duration": 60 }, { "title": "Street Style", "duration": 60 }, { "title": "Prime Showcase", "duration": 90 }, { "title": "Overnight Style Loop", "duration": 200 } ] },
-    { "num": 25, "id": "businessday", "name": "BUSINESS DAY TV", "genre": "Business & Finance News", "category": "business", "accent": "#d8a94b", "src": "https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.ism/.m3u8", "durationSec": 692,
-      "programs": [ { "title": "Market Open", "duration": 60 }, { "title": "Macro Morning", "duration": 60 }, { "title": "Deals & Dealmakers", "duration": 60 }, { "title": "Policy Watch", "duration": 45 }, { "title": "Closing Bell", "duration": 60 }, { "title": "Analysis: The Long View", "duration": 90 }, { "title": "Overnight Markets", "duration": 200 } ] },
-    { "num": 26, "id": "csuite", "name": "C-SUITE CAFE", "genre": "Business & Executive Talk", "category": "business", "accent": "#d8a94b", "src": "https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.ism/.m3u8", "durationSec": 692,
-      "programs": [ { "title": "Founders' Table", "duration": 60 }, { "title": "The CEO Interview", "duration": 60 }, { "title": "Leadership Lab", "duration": 60 }, { "title": "Strategy Session", "duration": 45 }, { "title": "Prime Conversation", "duration": 90 }, { "title": "Late Replay", "duration": 180 } ] },
-    { "num": 27, "id": "asikolive", "name": "ASIKO LIVE", "genre": "Live Event", "category": "live", "accent": "#df3b34", "live": true, "liveTitle": "LIVE — real feed, Eyevinn + Bunny",
+    {
+      "num": 1,
+      "id": "asikotv",
+      "name": "ASIKO TV",
+      "genre": "Flagship · Full Bouquet",
+      "category": "flagship",
+      "accent": "#d8a94b",
+      "src": "https://johnupahsw.ce.prod-se.osaas.io/channels/asiko01/master.m3u8",
+      "durationSec": 734,
+      "programs": [
+        {
+          "title": "Asiko Breakfast — Best of the Bouquet",
+          "duration": 120
+        },
+        {
+          "title": "Nollywood Now",
+          "duration": 90
+        },
+        {
+          "title": "The Africa Brief",
+          "duration": 45
+        },
+        {
+          "title": "Afternoon Movie Premiere",
+          "duration": 120
+        },
+        {
+          "title": "Music & Culture Mix",
+          "duration": 60
+        },
+        {
+          "title": "Prime Time: Channel of the Week",
+          "duration": 120
+        },
+        {
+          "title": "Faith & Reflection",
+          "duration": 45
+        },
+        {
+          "title": "Late Reel — Overnight Simulcast",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "num": 2,
+      "id": "asikoplus",
+      "name": "ASIKO+",
+      "genre": "Flagship · Premium Layer",
+      "category": "flagship",
+      "accent": "#d8a94b",
+      "src": "https://johnupahsw.ce.prod-se.osaas.io/channels/asiko02/master.m3u8",
+      "durationSec": 734,
+      "programs": [
+        {
+          "title": "Premiere Window — Exclusive First Runs",
+          "duration": 130
+        },
+        {
+          "title": "Binge Block: Box Set of the Day",
+          "duration": 180
+        },
+        {
+          "title": "Diaspora-First Special",
+          "duration": 90
+        },
+        {
+          "title": "Curated Cinema",
+          "duration": 120
+        },
+        {
+          "title": "Creator Spotlight",
+          "duration": 60
+        },
+        {
+          "title": "Ad-Light Prime Feature",
+          "duration": 130
+        },
+        {
+          "title": "After Hours Selects",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "num": 3,
+      "id": "movieafrica",
+      "name": "MOVIE AFRICA",
+      "genre": "Nollywood & Beyond",
+      "category": "nollywood",
+      "accent": "#d8a94b",
+      "src": "https://johnupahsw.ce.prod-se.osaas.io/channels/asiko03/master.m3u8",
+      "durationSec": 734,
+      "programs": [
+        {
+          "title": "Morning Movie",
+          "duration": 120
+        },
+        {
+          "title": "Nollywood Classics",
+          "duration": 120
+        },
+        {
+          "title": "New Release Premiere",
+          "duration": 120
+        },
+        {
+          "title": "Behind the Scenes",
+          "duration": 40
+        },
+        {
+          "title": "Our Stories, Our Movies",
+          "duration": 90
+        },
+        {
+          "title": "Evening Feature",
+          "duration": 130
+        },
+        {
+          "title": "Late Night Thriller",
+          "duration": 120
+        }
+      ]
+    },
+    {
+      "num": 4,
+      "id": "ma-yoruba",
+      "name": "MOVIE AFRICA: YORUBA",
+      "genre": "Nollywood · Yoruba",
+      "category": "nollywood",
+      "accent": "#d8a94b",
+      "src": "https://johnupahsw.ce.prod-se.osaas.io/channels/asiko04/master.m3u8",
+      "durationSec": 596,
+      "programs": [
+        {
+          "title": "Yoruba Epic Morning",
+          "duration": 120
+        },
+        {
+          "title": "Classic Epic & Apata",
+          "duration": 120
+        },
+        {
+          "title": "Contemporary Yoruba Drama",
+          "duration": 110
+        },
+        {
+          "title": "Stars of the Industry",
+          "duration": 45
+        },
+        {
+          "title": "Afternoon Feature (subtitled)",
+          "duration": 120
+        },
+        {
+          "title": "Prime Yoruba Movie",
+          "duration": 130
+        },
+        {
+          "title": "Late Screening",
+          "duration": 180
+        }
+      ]
+    },
+    {
+      "num": 5,
+      "id": "ma-epic",
+      "name": "MOVIE AFRICA: EPIC",
+      "genre": "Nollywood · Epic & Historical",
+      "category": "nollywood",
+      "accent": "#d8a94b",
+      "src": "https://johnupahsw.ce.prod-se.osaas.io/channels/asiko05/master.m3u8",
+      "durationSec": 734,
+      "programs": [
+        {
+          "title": "Kingdoms of Old",
+          "duration": 120
+        },
+        {
+          "title": "Warriors & Legends",
+          "duration": 120
+        },
+        {
+          "title": "Feature: The Throne",
+          "duration": 130
+        },
+        {
+          "title": "Folklore Retold",
+          "duration": 60
+        },
+        {
+          "title": "Epic Double Bill",
+          "duration": 220
+        },
+        {
+          "title": "Overnight Epics",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "num": 6,
+      "id": "sinema-olopin",
+      "name": "SINEMA OLOPIN",
+      "genre": "Yoruba Movies & Culture",
+      "category": "nollywood",
+      "accent": "#d8a94b",
+      "src": "https://johnupahsw.ce.prod-se.osaas.io/channels/asiko06/master.m3u8",
+      "durationSec": 734,
+      "programs": [
+        {
+          "title": "Culture Laid Bare",
+          "duration": 90
+        },
+        {
+          "title": "Morning Yoruba Feature (English subs)",
+          "duration": 120
+        },
+        {
+          "title": "Talk & Talent",
+          "duration": 60
+        },
+        {
+          "title": "Heritage Reel",
+          "duration": 45
+        },
+        {
+          "title": "Afternoon Movie",
+          "duration": 120
+        },
+        {
+          "title": "Prime Feature",
+          "duration": 130
+        },
+        {
+          "title": "Late Show",
+          "duration": 180
+        }
+      ]
+    },
+    {
+      "num": 7,
+      "id": "movieindia",
+      "name": "MOVIE INDIA",
+      "genre": "Bollywood",
+      "category": "nollywood",
+      "accent": "#d8a94b",
+      "src": "https://johnupahsw.ce.prod-se.osaas.io/channels/asiko07/master.m3u8",
+      "durationSec": 734,
+      "programs": [
+        {
+          "title": "Bollywood Breakfast",
+          "duration": 150
+        },
+        {
+          "title": "Song & Dance Hour",
+          "duration": 60
+        },
+        {
+          "title": "Afternoon Blockbuster",
+          "duration": 150
+        },
+        {
+          "title": "Star Interviews",
+          "duration": 45
+        },
+        {
+          "title": "Prime Blockbuster",
+          "duration": 160
+        },
+        {
+          "title": "Late Movie",
+          "duration": 180
+        }
+      ]
+    },
+    {
+      "num": 8,
+      "id": "ppg",
+      "name": "PPG",
+      "genre": "Praise · Power · Glory",
+      "category": "faith",
+      "accent": "#d8a94b",
+      "src": "https://johnupahsw.ce.prod-se.osaas.io/channels/asiko08/master.m3u8",
+      "durationSec": 692,
+      "programs": [
+        {
+          "title": "Morning Praise",
+          "duration": 90
+        },
+        {
+          "title": "Nonstop Worship",
+          "duration": 120
+        },
+        {
+          "title": "The Word Today",
+          "duration": 60
+        },
+        {
+          "title": "Gospel Music Hour",
+          "duration": 60
+        },
+        {
+          "title": "Testimonies",
+          "duration": 45
+        },
+        {
+          "title": "Evening Praise & Worship",
+          "duration": 90
+        },
+        {
+          "title": "Overnight Worship",
+          "duration": 240
+        }
+      ]
+    },
+    {
+      "num": 9,
+      "id": "amenmovies",
+      "name": "AMEN MOVIES",
+      "genre": "Christian Movies",
+      "category": "faith",
+      "accent": "#d8a94b",
+      "src": "https://johnupahsw.ce.prod-se.osaas.io/channels/asiko09/master.m3u8",
+      "durationSec": 734,
+      "programs": [
+        {
+          "title": "Faith Feature: Morning",
+          "duration": 120
+        },
+        {
+          "title": "Christian Drama Series",
+          "duration": 90
+        },
+        {
+          "title": "Afternoon Movie",
+          "duration": 120
+        },
+        {
+          "title": "Family & Faith",
+          "duration": 60
+        },
+        {
+          "title": "Prime Christian Movie",
+          "duration": 120
+        },
+        {
+          "title": "Late Feature",
+          "duration": 180
+        }
+      ]
+    },
+    {
+      "num": 10,
+      "id": "mandatenews",
+      "name": "MANDATE NEWS INTERNATIONAL",
+      "genre": "News",
+      "category": "news",
+      "accent": "#d8a94b",
+      "src": "https://johnupahsw.ce.prod-se.osaas.io/channels/asiko10/master.m3u8",
+      "durationSec": 692,
+      "programs": [
+        {
+          "title": "Africa This Morning",
+          "duration": 120
+        },
+        {
+          "title": "Market Open",
+          "duration": 30
+        },
+        {
+          "title": "The Newsroom",
+          "duration": 60
+        },
+        {
+          "title": "Continental Report",
+          "duration": 60
+        },
+        {
+          "title": "Midday Bulletin",
+          "duration": 30
+        },
+        {
+          "title": "In Depth: The Long Read",
+          "duration": 60
+        },
+        {
+          "title": "Evening Edition",
+          "duration": 90
+        },
+        {
+          "title": "Night Desk",
+          "duration": 120
+        },
+        {
+          "title": "Headlines on the Hour",
+          "duration": 160
+        }
+      ]
+    },
+    {
+      "num": 11,
+      "id": "goldmyne",
+      "name": "GOLDMYNE TV",
+      "genre": "Entertainment News & Gist",
+      "category": "news",
+      "accent": "#d8a94b",
+      "src": "https://johnupahsw.ce.prod-se.osaas.io/channels/asiko11/master.m3u8",
+      "durationSec": 596,
+      "programs": [
+        {
+          "title": "Morning Gist",
+          "duration": 90
+        },
+        {
+          "title": "Red Carpet Rewind",
+          "duration": 60
+        },
+        {
+          "title": "Celebrity Interviews",
+          "duration": 60
+        },
+        {
+          "title": "Industry News",
+          "duration": 45
+        },
+        {
+          "title": "The Story Behind the Stars",
+          "duration": 90
+        },
+        {
+          "title": "Evening Buzz",
+          "duration": 60
+        },
+        {
+          "title": "After Dark Gist",
+          "duration": 180
+        }
+      ]
+    },
+    {
+      "num": 12,
+      "id": "fad360",
+      "name": "FAD360",
+      "genre": "News",
+      "category": "news",
+      "accent": "#d8a94b",
+      "src": "https://johnupahsw.ce.prod-se.osaas.io/channels/asiko12/master.m3u8",
+      "durationSec": 692,
+      "programs": [
+        {
+          "title": "360 Morning",
+          "duration": 120
+        },
+        {
+          "title": "Politics Desk",
+          "duration": 60
+        },
+        {
+          "title": "The Culture Desk",
+          "duration": 60
+        },
+        {
+          "title": "Continental Wrap",
+          "duration": 45
+        },
+        {
+          "title": "Evening 360",
+          "duration": 90
+        },
+        {
+          "title": "Overnight Wire",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "num": 13,
+      "id": "play",
+      "name": "PLAY",
+      "genre": "African Music + Lifestyle",
+      "category": "music",
+      "accent": "#d8a94b",
+      "src": "https://johnupahsw.ce.prod-se.osaas.io/channels/asiko13/master.m3u8",
+      "durationSec": 370,
+      "programs": [
+        {
+          "title": "Wake-Up Playlist",
+          "duration": 120
+        },
+        {
+          "title": "Fresh Naija",
+          "duration": 60
+        },
+        {
+          "title": "Afrobeats & Amapiano",
+          "duration": 90
+        },
+        {
+          "title": "Retro Rewind",
+          "duration": 60
+        },
+        {
+          "title": "Drive-Time Mix",
+          "duration": 120
+        },
+        {
+          "title": "Live Session Replays",
+          "duration": 90
+        },
+        {
+          "title": "After Dark Sessions",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "num": 14,
+      "id": "platinumplay",
+      "name": "PLATINUM PLAY",
+      "genre": "Urban Music",
+      "category": "music",
+      "accent": "#d8a94b",
+      "src": "https://johnupahsw.ce.prod-se.osaas.io/channels/asiko14/master.m3u8",
+      "durationSec": 596,
+      "programs": [
+        {
+          "title": "Morning Rotation",
+          "duration": 120
+        },
+        {
+          "title": "Hip-Hop & Dancehall",
+          "duration": 90
+        },
+        {
+          "title": "The Platinum 20",
+          "duration": 90
+        },
+        {
+          "title": "New Video Premieres",
+          "duration": 60
+        },
+        {
+          "title": "Club Rotation",
+          "duration": 120
+        },
+        {
+          "title": "Overnight Loop",
+          "duration": 220
+        }
+      ]
+    },
+    {
+      "num": 15,
+      "id": "laffotv",
+      "name": "LAFFO TV",
+      "genre": "Comedy",
+      "category": "comedy",
+      "accent": "#d8a94b",
+      "src": "https://johnupahsw.ce.prod-se.osaas.io/channels/asiko15/master.m3u8",
+      "durationSec": 596,
+      "programs": [
+        {
+          "title": "Skit Marathon",
+          "duration": 90
+        },
+        {
+          "title": "Stand-Up Hour",
+          "duration": 60
+        },
+        {
+          "title": "Kings of Comedy",
+          "duration": 90
+        },
+        {
+          "title": "Sitcom Block",
+          "duration": 120
+        },
+        {
+          "title": "Prime Comedy Special",
+          "duration": 110
+        },
+        {
+          "title": "Late Laughs",
+          "duration": 180
+        }
+      ]
+    },
+    {
+      "num": 16,
+      "id": "nite1000",
+      "name": "NITE OF A THOUSAND LAUGHS",
+      "genre": "Comedy",
+      "category": "comedy",
+      "accent": "#d8a94b",
+      "src": "https://johnupahsw.ce.prod-se.osaas.io/channels/asiko16/master.m3u8",
+      "durationSec": 596,
+      "programs": [
+        {
+          "title": "Classic Nite Sets",
+          "duration": 120
+        },
+        {
+          "title": "The Franchise Archive",
+          "duration": 90
+        },
+        {
+          "title": "Headline Acts",
+          "duration": 90
+        },
+        {
+          "title": "Backstage",
+          "duration": 45
+        },
+        {
+          "title": "Prime Stand-Up Reel",
+          "duration": 120
+        },
+        {
+          "title": "Overnight Comedy",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "num": 17,
+      "id": "tattase",
+      "name": "TATTASE",
+      "genre": "Food, Culture & Lifestyle",
+      "category": "lifestyle",
+      "accent": "#d8a94b",
+      "src": "https://johnupahsw.ce.prod-se.osaas.io/channels/asiko17/master.m3u8",
+      "durationSec": 596,
+      "programs": [
+        {
+          "title": "Market Run",
+          "duration": 60
+        },
+        {
+          "title": "Recipes of the Continent",
+          "duration": 60
+        },
+        {
+          "title": "Food Brands & Makers",
+          "duration": 90
+        },
+        {
+          "title": "Tourism Trail",
+          "duration": 60
+        },
+        {
+          "title": "Chef's Table",
+          "duration": 90
+        },
+        {
+          "title": "Weekend Feast",
+          "duration": 120
+        },
+        {
+          "title": "Late Bites",
+          "duration": 180
+        }
+      ]
+    },
+    {
+      "num": 18,
+      "id": "naija",
+      "name": "NAIJA",
+      "genre": "Nigerian Lifestyle",
+      "category": "lifestyle",
+      "accent": "#d8a94b",
+      "src": "https://johnupahsw.ce.prod-se.osaas.io/channels/asiko18/master.m3u8",
+      "durationSec": 596,
+      "programs": [
+        {
+          "title": "The Lingo Show",
+          "duration": 60
+        },
+        {
+          "title": "Naija Kitchen",
+          "duration": 60
+        },
+        {
+          "title": "Street & Style",
+          "duration": 90
+        },
+        {
+          "title": "The Daily Challenge",
+          "duration": 45
+        },
+        {
+          "title": "Evening Lifestyle",
+          "duration": 90
+        },
+        {
+          "title": "Naija After Dark",
+          "duration": 180
+        }
+      ]
+    },
+    {
+      "num": 19,
+      "id": "heritagetv",
+      "name": "HERITAGE TV",
+      "genre": "Culture & Heritage",
+      "category": "culture",
+      "accent": "#d8a94b",
+      "src": "https://johnupahsw.ce.prod-se.osaas.io/channels/asiko19/master.m3u8",
+      "durationSec": 734,
+      "programs": [
+        {
+          "title": "Africa's History Hour",
+          "duration": 120
+        },
+        {
+          "title": "Traditions & Rites",
+          "duration": 90
+        },
+        {
+          "title": "Documentary: Cultural Memory",
+          "duration": 120
+        },
+        {
+          "title": "Oral Histories",
+          "duration": 45
+        },
+        {
+          "title": "Prime Documentary",
+          "duration": 120
+        },
+        {
+          "title": "Late Archive",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "num": 20,
+      "id": "arewa24",
+      "name": "AREWA24",
+      "genre": "Hausa Entertainment",
+      "category": "culture",
+      "accent": "#d8a94b",
+      "src": "https://johnupahsw.ce.prod-se.osaas.io/channels/asiko20/master.m3u8",
+      "durationSec": 734,
+      "programs": [
+        {
+          "title": "Arewa Morning",
+          "duration": 120
+        },
+        {
+          "title": "Kannywood Drama",
+          "duration": 120
+        },
+        {
+          "title": "Hausa Music Hour",
+          "duration": 60
+        },
+        {
+          "title": "Lifestyle Arewa",
+          "duration": 60
+        },
+        {
+          "title": "Prime Drama",
+          "duration": 120
+        },
+        {
+          "title": "Overnight",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "num": 21,
+      "id": "bounce",
+      "name": "BOUNCE",
+      "genre": "Kids",
+      "category": "kids",
+      "accent": "#d8a94b",
+      "src": "https://johnupahsw.ce.prod-se.osaas.io/channels/asiko21/master.m3u8",
+      "durationSec": 1800,
+      "programs": [
+        {
+          "title": "Sunrise Sing-Along",
+          "duration": 90
+        },
+        {
+          "title": "Little Treasures",
+          "duration": 45
+        },
+        {
+          "title": "Cartoon Carousel",
+          "duration": 120
+        },
+        {
+          "title": "Learn & Play",
+          "duration": 60
+        },
+        {
+          "title": "Afternoon Movie",
+          "duration": 100
+        },
+        {
+          "title": "Craft Club",
+          "duration": 45
+        },
+        {
+          "title": "Wind-Down Tales",
+          "duration": 60
+        },
+        {
+          "title": "Goodnight Loop",
+          "duration": 220
+        }
+      ]
+    },
+    {
+      "num": 22,
+      "id": "teenafrica",
+      "name": "TEEN AFRICA",
+      "genre": "Teen & Youth Lifestyle",
+      "category": "kids",
+      "accent": "#d8a94b",
+      "src": "https://johnupahsw.ce.prod-se.osaas.io/channels/asiko22/master.m3u8",
+      "durationSec": 1800,
+      "programs": [
+        {
+          "title": "Homeroom",
+          "duration": 60
+        },
+        {
+          "title": "Trends & Music",
+          "duration": 90
+        },
+        {
+          "title": "Campus Life",
+          "duration": 60
+        },
+        {
+          "title": "Issues That Matter",
+          "duration": 45
+        },
+        {
+          "title": "Talent Showcase",
+          "duration": 90
+        },
+        {
+          "title": "Evening Hangout",
+          "duration": 120
+        },
+        {
+          "title": "Late Loop",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "num": 23,
+      "id": "questv",
+      "name": "QUESTV",
+      "genre": "Fashion, Beauty & Style",
+      "category": "fashion",
+      "accent": "#d8a94b",
+      "src": "https://johnupahsw.ce.prod-se.osaas.io/channels/asiko23/master.m3u8",
+      "durationSec": 596,
+      "programs": [
+        {
+          "title": "Front Row",
+          "duration": 60
+        },
+        {
+          "title": "Designer Files",
+          "duration": 60
+        },
+        {
+          "title": "The Beauty Desk",
+          "duration": 60
+        },
+        {
+          "title": "Runway Africa",
+          "duration": 90
+        },
+        {
+          "title": "Style Icons",
+          "duration": 60
+        },
+        {
+          "title": "Evening Glamour",
+          "duration": 90
+        },
+        {
+          "title": "After Hours Style",
+          "duration": 180
+        }
+      ]
+    },
+    {
+      "num": 24,
+      "id": "shakara",
+      "name": "SHAKARA",
+      "genre": "African Fashion",
+      "category": "fashion",
+      "accent": "#d8a94b",
+      "src": "https://johnupahsw.ce.prod-se.osaas.io/channels/asiko24/master.m3u8",
+      "durationSec": 596,
+      "programs": [
+        {
+          "title": "Afrocentric Runway",
+          "duration": 90
+        },
+        {
+          "title": "Made in Africa",
+          "duration": 60
+        },
+        {
+          "title": "Textiles & Craft",
+          "duration": 60
+        },
+        {
+          "title": "Street Style",
+          "duration": 60
+        },
+        {
+          "title": "Prime Showcase",
+          "duration": 90
+        },
+        {
+          "title": "Overnight Style Loop",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "num": 25,
+      "id": "businessday",
+      "name": "BUSINESS DAY TV",
+      "genre": "Business & Finance News",
+      "category": "business",
+      "accent": "#d8a94b",
+      "src": "https://johnupahsw.ce.prod-se.osaas.io/channels/asiko25/master.m3u8",
+      "durationSec": 692,
+      "programs": [
+        {
+          "title": "Market Open",
+          "duration": 60
+        },
+        {
+          "title": "Macro Morning",
+          "duration": 60
+        },
+        {
+          "title": "Deals & Dealmakers",
+          "duration": 60
+        },
+        {
+          "title": "Policy Watch",
+          "duration": 45
+        },
+        {
+          "title": "Closing Bell",
+          "duration": 60
+        },
+        {
+          "title": "Analysis: The Long View",
+          "duration": 90
+        },
+        {
+          "title": "Overnight Markets",
+          "duration": 200
+        }
+      ]
+    },
+    {
+      "num": 26,
+      "id": "csuite",
+      "name": "C-SUITE CAFE",
+      "genre": "Business & Executive Talk",
+      "category": "business",
+      "accent": "#d8a94b",
+      "src": "https://johnupahsw.ce.prod-se.osaas.io/channels/asiko26/master.m3u8",
+      "durationSec": 692,
+      "programs": [
+        {
+          "title": "Founders' Table",
+          "duration": 60
+        },
+        {
+          "title": "The CEO Interview",
+          "duration": 60
+        },
+        {
+          "title": "Leadership Lab",
+          "duration": 60
+        },
+        {
+          "title": "Strategy Session",
+          "duration": 45
+        },
+        {
+          "title": "Prime Conversation",
+          "duration": 90
+        },
+        {
+          "title": "Late Replay",
+          "duration": 180
+        }
+      ]
+    },
+    {
+      "num": 27,
+      "id": "asikolive",
+      "name": "ASIKO LIVE",
+      "genre": "Live Event",
+      "category": "live",
+      "accent": "#df3b34",
+      "live": true,
+      "liveTitle": "LIVE — real feed, Eyevinn + Bunny",
       "src": "https://johnupahsw.ce.prod-se.osaas.io/channels/mychannel/master.m3u8",
-      "programs": [ { "title": "Live Event", "duration": 240 } ] },
-    { "num": 28, "id": "asikolivecue", "name": "ASIKO LIVE · CUES", "genre": "Live Event", "category": "live", "accent": "#df3b34", "live": true, "liveTitle": "LIVE — carries SCTE-35 ad-break markers",
-      "src": "https://demo.unified-streaming.com/k8s/live/stable/scte35.isml/.m3u8",
-      "programs": [ { "title": "Live Event", "duration": 240 } ] }
+      "programs": [
+        {
+          "title": "Live Event",
+          "duration": 240
+        }
+      ]
+    },
+    {
+      "num": 28,
+      "id": "asikolivecue",
+      "name": "ASIKO LIVE · CUES",
+      "genre": "Live Event",
+      "category": "live",
+      "accent": "#df3b34",
+      "live": true,
+      "liveTitle": "LIVE — carries SCTE-35 ad-break markers",
+      "src": "https://johnupahsw.ce.prod-se.osaas.io/channels/asiko28/master.m3u8",
+      "programs": [
+        {
+          "title": "Live Event",
+          "duration": 240
+        }
+      ]
+    }
   ]
 }

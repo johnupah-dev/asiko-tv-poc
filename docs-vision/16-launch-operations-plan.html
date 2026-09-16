@@ -1,0 +1,516 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style></head><body>
+<title>Asiko TV Launch Operations Plan</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root{
+    --bg:#F7F3E8;
+    --surface:#FFFFFF;
+    --surface-2:#FBF8F0;
+    --ink:#1A1610;
+    --ink-2:#5B5546;
+    --ink-3:#8A8471;
+    --accent:#A8721F;
+    --accent-strong:#7A5216;
+    --accent-soft:#F1D28A;
+    --accent-soft-bg:#FBF0D9;
+    --border:#E6DDC4;
+    --border-strong:#D8CAA0;
+    --good:#3E6B4F;
+    --good-bg:#E6EEE7;
+    --phase1:#7A5216;
+    --phase2:#14110C;
+    --shadow: 0 1px 2px rgba(26,22,16,.04), 0 8px 24px -12px rgba(26,22,16,.10);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0E0C09;
+      --surface:#17140F;
+      --surface-2:#1C1913;
+      --ink:#F3EEE0;
+      --ink-2:#C3BBA3;
+      --ink-3:#8F8870;
+      --accent:#E3AC52;
+      --accent-strong:#F1C97C;
+      --accent-soft:#3A2C15;
+      --accent-soft-bg:#241D10;
+      --border:#2E2A20;
+      --border-strong:#3C3626;
+      --good:#7FB08F;
+      --good-bg:#1B2820;
+      --phase1:#E3AC52;
+      --phase2:#F3EEE0;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px -12px rgba(0,0,0,.55);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0E0C09;
+    --surface:#17140F;
+    --surface-2:#1C1913;
+    --ink:#F3EEE0;
+    --ink-2:#C3BBA3;
+    --ink-3:#8F8870;
+    --accent:#E3AC52;
+    --accent-strong:#F1C97C;
+    --accent-soft:#3A2C15;
+    --accent-soft-bg:#241D10;
+    --border:#2E2A20;
+    --border-strong:#3C3626;
+    --good:#7FB08F;
+    --good-bg:#1B2820;
+    --phase1:#E3AC52;
+    --phase2:#F3EEE0;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px -12px rgba(0,0,0,.55);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Inter',ui-sans-serif,system-ui,sans-serif;
+    font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{ font-family:'Sora',ui-sans-serif,system-ui,sans-serif; text-wrap:balance; }
+
+  a{ color:var(--accent-strong); }
+
+  .wrap{ max-width:920px; margin:0 auto; padding:0 24px 96px; }
+
+  /* header band */
+  header.masthead{
+    background:
+      radial-gradient(1100px 420px at 12% -20%, var(--accent-soft-bg), transparent 60%),
+      var(--surface-2);
+    border-bottom:1px solid var(--border);
+  }
+  .masthead-inner{ max-width:920px; margin:0 auto; padding:56px 24px 40px; }
+  .brandrow{ display:flex; align-items:center; gap:10px; margin-bottom:28px; }
+  .brandmark{
+    width:30px; height:30px; border-radius:7px;
+    background:linear-gradient(155deg, var(--accent), var(--accent-strong));
+    display:flex; align-items:center; justify-content:center;
+    color:#0E0C09; font-family:'Sora'; font-weight:800; font-size:15px;
+    flex:none;
+  }
+  .brandword{ font-family:'Sora'; font-weight:700; letter-spacing:.02em; font-size:15px; }
+  .brandword b{ color:var(--accent-strong); font-weight:800; }
+  .eyebrow{
+    text-transform:uppercase; letter-spacing:.14em; font-size:12px; font-weight:600;
+    color:var(--accent-strong); margin:0 0 12px;
+  }
+  h1.title{ font-size:clamp(32px,4.6vw,46px); line-height:1.08; font-weight:800; margin:0 0 16px; letter-spacing:-.01em; }
+  p.dek{ font-size:18px; color:var(--ink-2); max-width:62ch; margin:0 0 22px; }
+  .metarow{ display:flex; flex-wrap:wrap; gap:10px 22px; font-size:13.5px; color:var(--ink-3); }
+  .metarow span b{ color:var(--ink-2); font-weight:600; }
+
+  /* nav */
+  nav.toc{
+    position:sticky; top:0; z-index:5;
+    background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border);
+  }
+  .toc-inner{
+    max-width:920px; margin:0 auto; padding:12px 24px;
+    display:flex; gap:18px; overflow-x:auto; font-size:13px;
+  }
+  .toc-inner a{
+    color:var(--ink-2); text-decoration:none; white-space:nowrap; font-weight:600;
+    padding:4px 0; border-bottom:2px solid transparent;
+  }
+  .toc-inner a:hover{ color:var(--accent-strong); border-bottom-color:var(--accent); }
+
+  section{ padding-top:52px; scroll-margin-top:56px; }
+  section + section{ border-top:1px solid var(--border); }
+
+  .secnum{ font-family:'Sora'; font-weight:700; color:var(--accent-strong); font-size:13px; letter-spacing:.08em; margin-bottom:6px; }
+  h2{ font-size:26px; font-weight:800; margin:0 0 8px; letter-spacing:-.01em; }
+  .lede{ color:var(--ink-2); max-width:64ch; margin:0 0 26px; font-size:15.5px; }
+
+  .callout{
+    background:var(--accent-soft-bg); border:1px solid var(--border-strong); border-radius:12px;
+    padding:20px 22px; margin:0 0 28px; box-shadow:var(--shadow);
+  }
+  .callout h3{ font-size:14px; text-transform:uppercase; letter-spacing:.08em; color:var(--accent-strong); margin:0 0 8px; }
+  .callout p{ margin:0; font-size:15px; color:var(--ink); }
+  .callout p + p{ margin-top:10px; }
+
+  /* phase cards */
+  .phases{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:22px 0 30px; }
+  @media (max-width:680px){ .phases{ grid-template-columns:1fr; } }
+  .phase{
+    background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:22px;
+    box-shadow:var(--shadow);
+  }
+  .phase .tag{
+    display:inline-flex; align-items:center; gap:6px; font-size:11.5px; font-weight:700;
+    text-transform:uppercase; letter-spacing:.08em; padding:4px 10px; border-radius:20px;
+    margin-bottom:12px;
+  }
+  .phase.p1 .tag{ background:var(--accent-soft-bg); color:var(--accent-strong); }
+  .phase.p2 .tag{ background:var(--good-bg); color:var(--good); }
+  .phase h4{ font-family:'Sora'; font-size:18px; margin:0 0 6px; }
+  .phase .when{ font-size:13px; color:var(--ink-3); margin-bottom:14px; }
+  .phase ul{ margin:0; padding-left:18px; font-size:14.5px; color:var(--ink-2); }
+  .phase li{ margin-bottom:6px; }
+  .phase .headcount{ font-family:'Sora'; font-weight:800; font-size:28px; color:var(--ink); margin-top:14px; }
+  .phase .headcount span{ font-family:'Inter'; font-weight:500; font-size:13px; color:var(--ink-3); display:block; }
+
+  /* tables */
+  .tblwrap{ overflow-x:auto; border:1px solid var(--border); border-radius:12px; margin:0 0 26px; box-shadow:var(--shadow); }
+  table{ border-collapse:collapse; width:100%; min-width:560px; background:var(--surface); }
+  th,td{ text-align:left; padding:11px 14px; font-size:14px; border-bottom:1px solid var(--border); vertical-align:top; }
+  thead th{
+    font-family:'Sora'; font-size:11.5px; text-transform:uppercase; letter-spacing:.06em;
+    color:var(--ink-3); background:var(--surface-2); font-weight:700;
+  }
+  tbody tr:last-child td{ border-bottom:none; }
+  td.num, th.num{ text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  td.strong{ font-weight:700; color:var(--ink); }
+  tfoot td{ font-weight:800; background:var(--surface-2); border-top:2px solid var(--border-strong); font-family:'Sora'; }
+  .small-note{ font-size:12.5px; color:var(--ink-3); margin:-14px 0 26px; }
+
+  /* checklist */
+  ol.checklist{ list-style:none; margin:0; padding:0; counter-reset:step; }
+  ol.checklist li{
+    counter-increment:step; position:relative; padding:14px 0 14px 44px; border-bottom:1px solid var(--border);
+  }
+  ol.checklist li:last-child{ border-bottom:none; }
+  ol.checklist li::before{
+    content:counter(step);
+    position:absolute; left:0; top:12px; width:28px; height:28px; border-radius:8px;
+    background:var(--accent-soft-bg); color:var(--accent-strong); border:1px solid var(--border-strong);
+    display:flex; align-items:center; justify-content:center; font-family:'Sora'; font-weight:700; font-size:13px;
+  }
+  ol.checklist b{ font-weight:700; }
+  ol.checklist .when{ float:right; font-size:12.5px; color:var(--ink-3); background:var(--surface-2); padding:2px 9px; border-radius:20px; border:1px solid var(--border); }
+
+  /* equipment grid */
+  .rolegrid{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin:0 0 28px; }
+  @media (max-width:680px){ .rolegrid{ grid-template-columns:1fr; } }
+  .rolecard{ background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:18px 20px; }
+  .rolecard h4{ font-family:'Sora'; font-size:15px; margin:0 0 10px; display:flex; align-items:center; gap:8px; }
+  .rolecard h4::before{ content:''; width:8px; height:8px; border-radius:50%; background:var(--accent); flex:none; }
+  .rolecard ul{ margin:0; padding-left:16px; font-size:13.5px; color:var(--ink-2); }
+  .rolecard li{ margin-bottom:5px; }
+
+  footer{
+    max-width:920px; margin:56px auto 0; padding:24px 24px 0; border-top:1px solid var(--border);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    font-size:12.5px; color:var(--ink-3);
+  }
+
+  .src{ font-size:13px; color:var(--ink-2); }
+  .src li{ margin-bottom:5px; }
+</style>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="brandrow">
+      <div class="brandmark">A</div>
+      <div class="brandword">ASIKO <b>TV</b></div>
+    </div>
+    <p class="eyebrow">Launch Operations Plan</p>
+    <h1 class="title">What it takes to run Asiko TV, day to day</h1>
+    <p class="dek">Not the platform build — that's decided (Eyevinn OSC, Bunny Stream, Enveu). This is the office, people, connectivity, hardware and cash required to operate programming, ad sales and content partnerships once the channels are live.</p>
+    <div class="metarow">
+      <span>Prepared <b>8 September 2026</b></span>
+      <span>For <b>Media Icons Africa / Asiko TV</b></span>
+      <span>Pricing basis <b>₦1,400 ≈ US$1</b> (Sept 2026 street rate)</span>
+    </div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#infra">Infra reality</a>
+    <a href="#team">Team</a>
+    <a href="#phases">Two phases</a>
+    <a href="#office">Office</a>
+    <a href="#data">Connectivity</a>
+    <a href="#hardware">Hardware</a>
+    <a href="#power">Power</a>
+    <a href="#costs">Cost summary</a>
+    <a href="#checklist">90-day plan</a>
+    <a href="#sources">Sources</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<section id="infra">
+  <p class="secnum">01</p>
+  <h2>The infrastructure question is already answered</h2>
+  <p class="lede">Before pricing desks and laptops, it's worth being explicit about what the office does <em>not</em> need to be — because that's the single biggest cost avoided.</p>
+  <div class="callout">
+    <h3>No server room, no data center</h3>
+    <p>Asiko TV's broadcast chain runs entirely in the cloud: Eyevinn Open Source Cloud handles playout (Channel Engine), server-side ad insertion (SGAI Pipeline + Ad Normalizer) and batch transcoding (VOD Pipeline); Bunny Stream/CDN handles storage and delivery; Hostinger hosts the front end; Hercules runs as the CMS. FOA (Fast on Africa) manages this stack for both Asiko and Homee.</p>
+    <p>So the office's "data requirement" isn't hosting anything — it's <b>staff bandwidth to move source video up to the cloud, monitor playout remotely, and run ad campaigns in a browser.</b> That reframes everything below: this is a lean media-ops office, not a technical facility.</p>
+  </div>
+</section>
+
+<section id="team">
+  <p class="secnum">02</p>
+  <h2>Team &amp; roles</h2>
+  <p class="lede">Five functions cover the work the platform itself can't do: getting content scheduled correctly, getting ads sold and trafficked, keeping content owners paid and happy, and keeping the lights on. Headcount scales with the channel rollout (7 → ~108 channels across ~54 markets).</p>
+  <div class="tblwrap">
+    <table>
+      <thead>
+        <tr><th>Role</th><th>Phase 1</th><th>Phase 2</th><th>Core responsibility</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="strong">Channel &amp; Content Ops</td><td>1</td><td>2</td><td>QC and re-encode incoming producer content to house profile; build the EPG and schedule in Channel Engine</td></tr>
+        <tr><td class="strong">Ad Operations / Traffic</td><td>1</td><td>2</td><td>Runs Google Ad Manager, traffics sponsor creative, reports delivery against the category-exclusive deals</td></tr>
+        <tr><td class="strong">Content Partnerships</td><td>1</td><td>1–2</td><td>Producer pipeline (e.g. Blessing Agofure), negotiates licence-fee vs. rev-share terms, Net-45 payouts</td></tr>
+        <tr><td class="strong">Sponsorship Sales</td><td>MD-led</td><td>2–3</td><td>Pitches the 30 target sectors for category-exclusive channel sponsorship (telecom, banking, FMCG, etc.)</td></tr>
+        <tr><td class="strong">Finance / Admin</td><td>part-time</td><td>1</td><td>Invoicing, vendor payments (Enveu, FOA, Bunny, Hostinger), payroll</td></tr>
+        <tr><td class="strong">IT / Infra liaison</td><td>FOA-covered</td><td>0–1</td><td>Bridges day-to-day issues between staff and FOA/Enveu/Eyevinn</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="small-note">Phase 1 assumes John covers strategy, key accounts (WoSA, Brandrus, EXMAN/MIPAN/ADVAN outreach) and vendor negotiation directly, as today.</p>
+</section>
+
+<section id="phases">
+  <p class="secnum">03</p>
+  <h2>Two build-out phases, not one</h2>
+  <p class="lede">A 30-sector, 108-channel ambition doesn't need a full Lagos office on day one — it needs one by the time content and ad volume justify it. Building lean now and scaling on revenue keeps the office from becoming the thing that outruns the platform.</p>
+  <div class="phases">
+    <div class="phase p1">
+      <span class="tag">Phase 1 · Lean launch</span>
+      <h4>Now → first 3 months</h4>
+      <div class="when">Supports the live 7-channel lineup and the Enveu build (≈10 weeks from scope sign-off)</div>
+      <ul>
+        <li>Hybrid / remote-first — no fixed lease required</li>
+        <li>Shared serviced desks or day-passes for sponsor-facing meetings only</li>
+        <li>4 laptops, 1 backup-internet kit, minimal furniture</li>
+        <li>Every ₦ spent is visible against the platform's own $2,000 POC ceiling — this is a separate, additional budget line</li>
+      </ul>
+      <div class="headcount">3–4<span>people</span></div>
+    </div>
+    <div class="phase p2">
+      <span class="tag">Phase 2 · Scale-up office</span>
+      <h4>Once sponsor revenue lands / rollout accelerates past 7 channels</h4>
+      <div class="when">Formal Lagos presence for advertiser credibility and larger content throughput</div>
+      <ul>
+        <li>Fixed office, Victoria Island / Ikoyi or Ikeja</li>
+        <li>Dedicated internet + real power backup</li>
+        <li>Meeting room built for advertiser pitches — including video calls to diaspora buyers in the UK/US/Canada</li>
+        <li>8–12 desks, dual monitors for ops/QC roles</li>
+      </ul>
+      <div class="headcount">8–12<span>people</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="office">
+  <p class="secnum">04</p>
+  <h2>Office</h2>
+  <p class="lede">Because sponsor pitches target category-leading brands (telecom, banking, FMCG, airlines), where you meet them matters more than where you QC video. A hybrid model — light footprint day-to-day, credible room for pitch meetings — covers both without paying for a lease you don't need yet.</p>
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>Option</th><th>Typical price</th><th>Best for</th></tr></thead>
+      <tbody>
+        <tr><td class="strong">Serviced desk, VI / Ikoyi<br><span style="color:var(--ink-3);font-weight:400">(Regus-type, all-in)</span></td><td class="num">₦177,000–₦301,000 / person / month</td><td>Phase 1 sponsor-facing presence; includes furniture, power, internet, reception, meeting-room credits</td></tr>
+        <tr><td class="strong">Own lease, open-plan VI</td><td class="num">₦180,000–₦350,000 / m² / year</td><td>Phase 2 — fixed cost, but fit-out, power backup and internet are then all extra and yours to manage</td></tr>
+        <tr><td class="strong">Mainland coworking<br><span style="color:var(--ink-3);font-weight:400">(Yaba / Ikeja)</span></td><td class="num">Meaningfully cheaper — get live quotes</td><td>Content-ops/back-office desks that don't need an island address</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="small-note">A workable Phase-1 shape: 1–2 serviced desks or a meeting-room membership on the Island for sponsor meetings, content-ops staff working remotely or from cheaper mainland coworking.</p>
+</section>
+
+<section id="data">
+  <p class="secnum">05</p>
+  <h2>Connectivity &amp; data</h2>
+  <p class="lede">The real risk isn't bandwidth — it's Nigerian power and single-ISP outages interrupting playout monitoring or a content upload mid-transfer. Plan for redundancy, not just speed.</p>
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>Provider / plan</th><th>Price</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr><td class="strong">Starlink — kit</td><td class="num">₦450,000 one-time</td><td>Best single fix for power/fibre-cut resilience; works anywhere with sky view</td></tr>
+        <tr><td class="strong">Starlink — Residential</td><td class="num">₦38,000–₦75,000 / mo</td><td>100–200 Mbps tiers; a Priority/Business tier exists at a higher price — confirm current rate direct</td></tr>
+        <tr><td class="strong">Spectranet doMore</td><td class="num">₦30,000–₦60,000 / mo</td><td>200–550GB fair-use cap, then throttled to ~512kbps–1Mbps — a real constraint for uploading source video</td></tr>
+        <tr><td class="strong">ipNX fibre (Advantage/Ultimate)</td><td class="num">₦16,000–₦158,000 / mo</td><td>Higher tiers give more headroom; confirm current enterprise-tier pricing, older published rates may be stale</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="small-note">Recommended: one fixed fibre line as primary + Starlink as automatic failover ≈ ₦90,000–₦150,000/month combined for Phase 1. Cloud storage/CDN egress (Bunny Stream) and the Eyevinn OSC usage bill are platform costs run through FOA — not an office line item, but confirm current usage-based pricing with FOA so it's budgeted somewhere.</p>
+</section>
+
+<section id="hardware">
+  <p class="secnum">06</p>
+  <h2>Hardware &amp; equipment</h2>
+  <p class="lede">Kit follows the role. Content Ops needs to see video accurately; Ad Ops needs screen real estate for campaign dashboards; everyone facing an overseas sponsor on a call needs to sound and look professional.</p>
+  <div class="rolegrid">
+    <div class="rolecard">
+      <h4>Channel &amp; Content Ops</h4>
+      <ul>
+        <li>Business laptop, i5/i7, 16GB RAM</li>
+        <li>1 external monitor for video QC</li>
+        <li>Good over-ear headphones for audio QC</li>
+        <li>Portable SSD (1–2TB) for staging files before upload</li>
+      </ul>
+    </div>
+    <div class="rolecard">
+      <h4>Ad Operations</h4>
+      <ul>
+        <li>Business laptop, i5/i7, 16GB RAM</li>
+        <li>1 external monitor for dashboards/reporting</li>
+        <li>Stable secondary connection for campaign uptime</li>
+      </ul>
+    </div>
+    <div class="rolecard">
+      <h4>Sales / Partnerships</h4>
+      <ul>
+        <li>Lighter laptop, good battery life</li>
+        <li>Mobile hotspot / SIM data for on-site pitches</li>
+        <li>Presentation-ready case for the deck (physical meetings still matter here)</li>
+      </ul>
+    </div>
+    <div class="rolecard">
+      <h4>Shared / office-wide</h4>
+      <ul>
+        <li>1 conferencing kit — webcam, mic, speaker — for UK/US/Canada diaspora advertiser calls</li>
+        <li>1 network-grade UPS to keep router/modem alive through power blips</li>
+        <li>NAS or external drive (4–8TB) as a local content archive/backup</li>
+        <li>Printer/scanner for contracts and licence agreements</li>
+      </ul>
+    </div>
+  </div>
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>Item</th><th>Price range</th></tr></thead>
+      <tbody>
+        <tr><td>Business laptop (i5/i7, 8–16GB)</td><td class="num">₦300,000–₦700,000</td></tr>
+        <tr><td>External monitor (QC/dashboard grade)</td><td class="num">₦120,000–₦180,000</td></tr>
+        <tr><td>Portable SSD / NAS (4–8TB)</td><td class="num">₦250,000–₦350,000</td></tr>
+        <tr><td>Conferencing kit (webcam/mic/speaker)</td><td class="num">₦120,000–₦200,000</td></tr>
+        <tr><td>Network UPS (small)</td><td class="num">₦60,000–₦100,000</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="power">
+  <p class="secnum">07</p>
+  <h2>Power backup</h2>
+  <p class="lede">Playout itself doesn't depend on office power — it's cloud-hosted. But a mid-upload transfer or a live sponsor video call dying mid-pitch does real damage. Plan for quiet, daily continuity first, deep backup second.</p>
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>System</th><th>Price</th><th>Role</th></tr></thead>
+      <tbody>
+        <tr><td class="strong">5kVA inverter (unit only)</td><td class="num">₦250,000–₦700,000</td><td>Silent, automatic — covers laptops, router, lights through short outages</td></tr>
+        <tr><td class="strong">+ battery bank (2–4 batteries)</td><td class="num">₦300,000–₦600,000</td><td>Determines how long the inverter holds without mains or fuel</td></tr>
+        <tr><td class="strong">3.5kVA petrol generator</td><td class="num">₦58,000–₦145,000</td><td>Deep-backup for extended outages; noisier, needs fuel and attention</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="small-note">A serviced office (Regus-type) typically bundles power backup into the per-person fee — one more reason it's the simpler Phase-1 default.</p>
+</section>
+
+<section id="costs">
+  <p class="secnum">08</p>
+  <h2>Cost summary</h2>
+  <p class="lede">Figures are current public-market indicators from September 2026, not vendor quotes — treat them as planning-grade and confirm 2–3 live quotes before committing spend. All USD figures use ≈₦1,400/$1; the official and parallel rates currently sit either side of that (₦1,322 official / ₦1,405 parallel).</p>
+
+  <h3 style="font-family:'Sora';font-size:16px;margin:0 0 10px;">Phase 1 — Lean launch</h3>
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>One-time setup</th><th class="num">₦</th><th class="num">US$</th></tr></thead>
+      <tbody>
+        <tr><td>4× business laptops</td><td class="num">2,200,000</td><td class="num">1,571</td></tr>
+        <tr><td>2× QC/reporting monitors</td><td class="num">300,000</td><td class="num">214</td></tr>
+        <tr><td>Starlink kit (primary/backup internet)</td><td class="num">450,000</td><td class="num">321</td></tr>
+        <tr><td>Portable NAS/SSD storage</td><td class="num">280,000</td><td class="num">200</td></tr>
+        <tr><td>Conferencing kit</td><td class="num">150,000</td><td class="num">107</td></tr>
+        <tr><td>Network UPS</td><td class="num">80,000</td><td class="num">57</td></tr>
+        <tr><td>Basic desks/chairs <span style="color:var(--ink-3)">(skip if fully serviced)</span></td><td class="num">350,000</td><td class="num">250</td></tr>
+        <tr><td>Contingency (10%)</td><td class="num">381,000</td><td class="num">272</td></tr>
+      </tbody>
+      <tfoot><tr><td>Total one-time</td><td class="num">≈4,191,000</td><td class="num">≈2,990</td></tr></tfoot>
+    </table>
+  </div>
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>Monthly recurring</th><th class="num">₦</th><th class="num">US$</th></tr></thead>
+      <tbody>
+        <tr><td>1–2 serviced desks (sponsor-facing)</td><td class="num">~400,000</td><td class="num">~286</td></tr>
+        <tr><td>Internet (fibre + Starlink failover)</td><td class="num">~90,000</td><td class="num">~64</td></tr>
+        <tr><td>Cloud/platform hosting (Bunny, Eyevinn OSC, Hostinger)</td><td class="num">TBD — confirm with FOA</td><td class="num">—</td></tr>
+        <tr><td>Payroll (3–4 staff, market-rate benchmark)</td><td class="num">TBD — see note</td><td class="num">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="small-note">Payroll benchmark: a Lagos sales-executive role averages ≈₦444,000/month (₦2.6M–₦8.3M/year range) per current market data — useful as one data point for sizing offers, not a fixed cost here since roles, seniority and commission structure vary.</p>
+
+  <h3 style="font-family:'Sora';font-size:16px;margin:26px 0 10px;">Phase 2 — Scale-up office</h3>
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>One-time setup</th><th class="num">₦</th><th class="num">US$</th></tr></thead>
+      <tbody>
+        <tr><td>Fit-out/furniture, ~10 desks <span style="color:var(--ink-3)">(estimate)</span></td><td class="num">2,500,000</td><td class="num">1,786</td></tr>
+        <tr><td>8–10× business laptops</td><td class="num">5,500,000</td><td class="num">3,929</td></tr>
+        <tr><td>Meeting-room AV + monitors</td><td class="num">800,000</td><td class="num">571</td></tr>
+        <tr><td>5kVA inverter + battery bank</td><td class="num">1,200,000</td><td class="num">857</td></tr>
+        <tr><td>3.5kVA backup generator</td><td class="num">150,000</td><td class="num">107</td></tr>
+        <tr><td>Networking (router/switch/cabling/UPS)</td><td class="num">300,000</td><td class="num">214</td></tr>
+        <tr><td>Signage/branding</td><td class="num">300,000</td><td class="num">214</td></tr>
+        <tr><td>Contingency (10%)</td><td class="num">1,075,000</td><td class="num">768</td></tr>
+      </tbody>
+      <tfoot><tr><td>Total one-time</td><td class="num">≈11,825,000</td><td class="num">≈8,446</td></tr></tfoot>
+    </table>
+  </div>
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>Monthly recurring</th><th class="num">₦</th><th class="num">US$</th></tr></thead>
+      <tbody>
+        <tr><td>Office — serviced (10 pax) <span style="color:var(--ink-3)">or</span> own lease (~150m² VI)</td><td class="num">~2,000,000–3,125,000</td><td class="num">~1,429–2,232</td></tr>
+        <tr><td>Internet (fibre + Starlink failover)</td><td class="num">~200,000</td><td class="num">~143</td></tr>
+        <tr><td>Generator fuel / power maintenance</td><td class="num">~150,000–300,000</td><td class="num">~107–214</td></tr>
+        <tr><td>Payroll (8–12 staff)</td><td class="num">TBD — headcount dependent</td><td class="num">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="small-note">Note on scope: the platform's own $2,000 bootstrap ceiling covers the POC/MVP build only. This office and team budget is necessarily larger, and separate from it — worth flagging explicitly when weighing it against the Enveu build's $13,000 one-time fee.</p>
+</section>
+
+<section id="checklist">
+  <p class="secnum">09</p>
+  <h2>90-day action plan</h2>
+  <ol class="checklist">
+    <li><span class="when">Week 1</span><b>Decide the Phase-1 footprint</b> — remote-plus-serviced-desk vs. a small owned space. This single decision sets most of the rest of the budget.</li>
+    <li><span class="when">Weeks 1–2</span><b>Order the 4 laptops and Starlink kit</b> so Content Ops and Ad Ops aren't blocked while the Enveu build proceeds.</li>
+    <li><span class="when">Weeks 1–2</span><b>Confirm Bunny Stream / Eyevinn OSC recurring costs with FOA</b> so the real monthly platform bill is known, not estimated.</li>
+    <li><span class="when">Weeks 2–4</span><b>Get 2–3 live quotes</b> on serviced-desk vs. mainland coworking vs. internet plans — the figures here are planning-grade, not binding.</li>
+    <li><span class="when">Weeks 3–4</span><b>Bring on Content Ops and Ad Ops leads</b> — the two roles most exposed by the just-launched 7-channel lineup.</li>
+    <li><span class="when">Weeks 4–6</span><b>Stand up the advertiser-facing meeting capability</b> — bookable room + conferencing kit, sized for UK/US/Canada diaspora sponsor calls.</li>
+    <li><span class="when">Ongoing</span><b>Re-evaluate for Phase 2</b> once the first category-exclusive sponsor deals close or the channel count meaningfully exceeds 7.</li>
+  </ol>
+</section>
+
+<section id="sources">
+  <p class="secnum">10</p>
+  <h2>Sources</h2>
+  <ul class="src">
+    <li><a href="https://www.gistreel.com/naira-to-dollar-exchange-rate-today-tuesday-september-8-2026/">Naira/USD exchange rate, 8 Sept 2026 — Gistreel</a></li>
+    <li><a href="https://www.naijatechguide.com/laptop-prices-in-nigeria-hp-dell-acer.html">Laptop prices in Nigeria 2026 — NaijaTechGuide</a></li>
+    <li><a href="https://www.officefreedom.com/nigeria/lagos-serviced-offices">Serviced office pricing, Lagos — Office Freedom</a></li>
+    <li><a href="https://nigeriapropertycentre.com/for-rent/commercial/offices/lagos/victoria-island/showtype">Office space for rent, Victoria Island — Nigeria Property Centre</a></li>
+    <li><a href="https://starlinkprice.com/countries/nigeria.html">Starlink pricing, Nigeria 2026</a></li>
+    <li><a href="https://nigerianfinder.com/ipnx-data-plans-prices/">ipNX data plans and prices — Nigerian Finder</a></li>
+    <li><a href="https://spectranet.com.ng/unlimited-plans/">Spectranet unlimited plans — official site</a></li>
+    <li><a href="https://www.lentoindia.com/blog/5kva-inverter-price-in-nigeria.html">5kVA inverter pricing — Lento India</a></li>
+    <li><a href="https://nigerianqueries.com/prices-of-3-5kva-generators-in-nigeria/">3.5kVA generator prices — Nigerian Queries</a></li>
+    <li><a href="https://worldsalaries.com/average-sales-executive-salary-in-lagos/nigeria/">Sales executive salary, Lagos — World Salaries</a></li>
+  </ul>
+</section>
+
+</div>
+
+<footer>
+  <span>Asiko TV Launch Operations Plan · Media Icons Africa</span>
+  <span>Built by Media Icons Africa</span>
+</footer>
+
+</body></html>
