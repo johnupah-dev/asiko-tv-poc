@@ -74,6 +74,32 @@ OSC before acting on any of it:
   last one is a channel-engine manifest quirk, not fixed).
   The repeatable 6-step process for wiring up each remaining channel is in
   that report's "Creating the remaining 27" section.
+
+## Infra groundwork update (16 Sep 2026)
+
+All **28/28 channels now run on real Eyevinn `channel-engine` instances**
+(`asiko01`–`asiko26`, `asiko28`, plus the pre-existing `mychannel` for
+channel 27/ASIKO LIVE) — see commit `8bb1715`. `data/channels.json` `src`
+fields point at these live instances. **Content is still placeholder**: every
+instance loops one of two Eyevinn demo assets (`tearsofsteel_4k.mov` /
+`VINN.mp4`) — real Asiko programming (Nollywood, news, faith, music etc.)
+was expected ~5 days out from this update (so check the actual date before
+trusting that window). No Bunny Stream credentials/connector were available
+in that session, so **Bunny is still the open item**: either get Bunny API
+access added, or get the real Bunny playback URLs handed over per-batch, then
+swap each channel's `src` (delete + recreate the instance, or update its
+`url` config, per `playout/README.md`'s 6-step process) — no front-end
+changes needed either way.
+
+Operational notes for next time you touch OSC channel-engine at this scale:
+the platform's ingress controller throws frequent transient 409/500 errors
+under concurrent instance creation, and — more importantly — a create call
+can report success and even show "running" moments later, then silently
+vanish. **Don't trust a single status check as final** — do a full
+`list-service-instances` sweep at the end and reconcile against it before
+declaring done. Token cost for 28 running instances: ~280/day against a
+300/day refill (confirmed via `get-usage`) — sustainable but thin; recheck
+before adding more always-on services.
 - A mobile portrait video-stage regression was found and fixed same night;
   a **phone-landscape layout gap was still open** (serves the 10-column
   desktop grid squeezed into a short viewport).
