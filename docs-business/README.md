@@ -73,6 +73,7 @@ vendor proposals, signed agreements, and playbooks.
 - `Asiko Ecosystem - 3-Year Financial Model.xlsx` — 3-year financial model
 - `asiko_model.xlsx` — financial model
 - `Asiko_TV_Year1_Business_Case.docx` — year-1 business case with financial projections
+- `Asiko-Master-Revenue-Streams-and-Brutal-Reality-Check.md` — **start here for revenue.** Consolidates all 21 revenue streams found across every document into one taxonomy, reconciles the four financial models above (which don't agree with each other), and calls out unverified/placeholder figures by name
 
 ### `confidential/` (git-ignored, not pushed)
 - `Blessing Aguofore.pdf`, `BTA Blessing Aguouore.pdf` — personal/financial documents for a named individual
