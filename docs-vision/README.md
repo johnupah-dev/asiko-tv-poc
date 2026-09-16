@@ -20,6 +20,10 @@ claude.ai; the PDFs and Word files are the same content for sending by email.
 | 12 | **Strategic SWOT** -- strengths, weaknesses, opportunities, threats across competition, voting, fresh channels, FAST training, ad-server, data cost, why free, media-entrepreneurship impact | `12-strategic-swot.html` · `Asiko TV - Strategic SWOT.pdf` | Investors, board, strategy |
 | 13 | **Niche & Mitigations** -- the beachhead Asiko owns, a mitigation for every weakness, the voting/cash-prize effect on usage, and the DNS steps for asiko.africa | `13-niche-and-mitigations.html` · `Asiko TV - Niche and Mitigations.pdf` | Investors, strategy |
 | 14 | **Team** -- the Media Icons Africa team behind Asiko across commercial, technology, content and legal/finance; bios to be completed | `14-team.html` · `Asiko TV - Team.pdf` | Investors, partners |
+| 15 | **September 2026 status report** -- honest audit of POC vs. live quality, the ASIKO LIVE channel's 3 real bugs (found & fixed), mobile UI findings, path to MVP, and a cost audit through year-end | `15-status-report-sep-2026.html` | Internal, you |
+| 16 | **Launch Operations Plan** -- the office, team, connectivity, hardware, power and cash needed to actually run Asiko day to day, in two phases (lean launch → scale-up) | `16-launch-operations-plan.html` | Internal, budgeting |
+| 17 | **Homepage Concept** -- a premium-streaming-service visual concept for the Asiko TV homepage (channel shelves, device roadmap, FAQ) | `17-homepage-concept.html` | Design reference |
+| 18 | **Digitex Partnership Playbook** -- how to progress, close and execute the Digitex ad-tech reseller/partner deal for Nigeria | `18-digitex-partnership-playbook.html` | Internal, deal-tracking |
 
 ## Notes
 

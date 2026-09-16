@@ -1,0 +1,446 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Digitex Partnership Playbook</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --paper: #f6f3ec;
+    --ink: #1b1d22;
+    --muted: #6b675e;
+    --line: #ddd8ca;
+    --accent: #c8432b;
+    --accent-soft: #f0dad2;
+    --navy: #24344a;
+    --navy-soft: #e4e8ee;
+    --card: #ffffff;
+    --shadow: 0 1px 2px rgba(27,29,34,0.05);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #15171c;
+      --ink: #ece8de;
+      --muted: #9b9689;
+      --line: #33353d;
+      --accent: #e2673f;
+      --accent-soft: #3a2621;
+      --navy: #7fa0c9;
+      --navy-soft: #202b3a;
+      --card: #1c1e24;
+      --shadow: 0 1px 2px rgba(0,0,0,0.4);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #15171c;
+    --ink: #ece8de;
+    --muted: #9b9689;
+    --line: #33353d;
+    --accent: #e2673f;
+    --accent-soft: #3a2621;
+    --navy: #7fa0c9;
+    --navy-soft: #202b3a;
+    --card: #1c1e24;
+    --shadow: 0 1px 2px rgba(0,0,0,0.4);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    line-height: 1.55;
+  }
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 24px 96px;
+  }
+
+  /* Masthead */
+  .masthead {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .tally {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+    flex-shrink: 0;
+  }
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(32px, 5vw, 44px);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+    margin: 0 0 10px;
+  }
+  .dek {
+    color: var(--muted);
+    font-size: 16.5px;
+    max-width: 56ch;
+    margin: 0 0 36px;
+  }
+
+  /* Stage tracker */
+  .tracker {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 44px;
+  }
+  .stage {
+    padding: 16px 18px;
+    border-right: 1px solid var(--line);
+    background: var(--card);
+  }
+  .stage:last-child { border-right: none; }
+  .stage.current { background: var(--accent-soft); }
+  .stage-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+  .stage.current .stage-num { color: var(--accent); }
+  .stage-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 17px;
+    margin-top: 2px;
+  }
+  .stage-note {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+
+  section { margin-bottom: 44px; }
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 23px;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
+    margin: 0 0 4px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  h2 .phase-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+  }
+  h2 + .lede {
+    color: var(--muted);
+    font-size: 14.5px;
+    margin: 0 0 18px;
+    max-width: 60ch;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    padding: 18px 20px;
+  }
+
+  ul.moves { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+  ul.moves li {
+    padding-left: 22px;
+    position: relative;
+  }
+  ul.moves li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  ul.moves b { font-weight: 600; }
+  ul.moves .why {
+    display: block;
+    color: var(--muted);
+    font-size: 13.5px;
+    margin-top: 2px;
+  }
+
+  /* Term sheet */
+  .terms { display: flex; flex-direction: column; }
+  .term-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .term-row:last-child { border-bottom: none; }
+  .term-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    padding-top: 2px;
+  }
+  .term-value { font-size: 14.5px; }
+  .term-value .ask {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    background: var(--navy-soft);
+    color: var(--navy);
+    padding: 1px 7px;
+    border-radius: 4px;
+    margin-top: 6px;
+  }
+
+  /* Rundown / timeline */
+  .rundown-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+  table.rundown {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    min-width: 560px;
+  }
+  table.rundown th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 10px 14px;
+    background: var(--navy-soft);
+    border-bottom: 1px solid var(--line);
+  }
+  table.rundown td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  table.rundown tr:last-child td { border-bottom: none; }
+  table.rundown td.when {
+    font-family: 'IBM Plex Mono', monospace;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    color: var(--accent);
+    font-size: 13px;
+  }
+  table.rundown td.owner { color: var(--muted); white-space: nowrap; }
+
+  /* Checklist */
+  .checklist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+  .checklist li { border-bottom: 1px solid var(--line); }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 4px;
+    cursor: pointer;
+    font-size: 14.5px;
+  }
+  .checklist input {
+    margin-top: 3px;
+    width: 16px; height: 16px;
+    accent-color: var(--accent);
+    flex-shrink: 0;
+  }
+  .checklist input:checked + span { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--line); }
+
+  .callout {
+    border-left: 3px solid var(--accent);
+    padding: 4px 0 4px 16px;
+    font-size: 14.5px;
+    color: var(--ink);
+  }
+  .callout b { color: var(--accent); }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+
+  @media (max-width: 520px) {
+    .tracker { grid-template-columns: 1fr; }
+    .stage { border-right: none; border-bottom: 1px solid var(--line); }
+    .stage:last-child { border-bottom: none; }
+    .term-row { grid-template-columns: 1fr; gap: 4px; }
+  }
+</style>
+
+<div class="wrap">
+
+  <div class="masthead">
+    <span class="tally"></span>
+    <span class="eyebrow">Media Icons Africa · Deal Memo</span>
+  </div>
+
+  <h1>Digitex Partnership Playbook</h1>
+  <p class="dek">You've moved past the pitch — Digitex is open to Media Icons Africa as their Nigerian commercial partner, not just a customer. This is how you turn that into a signed, running arrangement.</p>
+
+  <div class="tracker">
+    <div class="stage current">
+      <div class="stage-num">01 — NOW</div>
+      <div class="stage-name">Progress</div>
+      <div class="stage-note">Lock the framing in writing</div>
+    </div>
+    <div class="stage">
+      <div class="stage-num">02</div>
+      <div class="stage-name">Close</div>
+      <div class="stage-note">Terms, LOI, signature</div>
+    </div>
+    <div class="stage">
+      <div class="stage-num">03</div>
+      <div class="stage-name">Execute</div>
+      <div class="stage-note">Pilot, then go to market</div>
+    </div>
+  </div>
+
+  <section>
+    <h2><span class="phase-tag">01</span> Progress the conversation</h2>
+    <p class="lede">A good verbal conversation dies the moment everyone leaves the room and remembers it differently. Your first job is to make the partner framing durable.</p>
+    <ul class="moves">
+      <li><b>Send the recap within 24 hours.</b> A short email to your contact restating, in your own words, that the conversation covered Media Icons Africa as Digitex's local commercial partner for Nigeria — not a software customer.
+        <span class="why">Whoever writes the recap sets the frame the rest of the deal gets negotiated against.</span>
+      </li>
+      <li><b>Find out who actually signs.</b> Ask directly whether the Africa lead you're speaking with can approve a partner structure, or whether it needs UK sign-off — and get that person's name.
+        <span class="why">A verbal yes from someone without authority costs you weeks later.</span>
+      </li>
+      <li><b>Ask if a partner model already exists elsewhere.</b> Digitex likely has a reseller or agent structure in another market (UK regional agents, or elsewhere in Africa via the "Digitex Africa" entity).
+        <span class="why">A template partner already exists somewhere — get it, and you negotiate against Digitex's own precedent instead of drafting from nothing.</span>
+      </li>
+      <li><b>Narrow the ask to one pilot, not a market-wide deal.</b> Propose Tattase TV, or a single FAST channel, as the proof case before any Nigeria-wide exclusivity is discussed.
+        <span class="why">A big exclusive territory ask is slow to approve; a bounded pilot is fast to say yes to and builds the case for the bigger deal.</span>
+      </li>
+      <li><b>Get a dated next step before this goes cold.</b> Don't let "let's keep talking" stand — name a date for the next call or the term sheet.
+        <span class="why">Deals stall in the gap between meetings that don't have a next meeting attached.</span>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="phase-tag">02</span> Close the deal</h2>
+    <p class="lede">Push for something signed — a Letter of Intent first if a full contract feels premature — and know your walk-away line before you're in the room negotiating it live.</p>
+    <div class="card terms">
+      <div class="term-row">
+        <div class="term-label">Territory &amp; exclusivity</div>
+        <div class="term-value">Is Media Icons Africa the exclusive route to market in Nigeria, or one of several?
+          <div class="ask">push for: exclusive, Nigeria, 12–24 month initial term</div>
+        </div>
+      </div>
+      <div class="term-row">
+        <div class="term-label">Economics</div>
+        <div class="term-value">Commission or margin on software placed, vs. revenue share on ad-server/programmatic if that layer exists.
+          <div class="ask">get this in writing before the pilot, not after</div>
+        </div>
+      </div>
+      <div class="term-row">
+        <div class="term-label">Client ownership</div>
+        <div class="term-value">When Media Icons Africa brings a Nigerian broadcaster to Digitex, who owns that relationship going forward — you, or Digitex directly?</div>
+      </div>
+      <div class="term-row">
+        <div class="term-label">Minimum commitment</div>
+        <div class="term-value">If exclusivity is granted, expect a minimum — deals per year or a revenue floor — attached to it.
+          <div class="ask">know your realistic number before they name theirs</div>
+        </div>
+      </div>
+      <div class="term-row">
+        <div class="term-label">Your leverage</div>
+        <div class="term-value">Not "we'd like to sell your software" — it's Media Icons Africa's standing relationships across Nigerian broadcast and advertiser sales, and the group's own FAST/OTT channels as a live reference site. That's what Digitex can't buy off a shelf. Anchor the negotiation there.</div>
+      </div>
+    </div>
+    <p class="callout" style="margin-top:16px;"><b>Before signing anything —</b> even a lightweight LOI, have it read by counsel. A one-page review now is cheaper than an exclusivity clause you can't get out of in month eight.</p>
+  </section>
+
+  <section>
+    <h2><span class="phase-tag">03</span> Execute</h2>
+    <p class="lede">Once terms are agreed, the work splits in two: stand up the pilot internally, and start building what you'll show the next Nigerian broadcaster you approach as Digitex's local partner.</p>
+    <ul class="moves">
+      <li><b>Name the pilot and the owner.</b> Pick one channel or division (Tattase TV or a FAST channel is the natural first case) and assign one person internally to see onboarding through — not a committee.</li>
+      <li><b>Get the tech and commercial teams talking directly.</b> Whoever runs traffic/ad ops for Tattase TV should be on the integration calls with Digitex, not just you relaying messages.</li>
+      <li><b>Build the reseller pitch while the pilot runs.</b> A short deck or one-pager positioning Media Icons Africa as Digitex's Nigerian partner is the next deliverable once terms are settled — I can put that together with you when you're ready.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Suggested rundown</h2>
+    <p class="lede">Dates assume terms move at a normal pace from today. Tighten or stretch against what Digitex actually commits to.</p>
+    <div class="rundown-scroll">
+      <table class="rundown">
+        <thead>
+          <tr><th>When</th><th>Action</th><th>Owner</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="when">This week</td><td>Send written recap of the partner conversation; request their existing partner-model precedent, if any</td><td class="owner">You</td></tr>
+          <tr><td class="when">Week 2</td><td>Confirm sign-off authority on their side; get a term-sheet draft moving, scoped to one pilot channel</td><td class="owner">You + Digitex Africa lead</td></tr>
+          <tr><td class="when">Week 3–4</td><td>Negotiate exclusivity, economics, and minimums; legal review of LOI/contract</td><td class="owner">You + counsel</td></tr>
+          <tr><td class="when">Week 4–5</td><td>Sign. Name the pilot channel and internal owner</td><td class="owner">You</td></tr>
+          <tr><td class="when">Month 2</td><td>Pilot onboarding — software live on the chosen channel's ad sales/traffic desk</td><td class="owner">Pilot owner + Digitex</td></tr>
+          <tr><td class="when">Month 2–3</td><td>Build reseller pitch materials; identify first 2–3 external broadcaster targets</td><td class="owner">You</td></tr>
+          <tr><td class="when">Month 3+</td><td>First outbound pitch to a Nigerian broadcaster as Digitex's local partner</td><td class="owner">You</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>This week, in order</h2>
+    <ul class="checklist" id="checklist">
+      <li><label><input type="checkbox" data-id="c1"><span>Write and send the recap email restating the partner framing</span></label></li>
+      <li><label><input type="checkbox" data-id="c2"><span>Ask who signs off — UK or Africa — and get that name</span></label></li>
+      <li><label><input type="checkbox" data-id="c3"><span>Request their existing reseller/partner model, if one exists</span></label></li>
+      <li><label><input type="checkbox" data-id="c4"><span>Propose Tattase TV or one FAST channel as the named pilot</span></label></li>
+      <li><label><input type="checkbox" data-id="c5"><span>Get a dated next call or term-sheet deadline on the calendar</span></label></li>
+      <li><label><input type="checkbox" data-id="c6"><span>Decide your walk-away line on exclusivity and minimums before you need it</span></label></li>
+    </ul>
+  </section>
+
+  <footer>Digitex Partnership Playbook · drafted 10 Sep 2026 · living document — check off as you go</footer>
+
+</div>
+
+<script>
+  (function() {
+    try {
+      var boxes = document.querySelectorAll('#checklist input[type="checkbox"]');
+      boxes.forEach(function(box) {
+        var key = 'digitex-playbook-' + box.dataset.id;
+        try {
+          if (localStorage.getItem(key) === '1') box.checked = true;
+        } catch (e) {}
+        box.addEventListener('change', function() {
+          try {
+            localStorage.setItem(key, box.checked ? '1' : '0');
+          } catch (e) {}
+        });
+      });
+    } catch (e) {}
+  })();
+</script>
+
+</body></html>

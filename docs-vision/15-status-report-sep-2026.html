@@ -1,0 +1,525 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Asiko TV — September 2026 Status Report</title>
+<meta name="description" content="Where the Asiko TV platform stands today: POC and live-channel quality, mobile audit findings, the path to MVP, and a cost audit through year-end." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
+
+<style>
+  :root {
+    --paper: #FBF8F1;
+    --panel: #F2EADA;
+    --panel-2: #EBE1CB;
+    --line: #DED0AF;
+    --line-strong: #C9B888;
+    --ink: #211A10;
+    --muted: #6E5F45;
+    --faint: #93856A;
+    --gold: #93641A;
+    --gold-bright: #7A5314;
+    --live: #A3271E;
+    --good-bg: #E4EEDF; --good-fg: #2F5D34; --good-line: #B9D2AE;
+    --warn-bg: #FBEBCF; --warn-fg: #8A5A0A; --warn-line: #EBC784;
+    --crit-bg: #F7DEDB; --crit-fg: #9A2A20; --crit-line: #E9B3AC;
+    --shadow: 0 10px 30px -18px rgba(40, 28, 8, 0.35);
+    color-scheme: light;
+  }
+  :root[data-theme="light"] {
+    --paper: #FBF8F1; --panel: #F2EADA; --panel-2: #EBE1CB; --line: #DED0AF; --line-strong: #C9B888;
+    --ink: #211A10; --muted: #6E5F45; --faint: #93856A; --gold: #93641A; --gold-bright: #7A5314; --live: #A3271E;
+    --good-bg: #E4EEDF; --good-fg: #2F5D34; --good-line: #B9D2AE;
+    --warn-bg: #FBEBCF; --warn-fg: #8A5A0A; --warn-line: #EBC784;
+    --crit-bg: #F7DEDB; --crit-fg: #9A2A20; --crit-line: #E9B3AC;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #171009; --panel: #211809; --panel-2: #2A1F10; --line: #3C2E17; --line-strong: #55401E;
+      --ink: #F3E9D6; --muted: #C2AE87; --faint: #8B7756; --gold: #E3B45C; --gold-bright: #F0C87E; --live: #E2685D;
+      --good-bg: #17281B; --good-fg: #8FCB99; --good-line: #2B4832;
+      --warn-bg: #2E220C; --warn-fg: #E8B968; --warn-line: #4A3714;
+      --crit-bg: #2E1512; --crit-fg: #EE9086; --crit-line: #4E2521;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #171009; --panel: #211809; --panel-2: #2A1F10; --line: #3C2E17; --line-strong: #55401E;
+    --ink: #F3E9D6; --muted: #C2AE87; --faint: #8B7756; --gold: #E3B45C; --gold-bright: #F0C87E; --live: #E2685D;
+    --good-bg: #17281B; --good-fg: #8FCB99; --good-line: #2B4832;
+    --warn-bg: #2E220C; --warn-fg: #E8B968; --warn-line: #4A3714;
+    --crit-bg: #2E1512; --crit-fg: #EE9086; --crit-line: #4E2521;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+  h1, h2, h3 { font-family: "Archivo", "Hanken Grotesk", sans-serif; text-wrap: balance; margin: 0; color: var(--ink); }
+  p { margin: 0 0 1em; max-width: 68ch; }
+  a { color: var(--gold-bright); }
+  .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+  table { font-variant-numeric: tabular-nums; }
+
+  /* ---------- header ---------- */
+  header.top {
+    background: linear-gradient(180deg, var(--panel), var(--paper));
+    border-bottom: 1px solid var(--line);
+    padding: 44px 0 30px;
+  }
+  .eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+  }
+  .eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--live); box-shadow: 0 0 0 3px color-mix(in srgb, var(--live) 18%, transparent); }
+  h1.title { font-weight: 800; letter-spacing: -0.02em; font-size: clamp(1.7rem, 4vw, 2.5rem); margin: 0.5rem 0 0.8rem; }
+  .meta { display: flex; flex-wrap: wrap; gap: 0.4em 1.4em; color: var(--muted); font-size: 0.88rem; }
+  .meta b { color: var(--ink); font-weight: 600; }
+  .summary { margin-top: 1.1rem; font-size: 1.04rem; color: var(--ink); max-width: 70ch; }
+
+  /* ---------- sections ---------- */
+  section { padding: 34px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+  .sec-label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  h2.sec-title { font-weight: 800; letter-spacing: -0.015em; font-size: clamp(1.25rem, 2.6vw, 1.6rem); margin-bottom: 0.9rem; }
+  h3.sub { font-weight: 700; font-size: 1.03rem; margin: 1.3rem 0 0.5rem; color: var(--ink); }
+
+  /* ---------- fact grid ---------- */
+  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin: 1rem 0 1.4rem; }
+  .fact { background: var(--panel); padding: 14px 16px; }
+  .fact .n { font-family: "Archivo", sans-serif; font-weight: 800; font-size: 1.5rem; letter-spacing: -0.01em; }
+  .fact .l { color: var(--muted); font-size: 0.78rem; margin-top: 2px; }
+
+  /* ---------- lists ---------- */
+  ul.plain, ol.plain { margin: 0 0 1em; padding-left: 1.3em; }
+  ul.plain li, ol.plain li { margin-bottom: 0.5em; }
+  ol.steps { counter-reset: step; list-style: none; padding-left: 0; margin: 1rem 0; display: flex; flex-direction: column; gap: 0.9rem; }
+  ol.steps li { counter-increment: step; position: relative; padding-left: 2.6rem; }
+  ol.steps li::before {
+    content: counter(step);
+    position: absolute; left: 0; top: -2px;
+    width: 1.9rem; height: 1.9rem; border-radius: 50%;
+    background: var(--panel-2); border: 1px solid var(--line-strong);
+    display: flex; align-items: center; justify-content: center;
+    font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 0.88rem; color: var(--gold-bright);
+  }
+  ol.steps li b { display: block; font-weight: 700; margin-bottom: 0.15em; }
+
+  /* ---------- callout ---------- */
+  .callout { border-left: 3px solid var(--gold); background: var(--panel); border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 1rem 0; }
+  .callout.fixed { border-left-color: var(--good-fg); }
+  .callout p:last-child { margin-bottom: 0; }
+  .callout .tag { font-family: "IBM Plex Mono", monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--good-fg); font-weight: 600; }
+
+  /* ---------- severity flags ---------- */
+  .flags { display: flex; flex-direction: column; gap: 10px; margin: 1rem 0; }
+  .flag { border: 1px solid; border-radius: 10px; padding: 12px 16px; display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; align-items: start; }
+  .flag .chip {
+    font-family: "IBM Plex Mono", monospace; font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase;
+    font-weight: 700; padding: 3px 9px; border-radius: 999px; white-space: nowrap; align-self: start; margin-top: 2px;
+  }
+  .flag .body { min-width: 0; }
+  .flag .body b { display: block; margin-bottom: 2px; }
+  .flag .body p { margin: 0; font-size: 0.94rem; color: var(--muted); }
+  .flag.crit { background: var(--crit-bg); border-color: var(--crit-line); }
+  .flag.crit .chip { background: var(--crit-fg); color: var(--crit-bg); }
+  .flag.crit .body b { color: var(--crit-fg); }
+  .flag.warn { background: var(--warn-bg); border-color: var(--warn-line); }
+  .flag.warn .chip { background: var(--warn-fg); color: var(--warn-bg); }
+  .flag.warn .body b { color: var(--warn-fg); }
+  .flag.note { background: var(--panel); border-color: var(--line-strong); }
+  .flag.note .chip { background: var(--faint); color: var(--panel); }
+  .flag.note .body b { color: var(--ink); }
+
+  /* ---------- tables ---------- */
+  .tbl-wrap { overflow-x: auto; margin: 1rem 0; border: 1px solid var(--line); border-radius: 10px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; min-width: 480px; }
+  th, td { text-align: left; padding: 9px 14px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  th:first-child, td:first-child { white-space: normal; }
+  thead th { background: var(--panel-2); font-family: "IBM Plex Mono", monospace; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  tbody tr:last-child td { border-bottom: none; }
+  tr.total td { font-weight: 700; background: var(--panel); }
+  td.num, th.num { text-align: right; }
+  .unconfirmed { color: var(--gold-bright); font-style: italic; }
+
+  /* ---------- responsibility split ---------- */
+  .split { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 1rem 0; }
+  @media (min-width: 640px) { .split { grid-template-columns: 1fr 1fr; } }
+  .split .col { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; }
+  .split .col h4 { font-family: "IBM Plex Mono", monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin: 0 0 0.7em; }
+  .split ul { margin: 0; padding-left: 1.1em; }
+  .split li { margin-bottom: 0.5em; font-size: 0.92rem; }
+
+  /* ---------- footer ---------- */
+  footer { padding: 30px 0 60px; }
+  footer p { color: var(--muted); font-size: 0.85rem; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5em;
+    font-family: "Archivo", sans-serif; font-weight: 700; font-size: 0.9rem;
+    padding: 0.7em 1.3em; border-radius: 999px; background: var(--gold); color: var(--paper);
+    text-decoration: none; border: 0;
+  }
+  .wide-note { font-size: 0.85rem; color: var(--faint); font-style: italic; margin-top: 0.6em; }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 0 16px; }
+    th, td { padding: 8px 10px; font-size: 0.85rem; }
+  }
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <p class="eyebrow"><span class="dot"></span>Asiko TV &middot; Media Icons Africa</p>
+    <h1 class="title">Project Status Report</h1>
+    <div class="meta">
+      <span><b>Prepared</b> 12 September 2026</span>
+      <span><b>Covers</b> asiko.africa POC, asiko.live, Eyevinn + Bunny infrastructure</span>
+      <span><b>Prepared by</b> Claude (tech lead)</span>
+    </div>
+    <p class="summary">
+      Short version: the platform's bones are real and proven — 28 channels live on the real domain, and one of
+      them now runs on genuine Eyevinn + Bunny infrastructure end-to-end, video and audio, after two real bugs
+      were found and fixed this week. The other 25 loop channels and one of the two live slots still carry
+      placeholder test video, not Asiko programming — that is the actual gap between where we stand and MVP,
+      and it is a content problem now, not an infrastructure problem. A mobile layout regression was found and
+      fixed during the writing of this report; a phone-landscape gap was found and is still open. Full detail below.
+    </p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============================================================ -->
+  <section id="where-we-are">
+    <p class="sec-label">Where we are today</p>
+    <h2 class="sec-title">One real channel, twenty-seven placeholders, and a proven pipeline</h2>
+
+    <div class="facts">
+      <div class="fact"><div class="n">28</div><div class="l">channels live on asiko.africa</div></div>
+      <div class="fact"><div class="n">1 / 28</div><div class="l">running on real Eyevinn + Bunny infra</div></div>
+      <div class="fact"><div class="n">89</div><div class="l">channels mapped in the full bouquet</div></div>
+      <div class="fact"><div class="n">700</div><div class="l">Eyevinn tokens available, 690 remaining</div></div>
+      <div class="fact"><div class="n">14</div><div class="l">strategy/vision documents on file</div></div>
+      <div class="fact"><div class="n">0</div><div class="l">of 2 marketing/funnel sites deployed with the real bouquet</div></div>
+    </div>
+
+    <h3 class="sub">The product (asiko.africa)</h3>
+    <p>
+      A working FAST player: 28 channels in a locked 10-per-row desktop grid, a full-size 16:9 video stage, wall-clock
+      scheduling with a lower-third EPG, a simulated ad-break/revenue dashboard (fill rate, blended eCPM, SSP split),
+      a genre browse screen, and a competitions/voting shelf. It is on the real domain, over HTTP (HTTPS still open —
+      see Brutal, below).
+    </p>
+
+    <h3 class="sub">The infrastructure</h3>
+    <p>
+      Eyevinn Open Source Cloud is connected directly via its MCP server — I can create, inspect and repair channels
+      without you copying tokens around. One real channel-engine instance is running today, sourced from a Bunny
+      Stream library, and it is now confirmed to draw exactly <b>10 tokens/day</b> — matching the documented estimate,
+      but this is the first time it has been confirmed against real billing rather than assumed.
+    </p>
+
+    <h3 class="sub">The business layer</h3>
+    <p>
+      <b>asiko.live</b> — the sales/funnel site — has a rebuilt homepage and channel guide carrying the full 89-channel
+      bouquet with real synopses and logos, sitting finished in the repository. It has not been deployed: its hosting
+      location was never confirmed (it is not on the same cPanel account as asiko.africa). A cost model
+      (<span class="mono">Asiko_Channel_Cost_Model.xlsx</span>) covering all 28 channels was delivered last night and
+      is the live source of truth for the cost sections below.
+    </p>
+  </section>
+
+  <!-- ============================================================ -->
+  <section id="poc-quality">
+    <p class="sec-label">POC quality</p>
+    <h2 class="sec-title">Strong bones, test-content skin</h2>
+    <p>
+      The layout, monetisation model and channel-grid mechanics are genuinely solid — the 10-per-row lock, the
+      full-size video stage, and the revenue dashboard all do the job they were built for, and they held up under
+      last night's stress test of going from 22 to 28 channels without breaking. What keeps it from reading as a
+      finished consumer product:
+    </p>
+    <ul class="plain">
+      <li><b>It still looks like an ad-ops console, not a streaming app.</b> The revenue strip is the right thing to
+      show an investor, wrong thing to show a viewer — a consumer-facing "Browse" view exists, but the default
+      landing view is the operator view.</li>
+      <li><b>26 of 28 channels are on stock test streams</b> (Apple bip-bop, Mux demo clips, Unified Streaming demos)
+      — real for proving the mechanics, meaningless for judging what Asiko will actually feel like on air.</li>
+      <li><b>EPG program titles are placeholders</b> ("Late Night Thriller", "Morning Praise") generated to fill the
+      schedule, not real programming data.</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================ -->
+  <section id="live-quality">
+    <p class="sec-label">The live channel</p>
+    <h2 class="sec-title">ASIKO LIVE — three real bugs, now genuinely working</h2>
+    <p>
+      This is the one channel on real infrastructure, and it earned its stripes tonight. In order:
+    </p>
+    <ol class="steps">
+      <li><b>Bunny was blocking direct URL access.</b> The channel-engine instance returned <span class="mono">500
+      &mdash; "Session not ready"</span> on every request. Root cause: the Bunny Stream pull zone had direct-URL
+      access blocked, so the engine could never fetch a frame to build its playhead from. Fixed on the Bunny side,
+      verified with three consecutive successful manifest fetches.</li>
+      <li><b>The channel played with no sound.</b> The source video has separate audio and video tracks, but the
+      channel-engine instance was configured with <span class="mono">useDemuxedAudio: false</span>, silently
+      dropping the audio group. Three different API-level fixes were tried and blocked (one by a validator bug in
+      the platform, one by my own safety classifier refusing a delete, one by a missing API spec) before it was
+      fixed by hand in the OSC dashboard. Verified by pulling the real audio segment playlist afterwards.</li>
+      <li><b>The advertised "1080p, 9.6 Mbps" quality tier is mislabeled.</b> That tier's segments physically live in
+      Bunny's 720p folder — there is no true 1080p rendition being delivered, whatever the manifest claims. Not
+      fixed (it's a labelling quirk in how channel-engine builds its manifest, not something under our control),
+      but worth knowing before anyone markets "1080p" streaming.</li>
+    </ol>
+    <div class="callout fixed">
+      <p class="tag">Current state</p>
+      <p>Confirmed working end-to-end: real video, real audio, real CDN delivery, playing live on the ASIKO LIVE
+      slot on asiko.africa right now. The honest caveat: it is one test video looping, not Asiko programming — the
+      pipeline is proven, it has not yet been repeated at scale.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section id="mobile">
+    <p class="sec-label">Mobile UI/UX audit</p>
+    <h2 class="sec-title">One regression found and fixed tonight, one gap still open</h2>
+
+    <h3 class="sub">Portrait phone — fixed during this report</h3>
+    <p>
+      Testing at 375&times;812 (a standard phone) found the video stage rendering at <b>470px tall — 58% of the
+      screen</b> — instead of a proper 16:9 frame, leaving a large dead black area above the channel grid. Root
+      cause: a desktop-only fix from two nights ago (<span class="mono">height: 58vh</span>, added so the video
+      stayed large on desktop) was never overridden for mobile, and an explicit height always beats
+      <span class="mono">aspect-ratio</span> in CSS. Fixed, deployed, and re-verified live: the stage now measures
+      exactly 211px at 375px width — true 16:9 — with the 2-column channel grid below it as designed.
+    </p>
+
+    <div class="flags">
+      <div class="flag crit">
+        <span class="chip">Open</span>
+        <div class="body">
+          <b>Phone landscape is currently the desktop layout, squeezed.</b>
+          <p>Rotating a phone to landscape (e.g. 812&times;375 — wider than the 720px breakpoint, but only 375px
+          tall) currently serves the <em>desktop</em> layout: the 10-column channel grid and a 58vh-tall video stage,
+          inside a 375px-tall viewport. Measured result: the masthead and most of the video sit scrolled off-screen
+          on load, and the full page runs to 769px tall inside a 375px window — over two screens of scrolling to see
+          everything. People commonly rotate a phone specifically to watch video full-width; right now that's the
+          worst experience on the platform. Needs a real landscape-phone breakpoint (width <em>and</em> height, or
+          an <span class="mono">orientation: landscape</span> query capped to phone-scale widths) — not fixed
+          tonight, flagged as an MVP-phase task.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section id="remaining-channels">
+    <p class="sec-label">Creating the remaining 27</p>
+    <h2 class="sec-title">A known, repeatable process now — it wasn't before tonight</h2>
+    <p>
+      Every step below was learned the hard way this week. It is now a checklist, not a guess:
+    </p>
+    <ol class="steps">
+      <li><b>Curate and normalise the source file.</b> Loudness to &minus;23 LUFS, video to 1920&times;1080 16:9
+      25fps H.264, ident bumper spliced onto the front.</li>
+      <li><b>Upload to Bunny Stream</b> and confirm direct URL access is <em>not</em> blocked on that library/pull
+      zone — the exact fault that broke ASIKO LIVE.</li>
+      <li><b>Create a channel-engine instance</b> via the Eyevinn OSC connection: Loop type, the Bunny playlist URL,
+      and <span class="mono">useDemuxedAudio</span> set to match the source (demuxed source &rarr; <span class="mono">true</span>)
+      — the exact fault that left ASIKO LIVE silent.</li>
+      <li><b>Verify</b>: fetch the manifest three times for a stable 200, confirm an <span class="mono">EXT-X-MEDIA</span>
+      audio group is present, pull one real segment to confirm it plays.</li>
+      <li><b>Wire the real URL into <span class="mono">data/channels.json</span></b>, re-splice into the deployed build.</li>
+      <li><b>Deploy, then spot-check on both desktop and mobile</b> — the mobile regression above is the reason this
+      step is now non-negotiable, not optional.</li>
+    </ol>
+  </section>
+
+  <!-- ============================================================ -->
+  <section id="mvp">
+    <p class="sec-label">Path to MVP</p>
+    <h2 class="sec-title">What's needed, split by who it's waiting on</h2>
+    <div class="split">
+      <div class="col">
+        <h4>Waiting on you / the team</h4>
+        <ul>
+          <li>Curated content batches, handed over as promised</li>
+          <li>Real Bunny rate card: storage $/GB, bandwidth $/GB, storage zone/host names</li>
+          <li>Eyevinn Professional plan's actual monthly fee (not visible via the tools used tonight)</li>
+          <li>Run AutoSSL in cPanel for asiko.africa (2-minute click, still open)</li>
+          <li>Confirm where asiko.live should be hosted</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h4>On me, once inputs land</h4>
+        <ul>
+          <li>Run the 6-step process above across every curated batch</li>
+          <li>Fix the phone-landscape layout</li>
+          <li>Deploy asiko.live the moment hosting is confirmed</li>
+          <li>Deploy the forced-HTTPS redirect the moment AutoSSL succeeds</li>
+          <li>Replace the simulated ad/revenue strip with real SCTE-35/SSAI once a real ad server exists</li>
+          <li>Basic monitoring so a dead channel doesn't go unnoticed</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="sub">Timeline — bands, not a fake-precise date</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Phase</th><th>Work</th><th>Depends on</th><th class="num">Estimate</th></tr></thead>
+        <tbody>
+          <tr><td>1. Infra hardening</td><td>Landscape-mobile fix, HTTPS close-out, asiko.live deploy</td><td>Your AutoSSL click + hosting answer</td><td class="num">2&ndash;3 days</td></tr>
+          <tr><td>2. Channel wiring</td><td>All 28 channels on real Eyevinn + Bunny infra</td><td>Content curation pace</td><td class="num">2&ndash;4 days <i>per batch</i>, after each batch arrives</td></tr>
+          <tr><td>3. Real monetisation</td><td>Live SCTE-35 / SSAI replacing the simulated revenue bar</td><td>A real ad-server/SSP relationship</td><td class="num">1&ndash;2 weeks</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="wide-note">
+      Net read: a genuinely 28-real-channel MVP (playback only, revenue still simulated) is realistic within
+      <b>1&ndash;2 weeks of today</b> if content curation keeps the pace of the last 48 hours. Real ad monetisation
+      is a separate, longer track on top of that — don't let "MVP" quietly mean "real ad revenue" in conversation
+      with investors; those are two different milestones.
+    </p>
+  </section>
+
+  <!-- ============================================================ -->
+  <section id="brutal">
+    <p class="sec-label">Brutal — what I'd flag</p>
+    <h2 class="sec-title">No sugar-coating</h2>
+    <div class="flags">
+      <div class="flag crit">
+        <span class="chip">Critical</span>
+        <div class="body"><b>The platform looks complete. It is 1/28th real.</b>
+        <p>A viewer clicking through all 28 channels sees one consistent, polished grid. Only one of those channels
+        is actually running Asiko's own infrastructure with real economics behind it. That gap is invisible until
+        someone asks the right question.</p></div>
+      </div>
+      <div class="flag crit">
+        <span class="chip">Critical</span>
+        <div class="body"><b>asiko.africa is still "Not secure."</b>
+        <p>Still open, still a 2-minute fix on your side (AutoSSL), still the first thing a technically literate
+        investor will notice. This has been open for several days now.</p></div>
+      </div>
+      <div class="flag crit">
+        <span class="chip">Critical</span>
+        <div class="body"><b>asiko.live has been finished and undeployed for days.</b>
+        <p>The real 89-channel bouquet, real synopses, real logos — sitting in the repository. Anyone who visits
+        asiko.live today sees the old, smaller, generic version. This is pure upside sitting on the shelf.</p></div>
+      </div>
+      <div class="flag warn">
+        <span class="chip">Warning</span>
+        <div class="body"><b>The revenue dashboard is entirely simulated.</b>
+        <p>Fill rate, eCPM, impressions — all modelled, none of it real ad money yet. Fine for a demo if framed
+        honestly; a real problem if anyone lets an investor believe otherwise.</p></div>
+      </div>
+      <div class="flag warn">
+        <span class="chip">Warning</span>
+        <div class="body"><b>Phone-landscape viewing is currently broken.</b>
+        <p>Detailed above — not catastrophic, but exactly the scenario (rotate phone, watch video) most viewers
+        will actually try.</p></div>
+      </div>
+      <div class="flag warn">
+        <span class="chip">Warning</span>
+        <div class="body"><b>Eyevinn token budget is tight at 28 channels.</b>
+        <p>Estimated 310 tokens/day against a 300/day refill once all 28 are real — the buffer absorbs it for now,
+        but it's a live constraint to watch, not a hypothetical one.</p></div>
+      </div>
+      <div class="flag note">
+        <span class="chip">Note</span>
+        <div class="body"><b>No monitoring exists.</b>
+        <p>If a channel or the whole site goes down right before an investor call, nobody gets told. Cheap to fix,
+        not yet built.</p></div>
+      </div>
+      <div class="flag note">
+        <span class="chip">Note</span>
+        <div class="body"><b>Bunny credentials are still incomplete in the codebase.</b>
+        <p>Storage zone, host and pull-zone names are still blank in <span class="mono">bunny.env</span>. Tonight's
+        fixes happened through live troubleshooting, not a documented, reproducible setup.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section id="cost-now">
+    <p class="sec-label">Cost audit — now</p>
+    <h2 class="sec-title">One confirmed number, four still missing</h2>
+    <p>
+      Confirmed against live billing tonight, not just documented: <b>a running channel-engine loop channel costs
+      exactly 10 tokens/day</b> — matches the original estimate, but now it's fact, not assumption. Everything else
+      below still needs a real number from you before this section means anything:
+    </p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Line</th><th>Status</th><th class="num">Figure</th></tr></thead>
+        <tbody>
+          <tr><td>Eyevinn OSC &mdash; Professional plan</td><td>Purchased, active</td><td class="num unconfirmed">Monthly fee unconfirmed</td></tr>
+          <tr><td>Eyevinn tokens</td><td>Confirmed via live billing</td><td class="num">10/day per channel</td></tr>
+          <tr><td>Bunny Stream storage</td><td>Password on file only</td><td class="num unconfirmed">$/GB unconfirmed</td></tr>
+          <tr><td>Bunny Stream bandwidth</td><td>Not configured</td><td class="num unconfirmed">$/GB unconfirmed</td></tr>
+          <tr><td>VPS hosting</td><td>Not yet purchased</td><td class="num unconfirmed">~$16/mo illustrative only</td></tr>
+          <tr><td>Domain renewals</td><td>Existing, not itemised</td><td class="num unconfirmed">Unconfirmed</td></tr>
+          <tr><td>cPanel hosting (asiko.africa)</td><td>Existing via Media Icons Africa</td><td class="num">Sunk / shared, not broken out</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="wide-note">
+      Full detail and live formulas: <span class="mono">Asiko_Channel_Cost_Model.xlsx</span>, sent last night. That
+      file is the source of truth — this report summarises it, it doesn't replace it.
+    </p>
+  </section>
+
+  <!-- ============================================================ -->
+  <section id="cost-projection">
+    <p class="sec-label">Cost projection — to year end</p>
+    <h2 class="sec-title">Directional, not precise, until the four gaps above close</h2>
+    <p>
+      Roughly 3.5 months remain in 2026. Three bands, tied to how fast the platform actually fills out:
+    </p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Scenario</th><th>What it assumes</th><th class="num">Est. monthly by Dec</th><th class="num">Est. cumulative, Sep&ndash;Dec</th></tr></thead>
+        <tbody>
+          <tr><td>Low</td><td>POC stays ~1&ndash;5 real channels, minimal viewers, no VPS purchased yet</td><td class="num unconfirmed">Near-$0 beyond existing plans</td><td class="num unconfirmed">Low tens of $</td></tr>
+          <tr><td>Mid (MVP)</td><td>All 28 channels real, modest curated library, light real viewership, VPS active</td><td class="num unconfirmed">Low-to-mid $100s</td><td class="num unconfirmed">Depends on bandwidth once filled in</td></tr>
+          <tr><td>High (traction)</td><td>Real viewership growth off investor interest, larger content library, more bandwidth</td><td class="num unconfirmed">Bandwidth-dominated &mdash; unknown</td><td class="num unconfirmed">Cannot responsibly estimate yet</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="wide-note">
+      I'm not going to hand you a confident year-end number built on four placeholder inputs — that would be a
+      guess wearing a spreadsheet's clothes. The moment the Bunny rate card and Eyevinn plan fee land, this table
+      and the linked workbook both become real. That's the single fastest thing you can do to make this report's
+      weakest section strong.
+    </p>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <p>Asiko TV is a Media Icons Africa property. This report reflects the live state of asiko.africa, the Eyevinn
+  OSC workspace, and the asiko-tv-poc repository as of 12 September 2026 — not a plan, an audit of what's actually
+  running right now.</p>
+</footer>
+
+</body></html>
