@@ -26,9 +26,14 @@ if (!process.env.OSC_ACCESS_TOKEN) {
 const ctx = new Context();
 const cfg = JSON.parse(await readFile(new URL('../data/channels.json', import.meta.url), 'utf8'));
 
+// Instance names are `asiko` + zero-padded channel num (asiko01, asiko02, ...),
+// NOT `asiko` + channel id - that was the original plan but production ended up
+// numeric instead (see CLAUDE.md, "Infra groundwork update"). Channel 27
+// (ASIKO LIVE) is the one exception: it runs on a pre-existing instance named
+// "mychannel" from before this naming convention existed.
 const plan = cfg.channels.map((c) => {
-  if (!/^[a-z0-9]+$/.test(c.id)) throw new Error(`channel id "${c.id}" must be lowercase a-z0-9`);
-  return { id: c.id, name: `${PREFIX}${c.id}`, label: c.name, type: 'Loop', url: c.src };
+  const name = c.num === 27 ? 'mychannel' : `${PREFIX}${String(c.num).padStart(2, '0')}`;
+  return { id: c.id, num: c.num, name, label: c.name, type: 'Loop', url: c.src };
 });
 
 const sat = () => ctx.getServiceAccessToken(SERVICE);
@@ -46,7 +51,11 @@ async function provision() {
     process.stdout.write(`+ ${p.name}  launching Loop <- ${p.url} ... `);
     const inst = await createChannelEngineInstance(ctx, {
       name: p.name, type: p.type, url: p.url,
-      opts: { useDemuxedAudio: false, useVttSubtitles: false },
+      // Default true - the earlier `false` here is the exact bug that shipped
+      // ASIKO LIVE silently muted once (see CLAUDE.md). The right value
+      // genuinely depends on each source file's mux layout, not a global
+      // constant - override with ASIKO_DEMUXED_AUDIO=false if a batch needs it.
+      opts: { useDemuxedAudio: process.env.ASIKO_DEMUXED_AUDIO !== 'false', useVttSubtitles: false },
     });
     console.log(`ok -> ${inst.playback ?? inst.url}`);
   }
