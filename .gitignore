@@ -18,3 +18,4 @@ bunny.env.*
 # — kept local-only, never tracked. See docs-business/README.md.
 docs-business/confidential/
 docs-business/proposals-contracts/
+docs-business/financials/
