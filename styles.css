@@ -647,6 +647,30 @@ button { font-family: inherit; }
   .rev-split, .companion { flex-basis: 100%; min-width: 0; }
 }
 
+/* Phone landscape: short viewport, wide enough to dodge the max-width:720px block
+   above (a landscape phone is ~700-930px wide). Without this, the desktop layout
+   (58vh stage + 10-col rail + revbar) renders in full and the page runs to 2+
+   screens tall inside a ~375px-tall window. Fit everything to the viewport instead
+   and drop non-essential chrome rather than let it scroll. */
+@media (orientation: landscape) and (max-height: 500px) {
+  .app { display: flex; flex-direction: column; height: 100svh; max-height: 100svh; min-height: 0; overflow: hidden; }
+  .masthead { flex: 0 0 auto; padding: 5px 10px; gap: 8px; }
+  .masthead-mid { display: none; }
+  .masthead-actions .btn { padding: 5px 9px; font-size: 10px; letter-spacing: 0.05em; }
+  .stage { flex: 1 1 auto; min-height: 0; height: auto; max-height: none; position: relative; }
+  #video { object-fit: contain; }
+  .bug { top: 6px; right: 6px; max-width: 46vw; }
+  .bug-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .lower-third { left: 8px; right: 8px; bottom: 6px; max-width: none; }
+  .lt-row { flex-wrap: wrap; }
+  .lt-prog { flex-basis: 100%; margin-top: 1px; }
+  .lt-title { font-size: 14px; }
+  .rail { flex: 0 0 auto; display: flex; max-height: 60px; overflow-x: auto; overflow-y: hidden; }
+  .ch { flex: 0 0 auto; min-width: 92px; padding: 6px 10px; }
+  .ch-genre, .ch-now { display: none; }
+  .revbar { display: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .rec { animation: none; }
   .seg, .loading, .btn { transition: none; }
