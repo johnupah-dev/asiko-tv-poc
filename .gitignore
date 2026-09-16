@@ -13,3 +13,8 @@ playout/playout.json
 # bunny credentials - never commit
 bunny.env
 bunny.env.*
+
+# Asiko business docs: personal/financial data, signed contracts, vendor pricing
+# — kept local-only, never tracked. See docs-business/README.md.
+docs-business/confidential/
+docs-business/proposals-contracts/

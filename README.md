@@ -9,6 +9,11 @@ the front end of the product — the part viewers touch — plus a simulated ad/
 layer so you can see how monetisation behaves. The production plumbing (real playout,
 real ad insertion) is described in **[Roadmap to MVP](#roadmap-to-mvp)** below.
 
+**Looking for a document, deck, or proposal instead of code?** This repo is also the
+home for the wider Asiko project paper trail:
+- [`docs-vision/`](docs-vision) — product/architecture strategy docs (POC→MVP plan, design spec, SWOT, team, onboarding & revenue model, week-1 plan)
+- [`docs-business/`](docs-business) — commercial side: pitch decks, vendor proposals & contracts, brand assets, playbooks (see its README for the full index; contains confidential material — private repo only)
+
 ---
 
 ## What works today
