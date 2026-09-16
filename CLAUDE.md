@@ -41,7 +41,13 @@ this file and `docs-vision/` describe the code and the plan, not a live feed.
   Bunny Stream library; the pull zone **must** allow direct URL access (this
   broke ASIKO LIVE once — see status report `docs-vision/15-`) and
   `useDemuxedAudio` must match the source's mux layout (also broke ASIKO LIVE
-  once, silently dropping audio).
+  once, silently dropping audio). **Library ID: `749953`** (not sensitive —
+  safe to keep in plain text). The library-scoped Stream API Key is NOT in
+  this repo or this file — it should be set as an environment variable
+  (e.g. `BUNNY_STREAM_API_KEY`) in the Claude Code environment's own config,
+  never pasted into chat or committed. With both, Bunny's REST API is plain
+  HTTPS — e.g. `GET https://video.bunnycdn.com/library/749953/videos` with
+  header `AccessKey: <key>` — no connector needed, just `curl`/Bash.
 - **Hostinger / cPanel** — hosts asiko.africa; `deploy/asiko.africa.htaccess`
   is the forced-HTTPS/HSTS config staged for it.
 - **Hercules** — CMS (per the launch-ops plan doc).
