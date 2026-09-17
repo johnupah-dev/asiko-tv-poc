@@ -1,0 +1,35 @@
+name: Bunny account status
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Check Bunny balance and billing signals
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Verify Bunny secret exists
+        env:
+          BUNNY_API_KEY: ${{ secrets.BUNNY_API_KEY }}
+        run: |
+          if [ -z "$BUNNY_API_KEY" ]; then
+            echo "::error::Repository secret BUNNY_API_KEY is not configured."
+            exit 2
+          fi
+
+      - name: Read Bunny account status
+        env:
+          BUNNY_API_KEY: ${{ secrets.BUNNY_API_KEY }}
+        run: node scripts/check-bunny-account.mjs
