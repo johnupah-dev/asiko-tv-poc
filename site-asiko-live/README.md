@@ -37,6 +37,40 @@ Upload the whole folder to any static host or your existing web server
 (Netlify, Vercel, an S3 + CloudFront bucket, or a plain Nginx/Apache box),
 point asiko.live at it, and it's live.
 
+## Deploying via GitHub Pages (mitigation for Hostinger's intermittent 502s)
+
+Because this site has no PHP or other server-side code, it never needed
+Hostinger's LiteSpeed/LSAPI backend at all — that backend is what has been
+crash-looping (see the uptime monitor incidents: HTTP 502, `[Errno 111]
+Connection refused`, cycling every 1–8 hours, while the fully static pages
+served fine in between). Moving hosting to a static-only host removes that
+failure mode entirely, since there is no PHP process to exhaust or restart.
+
+`.github/workflows/deploy-pages.yml` publishes this folder to GitHub Pages
+on every push to `master` that touches `site-asiko-live/`. One-time setup:
+
+1. In the repo: **Settings → Pages → Build and deployment → Source →
+   GitHub Actions**. Push to `master` (or run the workflow manually) and the
+   site deploys to `https://<org-or-user>.github.io/<repo>/` — check the
+   Actions run for the exact URL.
+2. In the repo: **Settings → Pages → Custom domain** → enter `asiko.africa`
+   (this commits the `CNAME` file already present in this folder) → enable
+   **Enforce HTTPS** once the certificate is issued.
+3. At your DNS provider (wherever `asiko.africa`'s DNS is managed —
+   independent of Hostinger, and unrelated to who the domain is
+   *registered* through):
+   - `A` records for the apex `asiko.africa` → GitHub Pages' IPs:
+     `185.199.108.153`, `185.199.109.153`, `185.199.110.153`,
+     `185.199.111.153`
+   - `CNAME` record for `www.asiko.africa` → `<org-or-user>.github.io.`
+4. Wait for DNS propagation and the GitHub-issued TLS certificate, then
+   verify both `https://asiko.africa` and `https://www.asiko.africa` load.
+
+This can run in parallel with the existing Hostinger deployment (different
+hosts, same DNS record either way) — cut over by changing the DNS records in
+step 3 once you've verified the GitHub Pages copy looks right, no need to
+wait on Hostinger support first.
+
 ## Connecting marky.ai or a real CRM
 
 Every form (Advertise, List Your Channel, Join As A Creator, Test Run,
