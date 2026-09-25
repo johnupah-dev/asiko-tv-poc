@@ -1,5 +1,5 @@
 /* LOOP7 — FAST network POC
-   - 7 linear channels, each a looping VOD source seeked to wall-clock ("live" feel)
+   - 28 linear channels, each a looping VOD or live HLS source seeked to wall-clock ("live" feel)
    - EPG schedule is a metadata layer, decoupled from the underlying playout
    - Client-side ad-break simulation: avails -> creative -> impression -> revenue
    This is a front-end prototype. Production playout/SSAI/ad-decisioning is
@@ -66,28 +66,76 @@
     try { video.currentTime = nowSec() % Math.floor(base); } catch (e) {}
   }
 
+  /* A dead source must never leave viewers on an endless "Tuning…":
+     after TUNE_TIMEOUT_MS without playback (or MAX_NET_RETRIES fatal network
+     errors) switch to the channel's fallbackSrc if it has one, otherwise
+     show an off-air card and quietly retry every OFF_AIR_RETRY_MS. */
+  const TUNE_TIMEOUT_MS = 15000;
+  const MAX_NET_RETRIES = 3;
+  const OFF_AIR_RETRY_MS = 60000;
+  let tuneTimer = null;
+  let netRetries = 0;
+  let usingFallback = false;
+
+  function showTuning() {
+    loadingEl.classList.remove('is-hidden', 'is-offair');
+    loadingEl.innerHTML = 'Tuning<span class="dots">…</span>';
+  }
+  function armTuneTimer(ms) {
+    clearTimeout(tuneTimer);
+    tuneTimer = setTimeout(sourceFailed, ms);
+  }
+  function sourceFailed() {
+    clearTimeout(tuneTimer);
+    const ch = CH[current];
+    if (!ch) return;
+    if (ch.fallbackSrc && !usingFallback) {
+      usingFallback = true;
+      loadSource(ch);
+      return;
+    }
+    if (hls) { try { hls.destroy(); } catch (e) {} hls = null; }
+    loadingEl.classList.remove('is-hidden');
+    loadingEl.classList.add('is-offair');
+    loadingEl.innerHTML =
+      `<b>${fmt2(ch.num)} · ${ch.name}</b><span>Off air right now — we'll be back shortly.</span>`;
+    tuneTimer = setTimeout(() => {
+      if (CH[current] !== ch) return;
+      usingFallback = false;
+      showTuning();
+      loadSource(ch);
+    }, OFF_AIR_RETRY_MS);
+  }
+
   function loadSource(ch) {
     durHint = ch.durationSec || 0;
     dur = 0;
+    netRetries = 0;
+    const src = usingFallback && ch.fallbackSrc ? ch.fallbackSrc : ch.src;
     if (hls) { hls.destroy(); hls = null; }
+    armTuneTimer(TUNE_TIMEOUT_MS);
     if (!NATIVE_HLS) {
       const cfg = { enableWorker: true, lowLatencyMode: false };
       if (durHint) cfg.startPosition = nowSec() % durHint;
-      hls = new window.Hls(cfg);
-      hls.loadSource(ch.src);
-      hls.attachMedia(video);
-      hls.on(window.Hls.Events.MANIFEST_PARSED, () => {
+      const h = hls = new window.Hls(cfg);
+      h.loadSource(src);
+      h.attachMedia(video);
+      h.on(window.Hls.Events.MANIFEST_PARSED, () => {
         dur = video.duration || durHint;
         if (!inAd) video.play().catch(() => {});
       });
-      hls.on(window.Hls.Events.ERROR, (evt, data) => {
-        if (!data || !data.fatal) return;
-        if (data.type === window.Hls.ErrorTypes.NETWORK_ERROR) hls.startLoad();
-        else if (data.type === window.Hls.ErrorTypes.MEDIA_ERROR) hls.recoverMediaError();
-        else { try { hls.destroy(); } catch (e) {} hls = null; setTimeout(() => { if (!hls) loadSource(CH[current]); }, 1500); }
+      h.on(window.Hls.Events.ERROR, (evt, data) => {
+        if (h !== hls || !data || !data.fatal) return;
+        if (data.type === window.Hls.ErrorTypes.NETWORK_ERROR && netRetries++ < MAX_NET_RETRIES) {
+          setTimeout(() => { if (h === hls) h.startLoad(); }, 1000 * netRetries);
+        } else if (data.type === window.Hls.ErrorTypes.MEDIA_ERROR && netRetries++ < MAX_NET_RETRIES) {
+          h.recoverMediaError();
+        } else {
+          sourceFailed();
+        }
       });
     } else {
-      video.src = ch.src;
+      video.src = src;
       if (!inAd) video.play().catch(() => {});
     }
   }
@@ -98,7 +146,11 @@
     if (NATIVE_HLS) syncLive();
   });
   video.addEventListener('canplay', () => { if (!inAd) video.play().catch(() => {}); });
-  video.addEventListener('playing', () => { if (!inAd) loadingEl.classList.add('is-hidden'); });
+  video.addEventListener('playing', () => {
+    clearTimeout(tuneTimer);
+    if (!inAd) loadingEl.classList.add('is-hidden');
+  });
+  video.addEventListener('error', () => { if (NATIVE_HLS && CH[current]) sourceFailed(); });
 
   /* ---------- schedule / EPG ---------- */
   function scheduleAt(ch, date) {
@@ -156,7 +208,8 @@
     document.documentElement.style.setProperty('--ch', ch.accent);
     $('.bug-num').textContent = fmt2(ch.num);
     $('.bug-name').textContent = ch.name;
-    loadingEl.classList.remove('is-hidden');
+    usingFallback = false;
+    showTuning();
     watchAccum = 0;
     inAd = false;
     adEl.hidden = true;
