@@ -1,0 +1,5 @@
+https://<pull-zone>.b-cdn.net/<ident-videoId>/playlist.m3u8
+https://<pull-zone>.b-cdn.net/<programme-1-videoId>/playlist.m3u8
+https://<pull-zone>.b-cdn.net/<programme-2-videoId>/playlist.m3u8
+https://<pull-zone>.b-cdn.net/<ident-videoId>/playlist.m3u8
+https://<pull-zone>.b-cdn.net/<programme-3-videoId>/playlist.m3u8

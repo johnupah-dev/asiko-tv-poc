@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Provision the 7 POC channels as real Eyevinn Channel Engine (VOD2Live) linear channels",
+  "description": "Provision the Asiko channels as real Eyevinn Channel Engine (VOD2Live) linear channels - Loop or Playlist",
   "scripts": {
     "token": "node provision.mjs token",
+    "check": "node provision.mjs check",
     "provision": "node provision.mjs provision",
     "status": "node provision.mjs status",
     "teardown": "node provision.mjs teardown"

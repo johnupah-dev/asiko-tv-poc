@@ -1,0 +1,186 @@
+<title>Content Delivery Spec</title>
+<meta name="description" content="What Asiko TV needs from a channel owner: video and audio spec, files, ad-break cue points, metadata, logo and ident, and how to deliver." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+
+<style>
+  :root {
+    --bg:#0a0a0c; --bg-soft:#0f0f12; --panel:#17171b; --panel-2:#1e1e23;
+    --line:rgba(216,169,75,0.16); --line-strong:rgba(216,169,75,0.34);
+    --gold:#d8a94b; --gold-bright:#f3cd7e; --gold-deep:#a8792c; --gold-wash:rgba(216,169,75,0.10);
+    --white:#f7f5f0; --muted:#a7a4ac; --muted-2:#716f78; --red:#df3b34; --green:#6fbf97;
+    --r-sm:6px; --r-md:10px; --pill:999px;
+    --display:"Poppins","Segoe UI",system-ui,sans-serif;
+    --body:"Inter","Segoe UI",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+    --measure:70ch;
+    --s-1:clamp(.8rem,.78rem + .1vw,.86rem);
+    --s0:clamp(.95rem,.92rem + .15vw,1.02rem);
+    --s1:clamp(1.1rem,1.02rem + .4vw,1.28rem);
+    --s2:clamp(1.3rem,1.12rem + .7vw,1.7rem);
+    --s4:clamp(2.1rem,1.6rem + 2.6vw,3.4rem);
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--white); font-family:var(--body); font-size:var(--s0); line-height:1.6; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:64rem; margin:0 auto; padding:clamp(1.4rem,1rem + 3vw,4rem) clamp(1.1rem,.6rem + 3vw,3.4rem) 6rem; }
+
+  .lockup { display:inline-flex; align-items:center; gap:10px; border:1px solid var(--line); border-radius:9px; padding:6px 13px 6px 9px; margin-bottom:1.5rem; }
+  .lockup svg { width:24px; height:24px; display:block; }
+  .lockup .w { font-family:var(--display); font-weight:700; font-size:16px; letter-spacing:.1em; }
+  .lockup .w b { font-weight:800; color:var(--gold); }
+  .lockup .t { display:block; font-family:var(--mono); font-size:8px; letter-spacing:.24em; text-transform:uppercase; color:var(--gold); margin-top:3px; }
+
+  .eyebrow { display:inline-flex; align-items:center; gap:.6rem; font-family:var(--mono); font-size:var(--s-1); letter-spacing:.18em; text-transform:uppercase; color:var(--gold); margin:0 0 1rem; }
+  .eyebrow::before { content:""; width:1.6rem; height:1px; background:var(--gold); }
+  h1 { font-family:var(--display); font-weight:800; font-size:var(--s4); line-height:1.04; letter-spacing:-.02em; text-wrap:balance; margin:0 0 .7rem; }
+  h1 .accent { color:var(--gold); }
+  .standfirst { font-size:var(--s1); color:var(--muted); max-width:54ch; margin:0 0 1.4rem; }
+  .masthead { border-bottom:1px solid var(--line-strong); padding-bottom:1.6rem; }
+
+  main { margin-top:2.6rem; display:flex; flex-direction:column; gap:2.6rem; }
+  section h2 { font-family:var(--display); font-weight:700; font-size:var(--s2); line-height:1.14; letter-spacing:-.01em; margin:0 0 1rem; padding-bottom:.6rem; border-bottom:1px solid var(--line); }
+  h3 { font-family:var(--display); font-weight:600; font-size:var(--s0); margin:1.4rem 0 .4rem; color:var(--gold-bright); }
+  p { margin:0 0 .8rem; max-width:var(--measure); }
+  .lede { font-size:var(--s1); color:var(--white); max-width:56ch; }
+  strong { font-weight:600; color:var(--white); }
+  a { color:var(--gold); }
+  code { font-family:var(--mono); font-size:.82em; background:var(--panel-2); border:1px solid var(--line); border-radius:4px; padding:.06rem .35rem; color:var(--gold-bright); }
+
+  ol.steps { margin:0; padding:0; list-style:none; counter-reset:s; display:flex; flex-direction:column; gap:1rem; }
+  ol.steps > li { counter-increment:s; display:grid; grid-template-columns:2rem 1fr; gap:1rem; align-items:start; }
+  ol.steps > li::before { content:counter(s); font-family:var(--mono); font-size:.95rem; color:var(--gold); border:1px solid var(--line-strong); width:2rem; height:2rem; display:grid; place-items:center; border-radius:var(--r-sm); }
+  ol.steps b { font-family:var(--display); font-weight:600; color:var(--white); display:block; margin-bottom:.2rem; }
+  ol.steps .d { color:var(--muted); font-size:var(--s-1); }
+  ol.steps ul { margin:.4rem 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:.3rem; }
+  ol.steps ul li { padding-left:1rem; position:relative; font-size:var(--s-1); color:var(--muted); }
+  ol.steps ul li::before { content:""; position:absolute; left:.05rem; top:.6em; width:.32rem; height:.32rem; background:var(--gold); transform:rotate(45deg); }
+
+  .callout { background:var(--gold-wash); border:1px solid var(--line-strong); border-left:3px solid var(--gold); border-radius:0 var(--r-sm) var(--r-sm) 0; padding:1rem 1.15rem; max-width:var(--measure); }
+  .callout p { margin:0; }
+
+  .table-wrap { overflow-x:auto; border:1px solid var(--line); border-radius:var(--r-md); background:var(--bg-soft); margin-top:.6rem; }
+  table { border-collapse:collapse; width:100%; font-size:var(--s-1); min-width:44rem; }
+  th,td { text-align:left; padding:.65rem .85rem; vertical-align:top; border-bottom:1px solid var(--line); }
+  thead th { font-family:var(--mono); font-weight:500; font-size:.64rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); background:var(--panel); }
+  tbody tr:last-child td { border-bottom:0; }
+  td.k { color:var(--gold-bright); font-weight:500; white-space:nowrap; }
+
+  footer { margin-top:3.6rem; padding-top:1.3rem; border-top:1px solid var(--line-strong); font-size:var(--s-1); color:var(--muted); display:flex; flex-direction:column; gap:.3rem; }
+  footer b { color:var(--gold-bright); font-family:var(--display); font-weight:600; }
+  :focus-visible { outline:2px solid var(--gold); outline-offset:2px; }
+  ul.ticks { margin:.4rem 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:.45rem; max-width:var(--measure); }
+  ul.ticks li { padding-left:1.2rem; position:relative; }
+  ul.ticks li::before { content:""; position:absolute; left:.1rem; top:.62em; width:.38rem; height:.38rem; background:var(--gold); transform:rotate(45deg); }
+  pre { font-family:var(--mono); font-size:.8rem; background:var(--panel); border:1px solid var(--line); border-radius:var(--r-sm); padding:.9rem 1rem; overflow-x:auto; color:var(--gold-bright); max-width:var(--measure); }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <span class="lockup">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 L29 29 L3 29 Z" fill="#d8a94b"/><path d="M16 13 L23.5 27 L8.5 27 Z" fill="#0a0a0c"/><rect x="10" y="20.5" width="12" height="3.2" fill="#0a0a0c"/></svg>
+      <span><span class="w">ASIKO<b>&nbsp;TV</b></span><span class="t">The Soul of Africa</span></span>
+    </span>
+    <p class="eyebrow">Channel Owner Guide</p>
+    <h1>Content <span class="accent">delivery spec</span></h1>
+    <p class="standfirst">Exactly what to send us so your channel goes on air first time: files, ad breaks, metadata, logo and ident.</p>
+  </header>
+
+  <main>
+
+    <section>
+      <h2>1 · Video &amp; audio files</h2>
+      <p class="lede">Send your best master. We re-encode everything to one Asiko profile. What matters is that your files are clean, consistent and follow the rules below.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Item</th><th>Required</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td class="k">Container</td><td>MP4 or MOV</td><td>One file per programme or episode. No split parts.</td></tr>
+            <tr><td class="k">Video codec</td><td>H.264 (or ProRes / H.265 mezzanine)</td><td>High bitrate is fine. Minimum 8 Mbps at 1080p.</td></tr>
+            <tr><td class="k">Resolution</td><td>1920×1080 (preferred) or 1280×720</td><td>16:9. No letterbox burned into a 4:3 frame. Don't upscale SD to HD.</td></tr>
+            <tr><td class="k">Frame rate</td><td>25 fps, constant</td><td>Or your native rate (24 / 29.97 / 30), but <strong>the same across all your files</strong>. No variable frame rate (common with phone footage).</td></tr>
+            <tr><td class="k">Scan</td><td>Progressive</td><td>De-interlace before sending.</td></tr>
+            <tr><td class="k">Audio</td><td>AAC or PCM, stereo, 48 kHz</td><td>One stereo mix. Dialogue and music on the same track. No silent or mono-in-one-ear tracks.</td></tr>
+            <tr><td class="k">Loudness</td><td>−23 LUFS integrated (±1), true peak ≤ −1 dBTP</td><td>Stops your channel being louder or quieter than the one next to it.</td></tr>
+            <tr><td class="k">Clean start / end</td><td>1–2 s of black at head and tail</td><td>No colour bars, countdown clocks or slates inside the programme file.</td></tr>
+            <tr><td class="k">On-screen graphics</td><td><strong>No channel logo burned in</strong></td><td>We add your logo consistently at encode (see §4). Subtitles burned in are fine if the programme needs them.</td></tr>
+            <tr><td class="k">Ad breaks</td><td>No ads inside the file</td><td>Leave the programme clean. Tell us the break points instead (§2).</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>2 · Ad-break cue points</h2>
+      <p>Mark where a break can go: natural pauses, scene changes, act ends. We insert ads there, not in the middle of a line of dialogue.</p>
+      <ul class="ticks">
+        <li>Roughly <strong>one break every 12–15 minutes</strong> of programme.</li>
+        <li>Give each cue as a <strong>timecode</strong> (<code>HH:MM:SS</code>) from the start of the file, in the metadata sheet (§3).</li>
+        <li>If you already have fade-to-black break points, just list them. No re-edit needed.</li>
+        <li>Short programmes under 10 minutes need no cue. We place breaks between programmes.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>3 · Metadata sheet</h2>
+      <p>One row per file, as a spreadsheet (we send a template). It feeds the programme guide viewers see and the ad targeting.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Column</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td class="k">File name</td><td><code>movieafrica_the-return_s01e03.mp4</code>, i.e. <code>channel_title_sXXeYY</code>, lowercase, no spaces</td></tr>
+            <tr><td class="k">Title / episode title</td><td>The Return · Episode 3: Homecoming</td></tr>
+            <tr><td class="k">Synopsis</td><td>One or two sentences, max 250 characters</td></tr>
+            <tr><td class="k">Duration</td><td>00:47:12</td></tr>
+            <tr><td class="k">Genre</td><td>Drama</td></tr>
+            <tr><td class="k">Language · subtitles</td><td>Yoruba · English subtitles</td></tr>
+            <tr><td class="k">Age rating</td><td>All / 13+ / 16+ / 18+</td></tr>
+            <tr><td class="k">Ad-break cues</td><td>00:12:40, 00:24:05, 00:36:30</td></tr>
+            <tr><td class="k">Rights window</td><td>Start and end dates, territories (e.g. worldwide, excluding …)</td></tr>
+            <tr><td class="k">Thumbnail</td><td>1920×1080 JPG still, no text, one per programme</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>4 · Logo, ident &amp; slate</h2>
+      <p class="lede">These make it look like <em>your</em> channel. Send them once, at the start.</p>
+      <ol class="steps">
+        <li><div><b>Channel logo, on-screen version</b><span class="d">PNG with a <strong>transparent background</strong>, at least 400 px wide, readable on dark and light footage (a white or single-colour version works best). We place it in the top-right corner of every programme at encode time, the same on every screen. Also send an SVG if you have one, for the app and website.</span></div></li>
+        <li><div><b>Channel ident</b><span class="d">A 5–10 second video (same spec as §1) with your logo and channel name. It plays between programmes. Optional: a second ident for going into and coming out of breaks ("back after this…").</span></div></li>
+        <li><div><b>Off-air slate</b><span class="d">A 1920×1080 still (or a 10 s video) with your logo. It is shown if a programme fails to load, instead of a black screen.</span></div></li>
+        <li><div><b>Brand colour</b><span class="d">One hex colour (e.g. <code>#D8A94B</code>). It is used for your channel's accents in the Asiko app.</span></div></li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>5 · Schedule</h2>
+      <p>Tell us the running order. The simplest form: a list of file names in the order they should play, which loops when it reaches the end. Put new episodes at the point in the list where you want them.</p>
+      <pre>movieafrica_ident.mp4
+movieafrica_the-return_s01e01.mp4
+movieafrica_the-return_s01e02.mp4
+movieafrica_ident.mp4
+movieafrica_lagos-nights.mp4
+…</pre>
+      <p>Aim for <strong>at least 20–40 hours</strong> of programming to start, so viewers don't see repeats the same day. Dated schedules (“Friday 20:00 premiere”) are coming. Tell us if you need them.</p>
+    </section>
+
+    <section>
+      <h2>6 · How to deliver</h2>
+      <ol class="steps">
+        <li><div><b>We send you an upload link</b><span class="d">A private upload page for your channel's library. Or send a Google Drive / Dropbox / WeTransfer link and we upload for you.</span></div></li>
+        <li><div><b>Upload brand assets first</b><span class="d">The logo has to be in place before your programmes are encoded. Otherwise they need re-encoding.</span></div></li>
+        <li><div><b>Upload programmes + the metadata sheet</b><span class="d">File names must match the sheet exactly.</span></div></li>
+        <li><div><b>We check and confirm</b><span class="d">Within 2 working days we tell you which files passed, and what to fix on any that didn't. Then your channel goes on air.</span></div></li>
+      </ol>
+      <div class="callout"><p><strong>Top reasons files get sent back:</strong> variable frame rate (phone or screen recordings), a logo already burned in, audio on one side only, very quiet or clipped audio, colour bars or ads left in the file, and file names that don't match the sheet.</p></div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p><b>Asiko TV</b> — content delivery spec for channel owners</p>
+    <p>Media Icons Africa · 30 September 2026 · pairs with the List Your Channel pack, the Channel Owner Q&amp;A and the FAST Channel Creation Checklist</p>
+  </footer>
+</div>

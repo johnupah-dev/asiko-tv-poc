@@ -20,6 +20,7 @@ claude.ai; the PDFs and Word files are the same content for sending by email.
 | 12 | **Strategic SWOT** -- strengths, weaknesses, opportunities, threats across competition, voting, fresh channels, FAST training, ad-server, data cost, why free, media-entrepreneurship impact | `12-strategic-swot.html` · `Asiko TV - Strategic SWOT.pdf` | Investors, board, strategy |
 | 13 | **Niche & Mitigations** -- the beachhead Asiko owns, a mitigation for every weakness, the voting/cash-prize effect on usage, and the DNS steps for asiko.africa | `13-niche-and-mitigations.html` · `Asiko TV - Niche and Mitigations.pdf` | Investors, strategy |
 | 14 | **Team** -- the Media Icons Africa team behind Asiko across commercial, technology, content and legal/finance; bios to be completed | `14-team.html` · `Asiko TV - Team.pdf` | Investors, partners |
+| 15 | **Content Delivery Spec** -- file, audio and loudness spec, ad-break cues, metadata sheet, logo/ident/slate and how to deliver | `15-content-delivery-spec.html` · `Asiko TV - Content Delivery Spec.pdf` | Channel owners, before uploading |
 
 ## Notes
 
