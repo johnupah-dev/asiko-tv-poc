@@ -196,6 +196,15 @@ button { font-family: inherit; }
   border-radius: var(--r);
   backdrop-filter: blur(3px);
 }
+.bug-logo {
+  display: block;
+  height: 28px;
+  width: auto;
+  max-width: 72px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+.bug-logo[hidden] { display: none; }
 .bug-num {
   font-family: var(--font-display);
   font-weight: 700;
@@ -633,6 +642,7 @@ button { font-family: inherit; }
   .stage { position: sticky; top: 0; z-index: 5; height: auto; aspect-ratio: 16 / 9; min-height: 0; max-height: none; }
   #video { object-fit: cover; }
   .bug { top: 8px; right: 8px; max-width: 62vw; }
+  .bug-logo { height: 20px; max-width: 48px; }
   .bug-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .lower-third { left: 10px; right: 10px; bottom: 10px; max-width: none; }
   .lt-row { flex-wrap: wrap; }

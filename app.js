@@ -156,6 +156,9 @@
     document.documentElement.style.setProperty('--ch', ch.accent);
     $('.bug-num').textContent = fmt2(ch.num);
     $('.bug-name').textContent = ch.name;
+    const logo = $('.bug-logo');
+    logo.hidden = !ch.logo;
+    if (ch.logo) { logo.src = ch.logo; logo.alt = ch.name + ' logo'; }
     loadingEl.classList.remove('is-hidden');
     watchAccum = 0;
     inAd = false;
@@ -420,6 +423,7 @@
     }
     MON = CFG.monetization;
     CH = CFG.channels;
+    $('.bug-logo').addEventListener('error', (e) => { e.target.hidden = true; });
     buildRail();
     renderRev();
     rotateCompanion(true);
