@@ -1,0 +1,42 @@
+name: Snapshot live asiko.africa
+
+# Read-only copy of what is on the asiko.africa host, plus the files the last
+# deploy replaced, committed to the live-snapshot branch for review.
+on:
+  workflow_dispatch:
+  push:
+    branches: [claude/epic-curie-de7d15]
+    paths: [.github/workflows/snapshot-asiko-africa.yml, deploy/cpanel-snapshot.sh]
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Copy the live site
+        env:
+          CPANEL_TOKEN: ${{ secrets.CPANEL_TOKEN }}
+          CPANEL_HOST: ${{ vars.CPANEL_HOST || 'mediaiconsafrica.com' }}
+        run: bash deploy/cpanel-snapshot.sh
+      - name: Fetch the files the 2026-10-02 deploy replaced
+        uses: actions/download-artifact@v4
+        with:
+          name: previous-live-files
+          run-id: 37034385329
+          github-token: ${{ github.token }}
+          path: live-snapshot/_replaced-by-deploy-2026-10-02
+      - name: Commit to live-snapshot
+        run: |
+          mv live-snapshot /tmp/live-snapshot
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout --orphan live-snapshot
+          git rm -rfq .
+          cp -r /tmp/live-snapshot/. .
+          git add -A
+          git commit -qm "Snapshot of live asiko.africa $(date -u +%FT%TZ)"
+          git push -f origin live-snapshot
