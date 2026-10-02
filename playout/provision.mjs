@@ -2,14 +2,15 @@
  * playout/provision.mjs -- SDK version of osc-fast.ps1 (for "any dev").
  *
  * Reads ../data/channels.json (the same file the front end uses) and creates
- * one Eyevinn Channel Engine "Loop" instance per channel from its `src`.
+ * one Eyevinn Channel Engine "Loop" instance per channel that has a
+ * `loopSource` (the VOD playlist to loop). Channels without one are skipped.
  *
  *   cd playout && npm install
  *   export OSC_ACCESS_TOKEN=eyJ...            # https://app.osaas.io -> Settings -> API
  *   node provision.mjs token                  # auth check
- *   node provision.mjs provision              # create all 7
+ *   node provision.mjs provision              # create every channel with a loopSource
  *   node provision.mjs status                 # health + playback URLs -> playout.json
- *   node provision.mjs teardown               # delete all 7
+ *   node provision.mjs teardown               # delete every asiko* channel
  */
 import { readFile, writeFile } from 'node:fs/promises';
 import { Context, listInstances, removeInstance } from '@osaas/client-core';
@@ -26,9 +27,9 @@ if (!process.env.OSC_ACCESS_TOKEN) {
 const ctx = new Context();
 const cfg = JSON.parse(await readFile(new URL('../data/channels.json', import.meta.url), 'utf8'));
 
-const plan = cfg.channels.map((c) => {
+const plan = cfg.channels.filter((c) => c.loopSource).map((c) => {
   if (!/^[a-z0-9]+$/.test(c.id)) throw new Error(`channel id "${c.id}" must be lowercase a-z0-9`);
-  return { id: c.id, name: `${PREFIX}${c.id}`, label: c.name, type: 'Loop', url: c.src };
+  return { id: c.id, name: `${PREFIX}${c.id}`, label: c.name, type: 'Loop', url: c.loopSource };
 });
 
 const sat = () => ctx.getServiceAccessToken(SERVICE);

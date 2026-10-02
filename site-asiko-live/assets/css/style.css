@@ -224,7 +224,8 @@ section{ padding:84px 0; }
 .ch-card img{ margin:0 0 12px; }
 .ch-card .ch-cat{ text-transform:uppercase; letter-spacing:0.06em; color:var(--gold-bright); font-weight:700; }
 .ch-synopsis{ color:var(--muted); font-size:0.78rem; line-height:1.5; margin-top:8px; }
-.badge-poc{ background:var(--red); color:#fff; border-color:transparent; }
+.badge-live{ background:var(--red); color:#fff; border-color:transparent; }
+.logo-fallback{ display:flex; align-items:center; justify-content:center; text-align:center; height:44px; margin:0 auto 12px; font-size:0.8rem; font-weight:800; letter-spacing:0.04em; color:var(--gold, #d8a94b); }
 .badge-queued{ opacity:0.7; }
 
 /* ---------- channel guide (channels.html) ---------- */

@@ -1,11 +1,11 @@
 <#
-  playout/osc-fast.ps1  --  turn the POC's 7 channels into REAL linear channels
+  playout/osc-fast.ps1  --  provision Asiko TV channels as linear channels
                             on Eyevinn Open Source Cloud (channel-engine / VOD2Live)
 
   This is Layer 1 of the roadmap (see ../README.md): production playout.
   It reads the SAME channel list the front end uses ( ../data/channels.json ),
-  creates one Channel Engine "Loop" instance per channel from that channel's
-  `src`, waits for them to go healthy, and writes the playback URLs to
+  creates one Channel Engine "Loop" instance per channel that has a
+  `loopSource` (VOD playlist to loop), waits for them to go healthy, and writes the playback URLs to
   playout/playout.json so you can paste them back into data/channels.json.
 
   No Node, no CLI, no SDK -- just PowerShell + the OSC REST API:
@@ -19,9 +19,9 @@
   Usage (from the repo root or the playout/ folder):
     $env:OSC_ACCESS_TOKEN = "eyJ..."                     # OR put it in playout/.env
     powershell -ExecutionPolicy Bypass -File playout/osc-fast.ps1 token       # auth check
-    powershell -ExecutionPolicy Bypass -File playout/osc-fast.ps1 provision   # create all 7
+    powershell -ExecutionPolicy Bypass -File playout/osc-fast.ps1 provision   # create every channel with a loopSource
     powershell -ExecutionPolicy Bypass -File playout/osc-fast.ps1 status      # health + URLs
-    powershell -ExecutionPolicy Bypass -File playout/osc-fast.ps1 teardown    # delete all 7
+    powershell -ExecutionPolicy Bypass -File playout/osc-fast.ps1 teardown    # delete every asiko* channel
     powershell -ExecutionPolicy Bypass -File playout/osc-fast.ps1 provision -Recreate
 #>
 [CmdletBinding()]
@@ -96,7 +96,7 @@ function Connect-Osc {
 function Load-Plan {
   if (-not (Test-Path $ConfigPath)) { throw "Channel list not found: $ConfigPath" }
   $cfg = Get-Content $ConfigPath -Raw | ConvertFrom-Json
-  $cfg.channels | ForEach-Object {
+  $cfg.channels | Where-Object { $_.loopSource } | ForEach-Object {
     if ($_.id -notmatch '^[a-z0-9]+$') { throw "channel id '$($_.id)' must be lowercase a-z0-9 (Channel Engine instance-name rule)." }
     [pscustomobject]@{
       id     = $_.id
@@ -104,7 +104,7 @@ function Load-Plan {
       label  = $_.name
       genre  = $_.genre
       type   = 'Loop'
-      url    = $_.src
+      url    = $_.loopSource
       opts   = @{ useDemuxedAudio = $false; useVttSubtitles = $false }
     }
   }

@@ -1,4 +1,4 @@
-# Asiko POC — serve static index first
+# Asiko TV — serve static index first
 DirectoryIndex index.html index.php
 
 

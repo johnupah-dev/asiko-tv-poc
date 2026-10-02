@@ -1,11 +1,11 @@
 [
   {
     "category" : "Flagship",
-    "genreTag" : "Flagship · Full Bouquet Simulcast",
-    "logo" : "assets/img/channels/asiko-tv.png",
-    "name" : "Asiko TV",
+    "genreTag" : "Flagship · Best of the Bouquet",
+    "logo" : "assets/img/channels/asiko-plus.png",
+    "name" : "Asiko TV+",
     "slug" : "asiko-tv",
-    "status" : "poc",
+    "status" : "live",
     "synopsis" : "The master channel of the Asiko bouquet — a 24/7 simulcast reel of the best of Nollywood, news, music, faith and culture drawn from every channel on the platform. Built to be the first thing a new viewer finds, and the reason they stay to explore the rest."
   },
   {
@@ -14,7 +14,7 @@
     "logo" : "assets/img/channels/asiko-plus.png",
     "name" : "Asiko+",
     "slug" : "asiko-plus",
-    "status" : "poc",
+    "status" : "interested",
     "synopsis" : "The curated, ad-light extension of Asiko TV — binge blocks, exclusive premieres and diaspora-first specials pulled from across the bouquet, for viewers who want more of Asiko TV's best on their own time."
   },
   {
@@ -23,7 +23,7 @@
     "logo" : "assets/img/channels/movie-africa.png",
     "name" : "Movie Africa",
     "slug" : "movie-africa",
-    "status" : "poc",
+    "status" : "live",
     "synopsis" : "Entertainment done right — everything Movies. Stories from an African perspective; our stories, our movies, Nollywood, Gollywood and all the other 'woods' across the continent."
   },
   {
@@ -41,7 +41,7 @@
     "logo" : "assets/img/channels/movie-africa-epic.png",
     "name" : "Movie Africa: Epic",
     "slug" : "movie-africa-epic",
-    "status" : "poc",
+    "status" : "live",
     "synopsis" : "The period-drama arm of the Movie Africa family — kingdoms, warriors and legends brought to life in sweeping historical epics rooted in African history and folklore."
   },
   {
@@ -50,7 +50,7 @@
     "logo" : "assets/img/channels/movie-africa-yoruba.png",
     "name" : "Movie Africa: Yoruba",
     "slug" : "movie-africa-yoruba",
-    "status" : "poc",
+    "status" : "live",
     "synopsis" : "Yoruba-language cinema at its finest — from classic epics to contemporary drama, spotlighting the stars and stories that built the Yoruba film industry."
   },
   {
@@ -68,16 +68,16 @@
     "logo" : "assets/img/channels/movie-africa-igbo.png",
     "name" : "Movie Africa: Igbo",
     "slug" : "movie-africa-igbo",
-    "status" : "interested",
+    "status" : "live",
     "synopsis" : "The definitive home of Igbo-language cinema — from the golden age of Nollywood East to today's rising storytellers."
   },
   {
     "category" : "Nollywood & Drama",
     "genreTag" : "Nollywood · Hausa (Kannywood)",
     "logo" : "assets/img/channels/movie-africa-halisa.png",
-    "name" : "Movie Africa: Halisa",
+    "name" : "Movie Africa: Hausa",
     "slug" : "movie-africa-halisa",
-    "status" : "interested",
+    "status" : "live",
     "synopsis" : "Hausa-language cinema from Kano and beyond — Kannywood's biggest stars and stories for Northern Nigeria and the wider Hausa-speaking world."
   },
   {
@@ -95,7 +95,7 @@
     "logo" : "assets/img/channels/sinema-olopin.png",
     "name" : "Sinema Olopin",
     "slug" : "sinema-olopin",
-    "status" : "poc",
+    "status" : "interested",
     "synopsis" : "A most contemporary Yoruba TV channel that is much more than movies and talk shows — Yoruba culture laid bare in all its beauty, subtitled in English."
   },
   {
@@ -104,7 +104,7 @@
     "logo" : "assets/img/channels/movie-india.png",
     "name" : "Movie India",
     "slug" : "movie-india",
-    "status" : "poc",
+    "status" : "interested",
     "synopsis" : "Bollywood movies have long been a staple on the Nigerian and African movie menu. Follow the best and latest of the Bollywood blockbusters."
   },
   {
@@ -140,7 +140,7 @@
     "logo" : "assets/img/channels/amen-movies.png",
     "name" : "Amen Movies",
     "slug" : "amen-movies",
-    "status" : "poc",
+    "status" : "live",
     "synopsis" : "The Christian movie genre is fast developing and catering for the Christian community in Nigeria and around the world. Amen Movies is the definitive Christian Movies channel."
   },
   {
@@ -158,7 +158,7 @@
     "logo" : "assets/img/channels/ppg.png",
     "name" : "PPG",
     "slug" : "ppg",
-    "status" : "poc",
+    "status" : "live",
     "synopsis" : "Unleash the awesome power of the Almighty God as He inhabits our praises — Africa's premiere praise and worship channel, nonstop, to Him who deserves it."
   },
   {
@@ -194,7 +194,7 @@
     "logo" : "assets/img/channels/mandate-news.png",
     "name" : "Mandate News International",
     "slug" : "mandate-news",
-    "status" : "poc",
+    "status" : "interested",
     "synopsis" : "Independent, mandate-driven news coverage of Nigeria, Africa and the world — politics, business and the stories that matter, reported straight."
   },
   {
@@ -203,7 +203,7 @@
     "logo" : "assets/img/channels/goldmyne-tv.png",
     "name" : "GoldMyne TV",
     "slug" : "goldmyne-tv",
-    "status" : "poc",
+    "status" : "interested",
     "synopsis" : "Nigeria's entertainment industry, mined for gold — celebrity news, red-carpet coverage and the stories behind the stars."
   },
   {
@@ -221,16 +221,16 @@
     "logo" : "assets/img/channels/fad360.png",
     "name" : "FAD360",
     "slug" : "fad360",
-    "status" : "poc",
+    "status" : "interested",
     "synopsis" : "A 360-degree look at the stories of the day across Africa — reported straight, from politics to the culture desk."
   },
   {
     "category" : "Business",
     "genreTag" : "Business & Executive Talk",
     "logo" : "assets/img/channels/csuite-cafe-tv.png",
-    "name" : "C-Suite Cafe",
+    "name" : "C-Suite Café TV",
     "slug" : "c-suite-cafe",
-    "status" : "poc",
+    "status" : "live",
     "synopsis" : "Conversations from the executive suite — CEOs, founders and industry leaders unpacking strategy, leadership and the business of getting to the top."
   },
   {
@@ -239,16 +239,16 @@
     "logo" : "assets/img/channels/business-day-tv.png",
     "name" : "Business Day TV",
     "slug" : "business-day-tv",
-    "status" : "poc",
+    "status" : "interested",
     "synopsis" : "Markets, macroeconomics and the deals shaping Nigeria's economy — business news and analysis for investors, entrepreneurs and policy watchers."
   },
   {
     "category" : "Business",
     "genreTag" : "Real Estate & Property",
     "logo" : "assets/img/channels/estates-tv.png",
-    "name" : "Estates TV",
+    "name" : "Estate TV",
     "slug" : "estates-tv",
-    "status" : "interested",
+    "status" : "live",
     "synopsis" : "Lifestyle, business and legacy — property listings, real estate investment advice and the developments shaping Africa's skylines."
   },
   {
@@ -257,7 +257,7 @@
     "logo" : "assets/img/channels/laffo-tv.png",
     "name" : "Laffo TV",
     "slug" : "laffo-tv",
-    "status" : "poc",
+    "status" : "interested",
     "synopsis" : "A wholly indigenous African comedy channel. Watch out for the kings and stars of African comedy, back to back."
   },
   {
@@ -266,7 +266,7 @@
     "logo" : "assets/img/channels/nite-of-a-thousand-laughs.png",
     "name" : "Nite of a Thousand Laughs",
     "slug" : "nite-of-a-thousand-laughs",
-    "status" : "poc",
+    "status" : "interested",
     "synopsis" : "The broadcast home of Opa Williams' iconic Nigerian stand-up comedy franchise — a second flagship for Asiko's Comedy shelf alongside Laffo TV."
   },
   {
@@ -275,7 +275,7 @@
     "logo" : "assets/img/channels/questv.png",
     "name" : "QuesTV",
     "slug" : "questv",
-    "status" : "poc",
+    "status" : "interested",
     "synopsis" : "Africa's premier fashion, beauty and style television lifestyle channel — speaking only the language of style, unmatched in covering the industry across the continent."
   },
   {
@@ -284,7 +284,7 @@
     "logo" : "assets/img/channels/shakara.png",
     "name" : "Shakara",
     "slug" : "shakara",
-    "status" : "poc",
+    "status" : "interested",
     "synopsis" : "Style in the spirit of the mother continent — a dedicated African and Afrocentric fashion channel, formerly Quest TV, the first-ever 24-hour African fashion channel."
   },
   {
@@ -293,16 +293,16 @@
     "logo" : "assets/img/channels/sisi.png",
     "name" : "Sisi TV",
     "slug" : "sisi-tv",
-    "status" : "interested",
+    "status" : "live",
     "synopsis" : "A glamour and lifestyle channel for the modern African woman — beauty, style and the everyday glow-up, told with confidence and flair."
   },
   {
     "category" : "Weddings",
     "genreTag" : "Weddings",
     "logo" : "assets/img/channels/hooked.png",
-    "name" : "Hooked",
+    "name" : "Hooked TV",
     "slug" : "hooked",
-    "status" : "interested",
+    "status" : "live",
     "synopsis" : "Power to the couple. Weddings are the centrepiece of African celebration — Hooked follows the greatest love stories and the businesses built around them, on Africa's premiere wedding channel."
   },
   {
@@ -318,18 +318,18 @@
     "category" : "Kiddies & Teens",
     "genreTag" : "Kids",
     "logo" : "assets/img/channels/bounce.png",
-    "name" : "Bounce",
+    "name" : "Bounce TV",
     "slug" : "bounce",
-    "status" : "poc",
+    "status" : "live",
     "synopsis" : "Little treasures for your little treasure — an exclusive kiddies channel of cartoons, animations and excursions following the adventures of the Nigerian kid."
   },
   {
     "category" : "Kiddies & Teens",
     "genreTag" : "Kids Talent & Grooming",
     "logo" : "assets/img/channels/cks-tv.png",
-    "name" : "CKS TV (Charmingkids)",
+    "name" : "Charmin Kids",
     "slug" : "cks-tv",
-    "status" : "interested",
+    "status" : "live",
     "synopsis" : "The broadcast home of Charmingkids — grooming, talent development and confidence-building programming for the next generation of African children."
   },
   {
@@ -338,7 +338,7 @@
     "logo" : "assets/img/channels/teen-africa.png",
     "name" : "Teen Africa",
     "slug" : "teen-africa",
-    "status" : "poc",
+    "status" : "live",
     "synopsis" : "Made by and for African teens — school life, trends, music and the issues that matter to the continent's next generation."
   },
   {
@@ -347,7 +347,7 @@
     "logo" : "assets/img/channels/platinum-play.png",
     "name" : "Platinum Play",
     "slug" : "platinum-play",
-    "status" : "poc",
+    "status" : "interested",
     "synopsis" : "When a CD goes platinum, it's a commercial blockbuster. This urban contemporary music channel follows the hip-hop artistes and dancehall anthems raving across Africa."
   },
   {
@@ -356,7 +356,7 @@
     "logo" : "assets/img/channels/play.png",
     "name" : "Play",
     "slug" : "play",
-    "status" : "poc",
+    "status" : "interested",
     "synopsis" : "Nigerian music is massive around the world; Play delivers the best of Nigerian and African music — fresh, contemporary and retro — plus the whole lifestyle around the beat."
   },
   {
@@ -392,7 +392,7 @@
     "logo" : "assets/img/channels/heritage-tv.png",
     "name" : "Heritage TV",
     "slug" : "heritage-tv",
-    "status" : "poc",
+    "status" : "interested",
     "synopsis" : "Africa's history, traditions and heritage — documentaries and storytelling that preserve and celebrate the continent's cultural memory."
   },
   {
@@ -401,7 +401,7 @@
     "logo" : "assets/img/channels/arewa24.png",
     "name" : "Arewa24",
     "slug" : "arewa24",
-    "status" : "poc",
+    "status" : "interested",
     "synopsis" : "General entertainment for Northern Nigeria and the Hausa-speaking world — drama, music and lifestyle programming rooted in Arewa culture."
   },
   {
@@ -462,9 +462,9 @@
     "category" : "Women's Empowerment",
     "genreTag" : "Women's Networking & Empowerment",
     "logo" : "assets/img/channels/wctv.png",
-    "name" : "Women Connect TV",
+    "name" : "Women Connect",
     "slug" : "women-connect-tv",
-    "status" : "interested",
+    "status" : "live",
     "synopsis" : "Connecting African women in business, leadership and community — networking, mentorship and empowerment programming for women on the rise."
   },
   {
@@ -507,9 +507,9 @@
     "category" : "Lifestyle",
     "genreTag" : "Food, Culture & Lifestyle",
     "logo" : "assets/img/channels/tattase.png",
-    "name" : "Tattase",
+    "name" : "Tattase TV",
     "slug" : "tattase",
-    "status" : "poc",
+    "status" : "live",
     "synopsis" : "A pioneering Afrocentric digital multimedia platform focused on celebrating and promoting African cultures, cuisines, recipes, food brands and tourism — the flagship of the original Tattase TV lineup, now part of the Asiko bouquet."
   },
   {
@@ -527,7 +527,7 @@
     "logo" : "assets/img/channels/naija.png",
     "name" : "Naija",
     "slug" : "naija",
-    "status" : "poc",
+    "status" : "interested",
     "synopsis" : "A wholly and fully Nigerian lifestyle channel featuring everything that defines Nigeria — the lingo, the food, the news, the challenges."
   },
   {
@@ -561,9 +561,9 @@
     "category" : "Lifestyle",
     "genreTag" : "Food, Travel & Lifestyle",
     "logo" : "assets/img/channels/foodies-and-spices.png",
-    "name" : "Foodies & Spices",
+    "name" : "Foodies & Spice",
     "slug" : "foodies-and-spices",
-    "status" : "interested",
+    "status" : "live",
     "synopsis" : "Food, travel and lifestyle — recipes, spice trails and dining culture from across Africa."
   },
   {
@@ -608,7 +608,7 @@
     "logo" : "assets/img/channels/travel-nigeria.png",
     "name" : "Travel Nigeria",
     "slug" : "travel-nigeria",
-    "status" : "interested",
+    "status" : "live",
     "synopsis" : "The safari. Nigeria is a vast, travel-friendly nation — this channel presents it as the next big travel destination, the definitive guide for business and leisure travellers alike."
   },
   {
@@ -626,7 +626,7 @@
     "logo" : "assets/img/channels/sportsville-tv.png",
     "name" : "Sportsville TV",
     "slug" : "sportsville-tv",
-    "status" : "interested",
+    "status" : "live",
     "synopsis" : "A brand-new general sports channel — scores, highlights and sports culture across the games Africa follows."
   },
   {
@@ -784,12 +784,12 @@
   },
   {
     "category" : "Lifestyle",
-    "genreTag" : "Lifestyle",
-    "logo" : "assets/img/channels/ln247-lifestyle.png",
-    "name" : "LN247 Lifestyle",
+    "genreTag" : "News & Lifestyle",
+    "logo" : "assets/img/channels/ln247.png",
+    "name" : "LN247",
     "slug" : "ln247-lifestyle",
-    "status" : "queued",
-    "synopsis" : ""
+    "status" : "live",
+    "synopsis" : "News and lifestyle around the clock — the headlines, conversations and stories shaping Nigeria and Africa today."
   },
   {
     "category" : "Sports",
@@ -799,5 +799,71 @@
     "slug" : "afrosports",
     "status" : "queued",
     "synopsis" : ""
+  },
+  {
+    "category" : "Nollywood & Drama",
+    "genreTag" : "Drama Series & Box Sets",
+    "logo" : "assets/img/channels/movie-africa.png",
+    "name" : "Movie Africa: Series",
+    "slug" : "movie-africa-series",
+    "status" : "live",
+    "synopsis" : "The series home of the Movie Africa family — returning dramas, family sagas and box sets to binge, episode after episode."
+  },
+  {
+    "category" : "Nollywood & Drama",
+    "genreTag" : "Nollywood Classics & Drama",
+    "name" : "Zeb Ejiro TV",
+    "slug" : "zeb-ejiro-tv",
+    "status" : "live",
+    "synopsis" : "Nollywood storytelling from the house of Zeb Ejiro — classic and contemporary drama for the whole family."
+  },
+  {
+    "category" : "General Entertainment & Talent",
+    "genreTag" : "Entertainment",
+    "name" : "Sate TV",
+    "slug" : "sate-tv",
+    "status" : "live",
+    "synopsis" : "Round-the-clock African entertainment — shows, talk and showbiz."
+  },
+  {
+    "category" : "General Entertainment & Talent",
+    "genreTag" : "Entertainment",
+    "name" : "MUB TV",
+    "slug" : "mub-tv",
+    "status" : "live",
+    "synopsis" : "Entertainment programming for African audiences at home and in the diaspora."
+  },
+  {
+    "category" : "General Entertainment & Talent",
+    "genreTag" : "Digital Entertainment",
+    "logo" : "assets/img/channels/webtv-nigeria.png",
+    "name" : "Web TV",
+    "slug" : "web-tv",
+    "status" : "live",
+    "synopsis" : "The best of African digital entertainment — creators, web series and what is trending online, on the big screen."
+  },
+  {
+    "category" : "Music",
+    "genreTag" : "Music & Entertainment",
+    "name" : "Waves TV",
+    "slug" : "waves-tv",
+    "status" : "live",
+    "synopsis" : "Music and entertainment — the sounds of Afrobeats, Amapiano and beyond, all day."
+  },
+  {
+    "category" : "Comedy",
+    "genreTag" : "Comedy",
+    "name" : "The Humour Network",
+    "slug" : "the-humour-network",
+    "status" : "live",
+    "synopsis" : "Non-stop African comedy — skits, stand-up and sitcoms to keep you laughing."
+  },
+  {
+    "category" : "Lifestyle",
+    "genreTag" : "Live Event",
+    "name" : "Diner en Blanc LIVE",
+    "slug" : "diner-en-blanc-live",
+    "status" : "live",
+    "synopsis" : "Live coverage of Diner en Blanc — the style, the setting and the celebration, as it happens."
   }
 ]

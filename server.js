@@ -1,4 +1,4 @@
-/* Zero-dependency static server for the LOOP7 POC.
+/* Zero-dependency static server for the Asiko TV viewer app.
    Run:  node server.js   (or: PORT=8080 node server.js) */
 const http = require('http');
 const fs = require('fs');
@@ -35,4 +35,4 @@ http
       res.end(data);
     });
   })
-  .listen(PORT, () => console.log(`LOOP7 dev server -> http://localhost:${PORT}`));
+  .listen(PORT, () => console.log(`Asiko TV dev server -> http://localhost:${PORT}`));

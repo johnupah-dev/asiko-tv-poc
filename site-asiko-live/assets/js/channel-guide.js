@@ -30,7 +30,7 @@
   ];
 
   var STATUS_LABEL = {
-    poc: 'Live on the POC',
+    live: 'Live now',
     interested: 'Upcoming',
     queued: 'Onboarding'
   };
@@ -59,29 +59,31 @@
       return '' +
         '<div class="live-card ch-card ch-' + st + '" data-reveal>' +
           '<span class="upcoming-badge badge-' + st + '">' + (STATUS_LABEL[st] || 'Upcoming') + '</span>' +
-          '<img src="' + esc(c.logo) + '" alt="' + esc(c.name) + ' logo" loading="lazy">' +
+          (c.logo ? '<img src="' + esc(c.logo) + '" alt="' + esc(c.name) + ' logo" loading="lazy">'
+                  : '<div class="logo-fallback" aria-hidden="true">' + esc(c.name) + '</div>') +
           '<div class="ch-name">' + esc(c.name) + '</div>' +
           '<div class="ch-cat">' + esc(c.genreTag || c.category) + '</div>' +
           (c.synopsis ? '<p class="ch-synopsis">' + esc(c.synopsis) + '</p>' : '') +
         '</div>';
     }).join('');
 
-    var poc = list.filter(function (c) { return c.status === 'poc'; }).length;
+    var live = list.filter(function (c) { return c.status === 'live'; }).length;
     resultCount.textContent =
       list.length + (list.length === 1 ? ' channel' : ' channels') +
       (activeCategory !== 'All' ? ' in ' + activeCategory : '') +
       (q ? ' matching "' + activeQuery.trim() + '"' : '') +
-      (poc ? ' · ' + poc + ' live on the POC now' : '');
+      (live ? ' · ' + live + ' live now on asiko.africa' : '');
     emptyState.style.display = list.length ? 'none' : 'block';
   }
 
   fetch('assets/js/channels-data.json')
     .then(function (r) { return r.json(); })
     .then(function (data) {
-      // keep bouquet order, but show POC-live channels first within the full list
+      // keep bouquet order, but show live channels first within the full list
       allChannels = data.slice().sort(function (a, b) {
-        var rank = { poc: 0, interested: 1, queued: 2 };
-        return (rank[a.status] || 1) - (rank[b.status] || 1);
+        var rank = { live: 0, interested: 1, queued: 2 };
+        var r = function (c) { return c.status in rank ? rank[c.status] : 1; };
+        return r(a) - r(b);
       });
 
       var cats = ['All'].concat(CATEGORY_ORDER.filter(function (cat) {
