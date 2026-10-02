@@ -1,0 +1,1084 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Asiko TV — Free African TV, Always On</title>
+  <meta name="description" content="Watch Asiko TV free: 29 always-on African channels — Nollywood movies, faith, kids, food, lifestyle, business, sports, travel and live events. No subscription, no sign-up." />
+  <meta name="theme-color" content="#0a0a0c" />
+  <link rel="canonical" href="https://www.asiko.africa/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Asiko TV" />
+  <meta property="og:title" content="Asiko TV — Free African TV, Always On" />
+  <meta property="og:description" content="29 always-on African channels. Free to watch. No subscription, no sign-up." />
+  <meta property="og:url" content="https://www.asiko.africa/" />
+  <meta property="og:image" content="https://www.asiko.africa/assets/channels/asiko-plus.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/png" href="assets/asiko-icon.png" />
+  <link rel="apple-touch-icon" href="assets/asiko-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+  <style>
+/* Asiko TV — viewer app.
+   Committed dark world: every colour is painted from a token. */
+:root {
+  --ink:        #0a0a0c;
+  --stage:      #000;
+  --panel:      #17171b;
+  --panel-2:    #1e1e23;
+  --line:       rgba(216, 169, 75, 0.16);
+  --line-soft:  rgba(216, 169, 75, 0.09);
+  --line-strong: rgba(216, 169, 75, 0.32);
+  --text:       #f7f5f0;
+  --muted:      #a7a4ac;
+  --faint:      #716f78;
+  --live:       #df3b34;
+  --money:      #d8a94b; /* Asiko gold — primary accent */
+  --focus:      #d8a94b;
+  --ch:         #d8a94b; /* overridden per active channel */
+
+  --font-display: "Poppins", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-body:    "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-mono:    "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --r: 4px;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+html { background: var(--ink); }
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+button { font-family: inherit; }
+a { color: inherit; }
+
+.app {
+  display: grid;
+  grid-template-rows: auto auto auto auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+  max-width: 1600px;
+  margin: 0 auto;
+  background: var(--stage);
+}
+
+/* ---------- masthead ---------- */
+.masthead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 16px;
+  background: var(--ink);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  display: inline-flex; align-items: center; gap: 9px; text-decoration: none;
+  border: 1px solid var(--line); border-radius: 9px; padding: 5px 11px 5px 8px;
+}
+.brand-mark { width: 24px; height: 24px; flex: none; display: block; }
+.brand-text { display: flex; flex-direction: column; line-height: 1; }
+.brand .brand-word {
+  font-family: var(--font-display); font-weight: 700; font-size: 17px;
+  letter-spacing: 0.1em; color: var(--text);
+}
+.brand .brand-word b { font-weight: 800; color: var(--money); }
+.brand-tag {
+  font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.24em;
+  text-transform: uppercase; color: var(--money); margin-top: 3px;
+}
+
+.masthead-mid {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  color: var(--muted);
+}
+.on-air {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: var(--text);
+}
+.rec {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--live);
+  box-shadow: 0 0 0 0 rgba(255, 68, 54, 0.55);
+  animation: rec 2s ease-out infinite;
+}
+@keyframes rec {
+  0%   { box-shadow: 0 0 0 0 rgba(255, 68, 54, 0.55); }
+  70%  { box-shadow: 0 0 0 9px rgba(255, 68, 54, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 68, 54, 0); }
+}
+.clock {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+.tz { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+.masthead-actions { display: flex; gap: 8px; }
+
+.btn {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--text);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.btn:hover { border-color: var(--muted); }
+.btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.btn-accent, .btn.is-live {
+  border-color: transparent;
+  background: var(--money);
+  color: #0a0a0c;
+}
+.btn-accent:hover { filter: brightness(1.08); border-color: transparent; }
+
+/* ---------- stage ---------- */
+.stage {
+  position: relative;
+  background: #000;
+  overflow: hidden;
+  /* Fixed broadcast-style video window: big, but never taller than ~58%
+     of the screen, so the 10-per-row channel grid stays in view.
+     object-fit:contain letterboxes odd source ratios. */
+  height: 58vh;
+  min-height: 360px;
+  max-height: 560px;
+}
+#video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
+}
+.scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to top, rgba(4,6,10,0.85) 0%, rgba(4,6,10,0) 26%),
+    linear-gradient(to bottom, rgba(4,6,10,0.5) 0%, rgba(4,6,10,0) 18%);
+}
+
+.bug {
+  position: absolute;
+  top: 14px; right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px 6px 6px;
+  background: rgba(10, 13, 18, 0.62);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-left: 3px solid var(--ch);
+  border-radius: var(--r);
+  backdrop-filter: blur(3px);
+}
+.bug-num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--ch);
+  min-width: 16px;
+  text-align: center;
+}
+.bug-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.lower-third {
+  position: absolute;
+  left: 20px;
+  bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: min(70ch, 78%);
+}
+.lt-row { display: flex; align-items: baseline; gap: 10px; }
+.lt-tag {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: #0a0a0c;
+  background: var(--ch);
+  padding: 3px 7px;
+  border-radius: 2px;
+  flex: none;
+}
+.lt-tag.is-live { background: var(--live); color: #fff; }
+.lt-tag-ghost {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--line);
+}
+.lt-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: 0.01em;
+  color: var(--text);
+  text-wrap: balance;
+}
+.lt-prog {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+.lt-title-next { font-size: 13px; color: var(--muted); }
+.lt-time { font-family: var(--font-mono); font-size: 11px; color: var(--faint); }
+
+.loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-size: 13px;
+  color: var(--muted);
+  background: #000;
+  transition: opacity 0.35s ease;
+}
+.loading.is-hidden { opacity: 0; pointer-events: none; }
+.loading-logo { max-width: min(260px, 50%); max-height: 38%; object-fit: contain; }
+
+/* ---------- channel logos ---------- */
+.logo {
+  display: grid;
+  place-items: center;
+  position: relative;
+  background: #000;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.logo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block; }
+.logo .mono {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--money);
+  line-height: 1;
+}
+
+/* ---------- channel rail ---------- */
+.rail {
+  /* Desktop: LOCKED to 10 channels per row. Adding channels adds rows,
+     not columns. The rail caps at ~3 rows and scrolls internally beyond
+     that, so the video stage above is never squeezed. */
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  gap: 2px;
+  background: var(--line-soft);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  max-height: 384px;   /* three full rows */
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+}
+.ch {
+  --ch: var(--money);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  padding: 9px 10px 11px;
+  background: var(--panel);
+  border: 0;
+  border-top: 3px solid transparent;
+  text-align: left;
+  cursor: pointer;
+  color: var(--muted);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.ch:hover { background: var(--panel-2); color: var(--text); }
+.ch:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+.ch.is-active {
+  background: var(--panel-2);
+  color: var(--text);
+  border-top-color: var(--ch);
+}
+.ch .logo { width: 100%; height: 44px; }
+.ch .logo .mono { font-size: 15px; }
+.ch-top {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  min-width: 0;
+}
+.ch-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--faint);
+  flex: none;
+}
+.ch.is-active .ch-num { color: var(--ch); }
+.ch-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+.ch-now {
+  font-size: 11.5px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ch-genre {
+  font-family: var(--font-display);
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faint);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ch.is-live-ch .ch-now { color: var(--live); font-weight: 600; }
+
+/* ---------- footer ---------- */
+.site-foot {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  padding: 16px 18px 20px;
+  background: var(--ink);
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12.5px;
+}
+.foot-lede { margin-right: auto; }
+.foot-lede b { font-family: var(--font-display); color: var(--money); letter-spacing: 0.04em; }
+.foot-links { display: flex; flex-wrap: wrap; gap: 8px 18px; }
+.foot-links a {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text);
+}
+.foot-links a:hover { color: var(--money); }
+.foot-links a:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+.foot-legal { font-family: var(--font-mono); font-size: 10.5px; color: var(--faint); }
+
+/* ---------- TV guide ---------- */
+.guide {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background: rgba(4, 6, 10, 0.96);
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+  backdrop-filter: blur(2px);
+}
+.guide-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+.guide-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.guide-window {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+  margin-right: auto;
+}
+.guide-grid {
+  margin-top: 14px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.guide-row {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: 2px;
+  min-height: 58px;
+}
+.guide-label {
+  --ch: var(--money);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  padding: 8px 12px;
+  background: var(--panel);
+  border: 0;
+  border-left: 3px solid var(--ch);
+  text-align: left;
+  color: var(--text);
+  cursor: pointer;
+}
+.guide-label:hover { background: var(--panel-2); }
+.guide-label:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+.guide-label b {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+.guide-label span { font-family: var(--font-mono); font-size: 10px; color: var(--faint); }
+.guide-track {
+  position: relative;
+  display: flex;
+  gap: 2px;
+  background: var(--stage);
+  overflow: hidden;
+}
+.guide-prog {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  padding: 8px 12px;
+  background: var(--panel);
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+}
+.guide-prog.is-on { background: var(--panel-2); box-shadow: inset 3px 0 0 var(--ch); }
+.guide-prog.is-live { box-shadow: inset 3px 0 0 var(--live); }
+.guide-prog b {
+  font-weight: 500;
+  font-size: 12px;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.guide-prog span { font-family: var(--font-mono); font-size: 10px; color: var(--faint); }
+.guide-now {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: var(--live);
+  z-index: 2;
+}
+
+/* ---------- channels overlay ---------- */
+.browse { position: fixed; inset: 0; z-index: 25; background: var(--ink); display: flex; flex-direction: column; }
+.browse-head { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; padding: 14px 20px; border-bottom: 1px solid var(--line); }
+.lockup-sm { font-family: var(--font-display); font-weight: 700; font-size: 18px; letter-spacing: 0.12em; color: var(--text); }
+.lockup-sm b { color: var(--money); font-weight: 800; }
+.browse-sub { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); margin-right: auto; }
+.browse-body { overflow-y: auto; padding: 14px 0 48px; display: flex; flex-direction: column; gap: 24px; }
+.brow-row { display: flex; flex-direction: column; gap: 9px; }
+.brow-label { display: flex; align-items: baseline; gap: 10px; padding: 0 20px; font-family: var(--font-display); font-weight: 700; font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text); }
+.brow-label .count { font-family: var(--font-mono); font-size: 10px; font-weight: 400; letter-spacing: 0.05em; color: var(--faint); text-transform: none; }
+.brow-strip { display: flex; gap: 10px; overflow-x: auto; padding: 0 20px 4px; }
+.tile { flex: none; width: 196px; border: 1px solid var(--line); background: var(--panel); border-radius: 8px; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; text-align: left; color: var(--text); padding: 0; transition: border-color 0.12s ease, background 0.12s ease; }
+.tile:hover { border-color: var(--money); background: var(--panel-2); }
+.tile:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.tile.is-active { border-color: var(--money); }
+.tile .logo { width: 100%; aspect-ratio: 16 / 9; border-radius: 0; position: relative; }
+.tile .logo .mono { font-size: 30px; }
+.tile .n { font-family: var(--font-mono); font-size: 10px; color: var(--muted); position: absolute; top: 6px; left: 8px; background: rgba(0,0,0,0.6); padding: 1px 5px; border-radius: 3px; }
+.tile .live-flag { position: absolute; top: 6px; right: 8px; font-family: var(--font-display); font-weight: 700; font-size: 9px; letter-spacing: 0.16em; color: #fff; background: var(--live); padding: 2px 6px; border-radius: 2px; }
+.tile-meta { padding: 9px 11px 11px; display: flex; flex-direction: column; gap: 3px; }
+.tile-name { font-family: var(--font-display); font-weight: 600; font-size: 12.5px; letter-spacing: 0.03em; color: var(--text); }
+.tile-genre { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); }
+.tile-now { font-size: 11px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1100px) {
+  .rail { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+}
+
+@media (max-width: 720px) {
+  .brand-tag { display: none; }
+  .brand { padding: 5px 9px; }
+  .brand-mark { width: 20px; height: 20px; }
+  .brand .brand-word { font-size: 15px; }
+
+  /* page scrolls; the video pins to the top while you scroll the channel grid */
+  .app { height: auto; min-height: 100svh; display: block; }
+  .masthead { flex-wrap: wrap; gap: 7px 8px; padding: 8px 12px; }
+  .masthead-actions { gap: 6px; flex-wrap: wrap; }
+  .masthead-actions .btn { padding: 6px 9px; font-size: 10px; letter-spacing: 0.06em; }
+  .masthead-mid { order: 3; width: 100%; gap: 8px; }
+  .clock { font-size: 12px; }
+
+  .stage { position: sticky; top: 0; z-index: 5; height: auto; aspect-ratio: 16 / 9; min-height: 0; max-height: none; }
+  .bug { top: 8px; right: 8px; gap: 5px; padding: 4px 7px 4px 5px; max-width: 62vw; }
+  .bug-name { font-size: 10px; letter-spacing: 0.1em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .lower-third { left: 10px; right: 10px; bottom: 10px; max-width: none; }
+  .lt-row { flex-wrap: wrap; }
+  .lt-title { font-size: 16px; }
+  .lt-prog, .lt-time, .lt-title-next { font-size: 10px; }
+  .lt-prog { flex-basis: 100%; margin-top: 1px; }
+  .loading-logo { max-height: 45%; }
+
+  /* channels in rows of two — no sideways scrolling, whole page scrolls */
+  .rail { grid-template-columns: repeat(2, 1fr); gap: 1px; max-height: none; overflow: visible; }
+  .ch { padding: 10px 12px 12px; }
+  .ch .logo { height: auto; aspect-ratio: 16 / 9; }
+  .ch-name { font-size: 12.5px; white-space: normal; overflow: visible; text-overflow: clip; }
+  .ch-genre { white-space: normal; overflow: visible; text-overflow: clip; }
+  .ch-now { font-size: 11px; }
+
+  .site-foot { padding: 16px 14px 24px; }
+  .foot-lede { flex-basis: 100%; }
+
+  .guide { padding: 12px; }
+  .guide-row { grid-template-columns: 112px 1fr; }
+  .browse-head { padding: 12px 14px; gap: 8px; }
+  .browse-body { padding: 10px 0 40px; }
+  .brow-label, .brow-strip { padding-left: 14px; padding-right: 14px; }
+  .tile { width: 150px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rec { animation: none; }
+  .loading, .btn { transition: none; }
+}
+</style>
+</head>
+<body>
+  <div class="app">
+    <header class="masthead">
+      <a class="brand" href="./" aria-label="Asiko TV — home">
+        <svg class="brand-mark" viewBox="0 0 32 32" role="img" aria-hidden="true">
+          <path d="M16 3 L29 29 L3 29 Z" fill="#d8a94b" />
+          <path d="M16 13 L23.5 27 L8.5 27 Z" fill="#0a0a0c" />
+          <rect x="10" y="20.5" width="12" height="3.2" fill="#0a0a0c" />
+        </svg>
+        <span class="brand-text">
+          <span class="brand-word">ASIKO<b>&nbsp;TV</b></span>
+          <span class="brand-tag">The Soul of Africa</span>
+        </span>
+      </a>
+      <div class="masthead-mid">
+        <span class="on-air"><span class="rec"></span>ON AIR</span>
+        <time id="clock" class="clock">00:00:00</time>
+        <span id="tagline" class="tz">Free to watch</span>
+      </div>
+      <div class="masthead-actions">
+        <button id="browseBtn" class="btn" type="button" aria-expanded="false">Channels</button>
+        <button id="guideBtn" class="btn" type="button" aria-expanded="false">Guide</button>
+        <button id="soundBtn" class="btn btn-accent" type="button">Unmute</button>
+      </div>
+    </header>
+
+    <main class="stage">
+      <video id="video" playsinline muted autoplay></video>
+      <div class="scrim" aria-hidden="true"></div>
+
+      <div id="bug" class="bug"><span class="bug-num">01</span><span class="bug-name">Asiko TV+</span></div>
+
+      <div class="lower-third" id="lowerThird" aria-live="polite">
+        <div class="lt-row lt-now">
+          <span id="nowTag" class="lt-tag">NOW</span>
+          <span id="nowTitle" class="lt-title">—</span>
+          <span id="nowProgress" class="lt-prog"></span>
+        </div>
+        <div class="lt-row lt-next" id="nextRow">
+          <span class="lt-tag lt-tag-ghost">NEXT</span>
+          <span id="nextTitle" class="lt-title-next">—</span>
+          <span id="nextTime" class="lt-time"></span>
+        </div>
+      </div>
+
+      <div id="loading" class="loading" role="status">
+        <img id="loadingLogo" class="loading-logo" alt="" hidden />
+        <span id="loadingText">Tuning<span class="dots">…</span></span>
+      </div>
+    </main>
+
+    <nav id="rail" class="rail" aria-label="Channels"></nav>
+
+    <footer class="site-foot">
+      <div class="foot-lede">
+        <b>Asiko TV</b> — free African TV, always on. No subscription. No sign-up.
+      </div>
+      <nav class="foot-links" aria-label="Business">
+        <a href="mailto:john.upah@mediaiconsltd.com?subject=Advertising%20on%20Asiko%20TV">Advertise</a>
+        <a href="mailto:john.upah@mediaiconsltd.com?subject=List%20my%20channel%20on%20Asiko%20TV">List your channel</a>
+        <a href="mailto:john.upah@mediaiconsltd.com?subject=Asiko%20TV">Contact</a>
+      </nav>
+      <div class="foot-legal">© <span id="year">2026</span> Media Icons Africa</div>
+    </footer>
+  </div>
+
+  <div id="guide" class="guide" hidden>
+    <div class="guide-head">
+      <div class="guide-title">TV Guide</div>
+      <div id="guideWindow" class="guide-window">—</div>
+      <button id="guideClose" class="btn" type="button">Close</button>
+    </div>
+    <div id="guideGrid" class="guide-grid"></div>
+  </div>
+
+  <div id="browse" class="browse" hidden>
+    <div class="browse-head">
+      <span class="lockup-sm">ASIKO<b>&nbsp;TV</b></span>
+      <span id="browseSub" class="browse-sub">All channels</span>
+      <button id="browseClose" class="btn" type="button">Close</button>
+    </div>
+    <div id="browseBody" class="browse-body"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.13/hls.min.js"></script>
+  <script>window.__ASIKO_CFG__ = {"network":"ASIKO TV","networkFeed":"https://johnupahsw.ce.prod-se.osaas.io/channels/mychannel/master.m3u8","sections":[{"id":"flagship","label":"Asiko TV+"},{"id":"movies","label":"Movies & Drama"},{"id":"faith","label":"Faith"},{"id":"kids","label":"Kids & Teens"},{"id":"lifestyle","label":"Food & Lifestyle"},{"id":"women","label":"Women, Style & Weddings"},{"id":"entertainment","label":"Entertainment & Comedy"},{"id":"news","label":"News"},{"id":"business","label":"Business & Property"},{"id":"sports","label":"Sports & Travel"},{"id":"events","label":"Live Events"}],"channels":[{"num":1,"id":"asikotvplus","name":"Asiko TV+","genre":"Flagship · Best of the Bouquet","category":"flagship","logo":"assets/channels/asiko-plus.png","programs":[{"title":"Asiko Breakfast — Best of the Bouquet","duration":120},{"title":"Nollywood Now","duration":90},{"title":"The Africa Brief","duration":45},{"title":"Afternoon Movie Premiere","duration":120},{"title":"Music & Culture Mix","duration":60},{"title":"Prime Time: Channel of the Week","duration":120},{"title":"Faith & Reflection","duration":45},{"title":"Late Reel — Overnight","duration":200}]},{"num":2,"id":"movieafrica","name":"Movie Africa","genre":"Nollywood & Beyond","category":"movies","logo":"assets/channels/movie-africa.png","programs":[{"title":"Morning Movie","duration":120},{"title":"Nollywood Classics","duration":120},{"title":"New Release Premiere","duration":120},{"title":"Behind the Scenes","duration":40},{"title":"Our Stories, Our Movies","duration":90},{"title":"Evening Feature","duration":130},{"title":"Late Night Thriller","duration":120}]},{"num":3,"id":"maepic","name":"Movie Africa Epic","genre":"Epic & Historical","category":"movies","logo":"assets/channels/movie-africa-epic.png","programs":[{"title":"Kingdoms of Old","duration":120},{"title":"Warriors & Legends","duration":120},{"title":"Feature: The Throne","duration":130},{"title":"Folklore Retold","duration":60},{"title":"Epic Double Bill","duration":220},{"title":"Overnight Epics","duration":200}]},{"num":4,"id":"maseries","name":"Movie Africa Series","genre":"Drama Series & Box Sets","category":"movies","logo":"assets/channels/movie-africa.png","programs":[{"title":"Series Catch-Up","duration":120},{"title":"Daytime Drama","duration":90},{"title":"Binge Block","duration":180},{"title":"Family Saga","duration":60},{"title":"Prime-Time Series","duration":120},{"title":"Box Set Overnight","duration":200}]},{"num":5,"id":"mahausa","name":"Movie Africa Hausa","genre":"Kannywood · Hausa","category":"movies","logo":"assets/channels/movie-africa-halisa.png","programs":[{"title":"Kannywood Morning","duration":120},{"title":"Hausa Classics","duration":120},{"title":"Afternoon Feature","duration":110},{"title":"Stars of Kannywood","duration":45},{"title":"Prime Hausa Movie","duration":130},{"title":"Late Screening","duration":180}]},{"num":6,"id":"maigbo","name":"Movie Africa Igbo","genre":"Nollywood · Igbo","category":"movies","logo":"assets/channels/movie-africa-igbo.png","programs":[{"title":"Igbo Morning Movie","duration":120},{"title":"Nollywood East Classics","duration":120},{"title":"Village & Kingdom Tales","duration":110},{"title":"Culture Corner","duration":45},{"title":"Prime Igbo Movie","duration":130},{"title":"Late Screening","duration":180}]},{"num":7,"id":"mayoruba","name":"Movie Africa Yoruba","genre":"Nollywood · Yoruba","category":"movies","logo":"assets/channels/movie-africa-yoruba.png","programs":[{"title":"Yoruba Epic Morning","duration":120},{"title":"Classic Epic & Apata","duration":120},{"title":"Contemporary Yoruba Drama","duration":110},{"title":"Stars of the Industry","duration":45},{"title":"Afternoon Feature (subtitled)","duration":120},{"title":"Prime Yoruba Movie","duration":130},{"title":"Late Screening","duration":180}]},{"num":8,"id":"amenmovies","name":"Amen Movies","genre":"Christian Movies","category":"faith","logo":"assets/channels/amen-movies.png","programs":[{"title":"Faith Feature: Morning","duration":120},{"title":"Christian Drama Series","duration":90},{"title":"Afternoon Movie","duration":120},{"title":"Family & Faith","duration":60},{"title":"Prime Christian Movie","duration":120},{"title":"Late Feature","duration":180}]},{"num":9,"id":"zebejirotv","name":"Zeb Ejiro TV","genre":"Nollywood Classics & Drama","category":"movies","programs":[{"title":"Morning Classic","duration":120},{"title":"Drama Hour","duration":60},{"title":"Afternoon Feature","duration":120},{"title":"The Director's Chair","duration":45},{"title":"Prime Feature","duration":130},{"title":"Late Classic","duration":180}]},{"num":10,"id":"tattasetv","name":"Tattase TV","genre":"Food, Culture & Lifestyle","category":"lifestyle","logo":"assets/channels/tattase.png","programs":[{"title":"Market Run","duration":60},{"title":"Recipes of the Continent","duration":60},{"title":"Food Brands & Makers","duration":90},{"title":"Tourism Trail","duration":60},{"title":"Chef's Table","duration":90},{"title":"Weekend Feast","duration":120},{"title":"Late Bites","duration":180}]},{"num":11,"id":"foodiesspice","name":"Foodies & Spice","genre":"Food & Travel","category":"lifestyle","logo":"assets/channels/foodies-and-spices.png","programs":[{"title":"Breakfast Plates","duration":60},{"title":"Spice Trails","duration":60},{"title":"Street Food Africa","duration":60},{"title":"Home Kitchen","duration":90},{"title":"Dining Out","duration":60},{"title":"Cook-Off","duration":90},{"title":"Midnight Snacks","duration":180}]},{"num":12,"id":"satetv","name":"Sate TV","genre":"Entertainment","category":"entertainment","programs":[{"title":"Morning Mix","duration":120},{"title":"Talk Time","duration":60},{"title":"Afternoon Entertainment","duration":120},{"title":"Showbiz Today","duration":45},{"title":"Prime Entertainment","duration":120},{"title":"Late Show","duration":180}]},{"num":13,"id":"sisitv","name":"Sisi TV","genre":"Women's Lifestyle & Glamour","category":"women","logo":"assets/channels/sisi.png","programs":[{"title":"Glow Up","duration":60},{"title":"Sisi Style","duration":60},{"title":"Beauty Desk","duration":60},{"title":"Real Talk","duration":60},{"title":"Evening Glamour","duration":90},{"title":"After Hours Style","duration":180}]},{"num":14,"id":"hookedtv","name":"Hooked TV","genre":"Weddings & Celebrations","category":"women","logo":"assets/channels/hooked.png","programs":[{"title":"Say Yes","duration":60},{"title":"Wedding of the Week","duration":90},{"title":"Aso-Ebi & Owambe","duration":60},{"title":"The Planners","duration":60},{"title":"Love Stories","duration":90},{"title":"Celebration Replay","duration":180}]},{"num":15,"id":"mubtv","name":"MUB TV","genre":"Entertainment","category":"entertainment","programs":[{"title":"Morning Mix","duration":90},{"title":"Spotlight","duration":60},{"title":"Afternoon Entertainment","duration":120},{"title":"Trending Now","duration":45},{"title":"Prime Entertainment","duration":120},{"title":"Late Show","duration":180}]},{"num":16,"id":"teenafrica","name":"Teen Africa","genre":"Teen & Youth Lifestyle","category":"kids","logo":"assets/channels/teen-africa.png","programs":[{"title":"Homeroom","duration":60},{"title":"Trends & Music","duration":90},{"title":"Campus Life","duration":60},{"title":"Issues That Matter","duration":45},{"title":"Talent Showcase","duration":90},{"title":"Evening Hangout","duration":120},{"title":"Late Loop","duration":200}]},{"num":17,"id":"charminkids","name":"Charmin Kids","genre":"Kids Talent & Grooming","category":"kids","logo":"assets/channels/cks-tv.png","programs":[{"title":"Rise & Shine","duration":60},{"title":"Little Stars","duration":60},{"title":"Talent Time","duration":90},{"title":"Manners & Me","duration":45},{"title":"Afternoon Fun","duration":90},{"title":"Story Hour","duration":60},{"title":"Goodnight Loop","duration":220}]},{"num":18,"id":"ppg","name":"PPG","genre":"Praise · Power · Glory","category":"faith","logo":"assets/channels/ppg.png","programs":[{"title":"Morning Praise","duration":90},{"title":"Nonstop Worship","duration":120},{"title":"The Word Today","duration":60},{"title":"Gospel Music Hour","duration":60},{"title":"Testimonies","duration":45},{"title":"Evening Praise & Worship","duration":90},{"title":"Overnight Worship","duration":240}]},{"num":19,"id":"bouncetv","name":"Bounce TV","genre":"Kids","category":"kids","logo":"assets/channels/bounce.png","programs":[{"title":"Sunrise Sing-Along","duration":90},{"title":"Little Treasures","duration":45},{"title":"Cartoon Carousel","duration":120},{"title":"Learn & Play","duration":60},{"title":"Afternoon Movie","duration":100},{"title":"Craft Club","duration":45},{"title":"Wind-Down Tales","duration":60},{"title":"Goodnight Loop","duration":220}]},{"num":20,"id":"webtv","name":"Web TV","genre":"Digital Entertainment","category":"entertainment","logo":"assets/channels/webtv-nigeria.png","programs":[{"title":"Web Picks","duration":90},{"title":"Creator Hour","duration":60},{"title":"Viral Today","duration":60},{"title":"Web Series Block","duration":120},{"title":"Prime Picks","duration":90},{"title":"Overnight Stream","duration":200}]},{"num":21,"id":"ln247","name":"LN247","genre":"News & Lifestyle","category":"news","logo":"assets/channels/ln247.png","programs":[{"title":"Morning Briefing","duration":90},{"title":"Headlines on the Hour","duration":60},{"title":"Lifestyle Desk","duration":60},{"title":"Midday News","duration":45},{"title":"The Conversation","duration":60},{"title":"Evening News","duration":90},{"title":"Night Wire","duration":180}]},{"num":22,"id":"estatetv","name":"Estate TV","genre":"Real Estate & Property","category":"business","logo":"assets/channels/estates-tv.png","programs":[{"title":"Property Morning","duration":60},{"title":"Homes Tour","duration":60},{"title":"Invest Smart","duration":60},{"title":"Developers' Showcase","duration":60},{"title":"Market Watch","duration":45},{"title":"Dream Homes","duration":90},{"title":"Overnight Listings","duration":200}]},{"num":23,"id":"csuitecafe","name":"C-Suite Café TV","genre":"Business & Executive Talk","category":"business","logo":"assets/channels/csuite-cafe-tv.png","programs":[{"title":"Founders' Table","duration":60},{"title":"The CEO Interview","duration":60},{"title":"Leadership Lab","duration":60},{"title":"Strategy Session","duration":45},{"title":"Prime Conversation","duration":90},{"title":"Late Replay","duration":180}]},{"num":24,"id":"wavestv","name":"Waves TV","genre":"Music & Entertainment","category":"entertainment","programs":[{"title":"Wake-Up Playlist","duration":120},{"title":"Fresh Sounds","duration":60},{"title":"Afrobeats & Amapiano","duration":90},{"title":"Retro Rewind","duration":60},{"title":"Drive-Time Mix","duration":120},{"title":"After Dark Sessions","duration":200}]},{"num":25,"id":"humournetwork","name":"The Humour Network","genre":"Comedy","category":"entertainment","programs":[{"title":"Skit Marathon","duration":90},{"title":"Stand-Up Hour","duration":60},{"title":"Kings of Comedy","duration":90},{"title":"Sitcom Block","duration":120},{"title":"Prime Comedy Special","duration":110},{"title":"Late Laughs","duration":180}]},{"num":26,"id":"womenconnect","name":"Women Connect","genre":"Women's Empowerment","category":"women","logo":"assets/channels/wctv.png","programs":[{"title":"Morning Connect","duration":60},{"title":"She Leads","duration":60},{"title":"Business Women","duration":60},{"title":"Mentor Moments","duration":45},{"title":"Community Voices","duration":60},{"title":"Evening Connect","duration":90},{"title":"Overnight Replay","duration":200}]},{"num":27,"id":"sportsvilletv","name":"Sportsville TV","genre":"Sports","category":"sports","logo":"assets/channels/sportsville-tv.png","programs":[{"title":"Sports Morning","duration":90},{"title":"Matchday Preview","duration":60},{"title":"Highlights Hour","duration":60},{"title":"Grassroots Africa","duration":60},{"title":"The Debate","duration":60},{"title":"Evening Highlights","duration":90},{"title":"Classic Matches","duration":200}]},{"num":28,"id":"travelnigeria","name":"Travel Nigeria","genre":"Travel & Tourism","category":"sports","logo":"assets/channels/travel-nigeria.png","programs":[{"title":"Destination Nigeria","duration":60},{"title":"City Guides","duration":60},{"title":"The Safari","duration":90},{"title":"Hotels & Getaways","duration":60},{"title":"Festival Trail","duration":90},{"title":"Travel Overnight","duration":200}]},{"num":29,"id":"dinerenblanc","name":"Diner en Blanc LIVE","genre":"Live Event","category":"events","live":true,"liveTitle":"Diner en Blanc LIVE","programs":[{"title":"Diner en Blanc LIVE","duration":240}]}]};</script>
+  <script>
+/* Asiko TV — viewer app.
+   - Every channel is a continuous live HLS stream (Eyevinn Channel Engine).
+     A channel without its own `src` carries the network feed.
+   - The TV guide is a schedule layer computed against the wall clock.
+   - Config comes from window.__ASIKO_CFG__ (single-file build) or
+     data/channels.json (dev server). */
+(() => {
+  'use strict';
+
+  const $ = (s, r = document) => r.querySelector(s);
+  const fmt2 = (n) => String(n).padStart(2, '0');
+  const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const K = 'asiko.';
+  const lsGet = (k, d) => { try { const v = localStorage.getItem(k); return v == null ? d : v; } catch (e) { return d; } };
+  const lsSet = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
+
+  const video = $('#video');
+  const railEl = $('#rail');
+  const loadingEl = $('#loading');
+  const loadingText = $('#loadingText');
+  const loadingLogo = $('#loadingLogo');
+  const clockEl = $('#clock');
+  const guideEl = $('#guide');
+  const browseEl = $('#browse');
+
+  let CFG = null, CH = [];
+  let current = 0;
+  let hls = null;
+  let loadedSrc = '';
+  let retryTimer = 0;
+  let retries = 0;
+
+  /* ---------- playback ---------- */
+  const HLS_JS = !!(window.Hls && window.Hls.isSupported());
+  const srcOf = (ch) => ch.src || CFG.networkFeed;
+
+  function setLoading(msg, ch) {
+    loadingText.textContent = msg;
+    if (ch && ch.logo) { loadingLogo.src = ch.logo; loadingLogo.hidden = false; }
+    else loadingLogo.hidden = true;
+    loadingEl.classList.remove('is-hidden');
+  }
+  function play() { video.play().catch(() => {}); }
+
+  function scheduleRetry() {
+    clearTimeout(retryTimer);
+    retries++;
+    setLoading('Reconnecting…', CH[current]);
+    // 2s, 4s, 8s … capped at 30s
+    retryTimer = setTimeout(() => loadSource(CH[current], true), Math.min(30000, 1000 * Math.pow(2, retries)));
+  }
+
+  function loadSource(ch, force) {
+    const src = srcOf(ch);
+    // channels sharing a feed switch instantly — no reload, no black frame
+    if (!force && src === loadedSrc && (hls || !HLS_JS)) { play(); return; }
+    clearTimeout(retryTimer);
+    loadedSrc = src;
+    if (hls) { hls.destroy(); hls = null; }
+    if (HLS_JS) {
+      hls = new window.Hls({ enableWorker: true, lowLatencyMode: false });
+      hls.loadSource(src);
+      hls.attachMedia(video);
+      hls.on(window.Hls.Events.MANIFEST_PARSED, play);
+      hls.on(window.Hls.Events.ERROR, (evt, data) => {
+        if (!data || !data.fatal) return;
+        if (data.type === window.Hls.ErrorTypes.MEDIA_ERROR) { hls.recoverMediaError(); return; }
+        loadedSrc = '';
+        scheduleRetry();
+      });
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = src;
+      play();
+    } else if (!window.Hls) {
+      setLoading('Could not start the player — check your connection and refresh');
+    } else {
+      setLoading('This browser cannot play Asiko TV — try Chrome, Safari, Edge or Firefox');
+    }
+  }
+
+  video.addEventListener('canplay', play);
+  video.addEventListener('playing', () => { retries = 0; loadingEl.classList.add('is-hidden'); });
+  video.addEventListener('error', () => { if (!HLS_JS) { loadedSrc = ''; scheduleRetry(); } });
+
+  /* ---------- schedule / guide ---------- */
+  function scheduleAt(ch, date) {
+    const mins = date.getHours() * 60 + date.getMinutes() + date.getSeconds() / 60;
+    const progs = ch.programs;
+    const total = progs.reduce((a, p) => a + p.duration, 0);
+    let t = ((mins % total) + total) % total;
+    let i = 0;
+    while (t >= progs[i].duration) { t -= progs[i].duration; i++; }
+    const startMin = mins - t;
+    const next = progs[(i + 1) % progs.length];
+    return {
+      title: progs[i].title,
+      startMin,
+      endMin: startMin + progs[i].duration,
+      elapsed: t,
+      duration: progs[i].duration,
+      nextTitle: next.title,
+      nextAtMin: startMin + progs[i].duration,
+    };
+  }
+  function minToClock(m) {
+    m = ((Math.floor(m) % 1440) + 1440) % 1440;
+    return `${fmt2(Math.floor(m / 60))}:${fmt2(m % 60)}`;
+  }
+  function minToDate(base, mins) {
+    const d = new Date(base);
+    d.setHours(0, 0, 0, 0);
+    d.setMinutes(mins);
+    return d;
+  }
+  const nowLabel = (ch, date) => (ch.live ? '● LIVE · ' + (ch.liveTitle || ch.name) : scheduleAt(ch, date).title);
+
+  /* ---------- logos ---------- */
+  function initials(name) {
+    const words = name.replace(/[^A-Za-z0-9 ]/g, ' ').split(/\s+/).filter((w) => w && !/^(the|tv|and|en)$/i.test(w));
+    return (words.slice(0, 2).map((w) => w[0]).join('') || name[0]).toUpperCase();
+  }
+  function logoHTML(ch, extra) {
+    const art = ch.logo
+      ? `<img src="${esc(ch.logo)}" alt="" decoding="async" />`
+      : `<span class="mono">${esc(initials(ch.name))}</span>`;
+    return `<span class="logo">${art}${extra || ''}</span>`;
+  }
+
+  /* ---------- channel rail ---------- */
+  function buildRail() {
+    railEl.innerHTML = '';
+    CH.forEach((ch, idx) => {
+      const b = document.createElement('button');
+      b.className = 'ch' + (ch.live ? ' is-live-ch' : '');
+      b.type = 'button';
+      b.setAttribute('aria-label', `Channel ${ch.num}: ${ch.name}`);
+      if (ch.accent) b.style.setProperty('--ch', ch.accent);
+      b.innerHTML =
+        logoHTML(ch) +
+        `<span class="ch-top"><span class="ch-num">${fmt2(ch.num)}</span>` +
+        `<span class="ch-name">${esc(ch.name)}</span></span>` +
+        `<span class="ch-now" data-now>—</span>` +
+        `<span class="ch-genre">${esc(ch.genre)}</span>`;
+      b.addEventListener('click', () => tune(idx));
+      railEl.appendChild(b);
+    });
+  }
+
+  function tune(i) {
+    current = ((i % CH.length) + CH.length) % CH.length;
+    const ch = CH[current];
+    lsSet(K + 'ch', ch.id);
+    try { history.replaceState(null, '', '#' + ch.num); } catch (e) {}
+    document.title = `${ch.name} — Asiko TV`;
+    document.documentElement.style.setProperty('--ch', ch.accent || '#d8a94b');
+    $('.bug-num').textContent = fmt2(ch.num);
+    $('.bug-name').textContent = ch.name;
+    [...railEl.children].forEach((el, idx) => {
+      const on = idx === current;
+      el.classList.toggle('is-active', on);
+      el.setAttribute('aria-current', on ? 'true' : 'false');
+      if (on) el.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    });
+    if (srcOf(ch) !== loadedSrc) setLoading('Tuning…', ch);
+    loadSource(ch);
+    updateLowerThird();
+  }
+
+  /* ---------- lower third ---------- */
+  function updateLowerThird() {
+    if (!CH.length) return;
+    const now = new Date();
+    const cur = CH[current];
+    const tag = $('#nowTag');
+    if (cur.live) {
+      tag.textContent = 'LIVE';
+      tag.classList.add('is-live');
+      $('#nowTitle').textContent = cur.liveTitle || cur.name;
+      $('#nowProgress').textContent = '';
+      $('#nextRow').hidden = true;
+    } else {
+      const s = scheduleAt(cur, now);
+      tag.textContent = 'NOW';
+      tag.classList.remove('is-live');
+      $('#nextRow').hidden = false;
+      $('#nowTitle').textContent = s.title;
+      $('#nextTitle').textContent = s.nextTitle;
+      $('#nextTime').textContent = 'at ' + minToClock(s.nextAtMin);
+      $('#nowProgress').textContent = `${minToClock(s.startMin)}–${minToClock(s.endMin)}`;
+    }
+    [...railEl.children].forEach((el, idx) => {
+      el.querySelector('[data-now]').textContent = nowLabel(CH[idx], now);
+    });
+  }
+
+  /* ---------- TV guide ---------- */
+  function renderGuide() {
+    if (guideEl.hidden || !CH.length) return;
+    const now = new Date();
+    const nowMin = now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
+    const winStart = Math.floor((now.getHours() * 60 + now.getMinutes()) / 30) * 30;
+    const WIN = 180;
+    $('#guideWindow').textContent = `${minToClock(winStart)} – ${minToClock(winStart + WIN)}`;
+    const grid = $('#guideGrid');
+    grid.innerHTML = '';
+    CH.forEach((ch, idx) => {
+      const row = document.createElement('div');
+      row.className = 'guide-row';
+
+      const label = document.createElement('button');
+      label.type = 'button';
+      label.className = 'guide-label';
+      if (ch.accent) label.style.setProperty('--ch', ch.accent);
+      label.innerHTML = `<b>${esc(ch.name)}</b><span>${fmt2(ch.num)} · ${esc(ch.genre)}</span>`;
+      label.addEventListener('click', () => { tune(idx); closeGuide(); });
+
+      const track = document.createElement('div');
+      track.className = 'guide-track';
+      if (ch.live) {
+        const cell = document.createElement('div');
+        cell.className = 'guide-prog is-on is-live';
+        cell.innerHTML = `<b>● LIVE · ${esc(ch.liveTitle || ch.name)}</b><span>Live event coverage</span>`;
+        track.appendChild(cell);
+      } else {
+        let cursor = winStart;
+        let guard = 0;
+        while (cursor < winStart + WIN && guard++ < 48) {
+          const s = scheduleAt(ch, minToDate(now, cursor));
+          const segEnd = Math.min(winStart + WIN, s.endMin);
+          const on = cursor <= nowMin && s.endMin > nowMin;
+          const cell = document.createElement('div');
+          cell.className = 'guide-prog' + (on ? ' is-on' : '');
+          cell.style.flexGrow = String(Math.max(1, segEnd - cursor));
+          if (ch.accent) cell.style.setProperty('--ch', ch.accent);
+          cell.innerHTML = `<b>${esc(s.title)}</b><span>${minToClock(s.startMin)}</span>`;
+          track.appendChild(cell);
+          cursor = s.endMin;
+        }
+        const nl = document.createElement('div');
+        nl.className = 'guide-now';
+        nl.style.left = (((nowMin - winStart) / WIN) * 100) + '%';
+        track.appendChild(nl);
+      }
+
+      row.appendChild(label);
+      row.appendChild(track);
+      grid.appendChild(row);
+    });
+  }
+  function openGuide() {
+    closeBrowse();
+    guideEl.hidden = false;
+    $('#guideBtn').setAttribute('aria-expanded', 'true');
+    renderGuide();
+  }
+  function closeGuide() {
+    guideEl.hidden = true;
+    $('#guideBtn').setAttribute('aria-expanded', 'false');
+  }
+
+  /* ---------- channels overlay ---------- */
+  function chTile(ch, now) {
+    const el = document.createElement('button');
+    el.type = 'button';
+    el.className = 'tile' + (CH[current] === ch ? ' is-active' : '');
+    el.innerHTML =
+      logoHTML(ch, `<span class="n">${fmt2(ch.num)}</span>` + (ch.live ? '<span class="live-flag">LIVE</span>' : '')) +
+      `<span class="tile-meta"><span class="tile-name">${esc(ch.name)}</span>` +
+      `<span class="tile-genre">${esc(ch.genre)}</span>` +
+      `<span class="tile-now">${esc(nowLabel(ch, now))}</span></span>`;
+    el.addEventListener('click', () => { tune(CH.indexOf(ch)); closeBrowse(); });
+    return el;
+  }
+  function renderBrowse() {
+    const body = $('#browseBody');
+    const now = new Date();
+    body.innerHTML = '';
+    (CFG.sections || []).forEach((sec) => {
+      const inSec = CH.filter((c) => c.category === sec.id);
+      if (!inSec.length) return;
+      const row = document.createElement('section');
+      row.className = 'brow-row';
+      row.innerHTML = `<div class="brow-label"><span>${esc(sec.label)}</span>` +
+        `<span class="count">${inSec.length} channel${inSec.length === 1 ? '' : 's'}</span></div>`;
+      const strip = document.createElement('div');
+      strip.className = 'brow-strip';
+      inSec.forEach((c) => strip.appendChild(chTile(c, now)));
+      row.appendChild(strip);
+      body.appendChild(row);
+    });
+  }
+  function openBrowse() {
+    closeGuide();
+    browseEl.hidden = false;
+    $('#browseBtn').setAttribute('aria-expanded', 'true');
+    renderBrowse();
+  }
+  function closeBrowse() {
+    browseEl.hidden = true;
+    $('#browseBtn').setAttribute('aria-expanded', 'false');
+  }
+
+  /* ---------- remote-style keys ---------- */
+  let digits = '';
+  let digitTimer = 0;
+  function enterDigit(d) {
+    digits = (digits + d).slice(-2);
+    $('.bug-num').textContent = digits.padEnd(2, '-');
+    clearTimeout(digitTimer);
+    const commit = () => {
+      const idx = CH.findIndex((c) => c.num === Number(digits));
+      digits = '';
+      if (idx >= 0) tune(idx); else $('.bug-num').textContent = fmt2(CH[current].num);
+    };
+    // a second digit can't extend past the line-up, so commit right away
+    if (digits.length === 2 || Number(digits) * 10 > CH.length) commit();
+    else digitTimer = setTimeout(commit, 1200);
+  }
+
+  function channelFromHash() {
+    const h = decodeURIComponent((location.hash || '').replace(/^#/, ''));
+    if (!h) return -1;
+    if (/^\d+$/.test(h)) return CH.findIndex((c) => c.num === Number(h));
+    return CH.findIndex((c) => c.id === h);
+  }
+
+  /* ---------- wire up ---------- */
+  $('#soundBtn').addEventListener('click', () => {
+    video.muted = !video.muted;
+    if (!video.muted && video.volume === 0) video.volume = 1;
+    const b = $('#soundBtn');
+    b.textContent = video.muted ? 'Unmute' : 'Mute';
+    b.classList.toggle('is-live', !video.muted);
+    play();
+  });
+  $('#guideBtn').addEventListener('click', () => (guideEl.hidden ? openGuide() : closeGuide()));
+  $('#guideClose').addEventListener('click', closeGuide);
+  $('#browseBtn').addEventListener('click', () => (browseEl.hidden ? openBrowse() : closeBrowse()));
+  $('#browseClose').addEventListener('click', closeBrowse);
+  document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.target && /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
+    const k = e.key;
+    if (k === 'Escape') { closeGuide(); closeBrowse(); return; }
+    if (k.length === 1 && k >= '0' && k <= '9') { enterDigit(k); return; }
+    const lk = k.toLowerCase();
+    if (lk === 'm') $('#soundBtn').click();
+    else if (lk === 'g') (guideEl.hidden ? openGuide() : closeGuide());
+    else if (lk === 'c') (browseEl.hidden ? openBrowse() : closeBrowse());
+    else if (guideEl.hidden && browseEl.hidden && (k === 'PageUp' || k === 'ArrowUp')) { e.preventDefault(); tune(current - 1); }
+    else if (guideEl.hidden && browseEl.hidden && (k === 'PageDown' || k === 'ArrowDown')) { e.preventDefault(); tune(current + 1); }
+  });
+  window.addEventListener('hashchange', () => {
+    const idx = channelFromHash();
+    if (idx >= 0 && idx !== current) tune(idx);
+  });
+  document.addEventListener('visibilitychange', () => {
+    // jump back to the live edge when the viewer returns
+    if (!document.hidden && video.paused) {
+      if (hls && hls.liveSyncPosition) video.currentTime = hls.liveSyncPosition;
+      play();
+    }
+  });
+  // nudge a player that stalls paused while visible (autoplay quirks)
+  setInterval(() => {
+    if (!document.hidden && video.paused && video.readyState >= 2 && !video.seeking) play();
+  }, 3000);
+
+  async function loadConfig() {
+    if (window.__ASIKO_CFG__) return window.__ASIKO_CFG__;
+    const res = await fetch('data/channels.json', { cache: 'no-store' });
+    if (!res.ok) throw new Error('config ' + res.status);
+    return res.json();
+  }
+
+  async function boot() {
+    try { CFG = await loadConfig(); } catch (e) { setLoading('We are having trouble reaching Asiko TV — please refresh'); return; }
+    CH = CFG.channels;
+    $('#tagline').textContent = `${CH.length} channels · free to watch`;
+    $('#browseSub').textContent = `All ${CH.length} channels`;
+    $('#year').textContent = String(new Date().getFullYear());
+    buildRail();
+    let start = channelFromHash();
+    if (start < 0) start = CH.findIndex((c) => c.id === lsGet(K + 'ch', ''));
+    tune(start < 0 ? 0 : start);
+    const tick = () => {
+      const d = new Date();
+      clockEl.textContent = `${fmt2(d.getHours())}:${fmt2(d.getMinutes())}:${fmt2(d.getSeconds())}`;
+    };
+    tick();
+    setInterval(tick, 1000);
+    setInterval(updateLowerThird, 5000);
+    setInterval(renderGuide, 30000);
+  }
+
+  boot();
+})();
+</script>
+</body>
+</html>
+
