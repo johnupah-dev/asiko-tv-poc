@@ -1,0 +1,86 @@
+# Publishes the sites whenever master changes (or on demand from the Actions tab).
+#
+#   asiko.africa  <- docs/ (built by build.mjs)
+#     secrets: FTP_SERVER, FTP_USERNAME, FTP_PASSWORD
+#     optional: FTP_SERVER_DIR (default "public_html/"), FTP_PROTOCOL (default "ftps")
+#
+#   asiko.live    <- site-asiko-live/
+#     secrets: LIVE_FTP_SERVER, LIVE_FTP_USERNAME, LIVE_FTP_PASSWORD
+#     optional: LIVE_FTP_SERVER_DIR (default "public_html/"), LIVE_FTP_PROTOCOL (default "ftps")
+#
+# A site whose secrets aren't set yet is skipped, not failed.
+# .htaccess is never uploaded — the live one carries cPanel-managed PHP settings.
+
+name: Deploy
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  asiko-africa:
+    runs-on: ubuntu-latest
+    env:
+      HAS_SECRETS: ${{ secrets.FTP_SERVER != '' && secrets.FTP_USERNAME != '' && secrets.FTP_PASSWORD != '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build docs/
+        run: node build.mjs
+
+      - name: Skip upload (secrets not set)
+        if: env.HAS_SECRETS != 'true'
+        run: echo "::warning::asiko.africa not deployed — add FTP_SERVER, FTP_USERNAME and FTP_PASSWORD in Settings → Secrets and variables → Actions."
+
+      - name: Upload to asiko.africa
+        if: env.HAS_SECRETS == 'true'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ${{ secrets.FTP_PROTOCOL || 'ftps' }}
+          local-dir: ./docs/
+          server-dir: ${{ secrets.FTP_SERVER_DIR || 'public_html/' }}
+          state-name: .ftp-deploy-sync-state.json
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.htaccess
+
+  asiko-live:
+    runs-on: ubuntu-latest
+    env:
+      HAS_SECRETS: ${{ secrets.LIVE_FTP_SERVER != '' && secrets.LIVE_FTP_USERNAME != '' && secrets.LIVE_FTP_PASSWORD != '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Skip upload (secrets not set)
+        if: env.HAS_SECRETS != 'true'
+        run: echo "::warning::asiko.live not deployed — add LIVE_FTP_SERVER, LIVE_FTP_USERNAME and LIVE_FTP_PASSWORD in Settings → Secrets and variables → Actions."
+
+      - name: Upload to asiko.live
+        if: env.HAS_SECRETS == 'true'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.LIVE_FTP_SERVER }}
+          username: ${{ secrets.LIVE_FTP_USERNAME }}
+          password: ${{ secrets.LIVE_FTP_PASSWORD }}
+          protocol: ${{ secrets.LIVE_FTP_PROTOCOL || 'ftps' }}
+          local-dir: ./site-asiko-live/
+          server-dir: ${{ secrets.LIVE_FTP_SERVER_DIR || 'public_html/' }}
+          state-name: .ftp-deploy-sync-state.json
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.htaccess
+            README.md
