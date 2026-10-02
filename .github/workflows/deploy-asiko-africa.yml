@@ -1,0 +1,36 @@
+name: Deploy asiko.africa
+
+# Builds docs/ and uploads it to the asiko.africa cPanel host.
+# Needs the repo secret CPANEL_TOKEN (Settings > Secrets and variables > Actions).
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+    paths: [index.html, styles.css, app.js, data/channels.json, assets/**, build.mjs, deploy/**]
+
+concurrency:
+  group: deploy-asiko-africa
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node build.mjs
+      - name: Upload to cPanel
+        env:
+          CPANEL_TOKEN: ${{ secrets.CPANEL_TOKEN }}
+          CPANEL_USER: mediaic1
+          CPANEL_HOST: ${{ vars.CPANEL_HOST || 'mediaiconsafrica.com' }}
+        run: bash deploy/cpanel-deploy.sh
+      - name: Keep the previous live files
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: previous-live-files
+          path: backup/
+          if-no-files-found: ignore
