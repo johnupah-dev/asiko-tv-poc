@@ -33,15 +33,15 @@
   <div class="container hero-grid">
     <div data-reveal>
       <span class="eyebrow">Africa's Free Streaming Home</span>
-      <h1>African TV, <span class="accent">free forever.</span><br>89 channels. One home.</h1>
+      <h1>African TV, <span class="accent">free forever.</span><br>97 channels. One home.</h1>
       <p class="hero-sub">Asiko TV is the free, ad-supported home of African live television — Nollywood, news, faith, music, comedy, culture and sport, from Lagos to the diaspora, on any screen. No subscription. No sign-up.</p>
       <div class="hero-actions">
         <a href="advertise.html" class="btn btn-gold">Advertise With Us</a>
         <a href="join.html" class="btn btn-outline">List Your Channel</a>
       </div>
       <div class="hero-stats">
-        <div class="hero-stat"><b>89</b><span>channels in the bouquet</span></div>
-        <div class="hero-stat"><b>26</b><span>live now on the POC</span></div>
+        <div class="hero-stat"><b>97</b><span>channels in the bouquet</span></div>
+        <div class="hero-stat"><b>29</b><span>channels live now</span></div>
         <div class="hero-stat"><b>19</b><span>genres, one platform</span></div>
         <div class="hero-stat"><b>100%</b><span>free to watch</span></div>
       </div>
@@ -63,8 +63,8 @@
   <div class="container">
     <div class="section-head" data-reveal>
       <span class="eyebrow">Now Building The Bouquet</span>
-      <h2>89 channels. 19 genres. 26 live now.</h2>
-      <p>Media Icons Africa is onboarding independent African broadcasters onto the Asiko TV bouquet — Nollywood, news, faith, comedy, fashion, sport, business and youth culture, side by side on one platform. 26 channels are already streaming on our proof-of-concept at asiko.africa.</p>
+      <h2>97 channels. 19 genres. 29 live now.</h2>
+      <p>Media Icons Africa is onboarding independent African broadcasters onto the Asiko TV bouquet — Nollywood, news, faith, comedy, fashion, sport, business and youth culture, side by side on one platform. 29 channels are streaming now at <a href="https://www.asiko.africa/">asiko.africa</a>.</p>
     </div>
     <div class="live-strip" id="homeChannelPreview" data-reveal></div>
     <div class="text-center" style="margin-top:36px">
@@ -247,11 +247,11 @@
 <script src="assets/js/main.js"></script>
 <script>
   fetch('assets/js/channels-data.json').then(r=>r.json()).then(data=>{
-    var pick = ["movie-africa","ppg","mandate-news","laffo-tv","play","tattase"];
+    var pick = ["movie-africa","ppg","amen-movies","tattase","bounce","sportsville-tv"];
     var bySlug = {};
     data.forEach(c => { bySlug[c.slug] = c; });
     var sample = pick.map(s => bySlug[s]).filter(Boolean);
-    var label = { poc: 'Live on the POC', interested: 'Upcoming', queued: 'Onboarding' };
+    var label = { live: 'Live now', interested: 'Upcoming', queued: 'Onboarding' };
     var target = document.getElementById('homeChannelPreview');
     target.innerHTML = sample.map(c => `
       <div class="live-card">

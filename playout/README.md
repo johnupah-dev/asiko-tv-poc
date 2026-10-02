@@ -1,17 +1,16 @@
-# playout/ — make the channels real (Roadmap Layer 1)
+# playout/ — provision linear channels on Eyevinn Open Source Cloud
 
-The POC front end fakes the linear feed in the browser. This folder turns the
-**same 7 channels** (`../data/channels.json`) into **real 24/7 linear channels** on
-**Eyevinn Open Source Cloud** using the `channel-engine` service (VOD2Live — it loops
-already-encoded video into a continuous HLS stream, no live encoder per channel).
+Each Asiko TV channel is a continuous HLS stream. This folder creates them with
+Eyevinn's `channel-engine` service (VOD2Live — it loops already-encoded video into a
+24/7 linear stream, no live encoder per channel).
 
-Nothing here changes the viewer experience. When it's done you copy the resulting
-playback URLs into `data/channels.json` and the front end is playing your real feeds.
+A channel is provisioned when it has a `loopSource` in `../data/channels.json` — the
+HLS VOD playlist (e.g. on Bunny Stream) to loop. Channels without one are skipped and,
+in the viewer, carry the network feed (`networkFeed`) until they get their own `src`.
 
-## Prerequisites (yours to do)
+## Prerequisites
 
-1. An **Open Source Cloud** account at <https://app.osaas.io> with a **card on file**
-   (every paid plan has a 14-day free trial; the POC fits the trial).
+1. An **Open Source Cloud** account at <https://app.osaas.io> with a card on file.
 2. An **access token**: app.osaas.io → Settings → API. Put it in `playout/.env`
    (copy `playout/.env.example`).
 
@@ -20,12 +19,9 @@ playback URLs into `data/channels.json` and the front end is playing your real f
 | Item | Tokens/day |
 |---|---|
 | 1 channel | 10 |
-| 7 channels | 70 |
+| 29 channels | 290 |
 | storage + ad insertion + scheduler | ~30 |
-| **7-channel POC total** | **~100/day** |
 | transcoding (batch — **turn it off after**) | 250/day |
-
-Free tier = 100 tokens total. Professional trial = 300/day for 14 days, card required.
 
 ## Run it
 
@@ -33,22 +29,22 @@ Free tier = 100 tokens total. Professional trial = 300/day for 14 days, card req
 
 ```bash
 powershell -ExecutionPolicy Bypass -File playout/osc-fast.ps1 token       # auth check
-powershell -ExecutionPolicy Bypass -File playout/osc-fast.ps1 provision   # create all 7
+powershell -ExecutionPolicy Bypass -File playout/osc-fast.ps1 provision   # create every channel with a loopSource
 powershell -ExecutionPolicy Bypass -File playout/osc-fast.ps1 status      # URLs -> playout/playout.json
-powershell -ExecutionPolicy Bypass -File playout/osc-fast.ps1 teardown    # delete all 7 (they cost while running)
+powershell -ExecutionPolicy Bypass -File playout/osc-fast.ps1 teardown    # delete every asiko* channel (they cost while running)
 ```
 
 **Any dev, with Node:** `cd playout && npm install && npm run provision`
 
 Both read `../data/channels.json`, create one `channel-engine` Loop instance per
-channel named `asiko<id>` (e.g. `asikoprime`), wait for health, and write
+channel with a `loopSource`, named `asiko<id>` (e.g. `asikomovieafrica`), wait for health, and write
 `playout/playout.json` mapping each channel to its live HLS playback URL.
 
 ## Then
 
 1. Open `playout/playout.json`, copy each `playback` URL.
 2. Paste it into `data/channels.json` as that channel's `src`.
-3. Reload the front end — real linear channels now.
+3. `node build.mjs` and upload `docs/` — that channel now plays its own feed.
 
 ## How the API wiring works
 
@@ -70,6 +66,5 @@ can find them.
 
 ## Next (Layer 2 — ads)
 
-Once the channels are real, replace the browser's simulated ad breaks with
-**server-side ad insertion**: Eyevinn's one-click **SGAI Pipeline** deploys the whole
+Ads go into the streams server-side (the viewer app has no ad logic): Eyevinn's one-click **SGAI Pipeline** deploys the whole
 ad stack plus a test ad server. That's a separate step — this folder only does playout.

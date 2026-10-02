@@ -8,7 +8,7 @@ lead-capture layer ready to connect to a real CRM.
 
 ```
 index.html          Homepage
-channels.html        Full 89-channel guide (search + genre filter + synopses)
+channels.html        Full 97-channel guide (search + genre filter + synopses)
 advertise.html       Advertiser / partner funnel + enquiry form
 join.html            Channel sign-up, creator sign-up, and "Test Run Your Channel" (tabs)
 about.html            Company / vision page, Media Icons Africa credit
@@ -21,7 +21,7 @@ assets/
   js/main.js            Nav, reveal animations, toast helper
   js/leads.js            Lead capture + CRM bridge (see "Connecting marky.ai / a CRM")
   js/channel-guide.js    Search/filter logic for channels.html
-  js/channels-data.json  All 89 channel entries (name, genre category, genre
+  js/channels-data.json  All 97 channel entries (name, genre category, genre
                             tag, synopsis, status, logo) — generated from
                             ../data/channels-bouquet.json (the canonical source)
   img/logos/              Asiko TV logo marks
@@ -77,14 +77,15 @@ leads dashboard while `CRM_ENDPOINT` is being wired up. Once you connect a
 real backend, replace this page with a proper authenticated view backed by
 your database or CRM.
 
-## The 89-channel bouquet
+## The 97-channel bouquet
 
-`assets/js/channels-data.json` holds all 89 channels from the Asiko TV Full
-Channel Bouquet deck, across 19 genre categories, each with its real logo,
+`assets/js/channels-data.json` holds all 97 channels — the 89 from the Asiko TV Full
+Channel Bouquet deck plus the launch line-up additions, across 19 genre categories, each with its real logo,
 genre tag and one-line synopsis. Every entry carries a `status`:
 
-* `poc` — live right now on the asiko.africa proof-of-concept (26 channels).
-  Renders with a red "Live on the POC" badge and sorts to the top.
+* `live` — streaming now on asiko.africa (the 29-channel launch line-up).
+  Renders with a red "Live now" badge and sorts to the top. Entries with no
+  logo yet render a text fallback.
 * `interested` — on the bouquet / signed interest. Gold "Upcoming" badge.
 * `queued` — onboarding queue; genre inferred from the name, synopsis pending.
 

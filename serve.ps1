@@ -1,4 +1,4 @@
-# LOOP7 dev server - no dependencies, uses built-in Windows .NET HttpListener.
+# Asiko TV dev server - no dependencies, uses built-in Windows .NET HttpListener.
 # Run:  powershell -ExecutionPolicy Bypass -File serve.ps1     (optional: $env:PORT)
 $port = if ($env:PORT) { $env:PORT } else { 4173 }
 $root = [System.IO.Path]::GetFullPath($PSScriptRoot)
@@ -16,7 +16,7 @@ $mime = @{
 $listener = [System.Net.HttpListener]::new()
 $listener.Prefixes.Add("http://localhost:$port/")
 $listener.Start()
-Write-Host "LOOP7 dev server -> http://localhost:$port  (Ctrl+C to stop)"
+Write-Host "Asiko TV dev server -> http://localhost:$port  (Ctrl+C to stop)"
 
 try {
   while ($listener.IsListening) {
