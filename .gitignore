@@ -13,3 +13,9 @@ playout/playout.json
 # bunny credentials - never commit
 bunny.env
 bunny.env.*
+
+# built upload bundle for fastonafrica.com (rebuild from site-fastonafrica/)
+fastonafrica-site.zip
+
+# fastonafrica.com form submissions (live copies stay on Hostinger only)
+site-fastonafrica/leads/*.jsonl
