@@ -42,7 +42,7 @@ jobs:
       - name: Verify https://www.fastonafrica.com/
         run: |
           sleep 5
-          if curl -sSL --max-time 30 "https://www.fastonafrica.com/?deploy=$(date +%s)" | grep -q "Africa's FAST engine"; then
+          if curl -sSL --max-time 30 "https://www.fastonafrica.com/?deploy=$(date +%s)" | grep -q "Fast on Africa"; then
             echo "LIVE: www.fastonafrica.com is serving the site"
           else
             echo "Uploaded, but www.fastonafrica.com is not serving it yet (check the CDN cache in hPanel, or the FTP directory)"; exit 1
