@@ -47,6 +47,7 @@ docs/                 GENERATED — never edit by hand
 deploy/               .htaccess for the asiko.africa cPanel host
 playout/              provisions channels on Eyevinn Open Source Cloud
 site-asiko-live/      asiko.live marketing / sales site (separate static site)
+site-fastonafrica/    www.fastonafrica.com — Fast on Africa B2B site (separate static site)
 ```
 
 ## Run it locally
@@ -98,3 +99,23 @@ Ads belong in the streams, inserted server-side (Eyevinn ad insertion / SSAI), s
 they can't be blocked. The viewer app carries no ad logic and needs no change when
 ad insertion is switched on. Advertising and channel
 listing enquiries go to the contacts in the site footer.
+
+## Fast on Africa — www.fastonafrica.com
+
+`site-fastonafrica/` is a plain static site (no build): `index.html`, the three policy
+pages, `.htaccess` (HTTPS + `www` redirect), `robots.txt`, `sitemap.xml`, `favicon.svg`.
+fastonafrica.com is hosted on **Hostinger**, not the asiko.africa cPanel box.
+
+`.github/workflows/deploy-fastonafrica.yml` uploads the folder to Hostinger over FTPS on
+every push to `master` that touches `site-fastonafrica/` (or run it by hand from the
+Actions tab). One-time setup — add these repo secrets from hPanel > Files > FTP Accounts:
+
+| Secret | Example |
+|---|---|
+| `FOA_FTP_SERVER` | `ftp.fastonafrica.com` |
+| `FOA_FTP_USERNAME` | `u123456789.fastonafrica.com` |
+| `FOA_FTP_PASSWORD` | the FTP account password |
+
+If the FTP account doesn't open straight into the web root, set the repo variable
+`FOA_FTP_DIR` (default `public_html/`). Hostinger's CDN caches pages — purge it in hPanel
+if a change doesn't show.

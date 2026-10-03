@@ -1,0 +1,20 @@
+# Fast on Africa — www.fastonafrica.com (Hostinger)
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # Force HTTPS. Behind Hostinger's CDN the origin may see plain HTTP with
+  # X-Forwarded-Proto: https, so only redirect when the visitor really used HTTP.
+  RewriteCond %{HTTP:X-Forwarded-Proto} =http [OR]
+  RewriteCond %{HTTPS}::%{HTTP:X-Forwarded-Proto} ^off::$
+  RewriteRule ^ https://www.fastonafrica.com%{REQUEST_URI} [R=301,L]
+  # fastonafrica.com -> www.fastonafrica.com
+  RewriteCond %{HTTP_HOST} ^fastonafrica\.com$ [NC]
+  RewriteRule ^ https://www.fastonafrica.com%{REQUEST_URI} [R=301,L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set Strict-Transport-Security "max-age=31536000"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

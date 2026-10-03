@@ -1,0 +1,49 @@
+name: Deploy fastonafrica.com
+
+# Uploads site-fastonafrica/ to the fastonafrica.com web root on Hostinger over FTPS.
+# Repo secrets (Settings > Secrets and variables > Actions):
+#   FOA_FTP_SERVER    e.g. ftp.fastonafrica.com (hPanel > Files > FTP Accounts)
+#   FOA_FTP_USERNAME  e.g. u123456789.fastonafrica.com
+#   FOA_FTP_PASSWORD
+# Optional repo variable FOA_FTP_DIR if the FTP account doesn't open in the web root
+# (default public_html/).
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+    paths: [site-fastonafrica/**, .github/workflows/deploy-fastonafrica.yml]
+
+concurrency:
+  group: deploy-fastonafrica
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check internal links
+        working-directory: site-fastonafrica
+        run: |
+          missing=0
+          for f in $(grep -ohE 'href="[a-z0-9-]+\.(html|svg)"' *.html | sort -u | sed -E 's/href="(.*)"/\1/'); do
+            [ -f "$f" ] || { echo "missing: $f"; missing=1; }
+          done
+          exit $missing
+      - name: Upload to Hostinger
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FOA_FTP_SERVER }}
+          username: ${{ secrets.FOA_FTP_USERNAME }}
+          password: ${{ secrets.FOA_FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: site-fastonafrica/
+          server-dir: ${{ vars.FOA_FTP_DIR || 'public_html/' }}
+      - name: Verify https://www.fastonafrica.com/
+        run: |
+          sleep 5
+          if curl -sSL --max-time 30 "https://www.fastonafrica.com/?deploy=$(date +%s)" | grep -q "Africa's FAST engine"; then
+            echo "LIVE: www.fastonafrica.com is serving the site"
+          else
+            echo "Uploaded, but www.fastonafrica.com is not serving it yet (check the CDN cache in hPanel, or the FTP directory)"; exit 1
+          fi
