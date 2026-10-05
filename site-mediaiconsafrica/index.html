@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Media Icons Africa — Your Most Complete Media Partner</title>
+<meta name="description" content="Media Icons Africa is an 11-division media holding company — ad sales, TV channel launch, events, training, streaming, production, publishing and more, under one roof.">
+<meta name="site-build" content="mediaiconsafrica">
+<link rel="canonical" href="https://www.mediaiconsafrica.com/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.mediaiconsafrica.com/">
+<meta property="og:title" content="Media Icons Africa — Your Most Complete Media Partner">
+<meta property="og:description" content="11 divisions, one holding company — ad sales, TV channel launch, events, training, streaming, production and publishing, built in Lagos for all of Africa.">
+<meta name="theme-color" content="#0e0c09">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Ccircle cx=%2732%27 cy=%2732%27 r=%2729%27 fill=%27%230e0c09%27 stroke=%27%23cd9c4c%27 stroke-width=%274%27/%3E%3Ctext x=%2732%27 y=%2741%27 text-anchor=%27middle%27 font-family=%27monospace%27 font-size=%2724%27 font-weight=%27700%27 fill=%27%23f0c987%27%3EMI%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0e0c09;
+    --surface:#1a1611;
+    --surface-2:#242019;
+    --surface-3:#2e281f;
+    --line: rgba(245,239,227,0.10);
+    --line-strong: rgba(245,239,227,0.20);
+    --gold:#cd9c4c;
+    --gold-bright:#f0c987;
+    --gold-deep:#8a6423;
+    --cream:#f5efe3;
+    --stone:#9a9385;
+    --stone-dim:#6b6558;
+    --signal:#c1442b;
+    --radius: 4px;
+    --radius-lg: 10px;
+    --maxw: 1180px;
+    --ease: cubic-bezier(.22,.61,.36,1);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    background:var(--ink);
+    color:var(--cream);
+    font-family:'Poppins', sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3,h4{
+    font-family:'Montserrat', sans-serif;
+    font-weight:800;
+    letter-spacing:-0.01em;
+    line-height:1.08;
+    text-wrap: balance;
+  }
+
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  img{max-width:100%; display:block;}
+  button{font-family:inherit; cursor:pointer;}
+
+  .mono{
+    font-family:'JetBrains Mono', monospace;
+    letter-spacing:0.06em;
+  }
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  ::selection{ background:var(--gold); color:var(--ink); }
+
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+    outline:2px solid var(--gold-bright);
+    outline-offset:3px;
+  }
+
+  /* ============ TICKER ============ */
+  .ticker-bar{
+    background:var(--ink);
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+    padding:9px 0;
+    position:relative;
+    z-index:60;
+  }
+  .ticker-track{
+    display:flex;
+    width:max-content;
+    animation: ticker-scroll 42s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce){ .ticker-track{ animation:none; } }
+  .ticker-track span{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:0 26px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:0.12em;
+    color:var(--stone);
+    white-space:nowrap;
+  }
+  .ticker-track .live-dot{
+    width:6px; height:6px; border-radius:50%;
+    background:var(--signal);
+    box-shadow:0 0 0 3px rgba(193,68,43,0.18);
+    flex-shrink:0;
+  }
+  @keyframes ticker-scroll{
+    from{ transform:translateX(0); }
+    to{ transform:translateX(-50%); }
+  }
+
+  /* ============ HEADER ============ */
+  header{
+    position:sticky; top:0;
+    z-index:50;
+    background:rgba(14,12,9,0.86);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid var(--line);
+    transition: padding .25s var(--ease);
+  }
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px 28px;
+    max-width:var(--maxw);
+    margin:0 auto;
+    transition: padding .25s var(--ease);
+  }
+  header.scrolled .nav{ padding:13px 28px; }
+
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Montserrat', sans-serif;
+    font-weight:800;
+    font-size:16px;
+    letter-spacing:0.02em;
+  }
+  .brand .mark{
+    width:32px; height:32px;
+    border:1.5px solid var(--gold);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:var(--gold-bright);
+    flex-shrink:0;
+  }
+  .brand small{
+    display:block;
+    font-family:'Poppins', sans-serif;
+    font-weight:400;
+    font-size:9.5px;
+    letter-spacing:0.16em;
+    color:var(--stone-dim);
+    text-transform:uppercase;
+    margin-top:1px;
+  }
+
+  .nav-links{
+    display:flex;
+    gap:34px;
+    align-items:center;
+  }
+  .nav-links a{
+    font-size:13.5px;
+    font-weight:500;
+    color:var(--stone);
+    position:relative;
+    padding:4px 0;
+    transition:color .2s;
+  }
+  .nav-links a:hover, .nav-links a.active{ color:var(--cream); }
+  .nav-links a.active::after{
+    content:'';
+    position:absolute; left:0; right:0; bottom:-2px;
+    height:1.5px; background:var(--gold);
+  }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    font-weight:600;
+    padding:11px 20px;
+    border-radius:var(--radius);
+    border:1px solid transparent;
+    transition: transform .2s var(--ease), background .2s, border-color .2s, color .2s;
+    white-space:nowrap;
+  }
+  .btn-gold{ background:var(--gold); color:#1c1408; }
+  .btn-gold:hover{ background:var(--gold-bright); transform:translateY(-1px); }
+  .btn-ghost{ border-color:var(--line-strong); color:var(--cream); }
+  .btn-ghost:hover{ border-color:var(--gold); color:var(--gold-bright); }
+  .btn-sm{ padding:8px 15px; font-size:12px; }
+
+  .nav-cta{ display:flex; align-items:center; gap:16px; }
+  .menu-toggle{
+    display:none;
+    background:none; border:none; color:var(--cream);
+    width:32px; height:32px;
+    flex-direction:column; justify-content:center; align-items:center; gap:5px;
+  }
+  .menu-toggle span{ width:20px; height:1.5px; background:var(--cream); display:block; transition:.25s; }
+  .menu-toggle.open span:nth-child(1){ transform:translateY(6.5px) rotate(45deg); }
+  .menu-toggle.open span:nth-child(2){ opacity:0; }
+  .menu-toggle.open span:nth-child(3){ transform:translateY(-6.5px) rotate(-45deg); }
+
+  /* ============ HERO ============ */
+  .hero{
+    position:relative;
+    padding:104px 0 90px;
+    background:
+      radial-gradient(ellipse 900px 500px at 82% -10%, rgba(205,156,76,0.16), transparent 60%),
+      var(--ink);
+    overflow:hidden;
+    border-bottom:1px solid var(--line);
+  }
+  .hero::before{
+    content:'';
+    position:absolute; inset:0;
+    background-image: repeating-linear-gradient(180deg, rgba(245,239,227,0.025) 0px, rgba(245,239,227,0.025) 1px, transparent 1px, transparent 3px);
+    pointer-events:none;
+    mix-blend-mode:overlay;
+  }
+  .hero-grid{
+    position:relative;
+    z-index:2;
+    display:grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap:56px;
+    align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:9px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px; letter-spacing:0.16em;
+    color:var(--gold-bright);
+    text-transform:uppercase;
+    margin-bottom:22px;
+    padding:6px 12px 6px 8px;
+    border:1px solid var(--line-strong);
+    border-radius:20px;
+  }
+  .eyebrow .dot{ width:6px; height:6px; border-radius:50%; background:var(--signal); animation:pulse 1.8s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:.35;} }
+
+  .hero h1{
+    font-size:clamp(2.4rem, 5vw, 4rem);
+    color:var(--cream);
+  }
+  .hero h1 .accent{ color:var(--gold-bright); }
+  .hero p.lead{
+    margin-top:22px;
+    font-size:17px;
+    line-height:1.75;
+    color:var(--stone);
+    max-width:52ch;
+  }
+  .hero p.lead strong{ color:var(--cream); font-weight:600; }
+  .hero-actions{
+    display:flex; gap:14px; margin-top:34px; flex-wrap:wrap;
+  }
+  .hero-meta{
+    margin-top:44px;
+    display:flex; gap:34px;
+    flex-wrap:wrap;
+  }
+  .hero-meta div{ border-left:2px solid var(--gold-deep); padding-left:14px; }
+  .hero-meta .num{ font-family:'Montserrat',sans-serif; font-weight:800; font-size:26px; color:var(--cream); }
+  .hero-meta .lbl{ font-size:11.5px; color:var(--stone-dim); text-transform:uppercase; letter-spacing:0.08em; margin-top:2px; }
+
+  /* Channel-scope panel */
+  .scope-panel{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:var(--radius-lg);
+    padding:26px 24px;
+    position:relative;
+  }
+  .scope-panel .head{
+    display:flex; justify-content:space-between; align-items:center;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px; letter-spacing:0.1em; color:var(--stone-dim); text-transform:uppercase;
+    margin-bottom:18px; padding-bottom:14px; border-bottom:1px dashed var(--line-strong);
+  }
+  .scope-list li{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:11px 0; border-bottom:1px solid var(--line);
+    font-size:13.5px;
+  }
+  .scope-list li:last-child{ border-bottom:none; }
+  .scope-list .tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px; color:var(--gold-bright);
+    background:rgba(205,156,76,0.1);
+    border:1px solid rgba(205,156,76,0.25);
+    padding:2px 8px; border-radius:20px;
+  }
+
+  /* ============ SECTION GENERIC ============ */
+  section{ padding:96px 0; }
+  .section-head{ max-width:640px; margin-bottom:56px; }
+  .kicker{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px; letter-spacing:0.18em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:14px; display:block;
+  }
+  .section-head h2{ font-size:clamp(1.9rem, 3.4vw, 2.6rem); color:var(--cream); }
+  .section-head p{ margin-top:16px; color:var(--stone); font-size:15.5px; max-width:56ch; }
+
+  .reveal{ opacity:0; transform:translateY(22px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+  .reveal.in{ opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce){ .reveal{ opacity:1; transform:none; } }
+
+  /* ============ ABOUT ============ */
+  .about{ background:var(--surface); border-bottom:1px solid var(--line); }
+  .about-grid{ display:grid; grid-template-columns: 0.9fr 1.1fr; gap:64px; }
+  .pillars{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .pillar{
+    border:1px solid var(--line); border-radius:var(--radius);
+    padding:20px; background:var(--surface-2);
+  }
+  .pillar .k{ font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--gold); letter-spacing:.1em; }
+  .pillar h4{ font-size:15px; margin-top:8px; color:var(--cream); font-weight:700; }
+  .pillar p{ font-size:13px; color:var(--stone); margin-top:6px; line-height:1.6; }
+  .about-copy p{ color:var(--stone); margin-bottom:16px; font-size:15px; }
+  .about-copy strong{ color:var(--cream); }
+
+  /* ============ DIVISIONS / CHANNEL LINEUP ============ */
+  .lineup{ background:var(--ink); }
+  .lineup-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:var(--radius-lg);
+    overflow:hidden;
+  }
+  .ch-card{
+    background:var(--surface);
+    padding:26px 24px;
+    transition: background .25s;
+    position:relative;
+  }
+  .ch-card:hover{ background:var(--surface-2); }
+  .ch-card .ch-top{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    margin-bottom:16px;
+  }
+  .ch-num{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; color:var(--gold-bright); letter-spacing:.08em;
+    border:1px solid var(--line-strong); border-radius:20px;
+    padding:3px 10px;
+  }
+  .ch-card .icon{ font-size:20px; opacity:.9; }
+  .ch-card h4{ font-size:16.5px; color:var(--cream); margin-bottom:8px; }
+  .ch-card p{ font-size:13px; color:var(--stone); line-height:1.6; margin-bottom:14px; min-height:58px; }
+  .ch-price{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px; color:var(--stone-dim);
+    border-top:1px dashed var(--line-strong);
+    padding-top:12px;
+  }
+  .ch-price b{ color:var(--gold); font-weight:600; }
+
+  /* ============ SPOTLIGHT (Fast on Africa: full station vs FAST channel) ============ */
+  .spotlight{ background:var(--surface); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .spot-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--radius-lg); overflow:hidden; }
+  .spot-card{ background:var(--surface-2); padding:38px 34px; }
+  .spot-card .tier{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--gold); letter-spacing:.14em; text-transform:uppercase; }
+  .spot-card h3{ font-size:26px; margin:14px 0 12px; color:var(--cream); }
+  .spot-card p{ color:var(--stone); font-size:14.5px; margin-bottom:20px; }
+  .spot-price{ font-family:'Montserrat',sans-serif; font-weight:800; font-size:30px; color:var(--gold-bright); margin-bottom:6px; }
+  .spot-price span{ font-family:'Poppins',sans-serif; font-weight:400; font-size:13px; color:var(--stone-dim); }
+  .spot-list{ margin:20px 0 26px; }
+  .spot-list li{ font-size:13.5px; color:var(--stone); padding:7px 0; padding-left:20px; position:relative; }
+  .spot-list li::before{ content:'—'; position:absolute; left:0; color:var(--gold-deep); }
+
+  /* ============ SECTORS ============ */
+  .sectors{ background:var(--ink); }
+  .sector-row{ display:flex; flex-wrap:wrap; gap:12px; }
+  .sector-pill{
+    border:1px solid var(--line-strong); border-radius:30px;
+    padding:12px 22px; font-size:13.5px; color:var(--cream);
+    display:flex; align-items:center; gap:10px;
+  }
+  .sector-pill .n{ font-family:'JetBrains Mono',monospace; color:var(--gold); font-size:11px; }
+
+  /* ============ ACADEMY / CONFERENCE BAND ============ */
+  .band{ background:var(--surface); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .band-grid{ display:grid; grid-template-columns:1fr 1fr; gap:40px; }
+  .band-card{ padding:6px 0; }
+  .band-card .kicker{ margin-bottom:10px; }
+  .band-card h3{ font-size:22px; color:var(--cream); margin-bottom:12px; }
+  .band-card p{ color:var(--stone); font-size:14.5px; margin-bottom:20px; }
+
+  /* ============ CONTACT ============ */
+  .contact{ background:var(--ink); }
+  .contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; }
+  .contact-copy h2{ font-size:clamp(1.9rem,3.4vw,2.6rem); color:var(--cream); }
+  .contact-copy p{ color:var(--stone); margin-top:16px; font-size:15px; max-width:44ch; }
+  .contact-chip{
+    display:inline-flex; align-items:center; gap:10px; margin-top:28px;
+    padding:12px 18px; border:1px solid var(--line-strong); border-radius:var(--radius);
+    font-size:13px;
+  }
+  form{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:30px; }
+  .field{ margin-bottom:18px; }
+  .field label{ display:block; font-size:12px; color:var(--stone); margin-bottom:7px; letter-spacing:.02em; }
+  .field input, .field select, .field textarea{
+    width:100%; background:var(--surface-2); border:1px solid var(--line-strong);
+    border-radius:var(--radius); padding:12px 14px; color:var(--cream); font-family:inherit; font-size:14px;
+    transition:border-color .2s;
+  }
+  .field input::placeholder, .field textarea::placeholder{ color:var(--stone-dim); }
+  .field input:focus, .field select:focus, .field textarea:focus{ border-color:var(--gold); outline:none; }
+  .field textarea{ resize:vertical; min-height:90px; }
+  .form-msg{ font-size:12.5px; color:var(--stone-dim); margin-top:12px; min-height:18px; }
+  .form-msg.ok{ color:var(--gold-bright); }
+
+  /* ============ FOOTER ============ */
+  footer{ background:var(--surface); border-top:1px solid var(--line); padding:56px 0 30px; }
+  .footer-grid{ display:grid; grid-template-columns:1.3fr 1fr 1fr 1.2fr 1fr; gap:36px; margin-bottom:44px; }
+  .footer-col h5{ font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--stone-dim); margin-bottom:16px; font-family:'JetBrains Mono',monospace; }
+  .footer-col a{ display:block; font-size:13.5px; color:var(--stone); padding:6px 0; transition:color .2s; }
+  .footer-col a:hover{ color:var(--gold-bright); }
+  .footer-brand p{ color:var(--stone); font-size:13.5px; margin-top:14px; max-width:32ch; }
+  .footer-bottom{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; border-top:1px solid var(--line); padding-top:24px; font-size:12px; color:var(--stone-dim); }
+  .footer-social{ display:flex; gap:16px; }
+
+  .to-top{
+    position:fixed; right:22px; bottom:22px; z-index:55;
+    width:44px; height:44px; border-radius:50%;
+    background:var(--gold); color:#1c1408; border:none;
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; pointer-events:none; transform:translateY(10px);
+    transition:opacity .25s, transform .25s;
+    font-size:16px;
+  }
+  .to-top.show{ opacity:1; pointer-events:auto; transform:none; }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 900px){
+    .hero-grid, .about-grid, .spot-grid, .band-grid, .contact-grid{ grid-template-columns:1fr; }
+    .lineup-grid{ grid-template-columns:repeat(2,1fr); }
+    .footer-grid{ grid-template-columns:1fr 1fr; }
+    .pillars{ grid-template-columns:1fr; }
+  }
+  @media (max-width: 700px){
+    .nav-links{
+      position:fixed; top:64px; left:0; right:0; bottom:0;
+      background:var(--ink); flex-direction:column; align-items:flex-start;
+      padding:30px 28px; gap:6px; transform:translateX(100%);
+      transition:transform .3s var(--ease); z-index:49;
+    }
+    .nav-links.open{ transform:translateX(0); }
+    .nav-links a{ padding:14px 0; font-size:16px; width:100%; border-bottom:1px solid var(--line); }
+    .menu-toggle{ display:flex; }
+    .nav-cta .btn-ghost{ display:none; }
+    .lineup-grid{ grid-template-columns:1fr; }
+    .footer-grid{ grid-template-columns:1fr 1fr; }
+    section{ padding:64px 0; }
+    .hero{ padding:56px 0 64px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="ticker-bar" aria-hidden="true">
+    <div class="ticker-track" id="tickerTrack">
+      <span><i class="live-dot"></i>ON AIR — TATTASE TV</span>
+      <span>ASIKO TV</span>
+      <span>DOTT TV</span>
+      <span>LN247</span>
+      <span>SPORTSVILLE AWARDS 2027</span>
+      <span>KULTURE STREAMS</span>
+      <span>MEDIA SALES CONFERENCE</span>
+      <span><i class="live-dot"></i>ON AIR — TATTASE TV</span>
+      <span>ASIKO TV</span>
+      <span>DOTT TV</span>
+      <span>LN247</span>
+      <span>SPORTSVILLE AWARDS 2027</span>
+      <span>KULTURE STREAMS</span>
+      <span>MEDIA SALES CONFERENCE</span>
+    </div>
+  </div>
+
+  <header id="siteHeader">
+    <nav class="nav">
+      <a href="#top" class="brand">
+        <span class="mark">MI</span>
+        <span>MEDIA ICONS AFRICA<small>Your most complete media partner</small></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about" data-nav>About</a></li>
+        <li><a href="#divisions" data-nav>Divisions</a></li>
+        <li><a href="#sectors" data-nav>Sectors</a></li>
+        <li><a href="#academy" data-nav>Academy &amp; Conference</a></li>
+        <li><a href="#contact" data-nav>Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="#contact" class="btn btn-ghost btn-sm">Book Free Audit</a>
+        <a href="https://wa.me/2348035382590" target="_blank" rel="noopener" class="btn btn-gold btn-sm">WhatsApp Us</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero" style="padding-top:64px;">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow"><span class="dot"></span>11 DIVISIONS · 1 HOLDING COMPANY</span>
+          <h1>Your most <span class="accent">complete</span> media partner in Africa.</h1>
+          <p class="lead">
+            Wanna stream? Wanna find sponsors for your event? Wanna monetise your content?
+            Wanna publish a book? Wanna upgrade your skills? Wanna set up your own TV channel?
+            <strong>Whatever it is you need a media partner for — we gat you.</strong>
+          </p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-gold">Book Your Free Media Audit</a>
+            <a href="#divisions" class="btn btn-ghost">Explore the 11 Divisions ↓</a>
+          </div>
+          <div class="hero-meta">
+            <div><div class="num">11</div><div class="lbl">Divisions, one partner</div></div>
+            <div><div class="num">30+</div><div class="lbl">Years in Nigerian media</div></div>
+            <div><div class="num">2005</div><div class="lbl">Building since</div></div>
+          </div>
+        </div>
+
+        <div class="scope-panel reveal">
+          <div class="head"><span>THE FULL SPECTRUM</span><span>SCROLL →</span></div>
+          <ul class="scope-list">
+            <li>Ad sales &amp; sponsorship <span class="tag">D1</span></li>
+            <li>Build a TV station or FAST channel <span class="tag">D2</span></li>
+            <li>Sponsors for your event <span class="tag">D3</span></li>
+            <li>Media sales training <span class="tag">D4</span></li>
+            <li><a href="https://www.asiko.africa" target="_blank" rel="noopener" style="color:inherit; text-decoration:none;">Stream on Asiko TV ↗</a> <span class="tag">D11</span></li>
+            <li>Publish your book <span class="tag">D10</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about" id="about">
+      <div class="wrap about-grid">
+        <div class="reveal">
+          <span class="kicker">Who we are</span>
+          <h2>Built in Lagos.<br>Made for Africa.</h2>
+          <div class="about-copy" style="margin-top:22px;">
+            <p>Media Icons Africa was founded on one problem: African brands, creators and broadcasters have <strong>great stories but no system to monetise them.</strong> So instead of being another vendor, we became the one holding company that owns the entire value chain — production, sales, distribution and monetisation.</p>
+            <p><strong>Mission —</strong> to extract value and create legacy from African stories through complete media solutions.</p>
+            <p><strong>Vision —</strong> to be Africa's #1 partner for media monetisation by 2030.</p>
+          </div>
+        </div>
+        <div class="pillars reveal">
+          <div class="pillar">
+            <div class="k">01 · OUTCOME FIRST</div>
+            <h4>We deliver revenue</h4>
+            <p>Not just services. Every division is judged on the money it puts in your account.</p>
+          </div>
+          <div class="pillar">
+            <div class="k">02 · COMPLETE</div>
+            <h4>One partner, all of media</h4>
+            <p>Sales, channels, events, training, streaming, production, publishing — under one roof.</p>
+          </div>
+          <div class="pillar">
+            <div class="k">03 · ROOTED &amp; AFRICAN</div>
+            <h4>Nigerian roots, African mindset</h4>
+            <p>Built in Lagos, wired for how media actually moves across the continent.</p>
+          </div>
+          <div class="pillar">
+            <div class="k">04 · DATA DRIVEN</div>
+            <h4>We sell what converts</h4>
+            <p>Not what we guess. Every rate card and campaign is built on real audience data.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIVISIONS / CHANNEL LINEUP -->
+    <section class="lineup" id="divisions">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="kicker">The lineup</span>
+          <h2>11 divisions. Think of them as channels — pick the one you need.</h2>
+          <p>Every division is a complete, standalone service. Most clients start with one and grow into three or four.</p>
+        </div>
+
+        <div class="lineup-grid reveal">
+          <div class="ch-card">
+            <div class="ch-top"><span class="ch-num">CH 01</span><span class="icon">📡</span></div>
+            <h4>Media Ad Sales House</h4>
+            <p>We represent media houses, sourcing advertising and sponsorship as your outsourced sales team.</p>
+            <div class="ch-price">Tailored to your scope · <b>request a quote</b></div>
+          </div>
+          <div class="ch-card">
+            <div class="ch-top"><span class="ch-num">CH 02</span><span class="icon">⚡</span></div>
+            <h4><a href="https://www.fastonafrica.com" target="_blank" rel="noopener" style="color:inherit; text-decoration:none;">Fast on Africa</a></h4>
+            <p>Build your TV station or launch a FAST channel — licensing, DSO and satellite carriage, playout and streaming. Launch · Distribute · Monetize.</p>
+            <div class="ch-price">Tailored to your scope · <b>request a quote</b></div>
+            <a href="https://www.fastonafrica.com" target="_blank" rel="noopener" style="color:var(--gold-bright); font-size:13px; text-decoration:none; display:inline-block; margin-top:10px;">Visit fastonafrica.com ↗</a>
+          </div>
+          <div class="ch-card">
+            <div class="ch-top"><span class="ch-num">CH 03</span><span class="icon">🎪</span></div>
+            <h4>Events+</h4>
+            <p>Sponsorship, streaming, marketing and PR for your event, from raising funds to going live.</p>
+            <div class="ch-price">Tailored to your scope · <b>request a quote</b></div>
+          </div>
+          <div class="ch-card">
+            <div class="ch-top"><span class="ch-num">CH 04</span><span class="icon">🎓</span></div>
+            <h4>Media Sales Academy</h4>
+            <p>The DSO Money Bootcamp and Media Sales Mastery — training built on 30+ years in the field.</p>
+            <div class="ch-price">Tailored to your scope · <b>request a quote</b></div>
+          </div>
+          <div class="ch-card">
+            <div class="ch-top"><span class="ch-num">CH 05</span><span class="icon">🎙️</span></div>
+            <h4>Media Sales Conference</h4>
+            <p>The annual gathering for 200+ media-sales directors — the industry's toughest questions, answered.</p>
+            <div class="ch-price">Tailored to your scope · <b>request a quote</b></div>
+          </div>
+          <div class="ch-card">
+            <div class="ch-top"><span class="ch-num">CH 06</span><span class="icon">⚽</span></div>
+            <h4>Sports Agency</h4>
+            <p>Rights sourcing, sponsorship representation and content packaging for sports properties.</p>
+            <div class="ch-price">Tailored to your scope · <b>request a quote</b></div>
+          </div>
+          <div class="ch-card">
+            <div class="ch-top"><span class="ch-num">CH 07</span><span class="icon">📱</span></div>
+            <h4>Media Icons Digital</h4>
+            <p>Social media, PR and digital marketing — the in-house agency for every division's clients.</p>
+            <div class="ch-price">Tailored to your scope · <b>request a quote</b></div>
+          </div>
+          <div class="ch-card">
+            <div class="ch-top"><span class="ch-num">CH 08</span><span class="icon">🤝</span></div>
+            <h4>Media Hands</h4>
+            <p>Recruitment and staffing for sales, production and on-air talent across the industry.</p>
+            <div class="ch-price">Tailored to your scope · <b>request a quote</b></div>
+          </div>
+          <div class="ch-card">
+            <div class="ch-top"><span class="ch-num">CH 09</span><span class="icon">🎬</span></div>
+            <h4>Studio Iconia</h4>
+            <p>Production, dubbing and translation services from our in-house studio.</p>
+            <div class="ch-price">Tailored to your scope · <b>request a quote</b></div>
+          </div>
+          <div class="ch-card">
+            <div class="ch-top"><span class="ch-num">CH 10</span><span class="icon">📚</span></div>
+            <h4>Icons Books &amp; Research</h4>
+            <p>Publishing, ghostwriting and commissioned research for media and Nollywood.</p>
+            <div class="ch-price">Tailored to your scope · <b>request a quote</b></div>
+          </div>
+          <div class="ch-card">
+            <div class="ch-top"><span class="ch-num">CH 11</span><span class="icon">🌍</span></div>
+            <h4><a href="https://www.asiko.africa" target="_blank" rel="noopener" style="color:inherit; text-decoration:none;">Asiko TV</a></h4>
+            <p>Africa's free, ad-supported streaming TV — linear channels that keep Africa and its diaspora connected to home.</p>
+            <div class="ch-price">Tailored to your scope · <b>request a quote</b></div>
+            <a href="https://www.asiko.africa" target="_blank" rel="noopener" style="color:var(--gold-bright); font-size:13px; text-decoration:none; display:inline-block; margin-top:10px;">Visit asiko.africa ↗</a>
+            <a href="https://www.asiko.live" target="_blank" rel="noopener" style="color:var(--gold-bright); font-size:13px; text-decoration:none; display:inline-block; margin-top:10px; margin-left:14px;">Advertise or list a channel: asiko.live ↗</a>
+          </div>
+          <a class="ch-card" href="#contact" style="text-decoration:none;">
+            <div class="ch-top"><span class="ch-num">NOT SURE?</span><span class="icon">💬</span></div>
+            <h4>Talk to us</h4>
+            <p>Tell us the problem and we'll tell you which division — or which three — will solve it.</p>
+            <div class="ch-price">20-minute call · <b>free</b></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPOTLIGHT: D2 vs D8 -->
+    <section class="spotlight">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="kicker">CH 02 · Fast on Africa</span>
+          <h2>Launching a channel? One division, two ways in.</h2>
+          <p>Whether you're an established broadcaster or a single creator with a great idea, there's a lane built for you.</p>
+        </div>
+        <div class="spot-grid reveal">
+          <div class="spot-card">
+            <div class="tier">CH 02 · Full station</div>
+            <h3>Build Your TV Station</h3>
+            <div class="spot-price">Turnkey <span>tailored quote</span></div>
+            <p>For broadcasters and operators ready to launch a fully licensed station — DSO carriage, studio, staff and a national marketing unit.</p>
+            <ul class="spot-list">
+              <li>Licensing &amp; DSO distribution negotiation</li>
+              <li>Studio build, staffing &amp; house style</li>
+              <li>Ongoing station management available</li>
+              <li>Revenue share on content syndication</li>
+            </ul>
+            <a href="#contact" class="btn btn-ghost btn-sm">Talk About a Station</a>
+          </div>
+          <div class="spot-card">
+            <div class="tier">CH 02 · FAST &amp; satellite</div>
+            <h3>Launch a FAST Channel</h3>
+            <div class="spot-price">Launch · Distribute · Monetize <span>free test period</span></div>
+            <p>For creators, churches, event owners and broadcasters — launch your own FAST channel without building your own infrastructure.</p>
+            <ul class="spot-list">
+              <li>FAST channel creation, management &amp; playout</li>
+              <li>DTH satellite option via Turksat &amp; Nigcomsat</li>
+              <li>Stream on <a href="https://www.asiko.africa" target="_blank" rel="noopener" style="color:var(--gold-bright);">Asiko TV</a> or distribute anywhere — no lock-in</li>
+              <li>Monetised by Media Icons Digital</li>
+            </ul>
+            <a href="#contact" class="btn btn-ghost btn-sm">Launch a Channel</a>
+            <a href="https://www.fastonafrica.com" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">fastonafrica.com ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTORS -->
+    <section class="sectors" id="sectors">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="kicker">Who we serve</span>
+          <h2>Six sectors. One partner across all of them.</h2>
+        </div>
+        <div class="sector-row reveal">
+          <div class="sector-pill"><span class="n">01</span>Broadcast &amp; DSO</div>
+          <div class="sector-pill"><span class="n">02</span>Brands &amp; Corporates</div>
+          <div class="sector-pill"><span class="n">03</span>Events &amp; Experiences</div>
+          <div class="sector-pill"><span class="n">04</span>Independent Creators</div>
+          <div class="sector-pill"><span class="n">05</span>Government &amp; NGOs</div>
+          <div class="sector-pill"><span class="n">06</span>Publishing &amp; Research</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACADEMY & CONFERENCE -->
+    <section class="band" id="academy">
+      <div class="wrap band-grid">
+        <div class="band-card reveal">
+          <span class="kicker">CH 04</span>
+          <h3>Media Sales Academy</h3>
+          <p>Built on 30+ years of Nigerian media-sales experience. The DSO Money Bootcamp and Media Sales Mastery courses come with templates, certification and a graduate directory.</p>
+          <a href="#contact" class="btn btn-gold btn-sm">Enrol Interest</a>
+        </div>
+        <div class="band-card reveal">
+          <span class="kicker">CH 05</span>
+          <h3>Media Sales Conference</h3>
+          <p>The annual gathering built for 200+ media-sales directors — tackling why POs are drying up, digital disruption, and media-inventory theft head-on.</p>
+          <a href="#contact" class="btn btn-gold btn-sm">Get Sponsorship Info</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+      <div class="wrap contact-grid">
+        <div class="contact-copy reveal">
+          <span class="kicker">Let's talk</span>
+          <h2>Ready to work?<br>Book your free audit.</h2>
+          <p>Tell us which division fits, or just tell us the problem — a 20-minute call is enough for us to tell you exactly how we can help.</p>
+          <div class="contact-chip">💬 &nbsp; Prefer WhatsApp? Tap "WhatsApp Us" in the menu — this form can message you there too.</div>
+        </div>
+        <form id="leadForm" novalidate>
+          <div class="field">
+            <label for="f-name">Your name</label>
+            <input type="text" id="f-name" placeholder="e.g. Adaeze Okafor" required>
+          </div>
+          <div class="field">
+            <label for="f-division">Which division do you need?</label>
+            <select id="f-division">
+              <option>Media Ad Sales House</option>
+              <option>Events+</option>
+              <option>Media Sales Academy</option>
+              <option>Media Sales Conference</option>
+              <option>Sports Agency</option>
+              <option>Media Icons Digital</option>
+              <option>Fast on Africa (TV station &amp; FAST channels)</option>
+              <option>Media Hands</option>
+              <option>Studio Iconia</option>
+              <option>Icons Books &amp; Research</option>
+              <option>Asiko TV</option>
+              <option>Not sure — just want to talk</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-msg">Tell us a bit more</label>
+            <textarea id="f-msg" placeholder="What are you trying to launch, sell, or grow?"></textarea>
+          </div>
+          <button type="submit" class="btn btn-gold" style="width:100%; justify-content:center;">Send via WhatsApp</button>
+          <div class="form-msg" id="formMsg"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand"><span class="mark">MI</span><span>MEDIA ICONS AFRICA</span></div>
+          <p>Your most complete media partner. 11 divisions, one holding company, built in Lagos for all of Africa.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Divisions</h5>
+          <a href="#divisions">Ad Sales House</a>
+          <a href="https://www.fastonafrica.com" target="_blank" rel="noopener">Fast on Africa ↗</a>
+          <a href="#divisions">Events+</a>
+          <a href="https://www.asiko.africa" target="_blank" rel="noopener">Asiko TV ↗</a>
+        </div>
+        <div class="footer-col">
+          <h5>Our sites</h5>
+          <a href="https://www.asiko.africa" target="_blank" rel="noopener">asiko.africa — watch Asiko TV ↗</a>
+          <a href="https://www.asiko.live" target="_blank" rel="noopener">asiko.live — advertise &amp; list channels ↗</a>
+          <a href="https://www.fastonafrica.com" target="_blank" rel="noopener">fastonafrica.com — launch a channel ↗</a>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <a href="#about">About</a>
+          <a href="#academy">Academy</a>
+          <a href="#academy">Conference</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h5>Get in touch</h5>
+          <a href="https://wa.me/2348035382590" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="mailto:john.upah@mediaiconsltd.com">john.upah@mediaiconsltd.com</a>
+          <a href="tel:+2348035382590">+234 803 538 2590</a>
+          <a href="#top">Lagos, Nigeria</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Media Icons Africa. All rights reserved. · Website built by Media Icons Africa</span>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram">Instagram</a>
+          <a href="#" aria-label="LinkedIn">LinkedIn</a>
+          <a href="#" aria-label="X">X</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="Back to top">↑</button>
+
+<script>
+  // Header scroll state
+  const header = document.getElementById('siteHeader');
+  const toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    header.classList.toggle('scrolled', y > 40);
+    toTop.classList.toggle('show', y > 600);
+  }, { passive:true });
+
+  toTop.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
+
+  // Mobile menu
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  menuToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    menuToggle.classList.toggle('open', isOpen);
+    menuToggle.setAttribute('aria-expanded', isOpen);
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    menuToggle.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', false);
+  }));
+
+  // Scrollspy
+  const navA = document.querySelectorAll('[data-nav]');
+  const sections = Array.from(navA).map(a => document.querySelector(a.getAttribute('href')));
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const id = '#' + entry.target.id;
+      const link = document.querySelector(`[data-nav][href="${id}"]`);
+      if (!link) return;
+      if (entry.isIntersecting) {
+        navA.forEach(a => a.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px' });
+  sections.forEach(s => s && spy.observe(s));
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        revealer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => revealer.observe(el));
+
+  // Lead form -> WhatsApp deep link (fully functional without a backend)
+  const leadForm = document.getElementById('leadForm');
+  const formMsg = document.getElementById('formMsg');
+  leadForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('f-name').value.trim();
+    const division = document.getElementById('f-division').value;
+    const msg = document.getElementById('f-msg').value.trim();
+    if (!name) {
+      formMsg.textContent = 'Please add your name so we know who to ask for.';
+      formMsg.classList.remove('ok');
+      return;
+    }
+    const text = `Hi Media Icons Africa, I'm ${name}. I'm interested in: ${division}.${msg ? ' ' + msg : ''}`;
+    const url = `https://wa.me/2348035382590?text=${encodeURIComponent(text)}`;
+    formMsg.textContent = 'Opening WhatsApp with your message ready to send…';
+    formMsg.classList.add('ok');
+    window.open(url, '_blank', 'noopener');
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

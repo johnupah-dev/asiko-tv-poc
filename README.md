@@ -47,6 +47,7 @@ docs/                 GENERATED — never edit by hand
 deploy/               .htaccess for the asiko.africa cPanel host
 playout/              provisions channels on Eyevinn Open Source Cloud
 site-asiko-live/      asiko.live marketing / sales site (separate static site)
+site-mediaiconsafrica/ mediaiconsafrica.com — the Media Icons Africa group site
 ```
 
 ## Run it locally
@@ -67,6 +68,26 @@ Upload the contents of `docs/` (`index.html` and the `assets/` folder) to the we
 of asiko.africa. The build inlines the CSS, config and script into one `index.html`,
 and fails if a channel number is duplicated, a logo file is missing, or a channel has
 no stream.
+
+## Publish to mediaiconsafrica.com
+
+`site-mediaiconsafrica/` is a single static page with no build step. Merging a change to it
+into `master` runs `.github/workflows/deploy-mediaiconsafrica.yml`, which uploads it to the
+mediaiconsafrica.com document root with the same `CPANEL_TOKEN` secret. It keeps the
+cPanel directives already in the live `.htaccess` (adding the block from
+`deploy/mediaiconsafrica.com.htaccess` on top), and it refuses to deploy if
+mediaiconsafrica.com and asiko.africa turn out to share a document root.
+
+## Our sites
+
+| Site | What it is |
+|---|---|
+| www.mediaiconsafrica.com | Media Icons Africa — the group, all 11 divisions |
+| www.asiko.africa | Asiko TV — watch the channels |
+| www.asiko.live | Asiko TV for business — advertise, list a channel, channel guide |
+| www.fastonafrica.com | Fast on Africa — build a TV station or launch a FAST channel |
+
+All four link to each other in their footers.
 
 ## Channel config (`data/channels.json`)
 
