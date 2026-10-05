@@ -2,11 +2,10 @@ name: Deploy asiko.africa
 
 # Builds docs/ and uploads it to the asiko.africa cPanel host.
 # Needs the repo secret CPANEL_TOKEN (Settings > Secrets and variables > Actions).
+# Manual only: the live site carries work that is not in this repo yet, so a
+# merge must never overwrite it automatically.
 on:
   workflow_dispatch:
-  push:
-    branches: [master]
-    paths: [index.html, styles.css, app.js, data/channels.json, assets/**, build.mjs, deploy/**]
 
 concurrency:
   group: deploy-asiko-africa
