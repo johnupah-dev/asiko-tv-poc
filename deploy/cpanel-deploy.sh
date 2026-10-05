@@ -100,7 +100,7 @@ done
 echo "== Verifying https://www.${DOMAIN}/"
 sleep 3
 page=$(curl -sSL --max-time 30 "https://www.${DOMAIN}/?deploy=$(date +%s)")
-if echo "$page" | grep -qF "$MARKER"; then
+if grep -qF -- "$MARKER" <<<"$page"; then
   echo "LIVE: www.${DOMAIN} is serving the new build"
 else
   echo "Uploaded, but www.${DOMAIN} is not serving the new build (DNS may point elsewhere, or a cache is in front)"; exit 1
