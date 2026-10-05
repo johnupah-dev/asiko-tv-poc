@@ -389,6 +389,9 @@ a { color: inherit; }
 .foot-links a:hover { color: var(--money); }
 .foot-links a:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
 .foot-legal { font-family: var(--font-mono); font-size: 10.5px; color: var(--faint); }
+.foot-legal a { color: inherit; text-decoration: none; }
+.foot-legal a:hover { color: var(--money); }
+.foot-legal a:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
 
 /* ---------- TV guide ---------- */
 .guide {
