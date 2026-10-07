@@ -32,7 +32,10 @@
 
   /* ---------- playback ---------- */
   const HLS_JS = !!(window.Hls && window.Hls.isSupported());
-  const srcOf = (ch) => ch.src || CFG.networkFeed;
+  // channels whose own stream has failed repeatedly fall back to the network feed,
+  // so a dead playout never leaves a viewer on a "Reconnecting…" screen forever
+  const failedSrc = new Set();
+  const srcOf = (ch) => (ch.src && !failedSrc.has(ch.src) ? ch.src : CFG.networkFeed);
 
   function setLoading(msg, ch) {
     loadingText.textContent = msg;
@@ -61,10 +64,15 @@
       hls = new window.Hls({ enableWorker: true, lowLatencyMode: false });
       hls.loadSource(src);
       hls.attachMedia(video);
-      hls.on(window.Hls.Events.MANIFEST_PARSED, play);
+      hls.on(window.Hls.Events.MANIFEST_PARSED, () => { retries = 0; play(); });
       hls.on(window.Hls.Events.ERROR, (evt, data) => {
         if (!data || !data.fatal) return;
         if (data.type === window.Hls.ErrorTypes.MEDIA_ERROR) { hls.recoverMediaError(); return; }
+        const ch = CH[current];
+        if (ch && ch.src && src === ch.src && src !== CFG.networkFeed && retries >= 2) {
+          failedSrc.add(src);            // give up on this channel's own feed for this visit
+          retries = 0;
+        }
         loadedSrc = '';
         scheduleRetry();
       });

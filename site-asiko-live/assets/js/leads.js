@@ -22,6 +22,17 @@
 
 var CRM_ENDPOINT = ""; // <-- paste your marky.ai / CRM webhook URL here
 var CRM_NOTIFY_EMAIL = "john.upah@mediaiconsltd.com";
+var CRM_WHATSAPP = "2348035382590"; // international format, no +
+
+// Most visitors are on phones without a mail app set up, so every submission
+// also gets a one-tap WhatsApp route carrying the same details.
+function asikoBuildWhatsApp(lead){
+  var lines = ["Hello Asiko TV — " + lead.formType];
+  Object.keys(lead.fields).forEach(function(k){
+    if(lead.fields[k]) lines.push(k + ": " + lead.fields[k]);
+  });
+  return "https://wa.me/" + CRM_WHATSAPP + "?text=" + encodeURIComponent(lines.join("\n"));
+}
 
 var ASIKO_LEADS_KEY = "__asikoSessionLeads";
 window[ASIKO_LEADS_KEY] = window[ASIKO_LEADS_KEY] || [];
@@ -58,7 +69,9 @@ function submitLead(formType, fields, onDone){
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(lead)
     }).then(function(res){
-      onDone && onDone({ ok: res.ok, mode: "backend", lead: lead });
+      onDone && (res.ok
+        ? onDone({ ok: true, mode: "backend", lead: lead })
+        : onDone({ ok: true, mode: "mailto", lead: lead, mailto: asikoBuildMailto(lead) }));
     }).catch(function(){
       onDone && onDone({ ok: true, mode: "mailto", lead: lead, mailto: asikoBuildMailto(lead) });
     });
@@ -98,6 +111,19 @@ function asikoBindForm(formEl, formType, opts){
         document.body.appendChild(link);
         link.click();
         link.remove();
+      }
+
+      if(result.mode === "mailto"){
+        var wa = asikoBuildWhatsApp(result.lead);
+        var host = opts.successEl || formEl.parentNode;
+        var old = host.querySelector(".wa-fallback"); if(old) old.remove();
+        var p = document.createElement("p");
+        p.className = "wa-fallback";
+        p.style.marginTop = "14px";
+        p.innerHTML = 'No email window opened? <a class="btn btn-gold btn-sm" target="_blank" rel="noopener">Send it on WhatsApp instead</a>';
+        p.querySelector("a").href = wa;
+        host.appendChild(p);
+        if(!opts.successEl){ formEl.parentNode.insertBefore(p, formEl.nextSibling); }
       }
 
       formEl.reset();
