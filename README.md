@@ -54,8 +54,9 @@ site-mediaiconsafrica/ mediaiconsafrica.com — the Media Icons Africa group sit
 
 Each channel runs on Eyevinn Channel Engine in **WebHook** mode and asks the
 **Asiko Scheduler** (`scheduler/`) what to play next. Content comes straight from
-Bunny Stream — one collection per channel — so uploading to a collection is all it
-takes to put programmes on air. The scheduler skips broken files, falls back to a
+Bunny Stream — one collection per channel. The *Sync channels from Bunny* workflow
+publishes each channel's playlist every 10 minutes, so uploading to a collection is
+all it takes to put programmes on air. The scheduler skips broken files, falls back to a
 slate, inserts house-ad pre-rolls, keeps a proof-of-play log and serves the real TV
 guide. See `scheduler/README.md` and `ops/FRIDAY-UPLOAD-RUNBOOK.md`.
 

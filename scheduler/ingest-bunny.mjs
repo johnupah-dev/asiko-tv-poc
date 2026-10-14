@@ -10,15 +10,21 @@
      node ingest-bunny.mjs --dry         # report only (recommended first)
      node ingest-bunny.mjs --probe       # also load and measure every video
      node ingest-bunny.mjs               # write playlists/<channel>.json
+     node ingest-bunny.mjs --out DIR --report FILE.md   # used by the sync workflow
 
    Matching and ordering rules: see lib/bunny.mjs. */
 
 import { writeFile, mkdir } from 'node:fs/promises';
+import { pathToFileURL } from 'node:url';
 import { buildPlaylists } from './lib/bunny.mjs';
 import { loadLineup } from './lib/lineup.mjs';
 
 const env = process.env;
-const DRY = process.argv.includes('--dry');
+const argv = process.argv.slice(2);
+const DRY = argv.includes('--dry');
+const opt = (name) => { const i = argv.indexOf(name); return i >= 0 ? argv[i + 1] : null; };
+const OUT = opt('--out');
+const REPORT = opt('--report');
 for (const k of ['BUNNY_LIBRARY_ID', 'BUNNY_API_KEY', 'BUNNY_CDN_HOST']) {
   if (!env[k]) { console.error(`Set ${k} first.`); process.exit(1); }
 }
@@ -30,7 +36,7 @@ const { playlists, report, unmatched, skipped } = await buildPlaylists({
   cdnHost: env.BUNNY_CDN_HOST,
   apiBase: env.BUNNY_API_BASE,
   lineup,
-  probe: process.argv.includes('--probe'),
+  probe: argv.includes('--probe'),
 });
 
 for (const s of skipped) console.log(`  skipped ${s}`);
@@ -43,8 +49,23 @@ const thin = report.filter((r) => r.videos && r.hours < 6);
 if (thin.length) console.log(`Under 6 hours of content (will repeat often): ${thin.map((r) => r.channel).join(', ')}`);
 
 if (!DRY) {
-  const dir = new URL('./playlists/', import.meta.url);
+  const dir = OUT ? pathToFileURL(OUT.replace(/\/?$/, '/')) : new URL('./playlists/', import.meta.url);
   await mkdir(dir, { recursive: true });
   for (const [id, doc] of playlists) if (doc.items.length) await writeFile(new URL(`${id}.json`, dir), JSON.stringify(doc, null, 2) + '\n');
 }
-console.log(DRY ? 'Dry run — nothing written.' : `Wrote ${[...playlists.values()].filter((d) => d.items.length).length} playlist(s) to scheduler/playlists/.`);
+if (REPORT) {
+  const md = [
+    `# Channel content — ${new Date().toISOString()}`,
+    '',
+    '| # | Channel | Bunny collection | Titles | Hours | Skipped |',
+    '|---|---|---|---|---|---|',
+    ...report.map((r) => `| ${r.num} | ${r.channel} | ${r.collection} | ${r.videos} | ${r.hours} | ${r.skipped} |`),
+    '',
+    skipped.length ? `**Skipped files**\n\n${skipped.map((s) => `- ${s}`).join('\n')}\n` : '',
+    empty.length ? `**No content yet (Coming soon):** ${empty.join(', ')}\n` : '',
+    unmatched.length ? `**Collections matching no channel — rename them:** ${unmatched.join(', ')}\n` : '',
+    thin.length ? `**Under 6 hours (will repeat often):** ${thin.map((r) => r.channel).join(', ')}\n` : '',
+  ].join('\n');
+  await writeFile(REPORT, md);
+}
+console.log(DRY ? 'Dry run — nothing written.' : `Wrote ${[...playlists.values()].filter((d) => d.items.length).length} playlist(s) to ${OUT || 'scheduler/playlists/'}.`);

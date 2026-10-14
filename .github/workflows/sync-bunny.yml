@@ -1,0 +1,71 @@
+name: Sync channels from Bunny
+
+# Every 10 minutes (and on demand): reads every Bunny Stream collection, checks
+# each finished video actually plays, and publishes one playlist per channel to
+# the `channel-playlists` branch. The Asiko Scheduler reads them from there, so
+# uploading to a channel's collection is all it takes to put it on air.
+# Nothing here deploys the website.
+#
+# Needs (Settings > Secrets and variables > Actions):
+#   secret   BUNNY_API_KEY     Bunny Stream library API key
+#   variable BUNNY_LIBRARY_ID  Bunny Stream library ID
+#   variable BUNNY_CDN_HOST    e.g. vz-bb76db1f-290.b-cdn.net
+on:
+  schedule:
+    - cron: '3-59/10 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-bunny
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Skip until Bunny is configured
+        id: cfg
+        env:
+          KEY: ${{ secrets.BUNNY_API_KEY }}
+          LIB: ${{ vars.BUNNY_LIBRARY_ID }}
+          CDN: ${{ vars.BUNNY_CDN_HOST }}
+        run: |
+          if [ -n "$KEY" ] && [ -n "$LIB" ] && [ -n "$CDN" ]; then echo "ready=true" >> "$GITHUB_OUTPUT"
+          else echo "ready=false" >> "$GITHUB_OUTPUT"; echo "Bunny secret/variables not set yet — nothing to do." >> "$GITHUB_STEP_SUMMARY"; fi
+      - name: Build playlists from Bunny (every video checked)
+        if: steps.cfg.outputs.ready == 'true'
+        env:
+          BUNNY_API_KEY: ${{ secrets.BUNNY_API_KEY }}
+          BUNNY_LIBRARY_ID: ${{ vars.BUNNY_LIBRARY_ID }}
+          BUNNY_CDN_HOST: ${{ vars.BUNNY_CDN_HOST }}
+        run: node scheduler/ingest-bunny.mjs --probe --out "$RUNNER_TEMP/out" --report "$RUNNER_TEMP/out/REPORT.md"
+      - name: Publish to the channel-playlists branch
+        if: steps.cfg.outputs.ready == 'true'
+        run: |
+          cat "$RUNNER_TEMP/out/REPORT.md" >> "$GITHUB_STEP_SUMMARY"
+          git config user.name "asiko-sync"
+          git config user.email "asiko-sync@users.noreply.github.com"
+          if git ls-remote --exit-code --heads origin channel-playlists >/dev/null; then
+            git fetch --depth 1 origin channel-playlists
+            git worktree add "$RUNNER_TEMP/pub" origin/channel-playlists
+            git -C "$RUNNER_TEMP/pub" checkout -B channel-playlists
+          else
+            git worktree add --detach "$RUNNER_TEMP/pub"
+            git -C "$RUNNER_TEMP/pub" checkout --orphan channel-playlists
+          fi
+          cd "$RUNNER_TEMP/pub"
+          git rm -rq --ignore-unmatch .
+          cp "$RUNNER_TEMP"/out/*.json "$RUNNER_TEMP/out/REPORT.md" . 2>/dev/null || true
+          git add -A
+          # updatedAt changes every run; only publish when the content itself changed
+          if git diff --cached --quiet -I '"updatedAt"' -I '^# Channel content'; then echo "No content change."; exit 0; fi
+          git commit -qm "Channel playlists $(date -u +%FT%TZ)"
+          git push -q origin channel-playlists

@@ -8,19 +8,24 @@
      GET /health               service + per-channel playlist health
      POST /reload              re-read playlists now (needs ADMIN_KEY)
 
-   Environment
+   Settings come from config.json (committed, no secrets) and can be overridden
+   by environment variables — so the service runs on any host with no secret store.
+
+   config.json / environment
+     playlistBase    / PLAYLIST_BASE  URL; <base>/<channel>.json is each channel's
+                     playlist (published by the "Sync channels from Bunny" workflow)
+     slate.hlsUrl    / SLATE_URL      HLS VOD aired when a channel has nothing playable
+     slate.title     / SLATE_TITLE
+     slate.durationSec / SLATE_DURATION
+
+   Environment only
      PORT            default 8080
      PLAYLIST_DIR    default ./playlists      (one <channel>.json per channel)
-     PLAYLIST_BASE   optional URL; <base>/<channel>.json overrides disk copies,
-                     so playlists can change without redeploying this service
      BUNNY_LIBRARY_ID, BUNNY_API_KEY, BUNNY_CDN_HOST
                      when set, channels are pulled straight from Bunny Stream
                      collections on every reload (upload -> on air in minutes);
                      a failed pull keeps the last good playlists
      ADS_FILE        default ./ads.json
-     SLATE_URL       HLS VOD played when a channel has nothing playable
-     SLATE_TITLE     default "Asiko TV — back shortly"
-     SLATE_DURATION  seconds, default 60
      ADMIN_KEY       required for POST /reload
      RELOAD_MIN      minutes between automatic playlist reloads, default 5 */
 
@@ -46,17 +51,20 @@ async function readJson(file, fallback) {
   try { return JSON.parse(await readFile(file, 'utf8')); } catch { return fallback; }
 }
 
-const ads = await readJson(ADS_FILE, null);
-const slate = env.SLATE_URL
-  ? { title: env.SLATE_TITLE || 'Asiko TV — back shortly', hlsUrl: env.SLATE_URL, durationSec: Number(env.SLATE_DURATION || 60) }
+const conf = await readJson(path.join(here, 'config.json'), {});
+const PLAYLIST_BASE = (env.PLAYLIST_BASE ?? conf.playlistBase ?? '').replace(/\/$/, '');
+const slateUrl = env.SLATE_URL || conf.slate?.hlsUrl;
+const slate = slateUrl
+  ? { title: env.SLATE_TITLE || conf.slate?.title || 'Asiko TV — back shortly', hlsUrl: slateUrl, durationSec: Number(env.SLATE_DURATION || conf.slate?.durationSec || 60) }
   : null;
+const ads = await readJson(ADS_FILE, null);
 
 const sched = new Scheduler({ check: (url) => probe(url), slate, ads });
 
 async function remotePlaylist(id) {
-  if (!env.PLAYLIST_BASE) return null;
+  if (!PLAYLIST_BASE) return null;
   try {
-    const res = await fetch(`${env.PLAYLIST_BASE.replace(/\/$/, '')}/${id}.json`, { signal: AbortSignal.timeout(8000) });
+    const res = await fetch(`${PLAYLIST_BASE}/${id}.json`, { signal: AbortSignal.timeout(8000), headers: { 'cache-control': 'no-cache' } });
     return res.ok ? await res.json() : null;
   } catch { return null; }
 }

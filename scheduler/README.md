@@ -9,7 +9,7 @@ and, along the way:
 | Job | How |
 |---|---|
 | Multi-title channels | Rotates through the channel's playlist (one Bunny collection per channel) |
-| Upload → on air | Pulls Bunny Stream every 5 minutes when `BUNNY_*` is set; no redeploy, no commit |
+| Upload → on air | Bunny collections → sync workflow (every 10 min) → scheduler (every 5 min); no redeploy |
 | Never dead air | Checks each video before airing it and skips broken ones; slate when nothing is playable |
 | Survives restarts | Starts each channel at a wall-clock position, not item 1 |
 | Real TV guide | `/epg` and `/epg/<channel>` from what actually aired plus the rotation ahead |
@@ -26,17 +26,30 @@ PLAYLIST_DIR=playlists npm start
 curl localhost:8080/health
 ```
 
+## How content reaches the scheduler
+
+1. Team uploads to Bunny Stream — one collection per channel.
+2. GitHub Actions **Sync channels from Bunny** (every 10 min) reads every collection,
+   loads every finished video to make sure it plays, and publishes one playlist per
+   channel to the `channel-playlists` branch, with a `REPORT.md` of what will air
+   and what was skipped. The Bunny key lives only in GitHub's encrypted secrets.
+3. The scheduler reads those playlists every 5 minutes (`playlistBase` in
+   `config.json`). No secrets on the scheduler host, nothing to redeploy.
+
+The scheduler can also pull Bunny directly if `BUNNY_LIBRARY_ID`, `BUNNY_API_KEY`
+and `BUNNY_CDN_HOST` are set in its environment.
+
 ## Deploy (Eyevinn OSC — My Apps)
 
-Node.js app, `subPath: scheduler`. Parameter store values:
+Node.js app from this repo, `subPath: scheduler`. No parameter store needed —
+settings are in `config.json`:
 
-| Name | Value | Secret? |
-|---|---|---|
-| `BUNNY_LIBRARY_ID` | Bunny Stream library ID | no |
-| `BUNNY_CDN_HOST` | e.g. `vz-xxxx-xxx.b-cdn.net` | no |
-| `BUNNY_API_KEY` | Bunny Stream library API key — enter it yourself in the OSC dashboard | **yes** |
-| `SLATE_URL` | HLS VOD to air when a channel has nothing playable | no |
-| `ADMIN_KEY` | any long random string, for `POST /reload` | **yes** |
+| Setting | Meaning |
+|---|---|
+| `playlistBase` | where the sync workflow publishes playlists |
+| `slate.hlsUrl` | HLS VOD aired when a channel has nothing playable |
+
+Optional environment: `ADMIN_KEY` (enables `POST /reload`), `RELOAD_MIN`.
 
 ## Content rules (Bunny)
 

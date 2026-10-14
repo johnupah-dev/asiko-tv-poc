@@ -16,9 +16,9 @@ Eyevinn and GitHub connections.
 | 1 | Merge the pull request once its checks are green. Nothing changes on asiko.africa yet (Coming soon and the live guide stay switched off). | John |
 | 2 | **Bunny library settings** (Stream → library → Encoding): enable exactly **360p, 480p and 720p**, nothing else. Every video must get the *same* quality ladder or channels can stall when one programme ends and the next begins. | Team |
 | 3 | In the same library, create **one collection per channel** you will launch, named exactly as on asiko.africa (e.g. `Tattase TV`, `Estate TV`, `LN247`). | Team |
-| 4 | Make a 30–60 second **"Asiko TV — back shortly"** video, upload it to Bunny (outside the channel collections) and copy its HLS link. This is the slate. | Team |
-| 5 | In the Eyevinn OSC dashboard → parameter store for the scheduler, enter `BUNNY_API_KEY` (Bunny → library → API) and `ADMIN_KEY` yourself. Never paste keys into chat or GitHub. | John |
-| 6 | Deploy the scheduler with the library ID, CDN host and slate link; confirm `/health` answers. | Claude |
+| 4 | Make a 30–60 second **"Asiko TV — back shortly"** video, upload it to Bunny (outside the channel collections) and send Claude its HLS link. This is the slate (until then the current network-feed video is used). | Team |
+| 5 | GitHub → asiko-tv-poc → Settings → Secrets and variables → Actions: add **secret** `BUNNY_API_KEY` (Bunny → Stream library → API) and **variables** `BUNNY_LIBRARY_ID` and `BUNNY_CDN_HOST` (`vz-bb76db1f-290.b-cdn.net`). Never paste the key into chat. | John |
+| 6 | Run **Actions → Sync channels from Bunny → Run workflow** once; its summary shows what each channel will air. Claude confirms the scheduler picks the playlists up (`/health`). | John + Claude |
 
 ## Friday morning — upload
 
@@ -29,8 +29,9 @@ Eyevinn and GitHub connections.
    - Name files `01 Title`, `02 Title` … to set the running order
    - **Rights:** only titles Media Icons owns or has a signed licence for
 8. Wait until Bunny shows every video as **Finished** — unfinished videos are not aired.
-9. **Pre-air report** (Claude): per channel, how many titles and hours, which files were
-   skipped and why, any collection whose name matches no channel. Fix and re-check.
+9. **Pre-air report:** the *Sync channels from Bunny* run summary (and `REPORT.md` on the
+   `channel-playlists` branch) lists, per channel, titles, hours and every skipped file
+   with the reason, plus any collection whose name matches no channel. Fix and re-run.
 
 ## Friday — go live, one channel first
 
@@ -48,8 +49,9 @@ Eyevinn and GitHub connections.
 
 ## After go-live
 
-- **Adding programmes:** upload to the channel's Bunny collection. On air within about
-  5 minutes of Bunny finishing — no code, no deploy.
+- **Adding programmes:** upload to the channel's Bunny collection. In the rotation within
+  about 15 minutes of Bunny finishing (sync every 10 min + scheduler reload every 5) —
+  no code, no deploy.
 - **Removing a title:** delete it from the collection.
 - **A new channel:** create its collection and upload; then Claude creates its playout
   channel and adds its link (steps 10–12 for that channel).
@@ -65,5 +67,5 @@ Eyevinn and GitHub connections.
 | One video is corrupt | Skipped; listed under the channel in `/health` and the monitor report | Re-upload it |
 | A whole channel's feed fails | Viewers on that channel see the Asiko network feed within seconds; the site retries the channel every minute | Check the monitor issue; Claude restarts or recreates that channel |
 | Scheduler down | Channel Engine plays its slate | Claude restarts the scheduler app on OSC |
-| Bunny API unreachable | Scheduler keeps the last good playlists | Nothing — it recovers on the next pull |
+| Bunny or GitHub unreachable | Scheduler keeps the last good playlists | Nothing — it recovers on the next sync |
 | Bad release of the site | — | Revert the last merge on GitHub; the deploy re-runs with the previous version |
