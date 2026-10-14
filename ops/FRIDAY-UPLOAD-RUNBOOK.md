@@ -15,7 +15,7 @@ Eyevinn and GitHub connections.
 |---|---|---|
 | 1 | Merge the pull request once its checks are green. Nothing changes on asiko.africa yet (Coming soon and the live guide stay switched off). | John |
 | 2 | **Bunny library settings** (Stream → library → Encoding): enable exactly **360p, 480p and 720p**, nothing else. Every video must get the *same* quality ladder or channels can stall when one programme ends and the next begins. | Team |
-| 3 | In the same library, create **one collection per channel** you will launch, named exactly as on asiko.africa (e.g. `Tattase TV`, `Estate TV`, `LN247`). | Team |
+| 3 | **One collection per channel:** run *Actions → Create Bunny channel collections* once (after step 5) — it creates all 29, named as on asiko.africa. | Claude |
 | 4 | Make a 30–60 second **"Asiko TV — back shortly"** video, upload it to Bunny (outside the channel collections) and send Claude its HLS link. This is the slate (until then the current network-feed video is used). | Team |
 | 5 | GitHub → asiko-tv-poc → Settings → Secrets and variables → Actions: add **secret** `BUNNY_API_KEY` (Bunny → Stream library → API) and **variables** `BUNNY_LIBRARY_ID` and `BUNNY_CDN_HOST` (`vz-bb76db1f-290.b-cdn.net`). Never paste the key into chat. | John |
 | 6 | Run **Actions → Sync channels from Bunny → Run workflow** once; its summary shows what each channel will air. Claude confirms the scheduler picks the playlists up (`/health`). | John + Claude |

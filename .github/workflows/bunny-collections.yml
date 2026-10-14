@@ -1,0 +1,24 @@
+name: Create Bunny channel collections
+
+# Run by hand (Actions -> this workflow -> Run workflow). Creates one Bunny Stream
+# collection per Asiko channel that doesn't have one yet. Safe to re-run.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  create:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Create missing collections
+        env:
+          BUNNY_API_KEY: ${{ secrets.BUNNY_API_KEY }}
+          BUNNY_LIBRARY_ID: ${{ vars.BUNNY_LIBRARY_ID }}
+        run: node scheduler/create-collections.mjs
