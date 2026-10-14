@@ -13,3 +13,6 @@ playout/playout.json
 # bunny credentials - never commit
 bunny.env
 bunny.env.*
+
+# on-air monitor output
+ops/on-air-report.md

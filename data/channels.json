@@ -1,6 +1,8 @@
 {
   "network": "ASIKO TV",
   "networkFeed": "https://johnupahsw.ce.prod-se.osaas.io/channels/mychannel/master.m3u8",
+  "comingSoon": false,
+  "epgUrl": "",
   "sections": [
     {
       "id": "flagship",

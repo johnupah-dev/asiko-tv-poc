@@ -50,6 +50,28 @@ site-asiko-live/      asiko.live marketing / sales site (separate static site)
 site-mediaiconsafrica/ mediaiconsafrica.com — the Media Icons Africa group site
 ```
 
+## Production playout (from Oct 2026)
+
+Each channel runs on Eyevinn Channel Engine in **WebHook** mode and asks the
+**Asiko Scheduler** (`scheduler/`) what to play next. Content comes straight from
+Bunny Stream — one collection per channel — so uploading to a collection is all it
+takes to put programmes on air. The scheduler skips broken files, falls back to a
+slate, inserts house-ad pre-rolls, keeps a proof-of-play log and serves the real TV
+guide. See `scheduler/README.md` and `ops/FRIDAY-UPLOAD-RUNBOOK.md`.
+
+In `data/channels.json`:
+
+- `src` — a channel's own playback link. If it fails, viewers get the network feed
+  within seconds and the channel is retried every minute.
+- `comingSoon: true` — channels without a `src` are labelled *Coming soon* (they still
+  play the network feed).
+- `epgUrl` — the scheduler's URL; the TV guide and now/next then show what is really
+  airing. Without it, the typed `programs` schedule is used.
+
+`ops/check-on-air.mjs` runs every 10 minutes (`.github/workflows/on-air-monitor.yml`)
+and raises a GitHub issue when the site, the network feed, a channel or the scheduler
+is down. Pull requests run `.github/workflows/ci.yml` (site build + scheduler tests).
+
 ## Run it locally
 
 ```bash

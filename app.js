@@ -32,7 +32,15 @@
 
   /* ---------- playback ---------- */
   const HLS_JS = !!(window.Hls && window.Hls.isSupported());
-  const srcOf = (ch) => ch.src || CFG.networkFeed;
+  // A channel with its own feed plays it; a channel without one carries the
+  // network feed. If its own feed keeps failing, the viewer falls back to the
+  // network feed for a minute and then tries the channel again — never a black screen.
+  const fallbackUntil = {};
+  const hasOwnFeed = (ch) => !!ch.src;
+  const isSoon = (ch) => !ch.src && !ch.live && CFG.comingSoon === true;
+  const onFallback = (ch) => hasOwnFeed(ch) && (fallbackUntil[ch.id] || 0) > Date.now();
+  const srcOf = (ch) => (hasOwnFeed(ch) && !onFallback(ch) ? ch.src : CFG.networkFeed);
+  let recheckTimer = 0;
 
   function setLoading(msg, ch) {
     loadingText.textContent = msg;
@@ -45,7 +53,18 @@
   function scheduleRetry() {
     clearTimeout(retryTimer);
     retries++;
-    setLoading('Reconnecting…', CH[current]);
+    const ch = CH[current];
+    if (hasOwnFeed(ch) && !onFallback(ch) && retries >= 3) {
+      // own feed down: show the network feed now, try the channel again in 60s
+      fallbackUntil[ch.id] = Date.now() + 60000;
+      retries = 0;
+      setLoading('Reconnecting this channel — showing Asiko TV meanwhile', ch);
+      clearTimeout(recheckTimer);
+      recheckTimer = setTimeout(() => { if (CH[current] === ch) loadSource(ch, true); }, 61000);
+      loadSource(ch, true);
+      return;
+    }
+    setLoading('Reconnecting…', ch);
     // 2s, 4s, 8s … capped at 30s
     retryTimer = setTimeout(() => loadSource(CH[current], true), Math.min(30000, 1000 * Math.pow(2, retries)));
   }
@@ -66,6 +85,9 @@
         if (!data || !data.fatal) return;
         if (data.type === window.Hls.ErrorTypes.MEDIA_ERROR) { hls.recoverMediaError(); return; }
         loadedSrc = '';
+        // a 4xx on a channel's own feed won't fix itself in seconds: fall back at once
+        const code = data.response && data.response.code;
+        if (code >= 400 && code < 500 && hasOwnFeed(CH[current]) && !onFallback(CH[current])) retries = Math.max(retries, 2);
         scheduleRetry();
       });
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
@@ -112,7 +134,40 @@
     d.setMinutes(mins);
     return d;
   }
-  const nowLabel = (ch, date) => (ch.live ? '● LIVE · ' + (ch.liveTitle || ch.name) : scheduleAt(ch, date).title);
+  /* Real guide data from the Asiko Scheduler (CFG.epgUrl). Channels without
+     it — or when the scheduler is unreachable — use the typed schedule above. */
+  const EPG = {};
+  async function refreshEpg() {
+    if (!CFG.epgUrl) return;
+    const base = CFG.epgUrl.replace(/\/$/, '');
+    await Promise.all(CH.filter(hasOwnFeed).map(async (ch) => {
+      try {
+        const res = await fetch(`${base}/epg/${encodeURIComponent(ch.id)}?hours=4`, { cache: 'no-store' });
+        if (!res.ok) return;
+        const g = await res.json();
+        if (Array.isArray(g.programmes) && g.programmes.length) EPG[ch.id] = { at: Date.now(), programmes: g.programmes };
+      } catch (e) { /* keep the last good guide */ }
+    }));
+    updateLowerThird();
+    renderGuide();
+  }
+  function liveSlot(ch, date) {
+    const g = EPG[ch.id];
+    if (!g || Date.now() - g.at > 15 * 60000) return null;
+    const t = date.getTime();
+    const i = g.programmes.findIndex((p) => p.start <= t && t < p.end);
+    if (i < 0) return null;
+    const p = g.programmes[i];
+    const n = g.programmes[i + 1];
+    return { title: p.title, start: p.start, end: p.end, nextTitle: n ? n.title : '', nextAt: n ? n.start : p.end };
+  }
+  const msToClock = (ms) => { const d = new Date(ms); return `${fmt2(d.getHours())}:${fmt2(d.getMinutes())}`; };
+  const nowLabel = (ch, date) => {
+    if (ch.live) return '● LIVE · ' + (ch.liveTitle || ch.name);
+    if (isSoon(ch)) return 'Coming soon';
+    const l = liveSlot(ch, date);
+    return l ? l.title : scheduleAt(ch, date).title;
+  };
 
   /* ---------- logos ---------- */
   function initials(name) {
@@ -131,7 +186,7 @@
     railEl.innerHTML = '';
     CH.forEach((ch, idx) => {
       const b = document.createElement('button');
-      b.className = 'ch' + (ch.live ? ' is-live-ch' : '');
+      b.className = 'ch' + (ch.live ? ' is-live-ch' : '') + (isSoon(ch) ? ' is-soon' : '');
       b.type = 'button';
       b.setAttribute('aria-label', `Channel ${ch.num}: ${ch.name}`);
       if (ch.accent) b.style.setProperty('--ch', ch.accent);
@@ -161,6 +216,11 @@
       el.setAttribute('aria-current', on ? 'true' : 'false');
       if (on) el.scrollIntoView({ block: 'nearest', inline: 'nearest' });
     });
+    retries = 0;
+    clearTimeout(recheckTimer);
+    if (onFallback(ch)) {
+      recheckTimer = setTimeout(() => { if (CH[current] === ch) loadSource(ch, true); }, fallbackUntil[ch.id] - Date.now() + 1000);
+    }
     if (srcOf(ch) !== loadedSrc) setLoading('Tuning…', ch);
     loadSource(ch);
     updateLowerThird();
@@ -178,15 +238,24 @@
       $('#nowTitle').textContent = cur.liveTitle || cur.name;
       $('#nowProgress').textContent = '';
       $('#nextRow').hidden = true;
+    } else if (isSoon(cur)) {
+      tag.textContent = 'SOON';
+      tag.classList.remove('is-live');
+      $('#nowTitle').textContent = `${cur.name} — coming soon to Asiko TV`;
+      $('#nowProgress').textContent = '';
+      $('#nextRow').hidden = false;
+      $('#nextTitle').textContent = `Now showing: ${CFG.network || 'Asiko TV'}`;
+      $('#nextTime').textContent = '';
     } else {
-      const s = scheduleAt(cur, now);
+      const l = liveSlot(cur, now);
+      const s = l ? null : scheduleAt(cur, now);
       tag.textContent = 'NOW';
       tag.classList.remove('is-live');
       $('#nextRow').hidden = false;
-      $('#nowTitle').textContent = s.title;
-      $('#nextTitle').textContent = s.nextTitle;
-      $('#nextTime').textContent = 'at ' + minToClock(s.nextAtMin);
-      $('#nowProgress').textContent = `${minToClock(s.startMin)}–${minToClock(s.endMin)}`;
+      $('#nowTitle').textContent = l ? l.title : s.title;
+      $('#nextTitle').textContent = l ? (l.nextTitle || '—') : s.nextTitle;
+      $('#nextTime').textContent = 'at ' + (l ? msToClock(l.nextAt) : minToClock(s.nextAtMin));
+      $('#nowProgress').textContent = l ? `${msToClock(l.start)}–${msToClock(l.end)}` : `${minToClock(s.startMin)}–${minToClock(s.endMin)}`;
     }
     [...railEl.children].forEach((el, idx) => {
       el.querySelector('[data-now]').textContent = nowLabel(CH[idx], now);
@@ -216,11 +285,36 @@
 
       const track = document.createElement('div');
       track.className = 'guide-track';
+      const winStartMs = minToDate(now, winStart).getTime();
+      const winEndMs = winStartMs + WIN * 60000;
+      const real = EPG[ch.id] && Date.now() - EPG[ch.id].at < 15 * 60000
+        ? EPG[ch.id].programmes.filter((p) => p.end > winStartMs && p.start < winEndMs) : [];
       if (ch.live) {
         const cell = document.createElement('div');
         cell.className = 'guide-prog is-on is-live';
         cell.innerHTML = `<b>● LIVE · ${esc(ch.liveTitle || ch.name)}</b><span>Live event coverage</span>`;
         track.appendChild(cell);
+      } else if (isSoon(ch)) {
+        const cell = document.createElement('div');
+        cell.className = 'guide-prog is-soon';
+        cell.innerHTML = '<b>Coming soon</b><span>Channel launching on Asiko TV</span>';
+        track.appendChild(cell);
+      } else if (real.length) {
+        const t = now.getTime();
+        real.forEach((p) => {
+          const a = Math.max(p.start, winStartMs);
+          const b = Math.min(p.end, winEndMs);
+          const cell = document.createElement('div');
+          cell.className = 'guide-prog' + (p.start <= t && t < p.end ? ' is-on' : '');
+          cell.style.flexGrow = String(Math.max(1, (b - a) / 60000));
+          if (ch.accent) cell.style.setProperty('--ch', ch.accent);
+          cell.innerHTML = `<b>${esc(p.title)}</b><span>${msToClock(p.start)}</span>`;
+          track.appendChild(cell);
+        });
+        const nl = document.createElement('div');
+        nl.className = 'guide-now';
+        nl.style.left = (((nowMin - winStart) / WIN) * 100) + '%';
+        track.appendChild(nl);
       } else {
         let cursor = winStart;
         let guard = 0;
@@ -391,6 +485,8 @@
     setInterval(tick, 1000);
     setInterval(updateLowerThird, 5000);
     setInterval(renderGuide, 30000);
+    refreshEpg();
+    setInterval(refreshEpg, 60000);
   }
 
   boot();
