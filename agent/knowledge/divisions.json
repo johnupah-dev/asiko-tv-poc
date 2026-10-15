@@ -1,0 +1,150 @@
+{
+  "_note": "The 12 divisions the agent works for. Edit this file to change what the agent knows and says. A division with \"confirmed\": false is never marketed, quoted or promised to the public until its details are filled in and the flag is set to true.",
+  "divisions": [
+    {
+      "id": "ad-sales-house",
+      "code": "CH 01",
+      "name": "Media Ad Sales House",
+      "confirmed": true,
+      "oneLiner": "We represent media houses, sourcing advertising and sponsorship as your outsourced sales team.",
+      "services": ["Outsourced advertising sales for TV, radio, digital and OOH owners", "Sponsorship sourcing and representation", "Rate cards built on real audience data", "Category-exclusive sponsorship packages"],
+      "audiences": ["Broadcasters and DSO channel owners", "Digital publishers and creators", "Brands and media buyers looking for inventory"],
+      "sites": ["https://www.mediaiconsafrica.com"],
+      "keywords": ["media sales", "ad sales Nigeria", "sponsorship", "rate card", "media buying"],
+      "hashtags": ["#MediaSales", "#AdSales", "#Sponsorship", "#NigerianMedia"]
+    },
+    {
+      "id": "fast-on-africa",
+      "code": "CH 02",
+      "name": "Fast on Africa",
+      "confirmed": true,
+      "oneLiner": "Build your TV station or launch a FAST channel — licensing, DSO and satellite carriage, playout and streaming. Launch · Distribute · Monetize.",
+      "services": ["Full TV station build: licensing, DSO distribution negotiation, studio build, staffing, house style", "FAST channel creation, management and playout", "DTH satellite option via Turksat and Nigcomsat", "Stream on Asiko TV or distribute anywhere — the channel owner owns the HLS feed, no lock-in", "Free test period for a FAST channel"],
+      "audiences": ["Broadcasters and operators", "Creators, churches and event owners", "Brands that want their own channel"],
+      "sites": ["https://www.fastonafrica.com"],
+      "keywords": ["FAST channel", "launch a TV channel", "TV station Nigeria", "playout", "DSO", "satellite TV"],
+      "hashtags": ["#FASTchannels", "#FastOnAfrica", "#LaunchDistributeMonetize"]
+    },
+    {
+      "id": "events-plus",
+      "code": "CH 03",
+      "name": "Events+",
+      "confirmed": true,
+      "oneLiner": "Sponsorship, streaming, marketing and PR for your event, from raising funds to going live.",
+      "services": ["Event sponsorship sourcing", "Live streaming and broadcast of events", "Event marketing and PR", "Turning an event into a pop-up FAST channel on Asiko TV"],
+      "audiences": ["Event owners and promoters", "Award shows, conferences, concerts, churches", "Brands sponsoring events"],
+      "sites": ["https://www.mediaiconsafrica.com"],
+      "keywords": ["event sponsorship", "event streaming", "event PR Lagos", "live stream event Nigeria"],
+      "hashtags": ["#EventsPlus", "#EventSponsorship", "#LiveStreaming"]
+    },
+    {
+      "id": "media-sales-academy",
+      "code": "CH 04",
+      "name": "Media Sales Academy",
+      "confirmed": true,
+      "oneLiner": "The DSO Money Bootcamp and Media Sales Mastery — training built on 30+ years in the field.",
+      "services": ["DSO Money Bootcamp", "Media Sales Mastery course", "Templates, certification and a graduate directory", "FAST channel training for creators"],
+      "audiences": ["Media sales executives and managers", "Channel owners who need to sell their own airtime", "Graduates entering media sales"],
+      "sites": ["https://www.mediaiconsafrica.com"],
+      "keywords": ["media sales training", "sales course Nigeria", "DSO", "media sales certification"],
+      "hashtags": ["#MediaSalesAcademy", "#DSOMoneyBootcamp", "#MediaSalesMastery"]
+    },
+    {
+      "id": "media-sales-conference",
+      "code": "CH 05",
+      "name": "Media Sales Conference",
+      "confirmed": true,
+      "oneLiner": "The annual gathering for 200+ media-sales directors — the industry's toughest questions, answered.",
+      "services": ["Annual conference for media-sales leaders", "Sponsorship and exhibition packages", "Speaking and panel slots"],
+      "audiences": ["Media-sales directors and heads of commercial", "Agencies and media buyers", "Sponsors who want to reach the people who sell media"],
+      "sites": ["https://www.mediaiconsafrica.com"],
+      "keywords": ["media sales conference", "media conference Lagos", "media industry Nigeria"],
+      "hashtags": ["#MediaSalesConference", "#MSC", "#NigerianMedia"]
+    },
+    {
+      "id": "sports-agency",
+      "code": "CH 06",
+      "name": "Sports Agency",
+      "confirmed": true,
+      "oneLiner": "Rights sourcing, sponsorship representation and content packaging for sports properties.",
+      "services": ["Sports rights sourcing", "Sponsorship representation for sports properties", "Sports content packaging", "Marketing consultancy — e.g. the Sportsville Special Recognition Awards ahead of 2027"],
+      "audiences": ["Sports federations, clubs, leagues and events", "Sports brands and sponsors", "Broadcasters looking for sports content"],
+      "sites": ["https://www.mediaiconsafrica.com"],
+      "keywords": ["sports marketing Nigeria", "sports sponsorship", "sports rights", "Sportsville Awards"],
+      "hashtags": ["#SportsMarketing", "#SportsvilleAwards", "#SportsBusiness"]
+    },
+    {
+      "id": "media-icons-digital",
+      "code": "CH 07",
+      "name": "Media Icons Digital",
+      "confirmed": true,
+      "oneLiner": "Social media, PR and digital marketing — the in-house agency for every division's clients.",
+      "services": ["Social media management", "PR and media relations", "Digital marketing and paid campaigns", "Monetisation of FAST channels built with Fast on Africa"],
+      "audiences": ["Brands and corporates", "Creators and channel owners", "Every other division's clients"],
+      "sites": ["https://www.mediaiconsafrica.com"],
+      "keywords": ["digital marketing Lagos", "social media agency Nigeria", "PR agency Lagos"],
+      "hashtags": ["#DigitalMarketing", "#MediaIconsDigital", "#PR"]
+    },
+    {
+      "id": "media-hands",
+      "code": "CH 08",
+      "name": "Media Hands",
+      "confirmed": true,
+      "oneLiner": "Recruitment and staffing for sales, production and on-air talent across the industry.",
+      "services": ["Recruitment of media-sales staff", "Production crew staffing", "On-air talent sourcing"],
+      "audiences": ["Broadcasters and production houses", "Agencies", "Media professionals looking for roles"],
+      "sites": ["https://www.mediaiconsafrica.com"],
+      "keywords": ["media jobs Nigeria", "media recruitment", "TV presenter jobs Lagos"],
+      "hashtags": ["#MediaHands", "#MediaJobs", "#Hiring"]
+    },
+    {
+      "id": "studio-iconia",
+      "code": "CH 09",
+      "name": "Studio Iconia",
+      "confirmed": true,
+      "oneLiner": "Production, dubbing and translation services from our in-house studio.",
+      "services": ["Video and TV production", "Dubbing", "Translation"],
+      "audiences": ["Channel owners", "Brands", "Distributors taking content into new languages"],
+      "sites": ["https://www.mediaiconsafrica.com"],
+      "keywords": ["production studio Lagos", "dubbing Nigeria", "translation subtitling Africa"],
+      "hashtags": ["#StudioIconia", "#Production", "#Dubbing"]
+    },
+    {
+      "id": "icons-books-research",
+      "code": "CH 10",
+      "name": "Icons Books & Research",
+      "confirmed": true,
+      "oneLiner": "Publishing, ghostwriting and commissioned research for media and Nollywood.",
+      "services": ["Book publishing", "Ghostwriting", "Commissioned media and Nollywood research", "Industry reports — e.g. The African FAST Platform Playbook"],
+      "audiences": ["Authors and executives", "Media companies and investors needing research", "Nollywood stakeholders"],
+      "sites": ["https://www.mediaiconsafrica.com"],
+      "keywords": ["publish a book Nigeria", "ghostwriting", "Nollywood research", "media research Africa"],
+      "hashtags": ["#IconsBooks", "#Publishing", "#MediaResearch"]
+    },
+    {
+      "id": "asiko-tv",
+      "code": "CH 11",
+      "name": "Asiko TV",
+      "confirmed": true,
+      "oneLiner": "Africa's free, ad-supported streaming TV — linear channels that keep Africa and its diaspora connected to home.",
+      "services": ["29 free live channels at asiko.africa — no subscription, no sign-up", "Category-exclusive sponsorship (one advertiser per sector) + programmatic", "List your channel on Asiko TV (asiko.live)", "Advertise on Asiko TV (asiko.live)"],
+      "audiences": ["Viewers in Africa and the diaspora (UK, US, Canada, EU)", "Advertisers — remittance, telecom, banking, travel, education", "Channel owners and creators"],
+      "sites": ["https://www.asiko.africa", "https://www.asiko.live"],
+      "socials": {"instagram": "https://instagram.com/Asikotv", "facebook": "https://facebook.com/Asikotv", "tiktok": "https://tiktok.com/@Asikotv", "x": "https://x.com/Asikotv"},
+      "keywords": ["Asiko TV", "free African TV", "Nollywood streaming free", "FAST Africa", "African diaspora TV"],
+      "hashtags": ["#AsikoTV", "#TheSoulOfAfrica", "#FreeAfricanTV", "#Nollywood"]
+    },
+    {
+      "id": "division-12",
+      "code": "CH 12",
+      "name": "Division 12 (name to confirm)",
+      "confirmed": false,
+      "oneLiner": "TO CONFIRM — the website lists 11 divisions; fill in the twelfth here and set confirmed to true.",
+      "services": [],
+      "audiences": [],
+      "sites": [],
+      "keywords": [],
+      "hashtags": []
+    }
+  ]
+}

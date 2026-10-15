@@ -1,0 +1,18 @@
+{
+  "name": "media-icons-agent",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Marketing & content agent for Media Icons Africa's divisions and John Upah: content, social/digital monitoring, enquiry handling.",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "bin": { "mia": "src/cli.js" },
+  "scripts": {
+    "start": "node src/server.js",
+    "cli": "node src/cli.js",
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.134.0",
+    "zod": "^4.6.7"
+  }
+}

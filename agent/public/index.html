@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Media Icons Agent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Poppins:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0e0c09; --surface:#1a1611; --surface-2:#242019; --line:rgba(245,239,227,.12);
+  --gold:#cd9c4c; --gold-bright:#f0c987; --cream:#f5efe3; --stone:#9a9385; --signal:#c1442b; --ok:#5fae6e;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--ink);color:var(--cream);font:15px/1.6 Poppins,system-ui,sans-serif;min-height:100vh}
+h1,h2,h3{font-family:Montserrat,sans-serif;font-weight:800;line-height:1.15}
+a{color:var(--gold-bright)}
+.mono{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em}
+header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:16px;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(14,12,9,.95);z-index:5}
+.brand{display:flex;gap:10px;align-items:center}
+.mark{width:32px;height:32px;border:1.5px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold-bright)}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav button{background:none;border:1px solid transparent;color:var(--stone);padding:7px 12px;border-radius:4px;font:500 13px Poppins,sans-serif;cursor:pointer}
+nav button[aria-selected=true]{color:var(--cream);border-color:var(--gold)}
+main{max-width:1100px;margin:0 auto;padding:24px 16px 64px}
+section{display:none}section.on{display:block}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;margin-bottom:16px}
+label{display:block;font-size:12px;color:var(--stone);margin:10px 0 4px;text-transform:uppercase;letter-spacing:.08em}
+input,select,textarea{width:100%;background:var(--surface-2);color:var(--cream);border:1px solid var(--line);border-radius:4px;padding:9px 10px;font:inherit}
+textarea{min-height:90px;resize:vertical}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.btn{background:var(--gold);color:#1c1408;border:0;border-radius:4px;padding:10px 18px;font:600 13px Poppins,sans-serif;cursor:pointer;margin-top:14px}
+.btn:disabled{opacity:.5;cursor:wait}
+.btn.ghost{background:none;color:var(--cream);border:1px solid var(--line)}
+.checks{display:flex;flex-wrap:wrap;gap:8px 16px}.checks label{display:flex;gap:6px;align-items:center;text-transform:none;letter-spacing:0;color:var(--cream);font-size:14px;margin:0}.checks input{width:auto}
+.out{white-space:normal;word-wrap:break-word}
+.out h2{font-size:18px;margin:18px 0 6px;color:var(--gold-bright)}.out h3{font-size:15px;margin:12px 0 4px}
+.out p{margin:6px 0}.out ul{margin:6px 0 6px 20px}.out hr{border:0;border-top:1px dashed var(--line);margin:16px 0}
+.out table{border-collapse:collapse;width:100%;font-size:13px;display:block;overflow-x:auto}.out td,.out th{border:1px solid var(--line);padding:5px 7px;text-align:left;vertical-align:top}
+.post{background:var(--surface-2);border-radius:8px;padding:14px;margin:12px 0}
+.tag{display:inline-block;font:11px 'JetBrains Mono',monospace;color:var(--gold-bright);border:1px solid rgba(205,156,76,.35);border-radius:20px;padding:1px 8px;margin-right:6px}
+.tag.red{color:#ffb3a3;border-color:rgba(193,68,43,.6)}.tag.green{color:#b6e3be;border-color:rgba(95,174,110,.6)}
+.copy{float:right;font-size:12px;background:none;border:1px solid var(--line);color:var(--stone);border-radius:4px;padding:2px 8px;cursor:pointer}
+.msg{margin:10px 0;padding:12px 14px;border-radius:8px;background:var(--surface-2)}.msg.user{background:rgba(205,156,76,.12)}
+.muted{color:var(--stone)}.card>p.muted{margin:4px 0 10px}.err{color:#ffb3a3}
+.enq{border-left:3px solid var(--gold)}.enq.esc{border-left-color:var(--signal)}
+@media (max-width:600px){header{position:static}.row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><div class="mark mono">MI</div><div><h1 style="font-size:16px">Media Icons Agent</h1><div class="mono muted">CONTENT · MONITOR · ENQUIRIES</div></div></div>
+  <nav role="tablist">
+    <button data-tab="ask" aria-selected="true">Ask</button>
+    <button data-tab="create">Create</button>
+    <button data-tab="calendar">Calendar</button>
+    <button data-tab="monitor">Monitor</button>
+    <button data-tab="enquiries">Enquiries</button>
+    <button data-tab="settings">Settings</button>
+  </nav>
+</header>
+<main>
+  <section id="ask" class="on">
+    <div class="card">
+      <h2 style="font-size:20px">Ask the agent</h2>
+      <p class="muted">Anything across the 12 divisions: "Draft 3 LinkedIn posts for John on why FAST is Africa's moment", "What are people saying about Asiko TV this week?", "Plan next week's content with a Sportsville focus".</p>
+      <div id="chatlog"></div>
+      <textarea id="chatin" placeholder="Type your request…"></textarea>
+      <button class="btn" id="chatgo">Send</button> <button class="btn ghost" id="chatclear">New conversation</button>
+    </div>
+  </section>
+
+  <section id="create">
+    <div class="card">
+      <h2 style="font-size:20px">Create content</h2>
+      <div class="row">
+        <div><label for="c-div">Division</label><select id="c-div"><option value="group">Media Icons Africa (group)</option></select></div>
+        <div><label for="c-persona">Voice</label><select id="c-persona"><option value="brand">Brand</option><option value="john-upah">John Upah (first person)</option></select></div>
+        <div><label for="c-n">Variations per platform</label><select id="c-n"><option>1</option><option>2</option><option>3</option></select></div>
+      </div>
+      <label>Platforms</label>
+      <div class="checks" id="c-platforms"></div>
+      <label for="c-brief">Brief</label>
+      <textarea id="c-brief" placeholder="What is it about, who is it for, what should they do?"></textarea>
+      <button class="btn" id="c-go">Write it</button>
+    </div>
+    <div id="c-out"></div>
+  </section>
+
+  <section id="calendar">
+    <div class="card">
+      <h2 style="font-size:20px">Content calendar</h2>
+      <p class="muted">Plans posts so every division and John Upah stay visible every week.</p>
+      <div class="row">
+        <div><label for="k-start">Start</label><input type="date" id="k-start"></div>
+        <div><label for="k-days">Days</label><input type="number" id="k-days" value="7" min="1" max="31"></div>
+      </div>
+      <label for="k-focus">Focus (optional)</label><input id="k-focus" placeholder="e.g. Sportsville Awards 2027 nominations open">
+      <button class="btn" id="k-go">Plan it</button>
+    </div>
+    <div class="card out" id="k-out" hidden></div>
+  </section>
+
+  <section id="monitor">
+    <div class="card">
+      <h2 style="font-size:20px">Media monitor</h2>
+      <p class="muted">News, feeds, our four websites, and a live web &amp; social search — turned into risks, opportunities and draft replies. Runs daily on GitHub Actions too.</p>
+      <div class="checks" style="margin-top:10px"><label><input type="checkbox" id="m-web" checked> Include live web &amp; social search</label></div>
+      <button class="btn" id="m-go">Run a sweep now</button> <button class="btn ghost" id="m-last">Show latest</button> <button class="btn ghost" id="m-sites">Check sites</button>
+    </div>
+    <div class="card out" id="m-out" hidden></div>
+  </section>
+
+  <section id="enquiries">
+    <div class="card">
+      <h2 style="font-size:20px">Enquiries</h2>
+      <p class="muted">Website forms and WhatsApp arrive here automatically. Paste emails, DMs or call notes below. Every reply is a draft until someone approves it.</p>
+      <div class="row">
+        <div><label for="e-ch">Channel</label><select id="e-ch"><option>email</option><option>whatsapp</option><option>instagram</option><option>facebook</option><option>x</option><option>linkedin</option><option>tiktok</option><option>phone</option><option>website</option><option>other</option></select></div>
+        <div><label for="e-from">From (email / phone / handle)</label><input id="e-from"></div>
+        <div><label for="e-name">Name</label><input id="e-name"></div>
+      </div>
+      <label for="e-msg">Message</label><textarea id="e-msg"></textarea>
+      <button class="btn" id="e-go">Triage &amp; draft reply</button>
+      <div class="row" style="margin-top:14px"><div><label for="e-filter">Show</label><select id="e-filter"><option value="">All</option><option value="drafted" selected>Waiting for approval</option><option value="approved">Approved</option><option value="sent">Sent</option><option value="error">Errors</option><option value="dismissed">Dismissed</option></select></div></div>
+    </div>
+    <div id="e-list"></div>
+  </section>
+
+  <section id="settings">
+    <div class="card">
+      <h2 style="font-size:20px">Settings</h2>
+      <label for="s-token">Admin token</label>
+      <input id="s-token" type="password" placeholder="AGENT_ADMIN_TOKEN (leave empty on localhost)">
+      <button class="btn" id="s-save">Save on this device</button>
+      <p class="muted" style="margin-top:12px">Edit what the agent knows in <span class="mono">agent/knowledge/</span> — divisions, brand voice, John Upah, house rules, watchlist — then reload.</p>
+      <button class="btn ghost" id="s-reload">Reload knowledge</button>
+      <div id="s-divs" class="out" style="margin-top:14px"></div>
+    </div>
+  </section>
+</main>
+<script>
+const PLATFORMS = ["instagram","facebook","x","linkedin","tiktok","youtube","whatsapp","email","blog","press-release"];
+const $ = (id) => document.getElementById(id);
+const store = { get(k){ try { return localStorage.getItem(k) || ""; } catch { return ""; } }, set(k,v){ try { localStorage.setItem(k,v); } catch {} } };
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+// Small, safe Markdown renderer: escape first, then format.
+function md(src){
+  const lines = esc(src).split("\n"); let html = "", list = false, table = [];
+  const inline = (t) => t.replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>").replace(/_(.+?)_/g,"<em>$1</em>")
+    .replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>')
+    .replace(/(^|\s)(https?:\/\/[^\s<]+)/g,'$1<a href="$2" target="_blank" rel="noopener">$2</a>');
+  const flushTable = () => { if (!table.length) return; html += "<table>" + table.filter(r => !/^\|[\s|:-]+\|$/.test(r)).map((r,i) => "<tr>" + r.slice(1,-1).split("|").map(c => i ? `<td>${inline(c.trim())}</td>` : `<th>${inline(c.trim())}</th>`).join("") + "</tr>").join("") + "</table>"; table = []; };
+  for (const l of lines){
+    if (/^\|.*\|$/.test(l.trim())) { table.push(l.trim()); continue; } else flushTable();
+    if (/^\s*[-*] /.test(l)) { if(!list){html+="<ul>";list=true;} html += `<li>${inline(l.replace(/^\s*[-*] /,""))}</li>`; continue; }
+    if (list){ html+="</ul>"; list=false; }
+    if (/^### /.test(l)) html += `<h3>${inline(l.slice(4))}</h3>`;
+    else if (/^##? /.test(l)) html += `<h2>${inline(l.replace(/^##? /,""))}</h2>`;
+    else if (/^---$/.test(l.trim())) html += "<hr>";
+    else if (/^&gt; /.test(l)) html += `<p class="muted">${inline(l.slice(5))}</p>`;
+    else if (l.trim()) html += `<p>${inline(l)}</p>`;
+  }
+  flushTable(); if (list) html += "</ul>";
+  return html;
+}
+
+async function api(path, { method = "GET", body } = {}){
+  const token = store.get("miaToken");
+  const res = await fetch(path, { method, headers: { "content-type": "application/json", ...(token ? { authorization: `Bearer ${token}` } : {}) }, body: body ? JSON.stringify(body) : undefined });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+  return data;
+}
+async function busy(btn, fn){ const t = btn.textContent; btn.disabled = true; btn.textContent = "Working…"; try { await fn(); } catch (e) { alert(e.message); } finally { btn.disabled = false; btn.textContent = t; } }
+
+// tabs
+document.querySelectorAll("nav button").forEach(b => b.onclick = () => {
+  document.querySelectorAll("nav button").forEach(x => x.setAttribute("aria-selected", x === b));
+  document.querySelectorAll("section").forEach(s => s.classList.toggle("on", s.id === b.dataset.tab));
+  if (b.dataset.tab === "enquiries") loadEnquiries();
+  if (b.dataset.tab === "settings") loadDivisions();
+});
+
+// ask
+let history = [];
+function renderChat(){ $("chatlog").innerHTML = history.map(m => `<div class="msg ${m.role} out">${m.role === "user" ? esc(m.content) : md(m.content)}</div>`).join(""); }
+$("chatgo").onclick = () => { const q = $("chatin").value.trim(); if (!q) return; history.push({ role: "user", content: q }); renderChat(); $("chatin").value = "";
+  busy($("chatgo"), async () => { try { const r = await api("/api/chat", { method: "POST", body: { messages: history } }); history.push({ role: "assistant", content: r.reply + (r.sources.length ? "\n\n**Sources**\n" + r.sources.map(s => `- ${s.url}`).join("\n") : "") }); } catch (e) { history.pop(); throw e; } finally { renderChat(); } }); };
+$("chatclear").onclick = () => { history = []; renderChat(); };
+
+// create
+$("c-platforms").innerHTML = PLATFORMS.map(p => `<label><input type="checkbox" value="${p}" ${["instagram","linkedin","x"].includes(p) ? "checked" : ""}> ${p}</label>`).join("");
+let divisionsLoaded = false;
+async function loadDivisions(){
+  const divs = await api("/api/divisions").catch(() => null); if (!divs) return;
+  if (!divisionsLoaded){ $("c-div").innerHTML += divs.filter(d => d.confirmed).map(d => `<option value="${esc(d.id)}">${esc(d.code)} · ${esc(d.name)}</option>`).join(""); divisionsLoaded = true; }
+  $("s-divs").innerHTML = "<table><tr><th>#</th><th>Division</th><th>Status</th></tr>" + divs.map(d => `<tr><td>${esc(d.code)}</td><td>${esc(d.name)}</td><td>${d.confirmed ? '<span class="tag green">live</span>' : '<span class="tag red">to confirm</span>'}</td></tr>`).join("") + "</table>";
+}
+$("c-go").onclick = () => busy($("c-go"), async () => {
+  const platforms = [...document.querySelectorAll("#c-platforms input:checked")].map(i => i.value);
+  const { posts } = await api("/api/content", { method: "POST", body: { divisionId: $("c-div").value, persona: $("c-persona").value, variations: +$("c-n").value, platforms, brief: $("c-brief").value } });
+  $("c-out").innerHTML = posts.map((p, i) => {
+    const text = [p.title, p.body, p.hashtags.join(" ")].filter(Boolean).join("\n\n");
+    return `<div class="card post"><button class="copy" data-copy="${esc(text)}">Copy</button><span class="tag">${esc(p.platform)}</span><span class="tag">${esc(p.divisionId)}</span><span class="tag">${esc(p.persona)}</span>
+      <div class="out">${p.title ? `<h3>${esc(p.title)}</h3>` : ""}${md(p.body)}<p class="muted">${esc(p.hashtags.join(" "))}</p>
+      <p><strong>CTA:</strong> ${esc(p.cta)} — ${md(p.link)}</p><p><strong>Visual:</strong> ${esc(p.visualBrief)}</p><p><strong>Post at:</strong> ${esc(p.bestTime)}</p>
+      ${p.toConfirm.length ? `<p class="err"><strong>Check before posting:</strong> ${esc(p.toConfirm.join("; "))}</p>` : ""}</div></div>`; }).join("");
+});
+document.addEventListener("click", (e) => { const t = e.target.closest("[data-copy]"); if (t) { navigator.clipboard?.writeText(t.dataset.copy); t.textContent = "Copied"; } });
+
+// calendar
+$("k-start").value = new Intl.DateTimeFormat("en-CA", { timeZone: "Africa/Lagos" }).format(new Date());
+$("k-go").onclick = () => busy($("k-go"), async () => {
+  const c = await api("/api/calendar", { method: "POST", body: { startDate: $("k-start").value, days: +$("k-days").value, focus: $("k-focus").value } });
+  let m = `## ${c.theme}\n`; for (const d of c.days){ m += `\n### ${d.date}\n| Division | Platform | Voice | Pillar | Idea | CTA |\n|---|---|---|---|---|---|\n` + d.items.map(i => `| ${i.divisionId} | ${i.platform} | ${i.persona} | ${i.pillar} | ${i.idea.replace(/\|/g,"/")} | ${i.cta.replace(/\|/g,"/")} |`).join("\n") + "\n"; }
+  if (c.notes.length) m += "\n### Notes\n" + c.notes.map(n => `- ${n}`).join("\n");
+  $("k-out").hidden = false; $("k-out").innerHTML = md(m);
+});
+
+// monitor
+function showReport(r){
+  $("m-out").hidden = false;
+  if (!r) { $("m-out").innerHTML = "<p class='muted'>No report yet — run a sweep.</p>"; return; }
+  let m = `## ${r.date} — ${r.headline}\n${r.summary}\n\n### Our sites\n| Site | Status | Time |\n|---|---|---|\n` + r.sites.map(s => `| ${s.url} | ${s.up ? "up" : "DOWN " + (s.status || s.error)} | ${s.ms} ms |`).join("\n") + "\n";
+  if (r.risks.length) m += "\n### Risks\n" + r.risks.map(x => `- **${x.severity}** ${x.issue} — ${x.recommendedAction} ${x.url}`).join("\n") + "\n";
+  if (r.mentions.length) m += "\n### Mentions\n" + r.mentions.map(x => `- [${x.title}](${x.url}) — ${x.source}, ${x.date} · ${x.divisionId} · ${x.sentiment}`).join("\n") + "\n";
+  if (r.opportunities.length) m += "\n### Opportunities\n" + r.opportunities.map(x => `- **${x.divisionId}:** ${x.opportunity} → ${x.action} ${x.url}`).join("\n") + "\n";
+  if (r.responses.length) m += "\n### Draft responses\n" + r.responses.map(x => `- ${x.platform} ${x.url}${x.needsApproval ? " **(needs approval)**" : ""}\n> ${x.draftReply}`).join("\n") + "\n";
+  if (r.contentIdeas.length) m += "\n### Content ideas\n" + r.contentIdeas.map(x => `- **${x.divisionId} / ${x.platform}:** ${x.idea}`).join("\n") + "\n";
+  if (r.gaps.length) m += "\n### Not checked\n" + r.gaps.map(g => `- ${g}`).join("\n");
+  $("m-out").innerHTML = md(m);
+}
+$("m-go").onclick = () => busy($("m-go"), async () => showReport(await api("/api/monitor", { method: "POST", body: { web: $("m-web").checked } })));
+$("m-last").onclick = () => busy($("m-last"), async () => showReport(await api("/api/monitor")));
+$("m-sites").onclick = () => busy($("m-sites"), async () => { const s = await api("/api/sites"); $("m-out").hidden = false; $("m-out").innerHTML = md("| Site | Status | Time |\n|---|---|---|\n" + s.map(x => `| ${x.url} | ${x.up ? "up" : "DOWN " + (x.status || x.error)} | ${x.ms} ms |`).join("\n")); });
+
+// enquiries
+async function loadEnquiries(){
+  const list = await api("/api/enquiries" + ($("e-filter").value ? `?status=${$("e-filter").value}` : "")).catch(e => { $("e-list").innerHTML = `<p class="err">${esc(e.message)}</p>`; return null; });
+  if (!list) return;
+  $("e-list").innerHTML = list.length ? list.map(e => {
+    const t = e.triage;
+    return `<div class="card enq ${t?.escalate ? "esc" : ""}" data-id="${esc(e.id)}">
+      <span class="tag">${esc(e.channel)}</span><span class="tag">${esc(e.status)}</span>${t ? `<span class="tag">${esc(t.divisionId)}</span><span class="tag">${esc(t.intent)}</span><span class="tag">score ${t.leadScore}</span>${t.urgency === "high" ? '<span class="tag red">urgent</span>' : ""}${t.escalate ? `<span class="tag red">escalate</span>` : ""}` : ""}
+      <p class="mono muted" style="margin-top:8px">${esc(e.receivedAt.slice(0,16).replace("T"," "))} · ${esc(e.name)} ${esc(e.from)}</p>
+      <p style="white-space:pre-wrap">${esc(e.message)}</p>
+      ${t ? `<p><strong>Summary:</strong> ${esc(t.summary)}</p>${t.escalate ? `<p class="err"><strong>Escalate:</strong> ${esc(t.escalationReason)}</p>` : ""}
+      ${t.nextActions.length ? `<ul class="out">${t.nextActions.map(a => `<li>${esc(a)}</li>`).join("")}</ul>` : ""}
+      <label>Reply ${t.reply.subject ? "— " + esc(t.reply.subject) : ""}</label><textarea class="reply">${esc(e.finalReply || t.reply.body)}</textarea>
+      ${e.status === "drafted" ? `<button class="btn approve">Approve${e.channel === "whatsapp" ? " &amp; send" : ""}</button> <button class="btn ghost dismiss">Dismiss</button>` : ""}
+      ${e.delivery?.url ? `<p><a href="${esc(e.delivery.url)}">Open in mail client</a></p>` : ""}${e.delivery?.note ? `<p class="muted">${esc(e.delivery.note)}</p>` : ""}${e.delivery?.error ? `<p class="err">${esc(e.delivery.error)}</p>` : ""}`
+      : e.error ? `<p class="err">${esc(e.error)}</p>` : "<p class='muted'>Triage in progress…</p>"}</div>`; }).join("") : "<p class='muted'>Nothing here.</p>";
+}
+$("e-filter").onchange = loadEnquiries;
+$("e-list").addEventListener("click", (ev) => {
+  const card = ev.target.closest("[data-id]"); if (!card) return; const id = card.dataset.id;
+  if (ev.target.classList.contains("approve")) busy(ev.target, async () => { const e = await api(`/api/enquiries/${id}/approve`, { method: "POST", body: { body: card.querySelector(".reply").value } }); if (e.delivery?.url) window.location.href = e.delivery.url; await loadEnquiries(); });
+  if (ev.target.classList.contains("dismiss")) busy(ev.target, async () => { await api(`/api/enquiries/${id}/dismiss`, { method: "POST", body: {} }); await loadEnquiries(); });
+});
+$("e-go").onclick = () => busy($("e-go"), async () => { await api("/api/enquiries", { method: "POST", body: { channel: $("e-ch").value, from: $("e-from").value, name: $("e-name").value, message: $("e-msg").value } }); $("e-msg").value = ""; $("e-filter").value = ""; await loadEnquiries(); });
+
+// settings
+$("s-token").value = store.get("miaToken");
+$("s-save").onclick = () => { store.set("miaToken", $("s-token").value.trim()); divisionsLoaded = false; loadDivisions(); alert("Saved."); };
+$("s-reload").onclick = () => busy($("s-reload"), async () => { await api("/api/knowledge/reload", { method: "POST", body: {} }); await loadDivisions(); });
+loadDivisions();
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+{
+  "_note": "What the monitor watches. 'terms' are searched on Google News and by the agent's web search; 'feeds' are any RSS/Atom feeds (blogs, YouTube channels: https://www.youtube.com/feeds/videos.xml?channel_id=...); 'sites' get an uptime/speed check.",
+  "terms": [
+    { "q": "\"Media Icons Africa\"", "divisionId": "group" },
+    { "q": "\"John Upah\"", "divisionId": "john-upah" },
+    { "q": "\"Asiko TV\"", "divisionId": "asiko-tv" },
+    { "q": "\"Fast on Africa\" OR \"fastonafrica\"", "divisionId": "fast-on-africa" },
+    { "q": "\"Sportsville\" awards", "divisionId": "sports-agency" },
+    { "q": "\"Media Sales Conference\" Nigeria", "divisionId": "media-sales-conference" },
+    { "q": "\"Tattase TV\"", "divisionId": "asiko-tv" },
+    { "q": "\"Kulture Streams\"", "divisionId": "asiko-tv" }
+  ],
+  "industryTerms": [
+    "FAST channel Africa",
+    "Nigeria advertising spend",
+    "Nollywood streaming",
+    "NBC broadcasting Nigeria",
+    "African diaspora streaming"
+  ],
+  "socialHandles": {
+    "instagram": ["Asikotv"],
+    "facebook": ["Asikotv"],
+    "tiktok": ["Asikotv"],
+    "x": ["Asikotv"],
+    "linkedin": ["in/johnupah"]
+  },
+  "feeds": [],
+  "sites": [
+    "https://www.mediaiconsafrica.com",
+    "https://www.asiko.africa",
+    "https://www.asiko.live",
+    "https://www.fastonafrica.com"
+  ]
+}
