@@ -1,0 +1,89 @@
+name: Marketing agent
+
+# Tests the agent on every change, and runs it on a schedule:
+#   - every morning: media-monitoring briefing (news, feeds, our sites, web & social search)
+#   - every Monday:  the coming week's content calendar for all divisions and John Upah
+# Results appear in the run summary and as downloadable artifacts.
+# Needs the repo secret ANTHROPIC_API_KEY; scheduled runs skip quietly without it.
+on:
+  push:
+    branches: [master]
+    paths: [agent/**, .github/workflows/marketing-agent.yml]
+  pull_request:
+    paths: [agent/**, .github/workflows/marketing-agent.yml]
+  schedule:
+    - cron: "17 5 * * *" # 06:17 Lagos, daily
+  workflow_dispatch:
+    inputs:
+      task:
+        description: What to run
+        type: choice
+        options: [monitor, calendar, both]
+        default: monitor
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: agent
+
+jobs:
+  test:
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: agent/package-lock.json
+      - run: npm ci
+      - run: npm test
+
+  run:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      AGENT_DATA_DIR: ${{ github.workspace }}/agent-out
+    steps:
+      - uses: actions/checkout@v4
+      - name: Decide what to run
+        id: plan
+        env:
+          TASK: ${{ inputs.task || 'scheduled' }}
+        run: |
+          if [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "The ANTHROPIC_API_KEY secret is not set — nothing to run." >> "$GITHUB_STEP_SUMMARY"
+            echo "monitor=false" >> "$GITHUB_OUTPUT"; echo "calendar=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          monday=$([ "$(TZ=Africa/Lagos date +%u)" = 1 ] && echo true || echo false)
+          case "$TASK" in
+            monitor)  echo "monitor=true" >> "$GITHUB_OUTPUT"; echo "calendar=false" >> "$GITHUB_OUTPUT" ;;
+            calendar) echo "monitor=false" >> "$GITHUB_OUTPUT"; echo "calendar=true" >> "$GITHUB_OUTPUT" ;;
+            both)     echo "monitor=true" >> "$GITHUB_OUTPUT"; echo "calendar=true" >> "$GITHUB_OUTPUT" ;;
+            *)        echo "monitor=true" >> "$GITHUB_OUTPUT"; echo "calendar=$monday" >> "$GITHUB_OUTPUT" ;;
+          esac
+      - uses: actions/setup-node@v4
+        if: steps.plan.outputs.monitor == 'true' || steps.plan.outputs.calendar == 'true'
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: agent/package-lock.json
+      - run: npm ci
+        if: steps.plan.outputs.monitor == 'true' || steps.plan.outputs.calendar == 'true'
+      - name: Media monitor
+        if: steps.plan.outputs.monitor == 'true'
+        run: node src/cli.js monitor -o "$AGENT_DATA_DIR/monitor.md" && cat "$AGENT_DATA_DIR/monitor.md" >> "$GITHUB_STEP_SUMMARY"
+      - name: Content calendar (next 7 days)
+        if: steps.plan.outputs.calendar == 'true'
+        run: node src/cli.js calendar --days 7 -o "$AGENT_DATA_DIR/calendar.md" && cat "$AGENT_DATA_DIR/calendar.md" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: agent-reports-${{ github.run_id }}
+          path: agent-out/
+          if-no-files-found: ignore

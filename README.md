@@ -48,6 +48,7 @@ deploy/               .htaccess for the asiko.africa cPanel host
 playout/              provisions channels on Eyevinn Open Source Cloud
 site-asiko-live/      asiko.live marketing / sales site (separate static site)
 site-mediaiconsafrica/ mediaiconsafrica.com — the Media Icons Africa group site
+agent/               the marketing & content agent for all divisions — see agent/README.md
 ```
 
 ## Production playout (from Oct 2026)
