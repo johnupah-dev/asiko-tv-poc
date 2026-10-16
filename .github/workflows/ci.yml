@@ -1,0 +1,24 @@
+name: Checks
+
+# Runs on every pull request: the site must build (line-up validation) and the
+# scheduler's tests must pass before anything is merged — merging deploys live.
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Build the viewer site (validates data/channels.json)
+        run: node build.mjs
+      - name: Scheduler tests
+        working-directory: scheduler
+        run: npm test
+      - name: Syntax-check the viewer and ops scripts
+        run: node --check app.js && node --check ops/check-on-air.mjs && node --check playout/provision.mjs

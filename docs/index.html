@@ -595,6 +595,11 @@ a { color: inherit; }
   .rec { animation: none; }
   .loading, .btn { transition: none; }
 }
+
+/* channels that have no feed of their own yet */
+.ch.is-soon .logo { opacity: 0.55; }
+.ch.is-soon .ch-now { font-style: italic; }
+.guide-prog.is-soon { flex-grow: 1; opacity: 0.6; font-style: italic; }
 </style>
 </head>
 <body>
@@ -682,7 +687,7 @@ a { color: inherit; }
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.13/hls.min.js"></script>
-  <script>window.__ASIKO_CFG__ = {"network":"ASIKO TV","networkFeed":"https://johnupahsw.ce.prod-se.osaas.io/channels/mychannel/master.m3u8","sections":[{"id":"flagship","label":"Asiko TV+"},{"id":"movies","label":"Movies & Drama"},{"id":"faith","label":"Faith"},{"id":"kids","label":"Kids & Teens"},{"id":"lifestyle","label":"Food & Lifestyle"},{"id":"women","label":"Women, Style & Weddings"},{"id":"entertainment","label":"Entertainment & Comedy"},{"id":"news","label":"News"},{"id":"business","label":"Business & Property"},{"id":"sports","label":"Sports & Travel"},{"id":"events","label":"Live Events"}],"channels":[{"num":1,"id":"asikotvplus","name":"Asiko TV+","genre":"Flagship · Best of the Bouquet","category":"flagship","logo":"assets/channels/asiko-plus.png","programs":[{"title":"Asiko Breakfast — Best of the Bouquet","duration":120},{"title":"Nollywood Now","duration":90},{"title":"The Africa Brief","duration":45},{"title":"Afternoon Movie Premiere","duration":120},{"title":"Music & Culture Mix","duration":60},{"title":"Prime Time: Channel of the Week","duration":120},{"title":"Faith & Reflection","duration":45},{"title":"Late Reel — Overnight","duration":200}]},{"num":2,"id":"movieafrica","name":"Movie Africa","genre":"Nollywood & Beyond","category":"movies","logo":"assets/channels/movie-africa.png","programs":[{"title":"Morning Movie","duration":120},{"title":"Nollywood Classics","duration":120},{"title":"New Release Premiere","duration":120},{"title":"Behind the Scenes","duration":40},{"title":"Our Stories, Our Movies","duration":90},{"title":"Evening Feature","duration":130},{"title":"Late Night Thriller","duration":120}]},{"num":3,"id":"maepic","name":"Movie Africa Epic","genre":"Epic & Historical","category":"movies","logo":"assets/channels/movie-africa-epic.png","programs":[{"title":"Kingdoms of Old","duration":120},{"title":"Warriors & Legends","duration":120},{"title":"Feature: The Throne","duration":130},{"title":"Folklore Retold","duration":60},{"title":"Epic Double Bill","duration":220},{"title":"Overnight Epics","duration":200}]},{"num":4,"id":"maseries","name":"Movie Africa Series","genre":"Drama Series & Box Sets","category":"movies","logo":"assets/channels/movie-africa.png","programs":[{"title":"Series Catch-Up","duration":120},{"title":"Daytime Drama","duration":90},{"title":"Binge Block","duration":180},{"title":"Family Saga","duration":60},{"title":"Prime-Time Series","duration":120},{"title":"Box Set Overnight","duration":200}]},{"num":5,"id":"mahausa","name":"Movie Africa Hausa","genre":"Kannywood · Hausa","category":"movies","logo":"assets/channels/movie-africa-halisa.png","programs":[{"title":"Kannywood Morning","duration":120},{"title":"Hausa Classics","duration":120},{"title":"Afternoon Feature","duration":110},{"title":"Stars of Kannywood","duration":45},{"title":"Prime Hausa Movie","duration":130},{"title":"Late Screening","duration":180}]},{"num":6,"id":"maigbo","name":"Movie Africa Igbo","genre":"Nollywood · Igbo","category":"movies","logo":"assets/channels/movie-africa-igbo.png","programs":[{"title":"Igbo Morning Movie","duration":120},{"title":"Nollywood East Classics","duration":120},{"title":"Village & Kingdom Tales","duration":110},{"title":"Culture Corner","duration":45},{"title":"Prime Igbo Movie","duration":130},{"title":"Late Screening","duration":180}]},{"num":7,"id":"mayoruba","name":"Movie Africa Yoruba","genre":"Nollywood · Yoruba","category":"movies","logo":"assets/channels/movie-africa-yoruba.png","programs":[{"title":"Yoruba Epic Morning","duration":120},{"title":"Classic Epic & Apata","duration":120},{"title":"Contemporary Yoruba Drama","duration":110},{"title":"Stars of the Industry","duration":45},{"title":"Afternoon Feature (subtitled)","duration":120},{"title":"Prime Yoruba Movie","duration":130},{"title":"Late Screening","duration":180}]},{"num":8,"id":"amenmovies","name":"Amen Movies","genre":"Christian Movies","category":"faith","logo":"assets/channels/amen-movies.png","programs":[{"title":"Faith Feature: Morning","duration":120},{"title":"Christian Drama Series","duration":90},{"title":"Afternoon Movie","duration":120},{"title":"Family & Faith","duration":60},{"title":"Prime Christian Movie","duration":120},{"title":"Late Feature","duration":180}]},{"num":9,"id":"zebejirotv","name":"Zeb Ejiro TV","genre":"Nollywood Classics & Drama","category":"movies","programs":[{"title":"Morning Classic","duration":120},{"title":"Drama Hour","duration":60},{"title":"Afternoon Feature","duration":120},{"title":"The Director's Chair","duration":45},{"title":"Prime Feature","duration":130},{"title":"Late Classic","duration":180}]},{"num":10,"id":"tattasetv","name":"Tattase TV","genre":"Food, Culture & Lifestyle","category":"lifestyle","logo":"assets/channels/tattase.png","programs":[{"title":"Market Run","duration":60},{"title":"Recipes of the Continent","duration":60},{"title":"Food Brands & Makers","duration":90},{"title":"Tourism Trail","duration":60},{"title":"Chef's Table","duration":90},{"title":"Weekend Feast","duration":120},{"title":"Late Bites","duration":180}]},{"num":11,"id":"foodiesspice","name":"Foodies & Spice","genre":"Food & Travel","category":"lifestyle","logo":"assets/channels/foodies-and-spices.png","programs":[{"title":"Breakfast Plates","duration":60},{"title":"Spice Trails","duration":60},{"title":"Street Food Africa","duration":60},{"title":"Home Kitchen","duration":90},{"title":"Dining Out","duration":60},{"title":"Cook-Off","duration":90},{"title":"Midnight Snacks","duration":180}]},{"num":12,"id":"satetv","name":"Sate TV","genre":"Entertainment","category":"entertainment","programs":[{"title":"Morning Mix","duration":120},{"title":"Talk Time","duration":60},{"title":"Afternoon Entertainment","duration":120},{"title":"Showbiz Today","duration":45},{"title":"Prime Entertainment","duration":120},{"title":"Late Show","duration":180}]},{"num":13,"id":"sisitv","name":"Sisi TV","genre":"Women's Lifestyle & Glamour","category":"women","logo":"assets/channels/sisi.png","programs":[{"title":"Glow Up","duration":60},{"title":"Sisi Style","duration":60},{"title":"Beauty Desk","duration":60},{"title":"Real Talk","duration":60},{"title":"Evening Glamour","duration":90},{"title":"After Hours Style","duration":180}]},{"num":14,"id":"hookedtv","name":"Hooked TV","genre":"Weddings & Celebrations","category":"women","logo":"assets/channels/hooked.png","programs":[{"title":"Say Yes","duration":60},{"title":"Wedding of the Week","duration":90},{"title":"Aso-Ebi & Owambe","duration":60},{"title":"The Planners","duration":60},{"title":"Love Stories","duration":90},{"title":"Celebration Replay","duration":180}]},{"num":15,"id":"mubtv","name":"MUB TV","genre":"Entertainment","category":"entertainment","programs":[{"title":"Morning Mix","duration":90},{"title":"Spotlight","duration":60},{"title":"Afternoon Entertainment","duration":120},{"title":"Trending Now","duration":45},{"title":"Prime Entertainment","duration":120},{"title":"Late Show","duration":180}]},{"num":16,"id":"teenafrica","name":"Teen Africa","genre":"Teen & Youth Lifestyle","category":"kids","logo":"assets/channels/teen-africa.png","programs":[{"title":"Homeroom","duration":60},{"title":"Trends & Music","duration":90},{"title":"Campus Life","duration":60},{"title":"Issues That Matter","duration":45},{"title":"Talent Showcase","duration":90},{"title":"Evening Hangout","duration":120},{"title":"Late Loop","duration":200}]},{"num":17,"id":"charminkids","name":"Charmin Kids","genre":"Kids Talent & Grooming","category":"kids","logo":"assets/channels/cks-tv.png","programs":[{"title":"Rise & Shine","duration":60},{"title":"Little Stars","duration":60},{"title":"Talent Time","duration":90},{"title":"Manners & Me","duration":45},{"title":"Afternoon Fun","duration":90},{"title":"Story Hour","duration":60},{"title":"Goodnight Loop","duration":220}]},{"num":18,"id":"ppg","name":"PPG","genre":"Praise · Power · Glory","category":"faith","logo":"assets/channels/ppg.png","programs":[{"title":"Morning Praise","duration":90},{"title":"Nonstop Worship","duration":120},{"title":"The Word Today","duration":60},{"title":"Gospel Music Hour","duration":60},{"title":"Testimonies","duration":45},{"title":"Evening Praise & Worship","duration":90},{"title":"Overnight Worship","duration":240}]},{"num":19,"id":"bouncetv","name":"Bounce TV","genre":"Kids","category":"kids","logo":"assets/channels/bounce.png","programs":[{"title":"Sunrise Sing-Along","duration":90},{"title":"Little Treasures","duration":45},{"title":"Cartoon Carousel","duration":120},{"title":"Learn & Play","duration":60},{"title":"Afternoon Movie","duration":100},{"title":"Craft Club","duration":45},{"title":"Wind-Down Tales","duration":60},{"title":"Goodnight Loop","duration":220}]},{"num":20,"id":"webtv","name":"Web TV","genre":"Digital Entertainment","category":"entertainment","logo":"assets/channels/webtv-nigeria.png","programs":[{"title":"Web Picks","duration":90},{"title":"Creator Hour","duration":60},{"title":"Viral Today","duration":60},{"title":"Web Series Block","duration":120},{"title":"Prime Picks","duration":90},{"title":"Overnight Stream","duration":200}]},{"num":21,"id":"ln247","name":"LN247","genre":"News & Lifestyle","category":"news","logo":"assets/channels/ln247.png","programs":[{"title":"Morning Briefing","duration":90},{"title":"Headlines on the Hour","duration":60},{"title":"Lifestyle Desk","duration":60},{"title":"Midday News","duration":45},{"title":"The Conversation","duration":60},{"title":"Evening News","duration":90},{"title":"Night Wire","duration":180}]},{"num":22,"id":"estatetv","name":"Estate TV","genre":"Real Estate & Property","category":"business","logo":"assets/channels/estates-tv.png","programs":[{"title":"Property Morning","duration":60},{"title":"Homes Tour","duration":60},{"title":"Invest Smart","duration":60},{"title":"Developers' Showcase","duration":60},{"title":"Market Watch","duration":45},{"title":"Dream Homes","duration":90},{"title":"Overnight Listings","duration":200}]},{"num":23,"id":"csuitecafe","name":"C-Suite Café TV","genre":"Business & Executive Talk","category":"business","logo":"assets/channels/csuite-cafe-tv.png","programs":[{"title":"Founders' Table","duration":60},{"title":"The CEO Interview","duration":60},{"title":"Leadership Lab","duration":60},{"title":"Strategy Session","duration":45},{"title":"Prime Conversation","duration":90},{"title":"Late Replay","duration":180}]},{"num":24,"id":"wavestv","name":"Waves TV","genre":"Music & Entertainment","category":"entertainment","programs":[{"title":"Wake-Up Playlist","duration":120},{"title":"Fresh Sounds","duration":60},{"title":"Afrobeats & Amapiano","duration":90},{"title":"Retro Rewind","duration":60},{"title":"Drive-Time Mix","duration":120},{"title":"After Dark Sessions","duration":200}]},{"num":25,"id":"humournetwork","name":"The Humour Network","genre":"Comedy","category":"entertainment","programs":[{"title":"Skit Marathon","duration":90},{"title":"Stand-Up Hour","duration":60},{"title":"Kings of Comedy","duration":90},{"title":"Sitcom Block","duration":120},{"title":"Prime Comedy Special","duration":110},{"title":"Late Laughs","duration":180}]},{"num":26,"id":"womenconnect","name":"Women Connect","genre":"Women's Empowerment","category":"women","logo":"assets/channels/wctv.png","programs":[{"title":"Morning Connect","duration":60},{"title":"She Leads","duration":60},{"title":"Business Women","duration":60},{"title":"Mentor Moments","duration":45},{"title":"Community Voices","duration":60},{"title":"Evening Connect","duration":90},{"title":"Overnight Replay","duration":200}]},{"num":27,"id":"sportsvilletv","name":"Sportsville TV","genre":"Sports","category":"sports","logo":"assets/channels/sportsville-tv.png","programs":[{"title":"Sports Morning","duration":90},{"title":"Matchday Preview","duration":60},{"title":"Highlights Hour","duration":60},{"title":"Grassroots Africa","duration":60},{"title":"The Debate","duration":60},{"title":"Evening Highlights","duration":90},{"title":"Classic Matches","duration":200}]},{"num":28,"id":"travelnigeria","name":"Travel Nigeria","genre":"Travel & Tourism","category":"sports","logo":"assets/channels/travel-nigeria.png","programs":[{"title":"Destination Nigeria","duration":60},{"title":"City Guides","duration":60},{"title":"The Safari","duration":90},{"title":"Hotels & Getaways","duration":60},{"title":"Festival Trail","duration":90},{"title":"Travel Overnight","duration":200}]},{"num":29,"id":"dinerenblanc","name":"Diner en Blanc LIVE","genre":"Live Event","category":"events","live":true,"liveTitle":"Diner en Blanc LIVE","programs":[{"title":"Diner en Blanc LIVE","duration":240}]}]};</script>
+  <script>window.__ASIKO_CFG__ = {"network":"ASIKO TV","networkFeed":"https://johnupahsw.ce.prod-se.osaas.io/channels/mychannel/master.m3u8","comingSoon":false,"epgUrl":"","sections":[{"id":"flagship","label":"Asiko TV+"},{"id":"movies","label":"Movies & Drama"},{"id":"faith","label":"Faith"},{"id":"kids","label":"Kids & Teens"},{"id":"lifestyle","label":"Food & Lifestyle"},{"id":"women","label":"Women, Style & Weddings"},{"id":"entertainment","label":"Entertainment & Comedy"},{"id":"news","label":"News"},{"id":"business","label":"Business & Property"},{"id":"sports","label":"Sports & Travel"},{"id":"events","label":"Live Events"}],"channels":[{"num":1,"id":"asikotvplus","name":"Asiko TV+","genre":"Flagship · Best of the Bouquet","category":"flagship","logo":"assets/channels/asiko-plus.png","programs":[{"title":"Asiko Breakfast — Best of the Bouquet","duration":120},{"title":"Nollywood Now","duration":90},{"title":"The Africa Brief","duration":45},{"title":"Afternoon Movie Premiere","duration":120},{"title":"Music & Culture Mix","duration":60},{"title":"Prime Time: Channel of the Week","duration":120},{"title":"Faith & Reflection","duration":45},{"title":"Late Reel — Overnight","duration":200}]},{"num":2,"id":"movieafrica","name":"Movie Africa","genre":"Nollywood & Beyond","category":"movies","logo":"assets/channels/movie-africa.png","programs":[{"title":"Morning Movie","duration":120},{"title":"Nollywood Classics","duration":120},{"title":"New Release Premiere","duration":120},{"title":"Behind the Scenes","duration":40},{"title":"Our Stories, Our Movies","duration":90},{"title":"Evening Feature","duration":130},{"title":"Late Night Thriller","duration":120}]},{"num":3,"id":"maepic","name":"Movie Africa Epic","genre":"Epic & Historical","category":"movies","logo":"assets/channels/movie-africa-epic.png","programs":[{"title":"Kingdoms of Old","duration":120},{"title":"Warriors & Legends","duration":120},{"title":"Feature: The Throne","duration":130},{"title":"Folklore Retold","duration":60},{"title":"Epic Double Bill","duration":220},{"title":"Overnight Epics","duration":200}]},{"num":4,"id":"maseries","name":"Movie Africa Series","genre":"Drama Series & Box Sets","category":"movies","logo":"assets/channels/movie-africa.png","programs":[{"title":"Series Catch-Up","duration":120},{"title":"Daytime Drama","duration":90},{"title":"Binge Block","duration":180},{"title":"Family Saga","duration":60},{"title":"Prime-Time Series","duration":120},{"title":"Box Set Overnight","duration":200}]},{"num":5,"id":"mahausa","name":"Movie Africa Hausa","genre":"Kannywood · Hausa","category":"movies","logo":"assets/channels/movie-africa-halisa.png","programs":[{"title":"Kannywood Morning","duration":120},{"title":"Hausa Classics","duration":120},{"title":"Afternoon Feature","duration":110},{"title":"Stars of Kannywood","duration":45},{"title":"Prime Hausa Movie","duration":130},{"title":"Late Screening","duration":180}]},{"num":6,"id":"maigbo","name":"Movie Africa Igbo","genre":"Nollywood · Igbo","category":"movies","logo":"assets/channels/movie-africa-igbo.png","programs":[{"title":"Igbo Morning Movie","duration":120},{"title":"Nollywood East Classics","duration":120},{"title":"Village & Kingdom Tales","duration":110},{"title":"Culture Corner","duration":45},{"title":"Prime Igbo Movie","duration":130},{"title":"Late Screening","duration":180}]},{"num":7,"id":"mayoruba","name":"Movie Africa Yoruba","genre":"Nollywood · Yoruba","category":"movies","logo":"assets/channels/movie-africa-yoruba.png","programs":[{"title":"Yoruba Epic Morning","duration":120},{"title":"Classic Epic & Apata","duration":120},{"title":"Contemporary Yoruba Drama","duration":110},{"title":"Stars of the Industry","duration":45},{"title":"Afternoon Feature (subtitled)","duration":120},{"title":"Prime Yoruba Movie","duration":130},{"title":"Late Screening","duration":180}]},{"num":8,"id":"amenmovies","name":"Amen Movies","genre":"Christian Movies","category":"faith","logo":"assets/channels/amen-movies.png","programs":[{"title":"Faith Feature: Morning","duration":120},{"title":"Christian Drama Series","duration":90},{"title":"Afternoon Movie","duration":120},{"title":"Family & Faith","duration":60},{"title":"Prime Christian Movie","duration":120},{"title":"Late Feature","duration":180}]},{"num":9,"id":"zebejirotv","name":"Zeb Ejiro TV","genre":"Nollywood Classics & Drama","category":"movies","programs":[{"title":"Morning Classic","duration":120},{"title":"Drama Hour","duration":60},{"title":"Afternoon Feature","duration":120},{"title":"The Director's Chair","duration":45},{"title":"Prime Feature","duration":130},{"title":"Late Classic","duration":180}]},{"num":10,"id":"tattasetv","name":"Tattase TV","genre":"Food, Culture & Lifestyle","category":"lifestyle","logo":"assets/channels/tattase.png","programs":[{"title":"Market Run","duration":60},{"title":"Recipes of the Continent","duration":60},{"title":"Food Brands & Makers","duration":90},{"title":"Tourism Trail","duration":60},{"title":"Chef's Table","duration":90},{"title":"Weekend Feast","duration":120},{"title":"Late Bites","duration":180}]},{"num":11,"id":"foodiesspice","name":"Foodies & Spice","genre":"Food & Travel","category":"lifestyle","logo":"assets/channels/foodies-and-spices.png","programs":[{"title":"Breakfast Plates","duration":60},{"title":"Spice Trails","duration":60},{"title":"Street Food Africa","duration":60},{"title":"Home Kitchen","duration":90},{"title":"Dining Out","duration":60},{"title":"Cook-Off","duration":90},{"title":"Midnight Snacks","duration":180}]},{"num":12,"id":"satetv","name":"Sate TV","genre":"Entertainment","category":"entertainment","programs":[{"title":"Morning Mix","duration":120},{"title":"Talk Time","duration":60},{"title":"Afternoon Entertainment","duration":120},{"title":"Showbiz Today","duration":45},{"title":"Prime Entertainment","duration":120},{"title":"Late Show","duration":180}]},{"num":13,"id":"sisitv","name":"Sisi TV","genre":"Women's Lifestyle & Glamour","category":"women","logo":"assets/channels/sisi.png","programs":[{"title":"Glow Up","duration":60},{"title":"Sisi Style","duration":60},{"title":"Beauty Desk","duration":60},{"title":"Real Talk","duration":60},{"title":"Evening Glamour","duration":90},{"title":"After Hours Style","duration":180}]},{"num":14,"id":"hookedtv","name":"Hooked TV","genre":"Weddings & Celebrations","category":"women","logo":"assets/channels/hooked.png","programs":[{"title":"Say Yes","duration":60},{"title":"Wedding of the Week","duration":90},{"title":"Aso-Ebi & Owambe","duration":60},{"title":"The Planners","duration":60},{"title":"Love Stories","duration":90},{"title":"Celebration Replay","duration":180}]},{"num":15,"id":"mubtv","name":"MUB TV","genre":"Entertainment","category":"entertainment","programs":[{"title":"Morning Mix","duration":90},{"title":"Spotlight","duration":60},{"title":"Afternoon Entertainment","duration":120},{"title":"Trending Now","duration":45},{"title":"Prime Entertainment","duration":120},{"title":"Late Show","duration":180}]},{"num":16,"id":"teenafrica","name":"Teen Africa","genre":"Teen & Youth Lifestyle","category":"kids","logo":"assets/channels/teen-africa.png","programs":[{"title":"Homeroom","duration":60},{"title":"Trends & Music","duration":90},{"title":"Campus Life","duration":60},{"title":"Issues That Matter","duration":45},{"title":"Talent Showcase","duration":90},{"title":"Evening Hangout","duration":120},{"title":"Late Loop","duration":200}]},{"num":17,"id":"charminkids","name":"Charmin Kids","genre":"Kids Talent & Grooming","category":"kids","logo":"assets/channels/cks-tv.png","programs":[{"title":"Rise & Shine","duration":60},{"title":"Little Stars","duration":60},{"title":"Talent Time","duration":90},{"title":"Manners & Me","duration":45},{"title":"Afternoon Fun","duration":90},{"title":"Story Hour","duration":60},{"title":"Goodnight Loop","duration":220}]},{"num":18,"id":"ppg","name":"PPG","genre":"Praise · Power · Glory","category":"faith","logo":"assets/channels/ppg.png","programs":[{"title":"Morning Praise","duration":90},{"title":"Nonstop Worship","duration":120},{"title":"The Word Today","duration":60},{"title":"Gospel Music Hour","duration":60},{"title":"Testimonies","duration":45},{"title":"Evening Praise & Worship","duration":90},{"title":"Overnight Worship","duration":240}]},{"num":19,"id":"bouncetv","name":"Bounce TV","genre":"Kids","category":"kids","logo":"assets/channels/bounce.png","programs":[{"title":"Sunrise Sing-Along","duration":90},{"title":"Little Treasures","duration":45},{"title":"Cartoon Carousel","duration":120},{"title":"Learn & Play","duration":60},{"title":"Afternoon Movie","duration":100},{"title":"Craft Club","duration":45},{"title":"Wind-Down Tales","duration":60},{"title":"Goodnight Loop","duration":220}]},{"num":20,"id":"webtv","name":"Web TV","genre":"Digital Entertainment","category":"entertainment","logo":"assets/channels/webtv-nigeria.png","programs":[{"title":"Web Picks","duration":90},{"title":"Creator Hour","duration":60},{"title":"Viral Today","duration":60},{"title":"Web Series Block","duration":120},{"title":"Prime Picks","duration":90},{"title":"Overnight Stream","duration":200}]},{"num":21,"id":"ln247","name":"LN247","genre":"News & Lifestyle","category":"news","logo":"assets/channels/ln247.png","programs":[{"title":"Morning Briefing","duration":90},{"title":"Headlines on the Hour","duration":60},{"title":"Lifestyle Desk","duration":60},{"title":"Midday News","duration":45},{"title":"The Conversation","duration":60},{"title":"Evening News","duration":90},{"title":"Night Wire","duration":180}]},{"num":22,"id":"estatetv","name":"Estate TV","genre":"Real Estate & Property","category":"business","logo":"assets/channels/estates-tv.png","programs":[{"title":"Property Morning","duration":60},{"title":"Homes Tour","duration":60},{"title":"Invest Smart","duration":60},{"title":"Developers' Showcase","duration":60},{"title":"Market Watch","duration":45},{"title":"Dream Homes","duration":90},{"title":"Overnight Listings","duration":200}]},{"num":23,"id":"csuitecafe","name":"C-Suite Café TV","genre":"Business & Executive Talk","category":"business","logo":"assets/channels/csuite-cafe-tv.png","programs":[{"title":"Founders' Table","duration":60},{"title":"The CEO Interview","duration":60},{"title":"Leadership Lab","duration":60},{"title":"Strategy Session","duration":45},{"title":"Prime Conversation","duration":90},{"title":"Late Replay","duration":180}]},{"num":24,"id":"wavestv","name":"Waves TV","genre":"Music & Entertainment","category":"entertainment","programs":[{"title":"Wake-Up Playlist","duration":120},{"title":"Fresh Sounds","duration":60},{"title":"Afrobeats & Amapiano","duration":90},{"title":"Retro Rewind","duration":60},{"title":"Drive-Time Mix","duration":120},{"title":"After Dark Sessions","duration":200}]},{"num":25,"id":"humournetwork","name":"The Humour Network","genre":"Comedy","category":"entertainment","programs":[{"title":"Skit Marathon","duration":90},{"title":"Stand-Up Hour","duration":60},{"title":"Kings of Comedy","duration":90},{"title":"Sitcom Block","duration":120},{"title":"Prime Comedy Special","duration":110},{"title":"Late Laughs","duration":180}]},{"num":26,"id":"womenconnect","name":"Women Connect","genre":"Women's Empowerment","category":"women","logo":"assets/channels/wctv.png","programs":[{"title":"Morning Connect","duration":60},{"title":"She Leads","duration":60},{"title":"Business Women","duration":60},{"title":"Mentor Moments","duration":45},{"title":"Community Voices","duration":60},{"title":"Evening Connect","duration":90},{"title":"Overnight Replay","duration":200}]},{"num":27,"id":"sportsvilletv","name":"Sportsville TV","genre":"Sports","category":"sports","logo":"assets/channels/sportsville-tv.png","programs":[{"title":"Sports Morning","duration":90},{"title":"Matchday Preview","duration":60},{"title":"Highlights Hour","duration":60},{"title":"Grassroots Africa","duration":60},{"title":"The Debate","duration":60},{"title":"Evening Highlights","duration":90},{"title":"Classic Matches","duration":200}]},{"num":28,"id":"travelnigeria","name":"Travel Nigeria","genre":"Travel & Tourism","category":"sports","logo":"assets/channels/travel-nigeria.png","programs":[{"title":"Destination Nigeria","duration":60},{"title":"City Guides","duration":60},{"title":"The Safari","duration":90},{"title":"Hotels & Getaways","duration":60},{"title":"Festival Trail","duration":90},{"title":"Travel Overnight","duration":200}]},{"num":29,"id":"dinerenblanc","name":"Diner en Blanc LIVE","genre":"Live Event","category":"events","live":true,"liveTitle":"Diner en Blanc LIVE","programs":[{"title":"Diner en Blanc LIVE","duration":240}]}]};</script>
   <script>
 /* Asiko TV — viewer app.
    - Every channel is a continuous live HLS stream (Eyevinn Channel Engine).
@@ -718,7 +723,15 @@ a { color: inherit; }
 
   /* ---------- playback ---------- */
   const HLS_JS = !!(window.Hls && window.Hls.isSupported());
-  const srcOf = (ch) => ch.src || CFG.networkFeed;
+  // A channel with its own feed plays it; a channel without one carries the
+  // network feed. If its own feed keeps failing, the viewer falls back to the
+  // network feed for a minute and then tries the channel again — never a black screen.
+  const fallbackUntil = {};
+  const hasOwnFeed = (ch) => !!ch.src;
+  const isSoon = (ch) => !ch.src && !ch.live && CFG.comingSoon === true;
+  const onFallback = (ch) => hasOwnFeed(ch) && (fallbackUntil[ch.id] || 0) > Date.now();
+  const srcOf = (ch) => (hasOwnFeed(ch) && !onFallback(ch) ? ch.src : CFG.networkFeed);
+  let recheckTimer = 0;
 
   function setLoading(msg, ch) {
     loadingText.textContent = msg;
@@ -731,7 +744,18 @@ a { color: inherit; }
   function scheduleRetry() {
     clearTimeout(retryTimer);
     retries++;
-    setLoading('Reconnecting…', CH[current]);
+    const ch = CH[current];
+    if (hasOwnFeed(ch) && !onFallback(ch) && retries >= 3) {
+      // own feed down: show the network feed now, try the channel again in 60s
+      fallbackUntil[ch.id] = Date.now() + 60000;
+      retries = 0;
+      setLoading('Reconnecting this channel — showing Asiko TV meanwhile', ch);
+      clearTimeout(recheckTimer);
+      recheckTimer = setTimeout(() => { if (CH[current] === ch) loadSource(ch, true); }, 61000);
+      loadSource(ch, true);
+      return;
+    }
+    setLoading('Reconnecting…', ch);
     // 2s, 4s, 8s … capped at 30s
     retryTimer = setTimeout(() => loadSource(CH[current], true), Math.min(30000, 1000 * Math.pow(2, retries)));
   }
@@ -752,6 +776,9 @@ a { color: inherit; }
         if (!data || !data.fatal) return;
         if (data.type === window.Hls.ErrorTypes.MEDIA_ERROR) { hls.recoverMediaError(); return; }
         loadedSrc = '';
+        // a 4xx on a channel's own feed won't fix itself in seconds: fall back at once
+        const code = data.response && data.response.code;
+        if (code >= 400 && code < 500 && hasOwnFeed(CH[current]) && !onFallback(CH[current])) retries = Math.max(retries, 2);
         scheduleRetry();
       });
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
@@ -798,7 +825,40 @@ a { color: inherit; }
     d.setMinutes(mins);
     return d;
   }
-  const nowLabel = (ch, date) => (ch.live ? '● LIVE · ' + (ch.liveTitle || ch.name) : scheduleAt(ch, date).title);
+  /* Real guide data from the Asiko Scheduler (CFG.epgUrl). Channels without
+     it — or when the scheduler is unreachable — use the typed schedule above. */
+  const EPG = {};
+  async function refreshEpg() {
+    if (!CFG.epgUrl) return;
+    const base = CFG.epgUrl.replace(/\/$/, '');
+    await Promise.all(CH.filter(hasOwnFeed).map(async (ch) => {
+      try {
+        const res = await fetch(`${base}/epg/${encodeURIComponent(ch.id)}?hours=4`, { cache: 'no-store' });
+        if (!res.ok) return;
+        const g = await res.json();
+        if (Array.isArray(g.programmes) && g.programmes.length) EPG[ch.id] = { at: Date.now(), programmes: g.programmes };
+      } catch (e) { /* keep the last good guide */ }
+    }));
+    updateLowerThird();
+    renderGuide();
+  }
+  function liveSlot(ch, date) {
+    const g = EPG[ch.id];
+    if (!g || Date.now() - g.at > 15 * 60000) return null;
+    const t = date.getTime();
+    const i = g.programmes.findIndex((p) => p.start <= t && t < p.end);
+    if (i < 0) return null;
+    const p = g.programmes[i];
+    const n = g.programmes[i + 1];
+    return { title: p.title, start: p.start, end: p.end, nextTitle: n ? n.title : '', nextAt: n ? n.start : p.end };
+  }
+  const msToClock = (ms) => { const d = new Date(ms); return `${fmt2(d.getHours())}:${fmt2(d.getMinutes())}`; };
+  const nowLabel = (ch, date) => {
+    if (ch.live) return '● LIVE · ' + (ch.liveTitle || ch.name);
+    if (isSoon(ch)) return 'Coming soon';
+    const l = liveSlot(ch, date);
+    return l ? l.title : scheduleAt(ch, date).title;
+  };
 
   /* ---------- logos ---------- */
   function initials(name) {
@@ -817,7 +877,7 @@ a { color: inherit; }
     railEl.innerHTML = '';
     CH.forEach((ch, idx) => {
       const b = document.createElement('button');
-      b.className = 'ch' + (ch.live ? ' is-live-ch' : '');
+      b.className = 'ch' + (ch.live ? ' is-live-ch' : '') + (isSoon(ch) ? ' is-soon' : '');
       b.type = 'button';
       b.setAttribute('aria-label', `Channel ${ch.num}: ${ch.name}`);
       if (ch.accent) b.style.setProperty('--ch', ch.accent);
@@ -847,6 +907,11 @@ a { color: inherit; }
       el.setAttribute('aria-current', on ? 'true' : 'false');
       if (on) el.scrollIntoView({ block: 'nearest', inline: 'nearest' });
     });
+    retries = 0;
+    clearTimeout(recheckTimer);
+    if (onFallback(ch)) {
+      recheckTimer = setTimeout(() => { if (CH[current] === ch) loadSource(ch, true); }, fallbackUntil[ch.id] - Date.now() + 1000);
+    }
     if (srcOf(ch) !== loadedSrc) setLoading('Tuning…', ch);
     loadSource(ch);
     updateLowerThird();
@@ -864,15 +929,24 @@ a { color: inherit; }
       $('#nowTitle').textContent = cur.liveTitle || cur.name;
       $('#nowProgress').textContent = '';
       $('#nextRow').hidden = true;
+    } else if (isSoon(cur)) {
+      tag.textContent = 'SOON';
+      tag.classList.remove('is-live');
+      $('#nowTitle').textContent = `${cur.name} — coming soon to Asiko TV`;
+      $('#nowProgress').textContent = '';
+      $('#nextRow').hidden = false;
+      $('#nextTitle').textContent = `Now showing: ${CFG.network || 'Asiko TV'}`;
+      $('#nextTime').textContent = '';
     } else {
-      const s = scheduleAt(cur, now);
+      const l = liveSlot(cur, now);
+      const s = l ? null : scheduleAt(cur, now);
       tag.textContent = 'NOW';
       tag.classList.remove('is-live');
       $('#nextRow').hidden = false;
-      $('#nowTitle').textContent = s.title;
-      $('#nextTitle').textContent = s.nextTitle;
-      $('#nextTime').textContent = 'at ' + minToClock(s.nextAtMin);
-      $('#nowProgress').textContent = `${minToClock(s.startMin)}–${minToClock(s.endMin)}`;
+      $('#nowTitle').textContent = l ? l.title : s.title;
+      $('#nextTitle').textContent = l ? (l.nextTitle || '—') : s.nextTitle;
+      $('#nextTime').textContent = 'at ' + (l ? msToClock(l.nextAt) : minToClock(s.nextAtMin));
+      $('#nowProgress').textContent = l ? `${msToClock(l.start)}–${msToClock(l.end)}` : `${minToClock(s.startMin)}–${minToClock(s.endMin)}`;
     }
     [...railEl.children].forEach((el, idx) => {
       el.querySelector('[data-now]').textContent = nowLabel(CH[idx], now);
@@ -902,11 +976,36 @@ a { color: inherit; }
 
       const track = document.createElement('div');
       track.className = 'guide-track';
+      const winStartMs = minToDate(now, winStart).getTime();
+      const winEndMs = winStartMs + WIN * 60000;
+      const real = EPG[ch.id] && Date.now() - EPG[ch.id].at < 15 * 60000
+        ? EPG[ch.id].programmes.filter((p) => p.end > winStartMs && p.start < winEndMs) : [];
       if (ch.live) {
         const cell = document.createElement('div');
         cell.className = 'guide-prog is-on is-live';
         cell.innerHTML = `<b>● LIVE · ${esc(ch.liveTitle || ch.name)}</b><span>Live event coverage</span>`;
         track.appendChild(cell);
+      } else if (isSoon(ch)) {
+        const cell = document.createElement('div');
+        cell.className = 'guide-prog is-soon';
+        cell.innerHTML = '<b>Coming soon</b><span>Channel launching on Asiko TV</span>';
+        track.appendChild(cell);
+      } else if (real.length) {
+        const t = now.getTime();
+        real.forEach((p) => {
+          const a = Math.max(p.start, winStartMs);
+          const b = Math.min(p.end, winEndMs);
+          const cell = document.createElement('div');
+          cell.className = 'guide-prog' + (p.start <= t && t < p.end ? ' is-on' : '');
+          cell.style.flexGrow = String(Math.max(1, (b - a) / 60000));
+          if (ch.accent) cell.style.setProperty('--ch', ch.accent);
+          cell.innerHTML = `<b>${esc(p.title)}</b><span>${msToClock(p.start)}</span>`;
+          track.appendChild(cell);
+        });
+        const nl = document.createElement('div');
+        nl.className = 'guide-now';
+        nl.style.left = (((nowMin - winStart) / WIN) * 100) + '%';
+        track.appendChild(nl);
       } else {
         let cursor = winStart;
         let guard = 0;
@@ -1077,6 +1176,8 @@ a { color: inherit; }
     setInterval(tick, 1000);
     setInterval(updateLowerThird, 5000);
     setInterval(renderGuide, 30000);
+    refreshEpg();
+    setInterval(refreshEpg, 60000);
   }
 
   boot();

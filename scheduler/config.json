@@ -1,0 +1,9 @@
+{
+  "playlistBase": "https://raw.githubusercontent.com/johnupah-dev/asiko-tv-poc/channel-playlists",
+  "slate": {
+    "title": "Asiko TV",
+    "hlsUrl": "https://vz-bb76db1f-290.b-cdn.net/3857ba1f-827b-4722-90cd-75cdaa790d22/playlist.m3u8",
+    "durationSec": 0,
+    "note": "Temporary: the current network-feed video. Replace with a 30-60s \"back shortly\" clip (runbook step 4)."
+  }
+}

@@ -573,3 +573,8 @@ a { color: inherit; }
   .rec { animation: none; }
   .loading, .btn { transition: none; }
 }
+
+/* channels that have no feed of their own yet */
+.ch.is-soon .logo { opacity: 0.55; }
+.ch.is-soon .ch-now { font-style: italic; }
+.guide-prog.is-soon { flex-grow: 1; opacity: 0.6; font-style: italic; }

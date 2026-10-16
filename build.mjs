@@ -14,12 +14,16 @@ const [html, css, js, cfgText] = await Promise.all([
 const cfg = JSON.parse(cfgText);
 
 // fail the build rather than ship a broken line-up
+const httpsUrl = (u) => /^https:\/\/[^\s]+$/.test(u);
+if (cfg.epgUrl && !httpsUrl(cfg.epgUrl)) throw new Error(`epgUrl must be an https:// URL (got "${cfg.epgUrl}")`);
+if (!httpsUrl(cfg.networkFeed || '')) throw new Error('networkFeed must be an https:// URL — it is every channel\'s fallback');
 const nums = new Set();
 for (const c of cfg.channels) {
   if (!/^[a-z0-9]+$/.test(c.id)) throw new Error(`channel id "${c.id}" must be lowercase a-z0-9`);
   if (nums.has(c.num)) throw new Error(`duplicate channel number ${c.num}`);
   nums.add(c.num);
   if (!c.src && !cfg.networkFeed) throw new Error(`channel ${c.num} has no src and there is no networkFeed`);
+  if (c.src && !(httpsUrl(c.src) && /\.m3u8(\?|$)/.test(c.src))) throw new Error(`channel ${c.num} src must be an https:// .m3u8 URL`);
   if (!c.programs || !c.programs.length) throw new Error(`channel ${c.num} has no programs`);
   if (c.logo) await readFile(new URL(c.logo, root));
 }
